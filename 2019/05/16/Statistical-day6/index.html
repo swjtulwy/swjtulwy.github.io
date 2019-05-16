@@ -77,20 +77,20 @@
 
 
 
-<meta name="description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设$\{a_i,i\geq 1\}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：">
+<meta name="description" content="线性回归相关概念 单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种  二变量数据能够了解不同变量之间的关系   两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系  SSE: 误差平方和，$SS-E=\sum(y-\hat{y})^2$">
 <meta name="keywords" content="统计基础,任务打卡">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Statistical-day2">
-<meta property="og:url" content="http://yoursite.com/2019/05/11/Statistical-day2/index.html">
+<meta property="og:title" content="Statistical-day6">
+<meta property="og:url" content="http://yoursite.com/2019/05/16/Statistical-day6/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设$\{a_i,i\geq 1\}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：">
+<meta property="og:description" content="线性回归相关概念 单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种  二变量数据能够了解不同变量之间的关系   两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系  SSE: 误差平方和，$SS-E=\sum(y-\hat{y})^2$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/1557585731805.png">
-<meta property="og:updated_time" content="2019-05-12T08:42:48.541Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/16/Statistical-day6/20190516205736.png">
+<meta property="og:updated_time" content="2019-05-16T14:06:53.360Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Statistical-day2">
-<meta name="twitter:description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设$\{a_i,i\geq 1\}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：">
-<meta name="twitter:image" content="http://yoursite.com/images/1557585731805.png">
+<meta name="twitter:title" content="Statistical-day6">
+<meta name="twitter:description" content="线性回归相关概念 单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种  二变量数据能够了解不同变量之间的关系   两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系  SSE: 误差平方和，$SS-E=\sum(y-\hat{y})^2$">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/16/Statistical-day6/20190516205736.png">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/11/Statistical-day2/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/16/Statistical-day6/">
 
 
 
 
 
-  <title>Statistical-day2 | lwy's studio</title>
+  <title>Statistical-day6 | lwy's studio</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/11/Statistical-day2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/Statistical-day6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Statistical-day2</h1>
+          <h1 class="post-title" itemprop="name headline">Statistical-day6</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T19:52:00+08:00">
-                2019-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-16T20:17:34+08:00">
+                2019-05-16
               </time>
             
 
@@ -352,37 +352,53 @@
       
 
       
-        <h1 id="大数定律、正态分布"><a href="#大数定律、正态分布" class="headerlink" title="大数定律、正态分布"></a>大数定律、正态分布</h1><h2 id="大数定律-Law-of-Large-Numbers"><a href="#大数定律-Law-of-Large-Numbers" class="headerlink" title="大数定律(Law of Large Numbers)"></a>大数定律(Law of Large Numbers)</h2><p>大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值</p>
-<p>辛钦大数定律定义：</p>
-<p>设$\{a_i,i\geq 1\}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：<a id="more"></a></p>
-<script type="math/tex; mode=display">
-\lim_{n\to\infty}P\left(\left|\frac{1}{n}\sum_{i=1}^na_i-\mu\right|\lt\epsilon\right)=1</script><h2 id="正态分布-Normal-Distribution"><a href="#正态分布-Normal-Distribution" class="headerlink" title="正态分布(Normal Distribution)"></a>正态分布(Normal Distribution)</h2><p>补充点概率知识：</p>
-<p>研究一个随机变量，不只是要看它能取哪些值，更重要的是它取各种值的概率如何！</p>
-<h3 id="概率函数"><a href="#概率函数" class="headerlink" title="概率函数"></a>概率函数</h3><p>概率函数就是用函数的形式来表示概率：例如$P_i=P(X=a_i)(i=1,2,3,4,5,6)$ 。在这个函数里，自变量 X 是随机变量的取值，因变量 $P_i$ 是取值的概率。这就叫用数学语言来表示自然现象！它就代表了每个取值的概率，所以顺理成章的它就叫做了X的概率函数。<strong>从公式上来看，概率函数一次只能表示一个取值的概率。比如P(X=1)=1/6,这代表用概率函数的形式来表示，当随机变量取值为1的概率为1/6，一次只能代表一个随机变量的取值。</strong></p>
-<p>有时候也会把概率函数称作分布律</p>
-<h3 id="概率分布"><a href="#概率分布" class="headerlink" title="概率分布"></a>概率分布</h3><p>顾名思义就是概率的分布，这个概率分布还是讲概率的。<strong>我认为在理解这个概念时，关键不在于“概率”两个字，而在于“分布”这两个字。</strong>离散型随机变量的概率分布可以用列表表示</p>
-<h3 id="分布函数-Cumulative-Distribution-Function"><a href="#分布函数-Cumulative-Distribution-Function" class="headerlink" title="分布函数(Cumulative Distribution Function)"></a>分布函数(Cumulative Distribution Function)</h3><p>实际上就是概率分布函数，它就是概率函数取值的累加结果！所以它又叫累积概率函数！其实，我觉得叫它累积概率函数还更好理解！！<strong>概率函数和概率分布函数就像是一个硬币的两面，它们都只是描述概率的不同手段！</strong></p>
-<p>分布函数是针对离散型随机变量的</p>
-<h3 id="概率密度函数"><a href="#概率密度函数" class="headerlink" title="概率密度函数"></a>概率密度函数</h3><p>实际上就是<strong>连续型随机变量</strong>的概率函数，<strong>概率密度函数用数学公式表示就是一个定积分的函数，定积分在数学中是用来求面积的，而在这里，你就把概率表示为面积即可！</strong>处理连续数据时，所计算的是一个数值范围的概率</p>
-<p>概率密度函数是分布函数的导函数。</p>
-<p>下面进入正文</p>
-<h3 id="正态分布定义"><a href="#正态分布定义" class="headerlink" title="正态分布定义"></a>正态分布定义</h3><p>若随机变量服从一个数学期望为μ、方差为$\sigma^2$ 的正态分布，记为$X\sim{N(\mu，\sigma^2)}$。其概率密度函数为：</p>
-<script type="math/tex; mode=display">
-f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}</script><p>正态分布的期望值$\mu$ 决定了其位置，其标准差$\sigma$ 决定了分布的幅度。当$\mu$  = 0, $\sigma$  = 1时的正态分布是标准正态分布</p>
-<p>σ描述正态分布资料数据分布的离散程度，σ越大，数据分布越分散，σ越小，数据分布越集中。也称为是正态分布的形状参数，σ越大，曲线越扁平，反之，σ越小，曲线越瘦高。</p>
-<p>二项分布是离散分布，而正态分布是连续分布，使用正态分布近似代替二项分布时，必须进行连续性修正</p>
-<h3 id="正态分布性质"><a href="#正态分布性质" class="headerlink" title="正态分布性质"></a>正态分布性质</h3><ul>
-<li>如果$X\sim{N(\mu,\sigma^2)}$ ,且a与b是实数，那么$aX+b\sim{N(a\mu+b,(a\sigma)^2)}$ </li>
-<li>两个统计独立的正态随机变量之和或差也满足正态分布，对应的参数也是它们的参数之和或差</li>
+        <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
+<li><p>单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种</p>
+</li>
+<li><p>二变量数据能够了解不同变量之间的关系</p>
+</li>
 </ul>
-<p>正态概率计算三步法：</p>
-<ol>
-<li>确定分布与范围</li>
-<li>使其标准化</li>
-<li>查找概率</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p style="text-align: center;"><img src="\images/1557585731805.png"></p>
-
+<p>两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系</p>
+<ul>
+<li><strong>SSE</strong>: 误差平方和，$SS-E=\sum(y-\hat{y})^2$ <a id="more"></a></li>
+</ul>
+<p>我们用$y=ax+b$ 来拟合数据，其中$a$ 代表这条直线的斜率，使得$SSE$最小的$a$ 值计算如下：</p>
+<script type="math/tex; mode=display">
+a=\frac{\sum{((x-\overline{x})(y-\overline{y}))}}{\sum{(x-\overline{x})^2}}</script><script type="math/tex; mode=display">
+b=\overline{y}-a\overline{x}</script><ul>
+<li><p>相关系数</p>
+<p>相关系数可以指出数据点与直线的拟合程度，同时能够指出我们的期望预测结果能够达到的精确程度。相关系数是介于-1和1之间的一个数，描述了各个数据点与直线的偏离程度，通过它就可以量度回归线与数据的拟合度，通常用字母$R​$ 表示</p>
+<p>如果$R$ 等于-1，则数据为完全负线性相关，所有数据点都在一条直线上；如果$R$ 等于1，则数据完全正线性相关。如果$R$ 等于0，则不存在相关性，$R$越接近0，线性相关性越弱</p>
+<script type="math/tex; mode=display">
+R=\frac{as_x}{s_y}</script><p>$a$是已经求出的最佳拟合线的斜率，$s_x$ 是样本中$x$值的标准差，$s_y$是$y$值的标准差</p>
+<script type="math/tex; mode=display">
+s_x=\sqrt{\frac{\sum{(x-\overline{x})^2}}{n-1}}</script></li>
+</ul>
+<p>直线的平方误差显示出，总波动中有多少没有被回归线描述</p>
+<ul>
+<li>决定系数（coefficient of determination）</li>
+</ul>
+<p>决定系数:在$Y$的总平方和中，由X引起的平方和所占的比例，记为$R^2 $(R的平方)，有的教材上翻译为判定系数，也称为拟合优度。是相关系数的平方。表示可根据自变量的变异来解释因变量的变异部分。</p>
+<p>当$R^ 2$越接近1时，表示相关的方程式参考价值越高；相反，越接近0时，表示参考价值越低。这是在一元回归分析中的情况。但从本质上说决定系数和回归系数没有关系，就像标准差和标准误差在本质上没有关系一样。</p>
+<p>意义：拟合优度越大，自变量对因变量的解释程度越高，自变量引起的变动占总变动的百分比高。观察点在回归直线附近越密集。</p>
+<p>表达式：$R^2=SSR/SST=1-SSE/SST​$</p>
+<p>其中：$SST=SSR+SSE$，$SST$ (total sum of squares)为总平方和，$SSR$ (regression sum of squares)为回归平方和，$SSE$ (error sum of squares) 为残差平方和。</p>
+<ul>
+<li><p>回归平方和(已解释方差平方和)：</p>
+<p>$SSR(Sum \; of \;  Squares \; for\;  regression) = ESS (explained \; sum \; of \; squares)$ </p>
+</li>
+<li><p>残差平方和：</p>
+<p>$SSE（Sum\;  of \; Squares\;  for\;  Error） = RSS (residual\;  sum\;  of\;  squares) =SSR(sum\;  of \; squared\;  residuals)$</p>
+</li>
+<li><p>总离差平方和：</p>
+<p>$SST(Sum \; of \; Squares \; for\;  total) = TSS(total \; sum \; of \; squares)​$</p>
+<p>决定系数与相关系数区别</p>
+<p>| 判定系数                       | 相关系数                       |<br>| ——————————————— | ——————————————— |<br>| 就模型而言                     | 就两个变量而言                 |<br>| 说明解释变量对因变量的解释程度 | 度量两个变量线性依存程度       |<br>| 度量不对称的因果关系           | 度量不含因果关系的对称相关关系 |<br>| 取值：[0,1]                    | 取值：[-1,1]                   |</p>
+</li>
+</ul>
+<h3 id="最小二乘回归法"><a href="#最小二乘回归法" class="headerlink" title="最小二乘回归法"></a>最小二乘回归法</h3><p>最小二乘回归法是一种数学方法，可用一条最佳拟合线将一组二维变量数据拟合，通过将公式$y=ax+b​$ 的一条直线与一组数值相拟合，使得误差平方和最小——即，使得实际数值与这些数值的估计值之间的差值最小。</p>
+<p>这条直线称为回归线，在预测一个特定$x$值对应的$y$ 值时，要避免对已知数据点范围以外的值进行预测</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/2019/05/16/Statistical-day6/20190516205736.png" alt></p>
 
       
     </div>
@@ -415,8 +431,8 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/10/Statistical-day1/" rel="next" title="Statistical-day1">
-                <i class="fa fa-chevron-left"></i> Statistical-day1
+              <a href="/2019/05/15/Statistical-day5/" rel="next" title="Statistical-day5">
+                <i class="fa fa-chevron-left"></i> Statistical-day5
               </a>
             
           </div>
@@ -424,10 +440,6 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/13/Statistical-day3/" rel="prev" title="Statistical-day3">
-                Statistical-day3 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -561,7 +573,7 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#大数定律、正态分布"><span class="nav-number">1.</span> <span class="nav-text">大数定律、正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#大数定律-Law-of-Large-Numbers"><span class="nav-number">1.1.</span> <span class="nav-text">大数定律(Law of Large Numbers)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正态分布-Normal-Distribution"><span class="nav-number">1.2.</span> <span class="nav-text">正态分布(Normal Distribution)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概率函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">概率函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率分布"><span class="nav-number">1.2.2.</span> <span class="nav-text">概率分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布函数-Cumulative-Distribution-Function"><span class="nav-number">1.2.3.</span> <span class="nav-text">分布函数(Cumulative Distribution Function)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率密度函数"><span class="nav-number">1.2.4.</span> <span class="nav-text">概率密度函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正态分布定义"><span class="nav-number">1.2.5.</span> <span class="nav-text">正态分布定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正态分布性质"><span class="nav-number">1.2.6.</span> <span class="nav-text">正态分布性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.2.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关概念"><span class="nav-number">1.1.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘回归法"><span class="nav-number">1.1.1.</span> <span class="nav-text">最小二乘回归法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
