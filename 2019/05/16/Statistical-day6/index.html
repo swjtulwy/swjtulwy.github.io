@@ -86,7 +86,7 @@
 <meta property="og:description" content="线性回归相关概念 单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种  二变量数据能够了解不同变量之间的关系   两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/16/Statistical-day6/20190516205736.png">
-<meta property="og:updated_time" content="2019-05-16T14:25:46.319Z">
+<meta property="og:updated_time" content="2019-05-16T14:33:22.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Statistical-day6">
 <meta name="twitter:description" content="线性回归相关概念 单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种  二变量数据能够了解不同变量之间的关系   两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系">
@@ -394,9 +394,36 @@ s_x=\sqrt{\frac{\sum{(x-\overline{x})^2}}{n-1}}</script></li>
 <li><p>总离差平方和：</p>
 <p>$SST(Sum \; of \; Squares \; for\;  total) = TSS(total \; sum \; of \; squares)​$</p>
 <p>决定系数与相关系数区别</p>
-<p>| 判定系数                       | 相关系数                       |<br>| ——————————————— | ——————————————— |<br>| 就模型而言                     | 就两个变量而言                 |<br>| 说明解释变量对因变量的解释程度 | 度量两个变量线性依存程度       |<br>| 度量不对称的因果关系           | 度量不含因果关系的对称相关关系 |<br>| 取值：[0,1]                    | 取值：[-1,1]                   |</p>
 </li>
 </ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>判定系数</th>
+<th>相关系数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>就模型而言</td>
+<td>就两个变量而言</td>
+</tr>
+<tr>
+<td>说明解释变量对因变量的解释程度</td>
+<td>度量两个变量线性依存程度</td>
+</tr>
+<tr>
+<td>度量不对称的因果关系</td>
+<td>度量不含因果关系的对称相关关系</td>
+</tr>
+<tr>
+<td>取值：[0,1]</td>
+<td>取值：[－1,1]</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="最小二乘回归法"><a href="#最小二乘回归法" class="headerlink" title="最小二乘回归法"></a>最小二乘回归法</h2><p>最小二乘回归法是一种数学方法，可用一条最佳拟合线将一组二维变量数据拟合，通过将公式$y=ax+b​$ 的一条直线与一组数值相拟合，使得误差平方和最小——即，使得实际数值与这些数值的估计值之间的差值最小。</p>
 <p>这条直线称为回归线，在预测一个特定$x$值对应的$y$ 值时，要避免对已知数据点范围以外的值进行预测</p>
 <h2 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h2><p>协方差（Covariance）在概率论和统计学中用于衡量两个变量的总体误差。而方差是协方差的一种特殊情况，即当两个变量是相同的情况。</p>
