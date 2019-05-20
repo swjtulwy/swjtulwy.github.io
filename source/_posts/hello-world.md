@@ -43,3 +43,5 @@ this message is from my laptop
 $$
 \sum x_i
 $$
+
+this is from my lab message
