@@ -38,3 +38,8 @@ $ hexo deploy
 ```
 
 More info: [Deployment](https://hexo.io/docs/deployment.html)
+
+this message is from my laptop 
+$$
+\sum x_i
+$$
