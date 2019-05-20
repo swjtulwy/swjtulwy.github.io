@@ -9,7 +9,7 @@ categories: Numpy学习
 
 ### 1. 如何垂直叠加两个数组？
 
- **给定：**
+ **给定：**<!--more-->
 
 ```python
 a = np.arange(10).reshape(2,-1)

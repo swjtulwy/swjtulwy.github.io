@@ -11,7 +11,7 @@ categories: Numpy学习
 
 **问题：**计算sepallength的softmax分数。
 
-**给定：**
+**给定：**<!--more-->
 
 ```python
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
