@@ -9,7 +9,7 @@ categories: UNIX环境高级编程
 
 ## 文件描述符
 
-文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用`open`函数），**内核**会向进程返回 一个文件描述符。
+文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用`open`函数），**内核**会向进程返回 一个文件描述符。<!--more-->
 
 按照惯例，UNIX系统shell将进程的标准输入输出等与对应的文件描述符相关联,定义在`<unistd.h>` 中。
 
@@ -19,7 +19,7 @@ categories: UNIX环境高级编程
 | STDOUT_FILENO | 1          |
 | STDERR_FILENO | 2          |
 
-## 函数`open`和`openat`
+## 函数open和openat
 
 ```c
 #include <fcntl.h> //file control
@@ -42,7 +42,7 @@ int openat(int fd, const char* path, int oflag, ... /* mode_t mode */);
 
 
 
-## 函数`creat`
+## 函数creat
 
 ```c
 #include <fcntl.h>
@@ -58,7 +58,7 @@ open(path, O_WRONLY|O_CREAT|O_TRUNC, mode);
 open(path, O_RDWR|O_CREAT|OTRUNC, mode);
 ```
 
-## 函数`close`
+## 函数close
 
 ```c
 #include <unistd.h>
@@ -68,7 +68,7 @@ int close(int fd);
 
 关闭一个文件时还会释放该进程加在该文件上的所有记录锁，当一个进程终止时，内核自动关闭它打开的所有文件
 
-## 函数`lseek`
+## 函数lseek
 
 可以使用`lseek`显示地为一个打开文件设置偏移量(current file offset)。
 
@@ -90,7 +90,7 @@ off_t lseek(int fd, off_t offset, int whence);
 
 该函数只记录当前文件偏移量，不会进行I/O操作。
 
-## 函数`read` 
+## 函数read 
 
 调用`read`函数从打开文件中读数据
 
@@ -102,7 +102,7 @@ ssize_t read(int fd, void *buf, size_t nbytes);
 
 第二个参数表示通用指针，第三个参数中`size_t`是不带符号的整型，用于表示要读取的字节数。返回值为带符号的整型。
 
-## 函数`write` 
+## 函数write
 
 调用`write`函数向打开文件写数据
 
@@ -200,7 +200,7 @@ time ./test_fileio.out 4096 <./test.file >/dev/null
 
 解决方案：UNIX系统为这样的操作提供了一种原子操作方法，即在文件打开时设置O_APPEND标志。
 
-## 函数`dup`和`dup2`
+## 函数dup和dup2
 
 这两个函数都可以用来复制一个现有的文件描述符
 
@@ -218,7 +218,7 @@ int dup2(int fd, int fd2);
 
 `dup2(fd, fd2)` 等效于`close(fd2); fcntl(fd, F_DUPFD, fd2)` 
 
-## 函数`sync`　、`fsync` 和`fdatasync` 
+## 函数sync、fsync 和fdatasync 
 
 通常，当内核需要重用缓冲区来存放其他磁盘块数据时，它会把所有延迟写数据块写入磁盘。为了保证磁盘上实际文件系统和缓冲区中内容的一致性，UNIX系统提供了以上三个函数。
 
@@ -235,7 +235,7 @@ void sync(void);
 - `fsync` 函数只对有文件描述符`fd`指定的一个文件起作用，并且等待写磁盘操作结束才返回。
 - `fdatasync`函数类似于`fsync`，但它只影响文件的数据部分。
 
-## 函数`fcntl`
+## 函数fcntl
 
 `fcntl`函数可以改变已经打开的文件的属性
 
@@ -258,7 +258,7 @@ int fcntl(int fd, int cmd, ... /* int arg */);
 | F_GETOWN or F_SETOWN          | 获取/设置异步I/O所有权  |
 | F_GETLK, F_SETLK, or F_SETLKW | 获取/设置记录锁         |
 
-## 函数`ioctl`
+## 函数ioctl
 
 `ioctl`是I/O操作的杂物箱。终端I/O是使用该函数最多的地方。
 
