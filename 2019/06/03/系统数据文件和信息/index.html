@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unix,c语言,操作系统,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="系统数据文件和信息UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件/etc/passwd和组文件/etc/group就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行ls -l命令时都要使用口令文件。由于历史原因，这些数据文件都是ASCII文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非ASCII文">
+<meta name="keywords" content="Unix,c语言,操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统数据文件和信息">
+<meta property="og:url" content="http://yoursite.com/2019/06/03/系统数据文件和信息/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="系统数据文件和信息UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件/etc/passwd和组文件/etc/group就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行ls -l命令时都要使用口令文件。由于历史原因，这些数据文件都是ASCII文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非ASCII文">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603095559.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603161702.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603102941.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603163250.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603104257.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603164448.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/2012121515025942.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603171112.png">
+<meta property="og:updated_time" content="2019-06-07T07:26:09.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统数据文件和信息">
+<meta name="twitter:description" content="系统数据文件和信息UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件/etc/passwd和组文件/etc/group就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行ls -l命令时都要使用口令文件。由于历史原因，这些数据文件都是ASCII文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非ASCII文">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603095559.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/03/系统数据文件和信息/">
+
+
+
+
+
+  <title>系统数据文件和信息 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/03/系统数据文件和信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统数据文件和信息</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-03T17:17:18+08:00">
+                2019-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="系统数据文件和信息"><a href="#系统数据文件和信息" class="headerlink" title="系统数据文件和信息"></a>系统数据文件和信息</h1><p>UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件<code>/etc/passwd</code>和组文件<code>/etc/group</code>就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行<code>ls -l</code>命令时都要使用口令文件。由于历史原因，这些数据文件都是<code>ASCII</code>文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非<code>ASCII</code>文本格式存放这些文件，但仍向使用其他文件格式的应用程序提供<strong>可移植</strong>接口。<a id="more"></a></p>
+<h2 id="口令文件"><a href="#口令文件" class="headerlink" title="口令文件"></a>口令文件</h2><p>UNIX系统口令文件包含在<code>&lt;pwd.h&gt;</code>中定义的<code>passwd</code>结构中。</p>
+<p>结构中的字段一般有如下几个，用冒号隔开，以<code>linux</code>系统为例</p>
+<p>用户名:加密口令:数值用户ID:数值组ID:注释字段:初始工作目录:初始shell</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603095559.png" alt></p>
+<p><code>POSIX.1</code>定义了两个获取口令文件项的函数。可以用<code>getpwent</code>实现在给出用户登录名或数值用户ID后，这两个函数就能查看相关项</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pwd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">struct passwd *<span class="title">getpwnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">struct passwd *<span class="title">getpwuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</span><br><span class="line"><span class="comment">// reutrn: pointer if OK, NULL on error</span></span><br></pre></td></tr></table></figure>
+<p><code>getpwuid</code>函数由<code>ls(1)</code>函数使用，它将i节点中的数字ID映射为用户登录名。在键入登录名，<code>getpwnam</code>函数由<code>login(1)</code>程序使用。</p>
+<p>如果只是要查看登录名或用户ID，上面两个函数就可以了，但是有些程序要查看整个口令文件，则需要下面函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pwd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">struct passwd *<span class="title">getpwent</span><span class="params">(<span class="keyword">void</span>)</span></span>; <span class="comment">//调用此函数返回口令文件中下一个记录项（结构）</span></span><br><span class="line"><span class="comment">// reutrn: pointer if OK, NULL on error or EOF</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setpwent</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//将getpwent() 的读写地址指向密码文件开头</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">endpwent</span><span class="params">(<span class="keyword">void</span>)</span></span>; <span class="comment">//关闭这些文件</span></span><br></pre></td></tr></table></figure>
+<p>在使用<code>getpwent</code>查看完口令文件后，一定要调用<code>endpeent</code>关闭这些文件。</p>
+<p>写个程序查看root用户的相关信息及查看口令文件中所有用户的用户名，程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"pwd.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">passwd</span>* <span class="title">ppwd</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">passwd</span>* <span class="title">ptr</span>;</span></span><br><span class="line">    ppwd = getpwnam(<span class="string">"root"</span>);</span><br><span class="line">    <span class="keyword">if</span>(ppwd==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        perror(<span class="string">"getpwnam() error"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"root user information as follow:\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_name is: %s\n"</span>,ppwd-&gt;pw_name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_passwd is: %s\n"</span>,ppwd-&gt;pw_passwd);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_uid is: %d\n"</span>,ppwd-&gt;pw_uid);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_gid is: %d\n"</span>,ppwd-&gt;pw_gid);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_gecos is: %s\n"</span>,ppwd-&gt;pw_gecos);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_dir is: %s\n"</span>,ppwd-&gt;pw_dir);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_shell is: %s\n"</span>,ppwd-&gt;pw_shell);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*****************************\n"</span>);</span><br><span class="line">    setpwent();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Print all user name:\n"</span>);</span><br><span class="line">    <span class="keyword">while</span> ((ptr= getpwent())!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\t"</span>,ptr-&gt;pw_name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    endpwent();</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603161702.png" alt></p>
+<h2 id="阴影口令"><a href="#阴影口令" class="headerlink" title="阴影口令"></a>阴影口令</h2><p>加密口令是经过单向加密算法处理过的用户口令副本。因此算法是单向的，所以不能从加密口令猜测到原来的口令。对于一个加密口令，找不到一种算法可以将其反变换到明文口令。但有人经常会通过社会工程利用加密口令猜测原始口令，为了使得让猜测口令的人难以获得原始资料（加密口令），有些系统比如<code>linux</code>将机密口令存放在<code>/etc/shadow</code>中。该文件至少要包含用户名和加密口令。与该口令有关的其他信息也存放在该阴影文件中：</p>
+<p>用户登录名:加密口令:上次更改口令以来经过的时间:经多少天后允许更改:要求更改尚余天数:超期警告天数:账户不活动之前尚余天数:账户超期天数:保留</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603102941.png" alt></p>
+<p>只有用户登录名和加密口令这两个字段是必须的。阴影口令文件不应是一般用户可以读取的。仅有少数几个程序需要访问加密口令，如<code>login(1)</code>和<code>passwd(1)</code>，这些通常是设置用户ID为<code>root</code>的程序。有了阴影文件后，普通口令文件可以由用户自由读取。</p>
+<p>写个程序查看root用户的加密口令及所有用户的用户名及加密口令如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;shadow.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">spwd</span>* <span class="title">pspwd</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">psswd</span>* <span class="title">ptr</span>;</span></span><br><span class="line">    pspwd = getspnam(<span class="string">"root"</span>);</span><br><span class="line">    <span class="keyword">if</span>(pspwd==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        perror(<span class="string">"getspnam() error"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"root user information as follow:\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_name is: %s"</span>,pspwd-&gt;sp_namp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"user_passwd is %s"</span>, pspwd-&gt;sp_pwdp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*****************************\n"</span>);</span><br><span class="line">    setspent();</span><br><span class="line">    <span class="keyword">while</span>((pspwd=getspent())!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"user_name: %s\n"</span>,pspwd-&gt;sp_namp);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"user_passwd is: %s\n"</span>, pspwd-&gt;sp_pwdp);</span><br><span class="line">    &#125;</span><br><span class="line">    endspent();</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603163250.png" alt></p>
+<h2 id="组文件"><a href="#组文件" class="headerlink" title="组文件"></a>组文件</h2><p>在ASCII文件<code>/etc/group中</code>，组结构信息为（Linux）：</p>
+<p>组名:加密口令:数值组ID:指向各用户名指针的数组</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603104257.png" alt></p>
+<p>查看组名或数值组ID的函数:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;grp.h&gt;</span></span></span><br><span class="line"><span class="function">struct group *<span class="title">getgrnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">struct group *<span class="title">getgrgid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</span><br><span class="line"><span class="comment">// return: pointer if OK, NULL on error</span></span><br></pre></td></tr></table></figure>
+<p>搜索组整个组文件函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;grp.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">struct group *<span class="title">getgrent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="comment">//returns: pointer is OK,NULL on error/EOF</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setgrent</span><span class="params">(<span class="keyword">void</span>)</span></span>; <span class="comment">//打开组文件并反绕它，定位到开始。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">endgrent</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">// 关闭组文件</span></span><br></pre></td></tr></table></figure>
+<h2 id="实现区别"><a href="#实现区别" class="headerlink" title="实现区别"></a>实现区别</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>信息</th>
+<th>FreeBSD8.0</th>
+<th>Linux3.2.0</th>
+<th>Mac OS X 10.6.8</th>
+<th>Solaris 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>账户信息</td>
+<td>/etc/passwd</td>
+<td>/etc/passwd</td>
+<td>目录服务</td>
+<td>/etc/passwd</td>
+</tr>
+<tr>
+<td>加密口令</td>
+<td>/etc/master.passwd</td>
+<td>/etc/shadow</td>
+<td>目录服务</td>
+<td>/etc/shadow</td>
+</tr>
+<tr>
+<td>是否是散列口令文件</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>组信息</td>
+<td>/etc/group</td>
+<td>/etc/group</td>
+<td>目录服务</td>
+<td>/etc/group</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="其他数据文件"><a href="#其他数据文件" class="headerlink" title="其他数据文件"></a>其他数据文件</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th>数据文件</th>
+<th>头文件</th>
+<th>结构</th>
+<th>附加的搜索函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>口令</td>
+<td>/etc/passwd</td>
+<td><pwd.h></pwd.h></td>
+<td>passwd</td>
+<td>getpwnam、getpwuid</td>
+</tr>
+<tr>
+<td>组</td>
+<td>/etc/group</td>
+<td><grp.h></grp.h></td>
+<td>group</td>
+<td>getgrnam、getgrgid</td>
+</tr>
+<tr>
+<td>阴影</td>
+<td>/etc/shadow</td>
+<td><shadow.h></shadow.h></td>
+<td>spwd</td>
+<td>getspnam</td>
+</tr>
+<tr>
+<td>主机</td>
+<td>/etc/hosts</td>
+<td><netdb.h></netdb.h></td>
+<td>hostent</td>
+<td>getnameinfo、getaddrinfo</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>/etc/networks</td>
+<td><netdb.h></netdb.h></td>
+<td>netent</td>
+<td>getnetbyname、getnetbyaddr</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>/etc/protocols</td>
+<td><netdb.h></netdb.h></td>
+<td>protoent</td>
+<td>getprotobyname、getprotobynumber</td>
+</tr>
+<tr>
+<td>服务</td>
+<td>/etc/services</td>
+<td><netdb.h></netdb.h></td>
+<td>servernet</td>
+<td>getserverbyname、getserverbyport</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="登录账户记录"><a href="#登录账户记录" class="headerlink" title="登录账户记录"></a>登录账户记录</h2><p><code>utmp</code>文件记录当前登录到系统的各个用户；<code>wtmp</code>文件跟踪各个登录和注销时间。在V7中，每次写入这两个文件都是包含下列结构的一个二进制记录：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">utmp</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ut_line[<span class="number">8</span>]; <span class="comment">// tty line: "ttyh0", "ttyd0", "ttyp0", ...</span></span><br><span class="line">    <span class="keyword">char</span> ut_name[<span class="number">8</span>]; <span class="comment">// login name</span></span><br><span class="line">    <span class="keyword">long</span> ut_time; <span class="comment">//second since Epoch</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>登录时，<code>login</code>程序填写此类型结构，并将其写入到<code>utmp</code>文件中，同时也将其填写到<code>wtmp</code>中，注销时由<code>init</code>擦除。</p>
+<p><code>who</code>命令读取<code>utmp</code>文件，<code>last</code>命令读取<code>wtmp</code>文件。</p>
+<h2 id="系统标识"><a href="#系统标识" class="headerlink" title="系统标识"></a>系统标识</h2><p><code>uname</code>返回与主机和操作系统有关的信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/utsname.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uname</span><span class="params">(struct utsname *buf)</span></span>;</span><br><span class="line"><span class="comment">// returns: non-negatice value if OK, -1 on error</span></span><br></pre></td></tr></table></figure>
+<p><code>Linux</code>中也有<code>uname</code>命令</p>
+<p><code>utsname</code>结构如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">utsname</span>&#123;</span></span><br><span class="line">	<span class="keyword">char</span> sysname[]; <span class="comment">//操作系统名称</span></span><br><span class="line">    <span class="keyword">char</span> nodename[];<span class="comment">// name of this node</span></span><br><span class="line">    <span class="keyword">char</span> release[];<span class="comment">//current release of operating system</span></span><br><span class="line">    <span class="keyword">char</span> version[];<span class="comment">//current version of this release</span></span><br><span class="line">    <span class="keyword">char</span> machine[];<span class="comment">//name of hardware type</span></span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure>
+<p>写个程序获取本机当前主机和操作系统信息，程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/utsname.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">utsname</span> <span class="title">puname</span>;</span></span><br><span class="line">    <span class="keyword">if</span>(uname(&amp;puname)==<span class="number">-1</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"uname error"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"info of this system:\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"system name: %s\n"</span>,puname.sysname);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"node name: %s\n"</span>,puname.nodename);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"release is: %s\n"</span>,puname.release);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"version is: %s\n"</span>,puname.version);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"machine is: %s\n"</span>,puname.machine);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603164448.png" alt></p>
+<h2 id="时间和日期例程"><a href="#时间和日期例程" class="headerlink" title="时间和日期例程"></a>时间和日期例程</h2><p>由UNIX内核提供的基本时间服务是计算自协调世界时(UTC)1970年1月1日00:00:00这一特定时间一来经过的秒数。这种秒数是由<code>time_t</code>表示的，我们称之为日历时间。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">time_t</span> time(<span class="keyword">time_t</span> *tloc);</span><br><span class="line"><span class="comment">// 成功返回时间值 若出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>相关操作函数有：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gettimeofday</span><span class="params">(struct timeval *tv, struct timezone *tz)</span></span>; <span class="comment">//相比time提供更高的分辨率，微妙级</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">settimeofday</span><span class="params">(<span class="keyword">const</span> struct timeval *tv, <span class="keyword">const</span> struct timezone *tz)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> &#123;</span></span><br><span class="line">    <span class="keyword">time_t</span>      tv_sec;     <span class="comment">/* seconds */</span></span><br><span class="line">    <span class="keyword">suseconds_t</span> tv_usec;    <span class="comment">/* microseconds */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timezone</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> tz_minuteswest;     <span class="comment">/* minutes west of Greenwich */</span></span><br><span class="line">    <span class="keyword">int</span> tz_dsttime;         <span class="comment">/* type of DST correction */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>取得了这种以秒计的整型时间后，通常调用另外一个时间函数将其转化为人们可读的时间和日期。时间的结构及操作函数有：</p>
+<p><code>tm</code>结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tm</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> tm_sec; <span class="comment">/* 秒 – 取值区间为[0,60] */</span></span><br><span class="line">    <span class="keyword">int</span> tm_min; <span class="comment">/* 分 - 取值区间为[0,59] */</span></span><br><span class="line">    <span class="keyword">int</span> tm_hour; <span class="comment">/* 时 - 取值区间为[0,23] */</span></span><br><span class="line">    <span class="keyword">int</span> tm_mday; <span class="comment">/* 一个月中的日期 - 取值区间为[1,31] */</span></span><br><span class="line">    <span class="keyword">int</span> tm_mon; <span class="comment">/* 月份（从一月开始，0代表一月） - 取值区间为[0,11] */</span></span><br><span class="line">    <span class="keyword">int</span> tm_year; <span class="comment">/* 年份，其值等于实际年份减去1900 */</span></span><br><span class="line">    <span class="keyword">int</span> tm_wday; <span class="comment">/* 星期 – 取值区间为[0,6]，其中0代表星期天，1代表星期一，以此类推 */</span></span><br><span class="line">    <span class="keyword">int</span> tm_yday; </span><br><span class="line">    <span class="comment">// 从每年的1月1日开始的天数 – 取值区间为[0,365]，其中0代表1月1日，1代表1月2日，以此类推 */</span></span><br><span class="line">    <span class="keyword">int</span> tm_isdst; </span><br><span class="line">    <span class="comment">// 夏令时标识符，实行夏令时的时候，tm_isdst为正。不实行夏令时的时候，tm_isdst为0；不了解情况时，tm_isdst()为负。</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>秒可以超过59的理由是可以表示润秒。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">asctime</span><span class="params">(<span class="keyword">const</span> struct tm *tm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">ctime</span><span class="params">(<span class="keyword">const</span> <span class="keyword">time_t</span> *timep)</span></span>; </span><br><span class="line"><span class="function">struct tm *<span class="title">gmtime</span><span class="params">(<span class="keyword">const</span> <span class="keyword">time_t</span> *timep)</span></span>;  <span class="comment">//转换为国际标准时间</span></span><br><span class="line"><span class="function">struct tm *<span class="title">localtime</span><span class="params">(<span class="keyword">const</span> <span class="keyword">time_t</span> *timep)</span></span>; <span class="comment">//转换为本地实际(考虑时区和夏令时)</span></span><br><span class="line"><span class="keyword">time_t</span> mktime(struct tm *tm); <span class="comment">// 以本地时间的年月日等作为参数，将其变成time_t值</span></span><br><span class="line"><span class="keyword">size_t</span> strftime(<span class="keyword">char</span> *s, <span class="keyword">size_t</span> max, <span class="keyword">const</span> <span class="keyword">char</span> *format,<span class="keyword">const</span> struct tm *tm); <span class="comment">//对tm进行格式化输出到一个字符串</span></span><br></pre></td></tr></table></figure>
+<p>UNIX系统各个时间函数的关系如下图所示：</p>
+<p><img src="/2019/06/03/系统数据文件和信息/2012121515025942.png" alt></p>
+<p>写程序来演示用法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">time_t</span> now;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tm</span>* <span class="title">ptime</span>;</span></span><br><span class="line">    <span class="keyword">char</span>* ptstr;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">memset</span>(buf,<span class="number">0</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="comment">//获取时间，秒数</span></span><br><span class="line">    now = time(&amp;now);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"global time is: \n"</span>);</span><br><span class="line">    <span class="comment">//转化为国际时间</span></span><br><span class="line">    ptime = gmtime(&amp;now);</span><br><span class="line">    ptime-&gt;tm_year+=<span class="number">1900</span>;</span><br><span class="line">    ptime-&gt;tm_mon+=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d-%d-%d %d:%d:%d\n"</span>,ptime-&gt;tm_year,ptime-&gt;tm_mon,</span><br><span class="line">           ptime-&gt;tm_mday,ptime-&gt;tm_hour,ptime-&gt;tm_min,ptime-&gt;tm_sec);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"local time is:\n"</span>);</span><br><span class="line">    <span class="comment">// 转化为本地时间</span></span><br><span class="line">    ptime = localtime(&amp;now);</span><br><span class="line">    ptime-&gt;tm_year+=<span class="number">1900</span>;</span><br><span class="line">    ptime-&gt;tm_mon+=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d-%d-%d %d:%d:%d\n"</span>,ptime-&gt;tm_year,ptime-&gt;tm_mon,</span><br><span class="line">           ptime-&gt;tm_mday,ptime-&gt;tm_hour,ptime-&gt;tm_min,ptime-&gt;tm_sec);</span><br><span class="line">    <span class="comment">//将tm结构转换为字符串</span></span><br><span class="line">    ptstr = asctime(ptime);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"tm time string is: %s"</span>,ptstr);</span><br><span class="line">    <span class="comment">//将time_t类型转换为字符串</span></span><br><span class="line">    ptstr = ctime(&amp;now);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"time_t time string is: %s"</span>,ptstr);</span><br><span class="line">    <span class="comment">//date 格式化字符串输出时间</span></span><br><span class="line">    strftime(buf,<span class="number">100</span>,<span class="string">"%YYear %mMonth %dDay %A %X"</span>,ptime);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"time buf is: %s\n"</span>,buf);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603171112.png" alt></p>
+<p>以上就是关于UNIX的系统数据文件和信息。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unix/" rel="tag"># Unix</a>
+          
+            <a href="/tags/c语言/" rel="tag"># c语言</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/02/标准IO/" rel="next" title="标准IO">
+                <i class="fa fa-chevron-left"></i> 标准IO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/04/进程环境/" rel="prev" title="进程环境">
+                进程环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统数据文件和信息"><span class="nav-number">1.</span> <span class="nav-text">系统数据文件和信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#口令文件"><span class="nav-number">1.1.</span> <span class="nav-text">口令文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阴影口令"><span class="nav-number">1.2.</span> <span class="nav-text">阴影口令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组文件"><span class="nav-number">1.3.</span> <span class="nav-text">组文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现区别"><span class="nav-number">1.4.</span> <span class="nav-text">实现区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他数据文件"><span class="nav-number">1.5.</span> <span class="nav-text">其他数据文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录账户记录"><span class="nav-number">1.6.</span> <span class="nav-text">登录账户记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统标识"><span class="nav-number">1.7.</span> <span class="nav-text">系统标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间和日期例程"><span class="nav-number">1.8.</span> <span class="nav-text">时间和日期例程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

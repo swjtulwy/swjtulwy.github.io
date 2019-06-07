@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unix,c语言,操作系统,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。">
+<meta name="keywords" content="Unix,c语言,操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程环境">
+<meta property="og:url" content="http://yoursite.com/2019/06/04/进程环境/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/2012121516393376.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604160249.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604154434.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604160343.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/93291_090315085526.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604194351.png">
+<meta property="og:updated_time" content="2019-06-07T07:26:09.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程环境">
+<meta name="twitter:description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/04/进程环境/2012121516393376.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/04/进程环境/">
+
+
+
+
+
+  <title>进程环境 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/04/进程环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-04T20:00:06+08:00">
+                2019-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="进程环境"><a href="#进程环境" class="headerlink" title="进程环境"></a>进程环境</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文介绍：当程序执行时，其<code>main</code>函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。<a id="more"></a></p>
+<h2 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h2><p>c语言总是从<code>main</code>函数开始执行。其原型是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>;</span><br></pre></td></tr></table></figure>
+<p>其中,<code>argc</code>是命令行参数的数目，<code>argv</code>是指向参数的各个指针所构成的数组。当内核执行c程序时，在调用<code>main</code>前先调用一个特殊的启动例程（START-UP routine）。可执行程序文件将此启动例程指定为程序的起始地址——这是由连接编辑器设置的，而连接编辑器则由c编译器调用。启动例程从内核取得命令行参数和环境变量值，然后为按上述方式调用<code>main</code>函数做好安排。</p>
+<h2 id="进程终止"><a href="#进程终止" class="headerlink" title="进程终止"></a>进程终止</h2><p>由八种方式使得进程终止，其中5种正常终止，3种异常终止。</p>
+<ul>
+<li>正常终止<ul>
+<li>从<code>main</code>返回</li>
+<li>调用<code>exit</code></li>
+<li>调用<code>_exit</code>或<code>_Exit</code></li>
+<li>最后一个线程从其启动例程返回</li>
+<li>从最后一个线程调用<code>pthread_exit</code></li>
+</ul>
+</li>
+<li>异常终止<ul>
+<li>调用<code>abort</code></li>
+<li>接到一个信号</li>
+<li>最后一个线程对取消请求做出响应</li>
+</ul>
+</li>
+</ul>
+<h3 id="退出函数"><a href="#退出函数" class="headerlink" title="退出函数"></a>退出函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">void</span> _exit(<span class="keyword">int</span> status); <span class="comment">//由POSIX.1说明</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;  // 由ISO C说明</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span></span>; </span><br><span class="line"><span class="keyword">void</span> _Exit(<span class="keyword">int</span> status);</span><br></pre></td></tr></table></figure>
+<p><code>_exit</code>和<code>_Exit</code>函数立即进入内核，而<code>exit</code>函数则执行清理处理（如关闭标准I/O流，对所有打开流调用<code>fclose</code>，导致输出缓冲中所有的数据都被冲洗，执行各终止处理程序）。在<code>main</code>函数执行<code>return (0)</code>与<code>exit(0)</code>是等价的。</p>
+<p>3个退出函数都带一个整型参数，称为终止状态(<code>exit status</code>)，大多数UNIX系统<code>shell</code>都提供检查进程终止状态的方法。下列情况会导致该进程的终止状态未定义：a.调用这些函数时不带终止状态。b.<code>main</code>执行了一个无返回值的<code>return</code>语句。c.<code>main</code>没有声明返回类型为整型，则该进程的终止状态是未定义的。若<code>main</code>的返回类型是整型，并且<code>main</code>执行到最后一条语句时返回（隐式返回），那么终止状态为0。</p>
+<p>在<code>main</code>函数中，<code>exit(0)</code>与<code>return(0)</code>等价。</p>
+<h3 id="函数atexit"><a href="#函数atexit" class="headerlink" title="函数atexit"></a>函数atexit</h3><p>按照ISO C的规定，一个进程可以登记多至32个函数，这些函数将由<code>exit</code>自动调用。我们称这些函数为终止处理程序(exit handler)， 并调用<code>atexit</code>函数来<strong>登记这些函数</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">atexit</span><span class="params">(<span class="keyword">void</span> (*function)(<span class="keyword">void</span>))</span></span>;</span><br><span class="line"><span class="comment">// 返回值，成功返回0， 出错返回非0</span></span><br></pre></td></tr></table></figure>
+<p>其参数是一个函数地址，当调用此函数时无需向它传递任何参数，也不期望它返回一个值。<code>exit</code>调用这些函数的顺序与它们登记时候的顺序相反。同一函数如若登记多次，也会被调用多次。</p>
+<p>下图显示了一个c程序是如启动的</p>
+<p><img src="/2019/06/04/进程环境/2012121516393376.jpg" alt></p>
+<p><strong>内核使程序执行的唯一方法是调用一个<code>exec</code>函数，终止的唯一方法是显式或者隐式地通过<code>exit</code>函数调用<code>_exit()</code>或<code>_Exit()</code>，也可以非自愿的由一个信号使其终止。</strong></p>
+<p><img src="/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604160249.png" alt></p>
+<p>使用下列程序验证：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">my_exit1</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">my_exit2</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(atexit(my_exit2)!=<span class="number">0</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"can't register my_exit2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(atexit(my_exit1)!=<span class="number">0</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"can't register my_exit1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"main done\n"</span>);</span><br><span class="line">    <span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">my_exit1</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"first exit handler\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">my_exit2</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"second exit handler\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604154434.png" alt></p>
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>当执行一个程序时，调用<code>exec</code>的进程可将命令行参数传递给该新程序。这是UNIX shell的一部分常规操作。</p>
+<p>但是通常的<code>echo(1)</code>程序不回显第0个参数。</p>
+<p>ISO C和POSIX.1都要求<code>argv[argc]</code>是一个空指针。这就使得我们可以将参数处理循环改写为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;argv[i]!=<span class="literal">NULL</span>;i++)</span><br></pre></td></tr></table></figure>
+<h2 id="环境表"><a href="#环境表" class="headerlink" title="环境表"></a>环境表</h2><p>每个程序都接收到一张环境表。与参数表一样，环境表也是一个字符指针数组，其中每个指针包含一个以<code>null</code>结束的c字符串的地址。全局变量<code>environ</code>则包含了该指针数组的地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ; <span class="comment">//称作环境指针</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604160343.png" alt></p>
+<p>上图是由5个字符串组成的环境示例表</p>
+<p>按照惯例，环境由<code>name = value</code>这样的字符串组成。大多数预定义名完全由大写字母组成，但这只是一个惯例。</p>
+<p>通常使用<code>getenv</code>和<code>putenv</code>函数来访问特定的环境变量，而不是使用<code>environ</code>变量。但是，如果要查看整个环境，则必须使用<code>environ</code>指针。</p>
+<h2 id="c程序的存储空间布局"><a href="#c程序的存储空间布局" class="headerlink" title="c程序的存储空间布局"></a>c程序的存储空间布局</h2><p>历史沿袭至今，c程序一直由下列几个部分组成：</p>
+<ul>
+<li><p>正文段</p>
+<p>CPU执行的机器指令部分，通常正文段是可共享的，在存储器中也只需一个副本，正文段常常是只读的，以防止程序由于意外而修改其指令。</p>
+</li>
+<li><p>初始化数据段</p>
+<p>通常称作数据段，包含了程序中需明确地赋初值的变量。例如在c程序中任何函数之外的声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> maxcount = <span class="number">99</span>;</span><br></pre></td></tr></table></figure>
+<p>使此变量以其初值存放在初始化数据段中。</p>
+</li>
+<li><p>未初始化数据段</p>
+<p>通常将此段成为bss段，在程序开始执行前，内核将此段中的数据初始化为0或空指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> sum[<span class="number">1000</span>];</span><br></pre></td></tr></table></figure>
+<p>使此变量存放在非初始化数据段中。</p>
+</li>
+<li><p>栈</p>
+<p>自动变量以及每次函数调用时所需保存的信息都存在此段中。每次函数调用是其返回地址以及调用者的环境信息都存放在栈中。最近被调用的函数在栈上为其自动和临时变量分配存储空间，通过这种方式使用栈，可以使得c递归函数工作。递归函数每次调用自身，就会使用一个新的栈帧，因此一次函数调用实例中的变量不会影响另一次函数调用实例中的变量。</p>
+<p><img src="/2019/06/04/进程环境/93291_090315085526.jpg" alt></p>
+</li>
+<li><p>堆</p>
+<p>通常在堆中进行动态存储分配。</p>
+</li>
+</ul>
+<p><code>size</code>命令可以查看程序各个段的长度。</p>
+<h2 id="共享库"><a href="#共享库" class="headerlink" title="共享库"></a>共享库</h2><p>共享库使得可执行文件中不在需要包含公用的库函数，而只需在所有进程都可引用的存储区中保留这种库例程的一个副本。程序第一次执行或第一次调用某个库函数时，用动态链接方法将程序与共享库函数相连接。优点之一：可以用库函数的新版本代替老版本而无需对使用该库的程序重新连接编辑。</p>
+<h2 id="存储空间分配"><a href="#存储空间分配" class="headerlink" title="存储空间分配"></a>存储空间分配</h2><p>ISO C说明了三个用于存储空间动态分配的函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>; <span class="comment">// 分配指定字节数的存储区，此存储区中的初始值不定</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> nmemb, <span class="keyword">size_t</span> size)</span></span>; <span class="comment">// 未指定数量指定长度的对象分配存储空间，每一位初始化为0</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>; <span class="comment">// 增加或减少以前分配去的长度，初始值不确定</span></span><br><span class="line"><span class="comment">//以上三个函数若成功返回非空指针，若出错返回NULL</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span>* ptr)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>三个分配函数所返回的指针一定是适当对齐的，使其可用于任何数据对象。</p>
+<p>由于这三个函数返回通用指针，所以如果在程序中包括了<code>#include&lt;stdlib.h&gt;</code>,那么当我们将这些函数的返回指针赋予一个不同类型的指针时，就不需要显示执行强制类型转换。</p>
+<p>如果一个进程使用<code>malloc</code>函数却忘记使用<code>free</code>函数，那么该进程占用的存储空间就会连续增加，这就被称为泄漏(leakage)，会增加过度的换页开销，造成性能下降。</p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>环境字符串的形式是：<code>name=value</code></p>
+<p>UNIX并不查看这些字符串，它们的解释完全取决于各个应用程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">secure_getenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"><span class="comment">//成功返回指向与name关联的value的指针，若为找到返回NULL</span></span><br></pre></td></tr></table></figure>
+<p>几个典型的预定义环境变量含义：<code>HOME</code>：home起始目录，<code>PATH</code>：搜索可执行文件的路径前缀列表，<code>PWD</code>：当前工作目录的绝对路径名，<code>TERM</code>：终端类型。</p>
+<p>修改环境变量的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">putenv</span><span class="params">(<span class="keyword">char</span> *<span class="built_in">string</span>)</span></span>;	</span><br><span class="line"><span class="comment">//成功返回0 出错返回非0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> <span class="keyword">char</span> *value, <span class="keyword">int</span> overwrite)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unsetenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>putenv</code>取形式为<code>name=value</code>的字符串，将其放到环境表中，如果<code>name</code>已存在，则先删除其原来的定义</li>
+<li><code>setenv</code>将<code>name</code>设置为<code>value</code>，如果环境中<code>name</code>已存在，那么取决于<code>overwrite</code>的值，其值非0就先删除现有定义，否则不删除。</li>
+<li><code>unsetenv</code>删除<code>name</code>的定义，即使不存在也不算出错。</li>
+</ul>
+<p>写个程序验证以下环境变量的设置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* name;</span><br><span class="line">    <span class="keyword">char</span>* value;</span><br><span class="line">    <span class="keyword">char</span>* str = <span class="string">"LENGTH=10"</span>;</span><br><span class="line">    <span class="keyword">char</span>* pvalue;</span><br><span class="line">    name = <span class="string">"QUERY"</span>;</span><br><span class="line">    value = <span class="string">"Hello World"</span>;</span><br><span class="line">    <span class="comment">//设置环境变量，1表示若存在，则先删除</span></span><br><span class="line">    setenv(name,value,<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//用字符串设置环境变量</span></span><br><span class="line">    putenv(str);</span><br><span class="line">    <span class="comment">//取环境变量的值</span></span><br><span class="line">    pvalue = getenv(name); </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s=%s\n"</span>,name,pvalue);</span><br><span class="line">    unsetenv(name);</span><br><span class="line">    pvalue=getenv(<span class="string">"LENGTH"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"LENGTH=%s\n"</span>,pvalue);</span><br><span class="line">    unsetenv(<span class="string">"LENGTH"</span>);</span><br><span class="line">    pvalue=getenv(<span class="string">"HOME"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"HOME=%s\n"</span>,pvalue);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604194351.png" alt></p>
+<h2 id="函数setjmp和longjmp"><a href="#函数setjmp和longjmp" class="headerlink" title="函数setjmp和longjmp"></a>函数setjmp和longjmp</h2><p>全局跳转函数<code>setjmp</code>和<code>longjmp</code>：解决跨越函数跳跃，处理发生在深层次嵌套函数调用中出错情况非常有用。全局或者静态变量的值在执行<code>longjmp</code>是保持不变。函数原型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;setjmp.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setjmp</span><span class="params">(jmp_buf env)</span></span>;</span><br><span class="line"><span class="comment">// 若直接调用返回0，若从longjmp返回则为非0</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">longjmp</span><span class="params">(jmp_buf env, <span class="keyword">int</span> val)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>演示程序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;setjmp.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//定义一个全局的跳转变量</span></span><br><span class="line">jmp_buf jmpbuffer;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line">    <span class="comment">//获取返回值，0为直接调用</span></span><br><span class="line">    ret=setjmp(jmpbuffer);</span><br><span class="line">    <span class="keyword">switch</span>(ret)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"func1 is error.\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"func2 is error.\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"func3 is error.\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    func1();</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//longjmp(jmpbuffer,1);</span></span><br><span class="line">    func2();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//longjmp(jmpbuffer,2);</span></span><br><span class="line">    func3();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//设置跳转</span></span><br><span class="line">    longjmp(jmpbuffer,<span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; func3 is error.</span><br></pre></td></tr></table></figure>
+<h2 id="函数getrlimit和setrlimit"><a href="#函数getrlimit和setrlimit" class="headerlink" title="函数getrlimit和setrlimit"></a>函数getrlimit和setrlimit</h2><p>资源结果和函数原型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rlimit</span> &#123;</span></span><br><span class="line">    <span class="keyword">rlim_t</span> rlim_cur;  <span class="comment">/* Soft limit */</span></span><br><span class="line">    <span class="keyword">rlim_t</span> rlim_max;  <span class="comment">/* Hard limit (ceiling for rlim_cur) */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrlimit</span><span class="params">(<span class="keyword">int</span> resource, struct rlimit *rlim)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">const</span> struct rlimit *rlim)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0 出错返回非0</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unix/" rel="tag"># Unix</a>
+          
+            <a href="/tags/c语言/" rel="tag"># c语言</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/03/系统数据文件和信息/" rel="next" title="系统数据文件和信息">
+                <i class="fa fa-chevron-left"></i> 系统数据文件和信息
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/06/进程控制/" rel="prev" title="进程控制">
+                进程控制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程环境"><span class="nav-number">1.</span> <span class="nav-text">进程环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main函数"><span class="nav-number">1.2.</span> <span class="nav-text">main函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程终止"><span class="nav-number">1.3.</span> <span class="nav-text">进程终止</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#退出函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">退出函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数atexit"><span class="nav-number">1.3.2.</span> <span class="nav-text">函数atexit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行参数"><span class="nav-number">1.4.</span> <span class="nav-text">命令行参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境表"><span class="nav-number">1.5.</span> <span class="nav-text">环境表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c程序的存储空间布局"><span class="nav-number">1.6.</span> <span class="nav-text">c程序的存储空间布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享库"><span class="nav-number">1.7.</span> <span class="nav-text">共享库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储空间分配"><span class="nav-number">1.8.</span> <span class="nav-text">存储空间分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">1.9.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数setjmp和longjmp"><span class="nav-number">1.10.</span> <span class="nav-text">函数setjmp和longjmp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数getrlimit和setrlimit"><span class="nav-number">1.11.</span> <span class="nav-text">函数getrlimit和setrlimit</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

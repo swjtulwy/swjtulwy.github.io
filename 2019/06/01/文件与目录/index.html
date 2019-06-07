@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unix,c语言,操作系统,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件和目录本文将从stat函数开始，逐个说明stat结构的每一个成员以了解文件的所有属性">
+<meta name="keywords" content="Unix,c语言,操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件与目录">
+<meta property="og:url" content="http://yoursite.com/2019/06/01/文件与目录/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="文件和目录本文将从stat函数开始，逐个说明stat结构的每一个成员以了解文件的所有属性">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601153744.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601154619.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601224731.png">
+<meta property="og:updated_time" content="2019-06-07T07:26:09.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件与目录">
+<meta name="twitter:description" content="文件和目录本文将从stat函数开始，逐个说明stat结构的每一个成员以了解文件的所有属性">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601153744.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/01/文件与目录/">
+
+
+
+
+
+  <title>文件与目录 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/文件与目录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件与目录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T22:53:08+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><p>本文将从stat函数开始，逐个说明stat结构的每一个成员以了解文件的所有属性<a id="more"></a></p>
+<h2 id="函数stat、fstat、fstatat和lstat"><a href="#函数stat、fstat、fstatat和lstat" class="headerlink" title="函数stat、fstat、fstatat和lstat"></a>函数stat、fstat、fstatat和lstat</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">restrict</span> pathname, struct stat* <span class="keyword">restrict</span> buf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> fd, struct stat* buf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">restrict</span> pathname, struct stat* <span class="keyword">restrict</span> buf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstatat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">restrict</span> pathname, struct stat* <span class="keyword">restrict</span> buf, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>一旦给出<code>pathname</code>,<code>stat</code>函数将返回与此命名文件有关的信息结构。<code>fstat</code>函数获得在描述符<code>fd</code>上打开的文件的有关信息。<code>lstat</code>函数类似于<code>stat</code>,但是当命名的文件是一个符号链接时，<code>lstat</code>返回该符号链接的有关信息，而不是由该符号链接引用的文件信息。<code>fstatat</code>函数为一个相对于当前打开目录(由<code>fd</code>参数指向)的路径名返回文件统计信息,<code>flag</code>参数控制着是否跟随着一个符号链接，当<code>AT_SYMLINK_NOFOLLW</code>标志被设置，<code>fstatat</code>不会跟随符号链接，而是返回符号链接本身的信息。</p>
+<p>第二个参数<code>buf</code>是一个指针，它指向一个我们必须提供的结构，函数来填充由<code>buf</code>指向的结构。</p>
+<p>使用<code>stat</code>函数最多的地方可能就是<code>ls -l</code>命令，用其可以获得有关一个文件的所有信息。</p>
+<h2 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h2><ul>
+<li><p>普通文件（Regular file）</p>
+<p>包含了某种形式的数据，由处理该文件的应用程序解释</p>
+</li>
+<li><p>目录文件（Directory file）</p>
+<p>包含了其他文件的名字以及指向与这些文件有关信息的指针</p>
+</li>
+<li><p>字符特殊文件（Character special file）</p>
+<p>用于特定类型的设备，比如终端</p>
+</li>
+<li><p>块特殊设备（Block special file）</p>
+<p>用于磁盘设备</p>
+</li>
+<li><p>FIFO</p>
+<p>用于进程间通信</p>
+</li>
+<li><p>套接字（Socket）</p>
+<p>用于进程间网络通信</p>
+</li>
+<li><p>符号链接（Symbol link）</p>
+<p>这种类型的文件指向另一个文件</p>
+</li>
+</ul>
+<p>下列程序可以显示各种文件的类型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">    <span class="keyword">char</span>* ptr;</span><br><span class="line">    <span class="keyword">for</span>(i =<span class="number">1</span>;i&lt;argc;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s: "</span>,argv[i]);</span><br><span class="line">        <span class="keyword">if</span>(lstat(argv[i],&amp;buf)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            err_ret(<span class="string">"lstat error"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(S_ISREG(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"regular"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(S_ISDIR(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"rdirectory"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(S_ISCHR(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"character special"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(S_ISBLK(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"block special"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(S_ISFIFO(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"fifo"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(S_ISLNK(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"symbolic link"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(S_ISSOCK(buf.st_mode))</span><br><span class="line">            ptr = <span class="string">"socket"</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            ptr = <span class="string">"** unknown mode **"</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,ptr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设置用户ID和组ID"><a href="#设置用户ID和组ID" class="headerlink" title="设置用户ID和组ID"></a>设置用户ID和组ID</h2><p>与一个进程有关的ID有6个或更多，如下表所示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实际用户ID、实际组ID</td>
+<td>我们实际上是谁</td>
+</tr>
+<tr>
+<td>有效用户ID、有效组ID、附属组ID</td>
+<td>用于文件访问权限检查</td>
+</tr>
+<tr>
+<td>保存的设置用户ID、保存的设置组ID</td>
+<td>由exec函数保存</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>每个文件有一个所有者和组所有者，所有者由stat结构中的st_uid指定，组所有者则由st_gid指定。</p>
+<p>当执行一个程序文件时，进程的有效用户ID通常就是实际用户ID，有效组ID通常是实际组 ID。但是可以在文件模式字（st_mode）中设置一个特殊标志，其含义是：当执行此文件时，进程的有效用户ID设置为文件所有者的用户 ID(st_uid)。在文件模式字中这一位被称为设置用户ID(set-user-ID)位，同理对组也是。</p>
+<p>例如，若文件所有者是超级用户，而且设置了该文件的设置用户ID位，那么当该程序文件由一个进程执行时，该进程具有超级用户权限。不管执行此文件的进程的实际用户ID是什么。例如UNIX系统程序<code>passwd(1)</code>允许任一用户改变其口令，该程序是一个设置用户ID程序。因为该程序能将用户的新口令写入口令文件中(/etc/passwd 或/etc/shadow)，而只有超级用户才具有对该文件写的权限，所以需要使用设置用户ID功能。因为运行设置用户ID程序的进程通常会得到额外的权限，所以编写这样的程序要特别谨慎。</p>
+<h2 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h2><p><code>st_mode</code>值也包含了对文件的访问权限。</p>
+<p>每个文件有9个访问位，可以分为三类：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>st_mode屏蔽</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRUSR, S_IWUSR, S_IXUSR</td>
+<td>用户读，用户写，用户执行</td>
+</tr>
+<tr>
+<td>S_IRGRP, S_IWGRP, S_IXGRP</td>
+<td>组读，组写，组执行</td>
+</tr>
+<tr>
+<td>S_IROTH, S_IWOTH, S_IXOTH</td>
+<td>其它读，其他写，其它执行</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>UNIX中可以用<code>chmod(1)</code> 命令修改这九个权限，该命令中用u表示用户（所有者），g表示组，o表示其它</p>
+<ul>
+<li>我们用名字打开任一类型的文件时，对该名字中包含的每一个目录，包括当前目录都应该具有执行权限。</li>
+<li>为了在<code>open</code>函数中对一个文件指定<code>O_TRUNC</code>标志，必须对该文件具有写权限。</li>
+<li>为了在一个目录中创建一个新文件，必须对该目录具有写权限和执行权限。</li>
+<li>为了删除一个现有文件，必须对包含该文件的目录具有写和执行权限，对该文件不需要读写权限。</li>
+<li>如果用7个exec函数中的任何一个执行某个文件，都必须对该文件具有执行权限。该文件还必须是一个普通文件。</li>
+</ul>
+<p>进程每次打开、创建或删除一个文件时，内核就进行文件访问权限测试，而这种测试可能涉及文件的所有者、进程的有效ID。两个所有者是文件的性质，两个有效ID和附属组ID是进程的性质。</p>
+<p>内核权限测试具体如下：</p>
+<ol>
+<li>若进程的有效用户ID是0（超级用户），则允许访问。</li>
+<li>若进程的有效用户ID等于文件所有者ID,也就是进程拥有此文件，则适当的访问权限位被设置，就允许，否则拒绝。</li>
+<li>若进程的有效组ID或进程的附属组ID之一等于文件的组ID，那么如果组适当的访问权限被设置，则允许访问，否则拒绝。</li>
+<li>若其他用户适当的访问权限位被设置，则允许访问，否则拒绝。</li>
+</ol>
+<h2 id="新文件和目录的所有权"><a href="#新文件和目录的所有权" class="headerlink" title="新文件和目录的所有权"></a>新文件和目录的所有权</h2><p>新文件的用户ID设置为进程的有效用户ID。</p>
+<p>新文件的组ID可以是进程的有效组ID，也可以是它所在的目录的组ID。</p>
+<h2 id="函数access和faccessat"><a href="#函数access和faccessat" class="headerlink" title="函数access和faccessat"></a>函数access和faccessat</h2><p>access和faccessat函数是按实际用户ID和实际组ID进行访问权限测试的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">access</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pathname, <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">faccessat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span>* pathname, <span class="keyword">int</span> mode, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功返回0,出错返回-1</span></span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R_OK</td>
+<td>测试读权限</td>
+</tr>
+<tr>
+<td>W_OK</td>
+<td>测试写权限</td>
+</tr>
+<tr>
+<td>X_OK</td>
+<td>测试执行权限</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在UNIX进程中也有几组ID的概念。分别是实际用户ID，实际用户组ID，有效用户ID和有效用户组ID等等。当我们开始一个进程是，通常这个进程的有效用户ID就是这个进程的实际ID（比如我用eric用户登录，这个有效用户就我eric对应的ID）。然而当“设置用户ID位”打开以后，有效ID就是进程的程序文件对应的所有者的ID。</p>
+<p>下面用代码演示<code>access</code>函数的使用方法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc!=<span class="number">2</span>)</span><br><span class="line">        err_quit(<span class="string">"usage: 4-8.out &lt;pathname&gt;"</span>);</span><br><span class="line">    <span class="keyword">if</span>(access(argv[<span class="number">1</span>], R_OK)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        err_ret(<span class="string">"access error for %s"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"read access OK\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(open(argv[<span class="number">1</span>],O_RDONLY)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        err_ret(<span class="string">"open error for %s"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"open for reading OK\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601153744.png" alt></p>
+<h2 id="函数umask"><a href="#函数umask" class="headerlink" title="函数umask"></a>函数umask</h2><p><code>umask</code>函数为进程设置文件模式创建屏蔽字，并返回之前的值。（这是少数几个没有出错返回函数中的一个）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="keyword">mode_t</span> umask(<span class="keyword">mode_t</span> cmask);</span><br><span class="line"><span class="comment">/// 返回值：之前的文件模式创建屏蔽字</span></span><br></pre></td></tr></table></figure>
+<p>其中参数<code>cmask</code>是由9个常量中的若干个位“或”构成。在进程创建一个新文件或新目录时，就一定会使用文件模式创建屏蔽字。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RWRWRW (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    umask(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(creat(<span class="string">"foo"</span>, RWRWRW)&lt;<span class="number">0</span>)</span><br><span class="line">        err_sys(<span class="string">"create error for foo"</span>);</span><br><span class="line">    umask(S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH);</span><br><span class="line">    <span class="keyword">if</span>(creat(<span class="string">"bar"</span>, RWRWRW)&lt;<span class="number">0</span>)</span><br><span class="line">        err_sys(<span class="string">"create error for bar"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601154619.png" alt></p>
+<h2 id="函数chmod、fchmod和fchmodat"><a href="#函数chmod、fchmod和fchmodat" class="headerlink" title="函数chmod、fchmod和fchmodat"></a>函数chmod、fchmod和fchmodat</h2><p>这三个函数可以更改我们现有的访问权限</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chmod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmod</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmodat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p><code>chmod</code> 在指定文件上进行操作，<code>fchmod</code>则对已打开文件进行操作。</p>
+<h2 id="函数chown、fchown、lchown"><a href="#函数chown、fchown、lchown" class="headerlink" title="函数chown、fchown、lchown"></a>函数chown、fchown、lchown</h2><p>这几个函数用于改变文件的用户ID和组ID，如果参数<code>owner</code>和参数<code>group</code>任意一个为-1，则其对应的ID不变</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chown</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchown</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lchown</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchownat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="comment">//返回值：成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p><code>fchown</code> 函数改变fd参数指向的打开文件的所有者，既然它已经在一个已打开的文件上操作，就不能改变符号链接的所有者。</p>
+<h2 id="文件长度"><a href="#文件长度" class="headerlink" title="文件长度"></a>文件长度</h2><p><code>stat</code>结构成员<code>st_size</code>表示以字节为单位的文件的长度。此字段只对普通文件、目录文件和符号链接有意义。</p>
+<ul>
+<li>对于普通文件，其文件长度可以是0，在开始读这种文件时，将得到文件结束(end-of-file)指示。</li>
+<li>对于目录，文件长度通常是一个数的整倍数。</li>
+<li>对于符号链接，文件长度是在文件名中的实际字节数。</li>
+</ul>
+<h2 id="文件空洞"><a href="#文件空洞" class="headerlink" title="文件空洞"></a>文件空洞</h2><p>空洞是有所设置的偏移量超过文件尾端，并写入了某些数据后造成的。</p>
+<p>可以用<code>du -s file</code> 命令来查询<code>file</code>所占的字节快个数，Linux中字节块为设置环境变量的时候是512个字节。</p>
+<p>使用<code>wc -c file</code>可以计算<code>file</code>中的字符数(字节)</p>
+<p>使用实用程序复制文件后，空洞会被填满</p>
+<h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><p>有时候我们需要在文件尾端截去一些数据以缩短文件。可以使用下列函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">off_t</span> length)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> length)</span></span>;</span><br><span class="line"><span class="comment">// 返回值，成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>这两个函数将现有文件长度截断为<code>length</code>，如果文件以前的长度大于这个值则之后的数据将不能被访问，如果小于这个值，文件长度将增加，并在文件尾部形成空洞。</p>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
+<li>每个i节点中都有一个链接计数，其值是指向该i节点的目录项数，只有当链接计数为0时，才能删除该文件，这种链接类型叫硬链接。</li>
+<li>另一种链接类型叫符号链接，符号链接文件中的实际内容包含了该符号链接所指向的文件的名字</li>
+<li>i节点包含了文件有关的所有信息：文件类型，文件访问权限位、文件长度和指向文件数据块指针等。</li>
+<li>目录项中的i节点编号指向同一文件系统中的相应i节点，一个目录项不能指向另一个文件系统的i节点。</li>
+<li>当在不更改文件系统的情况下为一个文件重命名时，该文件的实际内容并未移动，只需构造一个指向现有i节点的新目录项，并删除老目录项。链接计数不会改变。</li>
+</ul>
+<h2 id="函数link、unlink和remove"><a href="#函数link、unlink和remove" class="headerlink" title="函数link、unlink和remove"></a>函数link、unlink和remove</h2><p>任何一个文件可以有多个目录项指向其i节点，创建一个指向现有文件的链接的方法是使用<code>link</code>函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">link</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpath, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">linkat</span><span class="params">(<span class="keyword">int</span> olddirfd, <span class="keyword">const</span> <span class="keyword">char</span> *oldpath,</span></span></span><br><span class="line"><span class="function"><span class="params">          <span class="keyword">int</span> newdirfd, <span class="keyword">const</span> <span class="keyword">char</span> *newpath, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>这两个函数创建一个新的目录项<code>newpath</code>，它引用现有文件<code>oldpath</code>，如果<code>newpath</code>已经存在，则返回出错。只创建<code>newpath</code>中的最后一个分量，路径中的其他部分应当已经存在。</p>
+<p>创建新目录项和增加链接计数应当是一个原子操作。</p>
+<p>为了删除一个现有的目录项，可以调用<code>unlink</code>函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlinkat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0，失败返回-1</span></span><br></pre></td></tr></table></figure>
+<p>这两个函数删除目录项，并将由<code>pathname</code>所引用的文件的链接计数减1.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(open(<span class="string">"tempfile"</span>,O_RDWR)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"open error"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(unlink(<span class="string">"tempfile"</span>)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"unlink error"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"file unlinked\n"</span>);</span><br><span class="line">    sleep(<span class="number">15</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"done\n"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述程序打开一个文件，然后解除它的链接，执行该程序的进程然后睡眠16秒，接着就终止。</p>
+<p><code>unlink</code>这种特性经常被程序用来确保即使是在程序崩溃时，它所创建的临时文件也不会遗留下来。进程用<code>open</code>或<code>creat</code>创建一个文件，然后立即调用<code>unlink</code>，因为该文件依旧是打开的，所以不会将其内容删除，只有当进程关闭该文件或终止时，该文件的内容才会被删除。</p>
+<p>如果<code>pathname</code>是符号链接，那么<code>unlink</code>删除该符号链接，而不是删除由该链接所引用的文件。</p>
+<p>我们也可以用<code>remove</code>函数解除对一个文件或目录的链接。对于文件，<code>remove</code>的功能与<code>unlink</code>相同。对于目录，<code>remove</code>与<code>rmdir</code>功能相同。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0 出错返回-1</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数rename"><a href="#函数rename" class="headerlink" title="函数rename"></a>函数rename</h2><p>文件和目录可以用<code>rename</code>函数进行重命名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rename</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpath, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">renameat</span><span class="params">(<span class="keyword">int</span> olddirfd, <span class="keyword">const</span> <span class="keyword">char</span> *oldpath, <span class="keyword">int</span> newdirfd, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果<code>oldpath</code>指的是文件不是目录，那么为该文件或符号链接重命名。</li>
+<li>如果<code>oldpath</code>指的是一个目录，那么为该目录重命名。</li>
+<li>如果<code>oldpath</code>或<code>newpath</code>引用符号链接，则处理的是符号链接本身，而不是它所引用的文件。</li>
+<li>不能对<code>.</code>和<code>..</code>重命名。</li>
+<li>如果两个参数一样，则不做任何更改而成功返回。</li>
+</ul>
+<h2 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h2><p>符号链接是对一个文件的间接指针，而硬链接直接指向文件的i节点。引入符号链接的目的是为了避开硬链接的一些限制。</p>
+<ul>
+<li>硬链接通常要求链接和文件位于同一文件系统中。</li>
+<li>只有超级用户才能创建指向目录的硬链接。</li>
+</ul>
+<p>对于符号链接其由以下特性：</p>
+<ul>
+<li>can link across filesystem</li>
+<li>anyone can link to a directory</li>
+<li>used to move a file or an entire directory hierarchy to somewhere else</li>
+<li>if function follows links, argument refers to the actual file</li>
+<li>if function does not follow links, argument refers to the link(不跟随符号链接)</li>
+</ul>
+<h2 id="创建和读取符号链接"><a href="#创建和读取符号链接" class="headerlink" title="创建和读取符号链接"></a>创建和读取符号链接</h2><p>创建：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *target, <span class="keyword">const</span> <span class="keyword">char</span> *linkpath)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlinkat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *target, <span class="keyword">int</span> newdirfd, <span class="keyword">const</span> <span class="keyword">char</span> *linkpath)</span></span>;</span><br><span class="line"><span class="comment">//成功返回0 出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>读取：打开符号链接本身</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> readlink(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *buf, <span class="keyword">size_t</span> bufsiz);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> readlinkat(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *buf, <span class="keyword">size_t</span> bufsiz);</span><br><span class="line"><span class="comment">// 成功返回读取的字节数 出错返回-1</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件的时间"><a href="#文件的时间" class="headerlink" title="文件的时间"></a>文件的时间</h2><p>对于每个文件维护三个时间字段：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+<th>例子</th>
+<th>ls(1选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>st_atim</td>
+<td>文件数据的最后访问时间</td>
+<td>read</td>
+<td>-u</td>
+</tr>
+<tr>
+<td>st_mtim</td>
+<td>文件数据的最后修改时间</td>
+<td>write</td>
+<td>默认</td>
+</tr>
+<tr>
+<td>st_ctim</td>
+<td>i节点状态的最后更改时间</td>
+<td>chmod, chown</td>
+<td>-c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="函数futimens-utimensat和utimes"><a href="#函数futimens-utimensat和utimes" class="headerlink" title="函数futimens,utimensat和utimes"></a>函数futimens,utimensat和utimes</h2><p>可以用这些函数对一个文件的访问时间和修改时间进行更改。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt; /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimensat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname,</span></span></span><br><span class="line"><span class="function"><span class="params">             <span class="keyword">const</span> struct timespec times[<span class="number">2</span>], <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">futimens</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0 出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>两个函数的<code>times</code>数组第一个元素包含访问时间，第二个元素包含修改时间，时间值都是日历时间。</p>
+<p><code>futimens</code>函数需要打开文件来更改它的时间，<code>utimensat</code>函数提供了一种使用文件名更改文件时间的方法。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utime.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">utime</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *filename, <span class="keyword">const</span> struct utimbuf *times)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimes</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *filename, <span class="keyword">const</span> struct timeval times[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>utimes</code>函数对路径名进行操作，<code>times</code>参数是指向包含两个时间戳元素的数组的指针，两个时间戳是用秒和微秒表示的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span>&#123;</span></span><br><span class="line">    <span class="keyword">time_t</span> tv_sec; <span class="comment">//s</span></span><br><span class="line">    <span class="keyword">long</span> tv_usec; <span class="comment">//ms</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数mkdir和rmdir"><a href="#函数mkdir和rmdir" class="headerlink" title="函数mkdir和rmdir"></a>函数mkdir和rmdir</h2><p>用<code>mkdir</code>创建目录，用<code>rmdir</code>删除目录</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;           /* Definition of AT_* constants */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkdirat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="comment">//成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>这两个函数创建新的空目录，其中<code>.</code>和<code>..</code>目录项是自动创建的。所指定的文件访问权限<code>mode</code>由进程的文件模式创建屏蔽字修改。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rmdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0 出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p>用<code>rmdir</code>可以删除一个<strong>空目录</strong>，空目录是只含<code>.</code>和<code>..</code>这两项的目录。</p>
+<h2 id="读目录"><a href="#读目录" class="headerlink" title="读目录"></a>读目录</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line"><span class="function">DIR* <span class="title">opendir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pathname)</span></span>;</span><br><span class="line"><span class="function">DIR* <span class="title">fdopendir</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"><span class="comment">//以上两个返回值，若成功返回指针，出错返回NULL</span></span><br><span class="line"><span class="function">struct dirent* <span class="title">readdir</span><span class="params">(DIR* dp)</span></span>;</span><br><span class="line"><span class="comment">//返回值：若成功返回指针，若在目录尾或出错，返回NULL</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rewinddir</span><span class="params">(DIR* dp)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">closedir</span><span class="params">(DIR* dp)</span></span>;</span><br><span class="line"><span class="comment">//若成功返回0，出错返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">telldir</span><span class="params">(DIR* dp)</span></span>;</span><br><span class="line"><span class="comment">//返回与dp关联的目录中的当前位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">seekdir</span><span class="params">(DIR* dp, <span class="keyword">long</span> loc)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="函数chdir-和-getcwd"><a href="#函数chdir-和-getcwd" class="headerlink" title="函数chdir 和 getcwd"></a>函数chdir 和 getcwd</h2><p>当用户登录到UNIX系统时，其当前的工作目录通常是口令文件<code>(/etc/passwd)</code>中该用户登录项的第六个字段——用户的起始目录(home directory)，当前工作目录是进程的一个属性，起始目录是登录名的一个属性。</p>
+<p>进程调用<code>chdir</code>可以更改当前工作目录</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchdir</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0，出错返回-1</span></span><br></pre></td></tr></table></figure>
+<p><code>getcwd</code>可以返回当前工作目录的绝对路径</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getcwd</span><span class="params">(<span class="keyword">char</span> *buf, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getwd</span><span class="params">(<span class="keyword">char</span> *buf)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回buf,出错返回NULL</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">get_current_dir_name</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>下列程序演示了如何使用上述函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* ptr;</span><br><span class="line">    <span class="keyword">size_t</span> size;</span><br><span class="line">    <span class="keyword">if</span>(chdir(<span class="string">"/usr/local"</span>)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"chdir error"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ptr = path_alloc(&amp;size);</span><br><span class="line">    <span class="keyword">if</span>(getcwd(ptr,size)==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        err_sys(<span class="string">"getcwd failed"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"cwd = %s\n"</span>, ptr);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设备特殊文件"><a href="#设备特殊文件" class="headerlink" title="设备特殊文件"></a>设备特殊文件</h2><ul>
+<li>每个文件系统所在的存储设备都由其主、次设备号表示。主设备号标识设备驱动程序，有时编码为与其通信的外设板；次设备号标识特定的子设备。一个磁盘驱动器通常包含若干个文件系统。在同一磁盘驱动器上的各文件系统通常具有相同的主设备号，但是次设备号却不同。设备号所用的数据类型是基本系统数据类型<code>dev_t</code></li>
+<li>我们可以使用两个宏:<code>major</code>和<code>minor</code>来访问主、次设备号。</li>
+<li>系统中与每个文件名关联的<code>st_dev</code>值是文件系统的设备号，该文件系统包含了这一文件名以及其对应的i节点</li>
+<li>只有字符特殊文件和块特殊文件才有<code>st_rdev</code>值，此值包含实际设备的设备号。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> SOLARIS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mkdev.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/sysmacros.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span>  <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">    <span class="keyword">for</span>(i =<span class="number">1</span>;i&lt;argc;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s: "</span>,argv[i]);</span><br><span class="line">        <span class="keyword">if</span>(stat(argv[i],&amp;buf)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            err_ret(<span class="string">"stat error"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"dev = %d/%d"</span>,major(buf.st_dev),minor(buf.st_dev));</span><br><span class="line">        <span class="keyword">if</span>(S_ISCHR(buf.st_mode)||S_ISBLK(buf.st_mode))&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"  (%s) rdev = %d/%d"</span>,(S_ISCHR(buf.st_mode))?<span class="string">"character"</span>:<span class="string">"block"</span>,major(buf.st_rdev),minor(buf.st_rdev));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/01/文件与目录/DeepinScreenshot_select-area_20190601224731.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unix/" rel="tag"># Unix</a>
+          
+            <a href="/tags/c语言/" rel="tag"># c语言</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/UNIX之文件IO/" rel="next" title="UNIX之文件IO">
+                <i class="fa fa-chevron-left"></i> UNIX之文件IO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/02/标准IO/" rel="prev" title="标准IO">
+                标准IO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数stat、fstat、fstatat和lstat"><span class="nav-number">1.1.</span> <span class="nav-text">函数stat、fstat、fstatat和lstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件类型"><span class="nav-number">1.2.</span> <span class="nav-text">文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置用户ID和组ID"><span class="nav-number">1.3.</span> <span class="nav-text">设置用户ID和组ID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问权限"><span class="nav-number">1.4.</span> <span class="nav-text">文件访问权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新文件和目录的所有权"><span class="nav-number">1.5.</span> <span class="nav-text">新文件和目录的所有权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数access和faccessat"><span class="nav-number">1.6.</span> <span class="nav-text">函数access和faccessat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数umask"><span class="nav-number">1.7.</span> <span class="nav-text">函数umask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数chmod、fchmod和fchmodat"><span class="nav-number">1.8.</span> <span class="nav-text">函数chmod、fchmod和fchmodat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数chown、fchown、lchown"><span class="nav-number">1.9.</span> <span class="nav-text">函数chown、fchown、lchown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件长度"><span class="nav-number">1.10.</span> <span class="nav-text">文件长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件空洞"><span class="nav-number">1.11.</span> <span class="nav-text">文件空洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件截断"><span class="nav-number">1.12.</span> <span class="nav-text">文件截断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.13.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数link、unlink和remove"><span class="nav-number">1.14.</span> <span class="nav-text">函数link、unlink和remove</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数rename"><span class="nav-number">1.15.</span> <span class="nav-text">函数rename</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号链接"><span class="nav-number">1.16.</span> <span class="nav-text">符号链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建和读取符号链接"><span class="nav-number">1.17.</span> <span class="nav-text">创建和读取符号链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的时间"><span class="nav-number">1.18.</span> <span class="nav-text">文件的时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数futimens-utimensat和utimes"><span class="nav-number">1.19.</span> <span class="nav-text">函数futimens,utimensat和utimes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数mkdir和rmdir"><span class="nav-number">1.20.</span> <span class="nav-text">函数mkdir和rmdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读目录"><span class="nav-number">1.21.</span> <span class="nav-text">读目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数chdir-和-getcwd"><span class="nav-number">1.22.</span> <span class="nav-text">函数chdir 和 getcwd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备特殊文件"><span class="nav-number">1.23.</span> <span class="nav-text">设备特殊文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

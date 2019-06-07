@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python学习,Numpy,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定：">
+<meta name="keywords" content="Python学习,Numpy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numpy基础学习">
+<meta property="og:url" content="http://yoursite.com/2019/05/20/Numpy基础学习/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-20T15:58:50.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Numpy基础学习">
+<meta name="twitter:description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/20/Numpy基础学习/">
+
+
+
+
+
+  <title>Numpy基础学习 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/20/Numpy基础学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Numpy基础学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T16:50:45+08:00">
+                2019-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Numpy学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Numpy学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="NumPy-常见问题-难度水平中等"><a href="#NumPy-常见问题-难度水平中等" class="headerlink" title="NumPy 常见问题(难度水平中等)"></a>NumPy 常见问题(难度水平中等)</h1><h3 id="1-如何垂直叠加两个数组？"><a href="#1-如何垂直叠加两个数组？" class="headerlink" title="1. 如何垂直叠加两个数组？"></a>1. 如何垂直叠加两个数组？</h3><p> <strong>给定：</strong><a id="more"></a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line">b = np.repeat(<span class="number">1</span>, <span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; array([[0, 1, 2, 3, 4],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 6, 7, 8, 9],</span></span><br><span class="line"><span class="comment"># &gt;        [1, 1, 1, 1, 1],</span></span><br><span class="line"><span class="comment"># &gt;        [1, 1, 1, 1, 1]])</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line">b = np.repeat(<span class="number">1</span>, <span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Answers</span></span><br><span class="line"><span class="comment"># Method 1:</span></span><br><span class="line">np.concatenate([a, b], axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2:</span></span><br><span class="line">np.vstack([a, b]) <span class="comment"># v 表示vertical</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 3:</span></span><br><span class="line">np.r_[a, b]</span><br><span class="line"><span class="comment"># &gt; array([[0, 1, 2, 3, 4],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 6, 7, 8, 9],</span></span><br><span class="line"><span class="comment"># &gt;        [1, 1, 1, 1, 1],</span></span><br><span class="line"><span class="comment"># &gt;        [1, 1, 1, 1, 1]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-如何水平叠加两个数组？"><a href="#2-如何水平叠加两个数组？" class="headerlink" title="2. 如何水平叠加两个数组？"></a>2. 如何水平叠加两个数组？</h3><p><strong>问题：</strong>将数组a和数组b水平堆叠。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line">b = np.repeat(<span class="number">1</span>, <span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; array([[0, 1, 2, 3, 4, 1, 1, 1, 1, 1],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 6, 7, 8, 9, 1, 1, 1, 1, 1]])</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line">b = np.repeat(<span class="number">1</span>, <span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Answers</span></span><br><span class="line"><span class="comment"># Method 1:</span></span><br><span class="line">np.concatenate([a, b], axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2:</span></span><br><span class="line">np.hstack([a, b]) <span class="comment"># h 表示horizon</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 3:</span></span><br><span class="line">np.c_[a, b]</span><br><span class="line"><span class="comment"># &gt; array([[0, 1, 2, 3, 4, 1, 1, 1, 1, 1],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 6, 7, 8, 9, 1, 1, 1, 1, 1]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-如何在无硬编码的情况下生成Numpy中的自定义序列？"><a href="#3-如何在无硬编码的情况下生成Numpy中的自定义序列？" class="headerlink" title="3. 如何在无硬编码的情况下生成Numpy中的自定义序列？"></a>3. 如何在无硬编码的情况下生成Numpy中的自定义序列？</h3><p><strong>问题：</strong>创建以下模式而不使用硬编码。只使用Numpy函数和下面的输入数组a。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])`</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; array([1, 1, 1, 2, 2, 2, 3, 3, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3])</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.r_[np.repeat(a, <span class="number">3</span>), np.tile(a, <span class="number">3</span>)]</span><br><span class="line"><span class="comment"># &gt; array([1, 1, 1, 2, 2, 2, 3, 3, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3])</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-如何获取两个Numpy数组之间的公共项？"><a href="#4-如何获取两个Numpy数组之间的公共项？" class="headerlink" title="4. 如何获取两个Numpy数组之间的公共项？"></a>4. 如何获取两个Numpy数组之间的公共项？</h3><p><strong>问题：</strong>获取数组a和数组b之间的公共项。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">b = np.array([<span class="number">7</span>,<span class="number">2</span>,<span class="number">10</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">8</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([<span class="number">2</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">b = np.array([<span class="number">7</span>,<span class="number">2</span>,<span class="number">10</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">8</span>])</span><br><span class="line">np.intersect1d(a,b)</span><br><span class="line"><span class="comment"># &gt; array([2, 4])</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-如何从一个数组中删除存在于另一个数组中的项？"><a href="#5-如何从一个数组中删除存在于另一个数组中的项？" class="headerlink" title="5. 如何从一个数组中删除存在于另一个数组中的项？"></a>5. 如何从一个数组中删除存在于另一个数组中的项？</h3><p><strong>问题：</strong>从数组a中删除数组b中的所有项。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">b = np.array([<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">b = np.array([<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># From 'a' remove all of 'b'</span></span><br><span class="line">np.setdiff1d(a,b)</span><br><span class="line"><span class="comment"># &gt; array([1, 2, 3, 4])</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-如何得到两个数组元素匹配的位置？"><a href="#6-如何得到两个数组元素匹配的位置？" class="headerlink" title="6. 如何得到两个数组元素匹配的位置？"></a>6. 如何得到两个数组元素匹配的位置？</h3><p><strong>问题：</strong>获取a和b元素匹配的位置。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">b = np.array([<span class="number">7</span>,<span class="number">2</span>,<span class="number">10</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">8</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; (array([1, 3, 5, 7]),)</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">b = np.array([<span class="number">7</span>,<span class="number">2</span>,<span class="number">10</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">8</span>])</span><br><span class="line"></span><br><span class="line">np.where(a == b)</span><br><span class="line"><span class="comment"># &gt; (array([1, 3, 5, 7]),)</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-如何从Numpy数组中提取给定范围内的所有数字？"><a href="#7-如何从Numpy数组中提取给定范围内的所有数字？" class="headerlink" title="7. 如何从Numpy数组中提取给定范围内的所有数字？"></a>7. 如何从Numpy数组中提取给定范围内的所有数字？</h3><p><strong>问题：</strong>获取5到10之间的所有项目。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">2</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">27</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(array([<span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>]),)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 1</span></span><br><span class="line">index = np.where((a &gt;= <span class="number">5</span>) &amp; (a &lt;= <span class="number">10</span>))</span><br><span class="line">a[index]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2:</span></span><br><span class="line">index = np.where(np.logical_and(a&gt;=<span class="number">5</span>, a&lt;=<span class="number">10</span>))</span><br><span class="line">a[index]</span><br><span class="line"><span class="comment"># &gt; (array([6, 9, 10]),)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 3: (thanks loganzk!)</span></span><br><span class="line">a[(a &gt;= <span class="number">5</span>) &amp; (a &lt;= <span class="number">10</span>)]</span><br></pre></td></tr></table></figure>
+<h3 id="8-如何创建一个python函数来处理scalars并在Numpy数组上工作？"><a href="#8-如何创建一个python函数来处理scalars并在Numpy数组上工作？" class="headerlink" title="8. 如何创建一个python函数来处理scalars并在Numpy数组上工作？"></a>8. 如何创建一个python函数来处理scalars并在Numpy数组上工作？</h3><p><strong>问题：</strong>转换适用于两个标量的函数maxx，以处理两个数组。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxx</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="string">"""Get the maximum of two items"""</span></span><br><span class="line">    <span class="keyword">if</span> x &gt;= y:</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line">maxx(<span class="number">1</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment"># &gt; 5</span></span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">b = np.array([<span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span>])</span><br><span class="line">pair_max(a, b)</span><br><span class="line"><span class="comment"># &gt; array([ 6.,  7.,  9.,  8.,  9.,  7.,  5.])</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxx</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="string">"""Get the maximum of two items"""</span></span><br><span class="line">    <span class="keyword">if</span> x &gt;= y:</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line">pair_max = np.vectorize(maxx, otypes=[float])</span><br><span class="line"></span><br><span class="line">a = np.array([<span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">b = np.array([<span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">pair_max(a, b)</span><br><span class="line"><span class="comment"># &gt; array([ 6.,  7.,  9.,  8.,  9.,  7.,  5.])</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-如何交换二维numpy数组中的两列？"><a href="#9-如何交换二维numpy数组中的两列？" class="headerlink" title="9. 如何交换二维numpy数组中的两列？"></a>9. 如何交换二维numpy数组中的两列？</h3><p><strong>问题：</strong>在数组arr中交换列1和2。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">arr[:, [<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment"># &gt; array([[1, 0, 2],</span></span><br><span class="line"><span class="comment"># &gt;        [4, 3, 5],</span></span><br><span class="line"><span class="comment"># &gt;        [7, 6, 8]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="10-如何交换二维numpy数组中的两行？"><a href="#10-如何交换二维numpy数组中的两行？" class="headerlink" title="10. 如何交换二维numpy数组中的两行？"></a>10. 如何交换二维numpy数组中的两行？</h3><p><strong>问题：</strong>交换数组arr中的第1和第2行：</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">arr[[<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>], :]</span><br><span class="line"><span class="comment"># &gt; array([[3, 4, 5],</span></span><br><span class="line"><span class="comment"># &gt;        [0, 1, 2],</span></span><br><span class="line"><span class="comment"># &gt;        [6, 7, 8]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="11-如何反转二维数组的行？"><a href="#11-如何反转二维数组的行？" class="headerlink" title="11. 如何反转二维数组的行？"></a>11. 如何反转二维数组的行？</h3><p><strong>问题：</strong>反转二维数组arr的行。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">arr[::<span class="number">-1</span>]</span><br><span class="line">array([[<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]])</span><br></pre></td></tr></table></figure>
+<h3 id="12-如何反转二维数组的列？"><a href="#12-如何反转二维数组的列？" class="headerlink" title="12. 如何反转二维数组的列？"></a>12. 如何反转二维数组的列？</h3><p><strong>问题：</strong>反转二维数组arr的列。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">arr[:, ::<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># &gt; array([[2, 1, 0],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 4, 3],</span></span><br><span class="line"><span class="comment"># &gt;        [8, 7, 6]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="13-如何创建包含5到10之间随机浮动的二维数组？"><a href="#13-如何创建包含5到10之间随机浮动的二维数组？" class="headerlink" title="13. 如何创建包含5到10之间随机浮动的二维数组？"></a>13. 如何创建包含5到10之间随机浮动的二维数组？</h3><p><strong>问题：</strong>创建一个形状为5x3的二维数组，以包含5到10之间的随机十进制数。</p>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">arr = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution Method 1:</span></span><br><span class="line">rand_arr = np.random.randint(low=<span class="number">5</span>, high=<span class="number">10</span>, size=(<span class="number">5</span>,<span class="number">3</span>)) + np.random.random((<span class="number">5</span>,<span class="number">3</span>))</span><br><span class="line"><span class="comment"># print(rand_arr)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution Method 2:</span></span><br><span class="line">rand_arr = np.random.uniform(<span class="number">5</span>,<span class="number">10</span>, size=(<span class="number">5</span>,<span class="number">3</span>))</span><br><span class="line">print(rand_arr)</span><br><span class="line"><span class="comment"># &gt; [[ 8.50061025  9.10531502  6.85867783]</span></span><br><span class="line"><span class="comment"># &gt;  [ 9.76262069  9.87717411  7.13466701]</span></span><br><span class="line"><span class="comment"># &gt;  [ 7.48966403  8.33409158  6.16808631]</span></span><br><span class="line"><span class="comment"># &gt;  [ 7.75010551  9.94535696  5.27373226]</span></span><br><span class="line"><span class="comment"># &gt;  [ 8.0850361   5.56165518  7.31244004]]</span></span><br></pre></td></tr></table></figure>
+<h3 id="14-如何导入数字和文本的数据集保持文本在numpy数组中完好无损？"><a href="#14-如何导入数字和文本的数据集保持文本在numpy数组中完好无损？" class="headerlink" title="14. 如何导入数字和文本的数据集保持文本在numpy数组中完好无损？"></a>14. 如何导入数字和文本的数据集保持文本在numpy数组中完好无损？</h3><p><strong>问题：</strong>导入鸢尾属植物数据集，保持文本不变。</p>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Solution</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>) </span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Print the first 3 rows</span></span><br><span class="line">iris[:<span class="number">3</span>]</span><br><span class="line"><span class="comment"># &gt; array([[b'5.1', b'3.5', b'1.4', b'0.2', b'Iris-setosa'],</span></span><br><span class="line"><span class="comment"># &gt;        [b'4.9', b'3.0', b'1.4', b'0.2', b'Iris-setosa'],</span></span><br><span class="line"><span class="comment"># &gt;        [b'4.7', b'3.2', b'1.3', b'0.2', b'Iris-setosa']], dtype=object)</span></span><br></pre></td></tr></table></figure>
+<h3 id="15-如何从1维元组数组中提取特定列？"><a href="#15-如何从1维元组数组中提取特定列？" class="headerlink" title="15. 如何从1维元组数组中提取特定列？"></a>15. 如何从1维元组数组中提取特定列？</h3><p><strong>问题：</strong>从前面问题中导入的一维鸢尾属植物数据集中提取文本列的物种。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_1d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给定：</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_1d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="literal">None</span>, encoding=<span class="literal">None</span>) <span class="comment"># None代表默认编码</span></span><br><span class="line">print(iris_1d.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution:</span></span><br><span class="line">species = np.array([row[<span class="number">4</span>] <span class="keyword">for</span> row <span class="keyword">in</span> iris_1d])</span><br><span class="line">species[:<span class="number">5</span>]</span><br><span class="line"><span class="comment"># &gt; (150,)</span></span><br><span class="line"><span class="comment"># &gt; array(['Iris-setosa', 'Iris-setosa', 'Iris-setosa', 'Iris-setosa',</span></span><br><span class="line"><span class="comment"># &gt;        'Iris-setosa'], dtype='&lt;U15')</span></span><br></pre></td></tr></table></figure>
+<h3 id="16-如何将1维元组数组转换为2维numpy数组？"><a href="#16-如何将1维元组数组转换为2维numpy数组？" class="headerlink" title="16. 如何将1维元组数组转换为2维numpy数组？"></a>16. 如何将1维元组数组转换为2维numpy数组？</h3><p><strong>问题：</strong>通过省略鸢尾属植物数据集种类的文本字段，将一维鸢尾属植物数据集转换为二维数组iris_2d。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_1d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># **给定：**</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_1d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution:</span></span><br><span class="line"><span class="comment"># Method 1: Convert each row to a list and get the first 4 items</span></span><br><span class="line">iris_2d = np.array([row.tolist()[:<span class="number">4</span>] <span class="keyword">for</span> row <span class="keyword">in</span> iris_1d])</span><br><span class="line">iris_2d[:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Alt Method 2: Import only the first 4 columns from source url</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">iris_2d[:<span class="number">4</span>]</span><br><span class="line"><span class="comment"># &gt; array([[ 5.1,  3.5,  1.4,  0.2],</span></span><br><span class="line"><span class="comment"># &gt;        [ 4.9,  3. ,  1.4,  0.2],</span></span><br><span class="line"><span class="comment"># &gt;        [ 4.7,  3.2,  1.3,  0.2],</span></span><br><span class="line"><span class="comment"># &gt;        [ 4.6,  3.1,  1.5,  0.2]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="17-如何规范化数组，使数组的值正好介于0和1之间？"><a href="#17-如何规范化数组，使数组的值正好介于0和1之间？" class="headerlink" title="17. 如何规范化数组，使数组的值正好介于0和1之间？"></a>17. 如何规范化数组，使数组的值正好介于0和1之间？</h3><p><strong>问题：</strong>创建一种标准化形式的鸢尾属植物间隔长度，其值正好介于0和1之间，这样最小值为0，最大值为1。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">sepallength = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">sepallength = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">Smax, Smin = sepallength.max(), sepallength.min()</span><br><span class="line">S = (sepallength - Smin)/(Smax - Smin)</span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">S = (sepallength - Smin)/sepallength.ptp()  <span class="comment"># Thanks, David Ojeda!</span></span><br><span class="line">print(S)</span><br><span class="line"><span class="comment"># &gt; [ 0.222  0.167  0.111  0.083  0.194  0.306  0.083  0.194  0.028  0.167</span></span><br><span class="line"><span class="comment"># &gt;   0.306  0.139  0.139  0.     0.417  0.389  0.306  0.222  0.389  0.222</span></span><br><span class="line"><span class="comment"># &gt;   0.306  0.222  0.083  0.222  0.139  0.194  0.194  0.25   0.25   0.111</span></span><br><span class="line"><span class="comment"># &gt;   0.139  0.306  0.25   0.333  0.167  0.194  0.333  0.167  0.028  0.222</span></span><br><span class="line"><span class="comment"># &gt;   0.194  0.056  0.028  0.194  0.222  0.139  0.222  0.083  0.278  0.194</span></span><br><span class="line"><span class="comment"># &gt;   0.75   0.583  0.722  0.333  0.611  0.389  0.556  0.167  0.639  0.25</span></span><br><span class="line"><span class="comment"># &gt;   0.194  0.444  0.472  0.5    0.361  0.667  0.361  0.417  0.528  0.361</span></span><br><span class="line"><span class="comment"># &gt;   0.444  0.5    0.556  0.5    0.583  0.639  0.694  0.667  0.472  0.389</span></span><br><span class="line"><span class="comment"># &gt;   0.333  0.333  0.417  0.472  0.306  0.472  0.667  0.556  0.361  0.333</span></span><br><span class="line"><span class="comment"># &gt;   0.333  0.5    0.417  0.194  0.361  0.389  0.389  0.528  0.222  0.389</span></span><br><span class="line"><span class="comment"># &gt;   0.556  0.417  0.778  0.556  0.611  0.917  0.167  0.833  0.667  0.806</span></span><br><span class="line"><span class="comment"># &gt;   0.611  0.583  0.694  0.389  0.417  0.583  0.611  0.944  0.944  0.472</span></span><br><span class="line"><span class="comment"># &gt;   0.722  0.361  0.944  0.556  0.667  0.806  0.528  0.5    0.583  0.806</span></span><br><span class="line"><span class="comment"># &gt;   0.861  1.     0.583  0.556  0.5    0.944  0.556  0.583  0.472  0.722</span></span><br><span class="line"><span class="comment"># &gt;   0.667  0.722  0.417  0.694  0.667  0.667  0.556  0.611  0.528  0.444]</span></span><br></pre></td></tr></table></figure>
+<h3 id="18-如何在数组中的随机位置插入值？"><a href="#18-如何在数组中的随机位置插入值？" class="headerlink" title="18. 如何在数组中的随机位置插入值？"></a>18. 如何在数组中的随机位置插入值？</h3><p><strong>问题：</strong>在iris_2d数据集中的20个随机位置插入np.nan值</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 1</span></span><br><span class="line">i, j = np.where(iris_2d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># i, j contain the row numbers and column numbers of 600 elements of iris_x</span></span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">iris_2d[np.random.choice((i), <span class="number">20</span>), np.random.choice((j), <span class="number">20</span>)] = np.nan</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2</span></span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">iris_2d[np.random.randint(<span class="number">150</span>, size=<span class="number">20</span>), np.random.randint(<span class="number">4</span>, size=<span class="number">20</span>)] = np.nan</span><br><span class="line"></span><br><span class="line"><span class="comment"># Print first 10 rows</span></span><br><span class="line">print(iris_2d[:<span class="number">10</span>])</span><br><span class="line"><span class="comment"># &gt; [[b'5.1' b'3.5' b'1.4' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.9' b'3.0' b'1.4' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.7' b'3.2' b'1.3' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.6' b'3.1' b'1.5' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'5.0' b'3.6' b'1.4' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'5.4' b'3.9' b'1.7' b'0.4' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.6' b'3.4' b'1.4' b'0.3' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'5.0' b'3.4' b'1.5' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.4' nan b'1.4' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.9' b'3.1' b'1.5' b'0.1' b'Iris-setosa']]</span></span><br></pre></td></tr></table></figure>
+<h3 id="19-如何在numpy数组中找到缺失值的位置？"><a href="#19-如何在numpy数组中找到缺失值的位置？" class="headerlink" title="19. 如何在numpy数组中找到缺失值的位置？"></a>19. 如何在numpy数组中找到缺失值的位置？</h3><p><strong>问题：</strong>在iris_2d的sepallength中查找缺失值的数量和位置（第1列）</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>)</span><br><span class="line">iris_2d[np.random.randint(<span class="number">150</span>, size=<span class="number">20</span>), np.random.randint(<span class="number">4</span>, size=<span class="number">20</span>)] = np.nan</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">iris_2d[np.random.randint(<span class="number">150</span>, size=<span class="number">20</span>), np.random.randint(<span class="number">4</span>, size=<span class="number">20</span>)] = np.nan</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">print(<span class="string">"Number of missing values: \n"</span>, np.isnan(iris_2d[:, <span class="number">0</span>]).sum())</span><br><span class="line">print(<span class="string">"Position of missing values: \n"</span>, np.where(np.isnan(iris_2d[:, <span class="number">0</span>])))</span><br><span class="line"><span class="comment"># &gt; Number of missing values: </span></span><br><span class="line"><span class="comment"># &gt;  5</span></span><br><span class="line"><span class="comment"># &gt; Position of missing values: </span></span><br><span class="line"><span class="comment"># &gt;  (array([ 39,  88,  99, 130, 147]),)</span></span><br></pre></td></tr></table></figure>
+<h3 id="20-如何找到numpy数组的两列之间的相关性？"><a href="#20-如何找到numpy数组的两列之间的相关性？" class="headerlink" title="20. 如何找到numpy数组的两列之间的相关性？"></a>20. 如何找到numpy数组的两列之间的相关性？</h3><p><strong>问题：</strong>在iris_2d中找出SepalLength（第1列）和PetalLength（第3列）之间的相关性</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 1</span></span><br><span class="line">np.corrcoef(iris[:, <span class="number">0</span>], iris[:, <span class="number">2</span>])[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 2</span></span><br><span class="line"><span class="keyword">from</span> scipy.stats.stats <span class="keyword">import</span> pearsonr  </span><br><span class="line">corr, p_value = pearsonr(iris[:, <span class="number">0</span>], iris[:, <span class="number">2</span>])</span><br><span class="line">print(corr)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Correlation coef indicates the degree of linear relationship between two numeric variables.</span></span><br><span class="line"><span class="comment"># It can range between -1 to +1.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The p-value roughly indicates the probability of an uncorrelated system producing </span></span><br><span class="line"><span class="comment"># datasets that have a correlation at least as extreme as the one computed.</span></span><br><span class="line"><span class="comment"># The lower the p-value (&lt;0.01), stronger is the significance of the relationship.</span></span><br><span class="line"><span class="comment"># It is not an indicator of the strength.</span></span><br><span class="line"><span class="comment"># &gt; 0.871754157305</span></span><br></pre></td></tr></table></figure>
+<h3 id="21-如何查找给定数组是否具有任何空值？"><a href="#21-如何查找给定数组是否具有任何空值？" class="headerlink" title="21. 如何查找给定数组是否具有任何空值？"></a>21. 如何查找给定数组是否具有任何空值？</h3><p><strong>问题：</strong>找出iris_2d是否有任何缺失值。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">np.isnan(iris_2d).any()</span><br><span class="line"><span class="comment"># &gt; False</span></span><br></pre></td></tr></table></figure>
+<h3 id="22-如何在numpy数组中用0替换所有缺失值？"><a href="#22-如何在numpy数组中用0替换所有缺失值？" class="headerlink" title="22. 如何在numpy数组中用0替换所有缺失值？"></a>22. 如何在numpy数组中用0替换所有缺失值？</h3><p><strong>问题：</strong>在numpy数组中将所有出现的nan替换为0</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">iris_2d[np.random.randint(<span class="number">150</span>, size=<span class="number">20</span>), np.random.randint(<span class="number">4</span>, size=<span class="number">20</span>)] = np.nan</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">iris_2d[np.random.randint(<span class="number">150</span>, size=<span class="number">20</span>), np.random.randint(<span class="number">4</span>, size=<span class="number">20</span>)] = np.nan</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">iris_2d[np.isnan(iris_2d)] = <span class="number">0</span></span><br><span class="line">iris_2d[:<span class="number">4</span>]</span><br><span class="line"><span class="comment"># &gt; array([[ 5.1,  3.5,  1.4,  0. ],</span></span><br><span class="line"><span class="comment"># &gt;        [ 4.9,  3. ,  1.4,  0.2],</span></span><br><span class="line"><span class="comment"># &gt;        [ 4.7,  3.2,  1.3,  0.2],</span></span><br><span class="line"><span class="comment"># &gt;        [ 4.6,  3.1,  1.5,  0.2]])</span></span><br></pre></td></tr></table></figure>
+<h3 id="23-如何在numpy数组中查找唯一值的计数？"><a href="#23-如何在numpy数组中查找唯一值的计数？" class="headerlink" title="23. 如何在numpy数组中查找唯一值的计数？"></a>23. 如何在numpy数组中查找唯一值的计数？</h3><p><strong>问题：</strong>找出鸢尾属植物物种中的独特值和独特值的数量</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Import iris keeping the text column intact</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line"><span class="comment"># Extract the species column as an array</span></span><br><span class="line">species = np.array([row.tolist()[<span class="number">4</span>] <span class="keyword">for</span> row <span class="keyword">in</span> iris])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the unique values and the counts</span></span><br><span class="line">np.unique(species, return_counts=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># &gt; (array([b'Iris-setosa', b'Iris-versicolor', b'Iris-virginica'],</span></span><br><span class="line"><span class="comment"># &gt;        dtype='|S15'), array([50, 50, 50]))</span></span><br></pre></td></tr></table></figure>
+<h3 id="24-如何将数字转换为分类（文本）数组？"><a href="#24-如何将数字转换为分类（文本）数组？" class="headerlink" title="24. 如何将数字转换为分类（文本）数组？"></a>24. 如何将数字转换为分类（文本）数组？</h3><p><strong>问题：</strong>将iris_2d的花瓣长度（第3列）加入以形成文本数组，这样如果花瓣长度为：</p>
+<ul>
+<li>Less than 3 —&gt; ‘small’</li>
+<li>3-5 —&gt; ‘medium’</li>
+<li>‘&gt;=5 —&gt; ‘large’</li>
+</ul>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Bin petallength </span></span><br><span class="line">petal_length_bin = np.digitize(iris[:, <span class="number">2</span>].astype(<span class="string">'float'</span>), [<span class="number">0</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Map it to respective category</span></span><br><span class="line">label_map = &#123;<span class="number">1</span>: <span class="string">'small'</span>, <span class="number">2</span>: <span class="string">'medium'</span>, <span class="number">3</span>: <span class="string">'large'</span>, <span class="number">4</span>: np.nan&#125;</span><br><span class="line">petal_length_cat = [label_map[x] <span class="keyword">for</span> x <span class="keyword">in</span> petal_length_bin]</span><br><span class="line"></span><br><span class="line"><span class="comment"># View</span></span><br><span class="line">petal_length_cat[:<span class="number">4</span>]</span><br><span class="line">&lt;<span class="comment"># &gt; ['small', 'small', 'small', 'small']</span></span><br></pre></td></tr></table></figure>
+<h3 id="25-如何从numpy数组的现有列创建新列？"><a href="#25-如何从numpy数组的现有列创建新列？" class="headerlink" title="25. 如何从numpy数组的现有列创建新列？"></a>25. 如何从numpy数组的现有列创建新列？</h3><p><strong>问题：</strong>在iris_2d中为卷创建一个新列，其中volume是<code>（pi x petallength x sepal_length ^ 2）/ 3</code></p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris_2d = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line"><span class="comment"># Compute volume</span></span><br><span class="line">sepallength = iris_2d[:, <span class="number">0</span>].astype(<span class="string">'float'</span>)</span><br><span class="line">petallength = iris_2d[:, <span class="number">2</span>].astype(<span class="string">'float'</span>)</span><br><span class="line">volume = (np.pi * petallength * (sepallength**<span class="number">2</span>))/<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Introduce new dimension to match iris_2d's</span></span><br><span class="line">volume = volume[:, np.newaxis]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add the new column</span></span><br><span class="line">out = np.hstack([iris_2d, volume])</span><br><span class="line"></span><br><span class="line"><span class="comment"># View</span></span><br><span class="line">out[:<span class="number">4</span>]</span><br><span class="line"><span class="comment"># &gt; array([[b'5.1', b'3.5', b'1.4', b'0.2', b'Iris-setosa', 38.13265162927291],</span></span><br><span class="line"><span class="comment"># &gt;        [b'4.9', b'3.0', b'1.4', b'0.2', b'Iris-setosa', 35.200498485922445],</span></span><br><span class="line"><span class="comment"># &gt;        [b'4.7', b'3.2', b'1.3', b'0.2', b'Iris-setosa', 30.0723720777127],</span></span><br><span class="line"><span class="comment"># &gt;        [b'4.6', b'3.1', b'1.5', b'0.2', b'Iris-setosa', 33.238050274980004]], dtype=object)</span></span><br></pre></td></tr></table></figure>
+<h3 id="26-如何在按另一个数组分组时获取数组的第二大值？"><a href="#26-如何在按另一个数组分组时获取数组的第二大值？" class="headerlink" title="26. 如何在按另一个数组分组时获取数组的第二大值？"></a>26. 如何在按另一个数组分组时获取数组的第二大值？</h3><p><strong>问题：</strong>第二长的物种setosa的价值是多少</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Import iris keeping the text column intact</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line"><span class="comment"># Get the species and petal length columns</span></span><br><span class="line">petal_len_setosa = iris[iris[:, <span class="number">4</span>] == <span class="string">b'Iris-setosa'</span>, [<span class="number">2</span>]].astype(<span class="string">'float'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the second last value</span></span><br><span class="line">np.unique(np.sort(petal_len_setosa))[<span class="number">-2</span>]</span><br><span class="line"><span class="comment"># &gt; 1.7</span></span><br></pre></td></tr></table></figure>
+<h3 id="27-如何按列对2D数组进行排序"><a href="#27-如何按列对2D数组进行排序" class="headerlink" title="27. 如何按列对2D数组进行排序"></a>27. 如何按列对2D数组进行排序</h3><p><strong>问题：</strong>根据sepallength列对虹膜数据集进行排序。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sort by column position 0: SepalLength</span></span><br><span class="line">print(iris[iris[:,<span class="number">0</span>].argsort()][:<span class="number">20</span>])</span><br><span class="line"><span class="comment"># &gt; [[b'4.3' b'3.0' b'1.1' b'0.1' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.4' b'3.2' b'1.3' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.4' b'3.0' b'1.3' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.4' b'2.9' b'1.4' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.5' b'2.3' b'1.3' b'0.3' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.6' b'3.6' b'1.0' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.6' b'3.1' b'1.5' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.6' b'3.4' b'1.4' b'0.3' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.6' b'3.2' b'1.4' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.7' b'3.2' b'1.3' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.7' b'3.2' b'1.6' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.8' b'3.0' b'1.4' b'0.1' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.8' b'3.0' b'1.4' b'0.3' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.8' b'3.4' b'1.9' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.8' b'3.4' b'1.6' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.8' b'3.1' b'1.6' b'0.2' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.9' b'2.4' b'3.3' b'1.0' b'Iris-versicolor']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.9' b'2.5' b'4.5' b'1.7' b'Iris-virginica']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.9' b'3.1' b'1.5' b'0.1' b'Iris-setosa']</span></span><br><span class="line"><span class="comment"># &gt;  [b'4.9' b'3.1' b'1.5' b'0.1' b'Iris-setosa']]</span></span><br></pre></td></tr></table></figure>
+<h3 id="28-如何找到第一次出现的值大于给定值的位置？"><a href="#28-如何找到第一次出现的值大于给定值的位置？" class="headerlink" title="28.  如何找到第一次出现的值大于给定值的位置？"></a>28.  如何找到第一次出现的值大于给定值的位置？</h3><p><strong>问题：</strong>在虹膜数据集的petalwidth第4列中查找第一次出现的值大于1.0的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># **给定：**</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># **给定：**</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution: (edit: changed argmax to argwhere. Thanks Rong!)</span></span><br><span class="line">np.argwhere(iris[:, <span class="number">3</span>].astype(float) &gt; <span class="number">1.0</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># &gt; 50</span></span><br></pre></td></tr></table></figure>
+<h3 id="29-如何将大于给定值的所有值替换为给定的截止值？"><a href="#29-如何将大于给定值的所有值替换为给定的截止值？" class="headerlink" title="29. 如何将大于给定值的所有值替换为给定的截止值？"></a>29. 如何将大于给定值的所有值替换为给定的截止值？</h3><p><strong>问题：</strong>从数组a中，替换所有大于30到30和小于10到10的值。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">a = np.random.uniform(<span class="number">1</span>,<span class="number">50</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">np.set_printoptions(precision=<span class="number">2</span>)</span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">a = np.random.uniform(<span class="number">1</span>,<span class="number">50</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 1: Using np.clip</span></span><br><span class="line">np.clip(a, a_min=<span class="number">10</span>, a_max=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 2: Using np.where</span></span><br><span class="line">print(np.where(a &lt; <span class="number">10</span>, <span class="number">10</span>, np.where(a &gt; <span class="number">30</span>, <span class="number">30</span>, a)))</span><br><span class="line"><span class="comment"># &gt; [ 27.63  14.64  21.8   30.    10.    10.    30.    30.    10.    29.18  30.</span></span><br><span class="line"><span class="comment"># &gt;   11.25  10.08  10.    11.77  30.    30.    10.    30.    14.43]</span></span><br></pre></td></tr></table></figure>
+<h3 id="30-如何从numpy数组中获取最大n值的位置？"><a href="#30-如何从numpy数组中获取最大n值的位置？" class="headerlink" title="30. 如何从numpy数组中获取最大n值的位置？"></a>30. 如何从numpy数组中获取最大n值的位置？</h3><p><strong>问题：</strong>获取给定数组a中前5个最大值的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">a = np.random.uniform(<span class="number">1</span>,<span class="number">50</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">a = np.random.uniform(<span class="number">1</span>,<span class="number">50</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution:</span></span><br><span class="line">print(a.argsort())</span><br><span class="line"><span class="comment"># &gt; [18 7 3 10 15]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 2:</span></span><br><span class="line">np.argpartition(-a, <span class="number">5</span>)[:<span class="number">5</span>]</span><br><span class="line"><span class="comment"># &gt; [15 10  3  7 18]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Below methods will get you the values.</span></span><br><span class="line"><span class="comment"># Method 1:</span></span><br><span class="line">a[a.argsort()][<span class="number">-5</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2:</span></span><br><span class="line">np.sort(a)[<span class="number">-5</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 3:</span></span><br><span class="line">np.partition(a, kth=<span class="number">-5</span>)[<span class="number">-5</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 4:</span></span><br><span class="line">a[np.argpartition(-a, <span class="number">5</span>)][:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="31-如何将数组转换为平面一维数组？"><a href="#31-如何将数组转换为平面一维数组？" class="headerlink" title="31. 如何将数组转换为平面一维数组？"></a>31. 如何将数组转换为平面一维数组？</h3><p><strong>问题：</strong>将array_of_arrays转换为扁平线性1d数组。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># **给定：**</span></span><br><span class="line">arr1 = np.arange(<span class="number">3</span>)</span><br><span class="line">arr2 = np.arange(<span class="number">3</span>,<span class="number">7</span>)</span><br><span class="line">arr3 = np.arange(<span class="number">7</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">array_of_arrays = np.array([arr1, arr2, arr3])</span><br><span class="line">array_of_arrays</span><br><span class="line"><span class="comment"># &gt; array([array([0, 1, 2]), array([3, 4, 5, 6]), array([7, 8, 9])], dtype=object)</span></span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># **给定：**</span></span><br><span class="line">arr1 = np.arange(<span class="number">3</span>)</span><br><span class="line">arr2 = np.arange(<span class="number">3</span>,<span class="number">7</span>)</span><br><span class="line">arr3 = np.arange(<span class="number">7</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">array_of_arrays = np.array([arr1, arr2, arr3])</span><br><span class="line">print(<span class="string">'array_of_arrays: '</span>, array_of_arrays)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 1</span></span><br><span class="line">arr_2d = np.array([a <span class="keyword">for</span> arr <span class="keyword">in</span> array_of_arrays <span class="keyword">for</span> a <span class="keyword">in</span> arr])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 2:</span></span><br><span class="line">arr_2d = np.concatenate(array_of_arrays)</span><br><span class="line">print(arr_2d)</span><br><span class="line"><span class="comment"># &gt; array_of_arrays:  [array([0, 1, 2]) array([3, 4, 5, 6]) array([7, 8, 9])]</span></span><br><span class="line"><span class="comment"># &gt; [0 1 2 3 4 5 6 7 8 9]</span></span><br></pre></td></tr></table></figure>
+<h3 id="32-如何使用numpy对数组中的项进行排名？"><a href="#32-如何使用numpy对数组中的项进行排名？" class="headerlink" title="32. 如何使用numpy对数组中的项进行排名？"></a>32. 如何使用numpy对数组中的项进行排名？</h3><p><strong>问题：</strong>为给定的数字数组a创建排名。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">10</span>)</span><br><span class="line">a = np.random.randint(<span class="number">20</span>, size=<span class="number">10</span>)</span><br><span class="line">print(a)</span><br><span class="line"><span class="comment"># &gt; [ 9  4 15  0 17 16 17  8  9  0]</span></span><br></pre></td></tr></table></figure>
+<p><strong>期望输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">4</span> <span class="number">2</span> <span class="number">6</span> <span class="number">0</span> <span class="number">8</span> <span class="number">7</span> <span class="number">9</span> <span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">10</span>)</span><br><span class="line">a = np.random.randint(<span class="number">20</span>, size=<span class="number">10</span>)</span><br><span class="line">print(<span class="string">'Array: '</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">print(a.argsort().argsort())</span><br><span class="line">print(<span class="string">'Array: '</span>, a)</span><br><span class="line"><span class="comment"># &gt; Array:  [ 9  4 15  0 17 16 17  8  9  0]</span></span><br><span class="line"><span class="comment"># &gt; [4 2 6 0 8 7 9 3 5 1]</span></span><br><span class="line"><span class="comment"># &gt; Array:  [ 9  4 15  0 17 16 17  8  9  0]</span></span><br></pre></td></tr></table></figure>
+<h3 id="33-如何在二维numpy数组的每一行中找到最大值？"><a href="#33-如何在二维numpy数组的每一行中找到最大值？" class="headerlink" title="33. 如何在二维numpy数组的每一行中找到最大值？"></a>33. 如何在二维numpy数组的每一行中找到最大值？</h3><p><strong>问题：</strong>计算给定数组中每行的最大值。</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">a = np.random.randint(<span class="number">1</span>,<span class="number">10</span>, [<span class="number">5</span>,<span class="number">3</span>])</span><br><span class="line">a</span><br><span class="line"><span class="comment"># &gt; array([[9, 9, 4],</span></span><br><span class="line"><span class="comment"># &gt;        [8, 8, 1],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 3, 6],</span></span><br><span class="line"><span class="comment"># &gt;        [3, 3, 3],</span></span><br><span class="line"><span class="comment"># &gt;        [2, 1, 9]])</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">a = np.random.randint(<span class="number">1</span>,<span class="number">10</span>, [<span class="number">5</span>,<span class="number">3</span>])</span><br><span class="line">a</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 1</span></span><br><span class="line">np.amax(a, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 2</span></span><br><span class="line">np.apply_along_axis(np.max, arr=a, axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># &gt; array([9, 8, 6, 3, 9])</span></span><br></pre></td></tr></table></figure>
+<h3 id="34-如何删除numpy数组中所有缺少的值？"><a href="#34-如何删除numpy数组中所有缺少的值？" class="headerlink" title="34. 如何删除numpy数组中所有缺少的值？"></a>34. 如何删除numpy数组中所有缺少的值？</h3><p><strong>问题：</strong>从一维numpy数组中删除所有NaN值</p>
+<p><strong>给定：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,np.nan,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,np.nan])</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([ <span class="number">1.</span>,  <span class="number">2.</span>,  <span class="number">3.</span>,  <span class="number">5.</span>,  <span class="number">6.</span>,  <span class="number">7.</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,np.nan,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,np.nan])</span><br><span class="line">a[~np.isnan(a)]</span><br><span class="line"><span class="comment"># &gt; array([ 1.,  2.,  3.,  5.,  6.,  7.])</span></span><br></pre></td></tr></table></figure>
+<h3 id="35-如何从二维数组中减去一维数组，其中一维数组的每一项从各自的行中减去？"><a href="#35-如何从二维数组中减去一维数组，其中一维数组的每一项从各自的行中减去？" class="headerlink" title="35. 如何从二维数组中减去一维数组，其中一维数组的每一项从各自的行中减去？"></a>35. 如何从二维数组中减去一维数组，其中一维数组的每一项从各自的行中减去？</h3><p><strong>问题：</strong>从2d数组a_2d中减去一维数组b_1D，使得b_1D的每一项从a_2d的相应行中减去。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a_2d = np.array([[<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>]])</span><br><span class="line">b_1d = np.array([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>期望的输出：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; [[2 2 2]</span></span><br><span class="line"><span class="comment"># &gt;  [2 2 2]</span></span><br><span class="line"><span class="comment"># &gt;  [2 2 2]]</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">a_2d = np.array([[<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>]])</span><br><span class="line">b_1d = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line">print(a_2d - b_1d[:,<span class="literal">None</span>])</span><br><span class="line"><span class="comment"># &gt; [[2 2 2]</span></span><br><span class="line"><span class="comment"># &gt;  [2 2 2]</span></span><br><span class="line"><span class="comment"># &gt;  [2 2 2]]</span></span><br></pre></td></tr></table></figure>
+<h3 id="36-如何查找数组中项的第n次重复索引？"><a href="#36-如何查找数组中项的第n次重复索引？" class="headerlink" title="36. 如何查找数组中项的第n次重复索引？"></a>36. 如何查找数组中项的第n次重复索引？</h3><p><strong>问题：</strong>找出x中数字1的第5次重复的索引。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">n = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 1: List comprehension</span></span><br><span class="line">[i <span class="keyword">for</span> i, v <span class="keyword">in</span> enumerate(x) <span class="keyword">if</span> v == <span class="number">1</span>][n<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 2: Numpy version</span></span><br><span class="line">np.where(x == <span class="number">1</span>)[<span class="number">0</span>][n<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># &gt; 8</span></span><br></pre></td></tr></table></figure>
+<h3 id="37-如何将numpy的datetime-64对象转换为datetime的datetime对象？"><a href="#37-如何将numpy的datetime-64对象转换为datetime的datetime对象？" class="headerlink" title="37. 如何将numpy的datetime 64对象转换为datetime的datetime对象？"></a>37. 如何将numpy的datetime 64对象转换为datetime的datetime对象？</h3><p><strong>问题：</strong>将numpy的<code>datetime64</code>对象转换为datetime的datetime对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># **给定：** a numpy datetime64 object</span></span><br><span class="line">dt64 = np.datetime64(<span class="string">'2018-02-25 22:10:10'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># **给定：** a numpy datetime64 object</span></span><br><span class="line">dt64 = np.datetime64(<span class="string">'2018-02-25 22:10:10'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">dt64.tolist()</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">dt64.astype(datetime)</span><br><span class="line"><span class="comment"># &gt; datetime.datetime(2018, 2, 25, 22, 10, 10)</span></span><br></pre></td></tr></table></figure>
+<h3 id="38-如何在给定起始点、长度和步骤的情况下创建一个numpy数组序列？"><a href="#38-如何在给定起始点、长度和步骤的情况下创建一个numpy数组序列？" class="headerlink" title="38. 如何在给定起始点、长度和步骤的情况下创建一个numpy数组序列？"></a>38. 如何在给定起始点、长度和步骤的情况下创建一个numpy数组序列？</h3><p><strong>问题：</strong>创建长度为10的numpy数组，从5开始，在连续的数字之间的步长为3。</p>
+<p><strong>答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">length = <span class="number">10</span></span><br><span class="line">start = <span class="number">5</span></span><br><span class="line">step = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">seq</span><span class="params">(start, length, step)</span>:</span></span><br><span class="line">    end = start + (step*length)</span><br><span class="line">    <span class="keyword">return</span> np.arange(start, end, step)</span><br><span class="line"></span><br><span class="line">seq(start, length, step)</span><br><span class="line"><span class="comment"># &gt; array([ 5,  8, 11, 14, 17, 20, 23, 26, 29, 32])</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python学习/" rel="tag"># Python学习</a>
+          
+            <a href="/tags/Numpy/" rel="tag"># Numpy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/17/Statistical-day7/" rel="next" title="Statistical-day7">
+                <i class="fa fa-chevron-left"></i> Statistical-day7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/20/Numpy进阶学习/" rel="prev" title="Numpy进阶学习">
+                Numpy进阶学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy-常见问题-难度水平中等"><span class="nav-number">1.</span> <span class="nav-text">NumPy 常见问题(难度水平中等)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-如何垂直叠加两个数组？"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 如何垂直叠加两个数组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-如何水平叠加两个数组？"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 如何水平叠加两个数组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-如何在无硬编码的情况下生成Numpy中的自定义序列？"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 如何在无硬编码的情况下生成Numpy中的自定义序列？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-如何获取两个Numpy数组之间的公共项？"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 如何获取两个Numpy数组之间的公共项？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-如何从一个数组中删除存在于另一个数组中的项？"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 如何从一个数组中删除存在于另一个数组中的项？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-如何得到两个数组元素匹配的位置？"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 如何得到两个数组元素匹配的位置？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-如何从Numpy数组中提取给定范围内的所有数字？"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. 如何从Numpy数组中提取给定范围内的所有数字？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-如何创建一个python函数来处理scalars并在Numpy数组上工作？"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. 如何创建一个python函数来处理scalars并在Numpy数组上工作？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-如何交换二维numpy数组中的两列？"><span class="nav-number">1.0.9.</span> <span class="nav-text">9. 如何交换二维numpy数组中的两列？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-如何交换二维numpy数组中的两行？"><span class="nav-number">1.0.10.</span> <span class="nav-text">10. 如何交换二维numpy数组中的两行？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-如何反转二维数组的行？"><span class="nav-number">1.0.11.</span> <span class="nav-text">11. 如何反转二维数组的行？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-如何反转二维数组的列？"><span class="nav-number">1.0.12.</span> <span class="nav-text">12. 如何反转二维数组的列？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-如何创建包含5到10之间随机浮动的二维数组？"><span class="nav-number">1.0.13.</span> <span class="nav-text">13. 如何创建包含5到10之间随机浮动的二维数组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-如何导入数字和文本的数据集保持文本在numpy数组中完好无损？"><span class="nav-number">1.0.14.</span> <span class="nav-text">14. 如何导入数字和文本的数据集保持文本在numpy数组中完好无损？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-如何从1维元组数组中提取特定列？"><span class="nav-number">1.0.15.</span> <span class="nav-text">15. 如何从1维元组数组中提取特定列？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-如何将1维元组数组转换为2维numpy数组？"><span class="nav-number">1.0.16.</span> <span class="nav-text">16. 如何将1维元组数组转换为2维numpy数组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-如何规范化数组，使数组的值正好介于0和1之间？"><span class="nav-number">1.0.17.</span> <span class="nav-text">17. 如何规范化数组，使数组的值正好介于0和1之间？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-如何在数组中的随机位置插入值？"><span class="nav-number">1.0.18.</span> <span class="nav-text">18. 如何在数组中的随机位置插入值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-如何在numpy数组中找到缺失值的位置？"><span class="nav-number">1.0.19.</span> <span class="nav-text">19. 如何在numpy数组中找到缺失值的位置？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-如何找到numpy数组的两列之间的相关性？"><span class="nav-number">1.0.20.</span> <span class="nav-text">20. 如何找到numpy数组的两列之间的相关性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-如何查找给定数组是否具有任何空值？"><span class="nav-number">1.0.21.</span> <span class="nav-text">21. 如何查找给定数组是否具有任何空值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-如何在numpy数组中用0替换所有缺失值？"><span class="nav-number">1.0.22.</span> <span class="nav-text">22. 如何在numpy数组中用0替换所有缺失值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-如何在numpy数组中查找唯一值的计数？"><span class="nav-number">1.0.23.</span> <span class="nav-text">23. 如何在numpy数组中查找唯一值的计数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-如何将数字转换为分类（文本）数组？"><span class="nav-number">1.0.24.</span> <span class="nav-text">24. 如何将数字转换为分类（文本）数组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-如何从numpy数组的现有列创建新列？"><span class="nav-number">1.0.25.</span> <span class="nav-text">25. 如何从numpy数组的现有列创建新列？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-如何在按另一个数组分组时获取数组的第二大值？"><span class="nav-number">1.0.26.</span> <span class="nav-text">26. 如何在按另一个数组分组时获取数组的第二大值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-如何按列对2D数组进行排序"><span class="nav-number">1.0.27.</span> <span class="nav-text">27. 如何按列对2D数组进行排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-如何找到第一次出现的值大于给定值的位置？"><span class="nav-number">1.0.28.</span> <span class="nav-text">28.  如何找到第一次出现的值大于给定值的位置？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-如何将大于给定值的所有值替换为给定的截止值？"><span class="nav-number">1.0.29.</span> <span class="nav-text">29. 如何将大于给定值的所有值替换为给定的截止值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-如何从numpy数组中获取最大n值的位置？"><span class="nav-number">1.0.30.</span> <span class="nav-text">30. 如何从numpy数组中获取最大n值的位置？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-如何将数组转换为平面一维数组？"><span class="nav-number">1.0.31.</span> <span class="nav-text">31. 如何将数组转换为平面一维数组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-如何使用numpy对数组中的项进行排名？"><span class="nav-number">1.0.32.</span> <span class="nav-text">32. 如何使用numpy对数组中的项进行排名？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-如何在二维numpy数组的每一行中找到最大值？"><span class="nav-number">1.0.33.</span> <span class="nav-text">33. 如何在二维numpy数组的每一行中找到最大值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-如何删除numpy数组中所有缺少的值？"><span class="nav-number">1.0.34.</span> <span class="nav-text">34. 如何删除numpy数组中所有缺少的值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-如何从二维数组中减去一维数组，其中一维数组的每一项从各自的行中减去？"><span class="nav-number">1.0.35.</span> <span class="nav-text">35. 如何从二维数组中减去一维数组，其中一维数组的每一项从各自的行中减去？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-如何查找数组中项的第n次重复索引？"><span class="nav-number">1.0.36.</span> <span class="nav-text">36. 如何查找数组中项的第n次重复索引？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-如何将numpy的datetime-64对象转换为datetime的datetime对象？"><span class="nav-number">1.0.37.</span> <span class="nav-text">37. 如何将numpy的datetime 64对象转换为datetime的datetime对象？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#38-如何在给定起始点、长度和步骤的情况下创建一个numpy数组序列？"><span class="nav-number">1.0.38.</span> <span class="nav-text">38. 如何在给定起始点、长度和步骤的情况下创建一个numpy数组序列？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
