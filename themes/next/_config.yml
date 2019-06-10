@@ -293,7 +293,7 @@ highlight_theme: normal
 # Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS
 # ---------------------------------------------------------------
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host. E.g. //fonts.googleapis.com (Default).
   host:
@@ -307,33 +307,34 @@ font:
   global:
     external: true
     family: Lato
-    size:
+    size: 16
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6).
   # Fallback to `global` font settings.
   headings:
     external: true
     family:
-    size:
+    size: 40
 
   # Font settings for posts.
   # Fallback to `global` font settings.
   posts:
     external: true
     family:
+    size: 20
 
   # Font settings for Logo.
   # Fallback to `global` font settings.
   logo:
     external: true
     family:
-    size:
+    size: 30
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
     family:
-    size:
+    size: 16
 
 
 # ---------------------------------------------------------------
@@ -347,7 +348,7 @@ mathjax:
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
-han: false
+han: true
 
 # Swiftype Search API Key
 #swiftype_key:
@@ -695,7 +696,7 @@ pace: false
 pace_theme: pace-theme-minimal
 
 # Canvas-nest
-canvas_nest: false
+canvas_nest: true
 
 # three_waves
 three_waves: false
@@ -811,3 +812,7 @@ images: images
 
 # Theme version
 version: 5.1.4
+
+# 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enabled: true
