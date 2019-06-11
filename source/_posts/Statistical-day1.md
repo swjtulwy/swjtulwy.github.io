@@ -264,4 +264,4 @@ $$
 
 ## 总结
 
-<p style="text-align: center;"><img src="\images/1557565529430.png"></p>
+![](Statistical-day1\1557565529430.png)

@@ -75,5 +75,5 @@ $$
 
 ### 总结
 
-<p style="text-align: center;"><img src="\images/1557585731805.png"></p>
+![](Statistical-day2\1557585731805.png)
 
