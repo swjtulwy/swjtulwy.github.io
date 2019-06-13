@@ -18,7 +18,7 @@ mathjax: true
 
 - 推论统计学 Inferential statistics
 
-  侧重以数据的子集分布情况来推断数据整体情况<!-- more -->
+  侧重以数据的子集分布情况来推断数据整体情况
 
 ## 集中趋势(Central Tendency)的量度:广义平均数(Average)
 

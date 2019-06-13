@@ -14,7 +14,7 @@ mathjax: true
 
 辛钦大数定律定义：
 
-设$\{a_i,i\geq 1\}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：<!-- more -->
+设$\{a_i,i\geq 1\}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：
 $$
 \lim_{n\to\infty}P\left(\left|\frac{1}{n}\sum_{i=1}^na_i-\mu\right|\lt\epsilon\right)=1
 $$

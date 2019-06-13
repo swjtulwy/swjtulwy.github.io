@@ -9,7 +9,7 @@ categories: UNIX环境高级编程
 
 ## 引言
 
-标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。<!--more--->
+标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。
 
 ![](标准IO\DeepinScreenshot_select-area_20190602151221.png)
 
