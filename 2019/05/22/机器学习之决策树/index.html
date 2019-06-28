@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,21 +107,21 @@
 
 
 
-<meta name="description" content="决策树分类算法原理概述分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。">
+<meta name="description" content="决策树分类算法原理概述分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。 用决策树对需要测试的实例进行分类：从根节点开始，对实例的某一特征进行测试，根据测试结果，将">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习之决策树">
 <meta property="og:url" content="http://yoursite.com/2019/05/22/机器学习之决策树/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="决策树分类算法原理概述分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。">
+<meta property="og:description" content="决策树分类算法原理概述分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。 用决策树对需要测试的实例进行分类：从根节点开始，对实例的某一特征进行测试，根据测试结果，将">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/22/机器学习之决策树/Figure_1.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/22/机器学习之决策树/Figure_2.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/22/机器学习之决策树/Figure_3.png">
-<meta property="og:updated_time" content="2019-06-07T07:26:09.917Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之决策树">
-<meta name="twitter:description" content="决策树分类算法原理概述分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。">
+<meta name="twitter:description" content="决策树分类算法原理概述分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。 用决策树对需要测试的实例进行分类：从根节点开始，对实例的某一特征进行测试，根据测试结果，将">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/22/机器学习之决策树/Figure_1.png">
 
 
@@ -102,7 +132,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -270,7 +300,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -348,13 +378,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="决策树分类算法"><a href="#决策树分类算法" class="headerlink" title="决策树分类算法"></a>决策树分类算法</h1><h2 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h2><p>分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和<strong>有向边</strong>（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。<a id="more"></a></p>
+        <h1 id="决策树分类算法"><a href="#决策树分类算法" class="headerlink" title="决策树分类算法"></a>决策树分类算法</h1><h2 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h2><p>分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和<strong>有向边</strong>（directed edge）组成。结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或属性(features)，叶结点表示一个类(labels)。</p>
 <p>用决策树对需要测试的实例进行分类：从根节点开始，对实例的某一特征进行测试，根据测试结果，将实例分配到其子结点；这时，每一个子结点对应着该特征的一个取值。如此递归地对实例进行测试并分配，直至达到叶结点。最后将实例分配到叶结点的类中。</p>
 <h3 id="信息熵-amp-信息增益"><a href="#信息熵-amp-信息增益" class="headerlink" title="信息熵 &amp; 信息增益"></a>信息熵 &amp; 信息增益</h3><p>熵（entropy）： 熵指的是体系的混乱的程度，在不同的学科中也有引申出的更为具体的定义，是各领域十分重要的参量。</p>
 <blockquote>
@@ -439,7 +469,7 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
 </blockquote>
 <p>&gt;</p>
 <blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; infoGain= 0.03939650364612124 bestFeature= 0 1.3260875253642983 1.286691021718177</span><br><span class="line">&gt; infoGain= 0.039510835423565815 bestFeature= 1 1.3260875253642983 1.2865766899407325</span><br><span class="line">&gt; infoGain= 0.37700523001147723 bestFeature= 2 1.3260875253642983 0.9490822953528211</span><br><span class="line">&gt; infoGain= 0.5487949406953986 bestFeature= 3 1.3260875253642983 0.7772925846688997</span><br><span class="line">&gt; infoGain= 0.22125183600446618 bestFeature= 0 1.5545851693377994 1.3333333333333333</span><br><span class="line">&gt; infoGain= 0.09543725231055489 bestFeature= 1 1.5545851693377994 1.4591479170272446</span><br><span class="line">&gt; infoGain= 0.7704260414863776 bestFeature= 2 1.5545851693377994 0.7841591278514218</span><br><span class="line">&gt; infoGain= 0.2516291673878229 bestFeature= 0 0.9182958340544896 0.6666666666666666</span><br><span class="line">&gt; infoGain= 0.4591479170272448 bestFeature= 1 0.9182958340544896 0.4591479170272448</span><br><span class="line">&gt; infoGain= 0.9182958340544896 bestFeature= 0 0.9182958340544896 0.0</span><br><span class="line">&gt; infoGain= 0.3166890883150208 bestFeature= 0 0.6500224216483541 0.3333333333333333</span><br><span class="line">&gt; infoGain= 0.19087450462110933 bestFeature= 1 0.6500224216483541 0.4591479170272448</span><br><span class="line">&gt; infoGain= 1.0 bestFeature= 0 1.0 0.0</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; infoGain= <span class="number">0.03939650364612124</span> bestFeature= <span class="number">0</span> <span class="number">1.3260875253642983</span> <span class="number">1.286691021718177</span></span><br><span class="line">&gt; infoGain= <span class="number">0.039510835423565815</span> bestFeature= <span class="number">1</span> <span class="number">1.3260875253642983</span> <span class="number">1.2865766899407325</span></span><br><span class="line">&gt; infoGain= <span class="number">0.37700523001147723</span> bestFeature= <span class="number">2</span> <span class="number">1.3260875253642983</span> <span class="number">0.9490822953528211</span></span><br><span class="line">&gt; infoGain= <span class="number">0.5487949406953986</span> bestFeature= <span class="number">3</span> <span class="number">1.3260875253642983</span> <span class="number">0.7772925846688997</span></span><br><span class="line">&gt; infoGain= <span class="number">0.22125183600446618</span> bestFeature= <span class="number">0</span> <span class="number">1.5545851693377994</span> <span class="number">1.3333333333333333</span></span><br><span class="line">&gt; infoGain= <span class="number">0.09543725231055489</span> bestFeature= <span class="number">1</span> <span class="number">1.5545851693377994</span> <span class="number">1.4591479170272446</span></span><br><span class="line">&gt; infoGain= <span class="number">0.7704260414863776</span> bestFeature= <span class="number">2</span> <span class="number">1.5545851693377994</span> <span class="number">0.7841591278514218</span></span><br><span class="line">&gt; infoGain= <span class="number">0.2516291673878229</span> bestFeature= <span class="number">0</span> <span class="number">0.9182958340544896</span> <span class="number">0.6666666666666666</span></span><br><span class="line">&gt; infoGain= <span class="number">0.4591479170272448</span> bestFeature= <span class="number">1</span> <span class="number">0.9182958340544896</span> <span class="number">0.4591479170272448</span></span><br><span class="line">&gt; infoGain= <span class="number">0.9182958340544896</span> bestFeature= <span class="number">0</span> <span class="number">0.9182958340544896</span> <span class="number">0.0</span></span><br><span class="line">&gt; infoGain= <span class="number">0.3166890883150208</span> bestFeature= <span class="number">0</span> <span class="number">0.6500224216483541</span> <span class="number">0.3333333333333333</span></span><br><span class="line">&gt; infoGain= <span class="number">0.19087450462110933</span> bestFeature= <span class="number">1</span> <span class="number">0.6500224216483541</span> <span class="number">0.4591479170272448</span></span><br><span class="line">&gt; infoGain= <span class="number">1.0</span> bestFeature= <span class="number">0</span> <span class="number">1.0</span> <span class="number">0.0</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 <p>测试算法</p>
 <p>编写测试函数验证决策树可以正确分类给定的数据实例。</p>
 <p>使用算法</p>
@@ -453,6 +483,7 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
 
       
     </div>
+
     
     
     
@@ -480,8 +511,8 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/20/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/05/20/机器学习之k-近邻算法/" rel="next" title="机器学习之k-近邻算法">
+                <i class="fa fa-chevron-left"></i> 机器学习之k-近邻算法
               </a>
             
           </div>
@@ -558,7 +589,7 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -571,7 +602,7 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -582,7 +613,7 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -593,7 +624,7 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -603,6 +634,22 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -637,6 +684,8 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -711,6 +760,8 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
   
 
 
+  
+
 
 
 
@@ -749,6 +800,11 @@ H=-\sum_{i=1}^np(x_i)log_2p(x_i)</script><blockquote>
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

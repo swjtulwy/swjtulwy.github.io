@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,18 +107,18 @@
 
 
 
-<meta name="description" content="NumPy 常见问题(难度水平偏难)1. 如何计算Softmax得分？问题：计算sepallength的softmax分数。 给定：">
+<meta name="description" content="NumPy 常见问题(难度水平偏难)1. 如何计算Softmax得分？问题：计算sepallength的softmax分数。 给定： 12url = &apos;https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data&apos;sepallength = np.genfromtxt(url, delimiter=&apos;,&apos;, dty">
 <meta name="keywords" content="Python学习,Numpy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Numpy进阶学习">
 <meta property="og:url" content="http://yoursite.com/2019/05/20/Numpy进阶学习/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="NumPy 常见问题(难度水平偏难)1. 如何计算Softmax得分？问题：计算sepallength的softmax分数。 给定：">
+<meta property="og:description" content="NumPy 常见问题(难度水平偏难)1. 如何计算Softmax得分？问题：计算sepallength的softmax分数。 给定： 12url = &apos;https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data&apos;sepallength = np.genfromtxt(url, delimiter=&apos;,&apos;, dty">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-20T15:58:50.489Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Numpy进阶学习">
-<meta name="twitter:description" content="NumPy 常见问题(难度水平偏难)1. 如何计算Softmax得分？问题：计算sepallength的softmax分数。 给定：">
+<meta name="twitter:description" content="NumPy 常见问题(难度水平偏难)1. 如何计算Softmax得分？问题：计算sepallength的softmax分数。 给定： 12url = &apos;https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data&apos;sepallength = np.genfromtxt(url, delimiter=&apos;,&apos;, dty">
 
 
 
@@ -98,7 +128,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -266,7 +296,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -344,14 +374,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
         <h1 id="NumPy-常见问题-难度水平偏难"><a href="#NumPy-常见问题-难度水平偏难" class="headerlink" title="NumPy 常见问题(难度水平偏难)"></a>NumPy 常见问题(难度水平偏难)</h1><h3 id="1-如何计算Softmax得分？"><a href="#1-如何计算Softmax得分？" class="headerlink" title="1. 如何计算Softmax得分？"></a>1. 如何计算Softmax得分？</h3><p><strong>问题：</strong>计算sepallength的softmax分数。</p>
-<p><strong>给定：</strong><a id="more"></a></p>
+<p><strong>给定：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">sepallength = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'float'</span>, usecols=[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
 <p><strong>答案：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">sepallength = np.array([float(row[<span class="number">0</span>]) <span class="keyword">for</span> row <span class="keyword">in</span> iris])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">"""Compute softmax values for each sets of scores in x.</span></span><br><span class="line"><span class="string">    https://stackoverflow.com/questions/34968722/how-to-implement-the-softmax-function-in-python"""</span></span><br><span class="line">    e_x = np.exp(x - np.max(x))</span><br><span class="line">    <span class="keyword">return</span> e_x / e_x.sum(axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">print(softmax(sepallength))</span><br><span class="line"><span class="comment"># &gt; [ 0.002  0.002  0.001  0.001  0.002  0.003  0.001  0.002  0.001  0.002</span></span><br><span class="line"><span class="comment"># &gt;   0.003  0.002  0.002  0.001  0.004  0.004  0.003  0.002  0.004  0.002</span></span><br><span class="line"><span class="comment"># &gt;   0.003  0.002  0.001  0.002  0.002  0.002  0.002  0.002  0.002  0.001</span></span><br><span class="line"><span class="comment"># &gt;   0.002  0.003  0.002  0.003  0.002  0.002  0.003  0.002  0.001  0.002</span></span><br><span class="line"><span class="comment"># &gt;   0.002  0.001  0.001  0.002  0.002  0.002  0.002  0.001  0.003  0.002</span></span><br><span class="line"><span class="comment"># &gt;   0.015  0.008  0.013  0.003  0.009  0.004  0.007  0.002  0.01   0.002</span></span><br><span class="line"><span class="comment"># &gt;   0.002  0.005  0.005  0.006  0.004  0.011  0.004  0.004  0.007  0.004</span></span><br><span class="line"><span class="comment"># &gt;   0.005  0.006  0.007  0.006  0.008  0.01   0.012  0.011  0.005  0.004</span></span><br><span class="line"><span class="comment"># &gt;   0.003  0.003  0.004  0.005  0.003  0.005  0.011  0.007  0.004  0.003</span></span><br><span class="line"><span class="comment"># &gt;   0.003  0.006  0.004  0.002  0.004  0.004  0.004  0.007  0.002  0.004</span></span><br><span class="line"><span class="comment"># &gt;   0.007  0.004  0.016  0.007  0.009  0.027  0.002  0.02   0.011  0.018</span></span><br><span class="line"><span class="comment"># &gt;   0.009  0.008  0.012  0.004  0.004  0.008  0.009  0.03   0.03   0.005</span></span><br><span class="line"><span class="comment"># &gt;   0.013  0.004  0.03   0.007  0.011  0.018  0.007  0.006  0.008  0.018</span></span><br><span class="line"><span class="comment"># &gt;   0.022  0.037  0.008  0.007  0.006  0.03   0.007  0.008  0.005  0.013</span></span><br><span class="line"><span class="comment"># &gt;   0.011  0.013  0.004  0.012  0.011  0.011  0.007  0.009  0.007  0.005]</span></span><br></pre></td></tr></table></figure>
@@ -427,7 +457,7 @@
 <p><strong>答案：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Input</span></span><br><span class="line">url = <span class="string">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span><br><span class="line">iris = np.genfromtxt(url, delimiter=<span class="string">','</span>, dtype=<span class="string">'object'</span>)</span><br><span class="line">names = (<span class="string">'sepallength'</span>, <span class="string">'sepalwidth'</span>, <span class="string">'petallength'</span>, <span class="string">'petalwidth'</span>, <span class="string">'species'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution</span></span><br><span class="line"><span class="comment"># No direct way to implement this. Just a version of a workaround.</span></span><br><span class="line">numeric_column = iris[:, <span class="number">1</span>].astype(<span class="string">'float'</span>)  <span class="comment"># sepalwidth</span></span><br><span class="line">grouping_column = iris[:, <span class="number">4</span>]  <span class="comment"># species</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># List comprehension version</span></span><br><span class="line">[[group_val, numeric_column[grouping_column==group_val].mean()] <span class="keyword">for</span> group_val <span class="keyword">in</span> np.unique(grouping_column)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># For Loop version</span></span><br><span class="line">output = []</span><br><span class="line"><span class="keyword">for</span> group_val <span class="keyword">in</span> np.unique(grouping_column):</span><br><span class="line">    output.append([group_val, numeric_column[grouping_column==group_val].mean()])</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line"><span class="comment"># &gt; [[b'Iris-setosa', 3.418],</span></span><br><span class="line"><span class="comment"># &gt;  [b'Iris-versicolor', 2.770],</span></span><br><span class="line"><span class="comment"># &gt;  [b'Iris-virginica', 2.974]]</span></span><br></pre></td></tr></table></figure>
 <h3 id="13-如何将PIL图像转换为numpy数组？"><a href="#13-如何将PIL图像转换为numpy数组？" class="headerlink" title="13. 如何将PIL图像转换为numpy数组？"></a>13. 如何将PIL图像转换为numpy数组？</h3><p><strong>问题：</strong>从以下URL导入图像并将其转换为numpy数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL = &apos;https://upload.wikimedia.org/wikipedia/commons/8/8b/Denali_Mt_McKinley.jpg&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">URL</span> = <span class="string">'https://upload.wikimedia.org/wikipedia/commons/8/8b/Denali_Mt_McKinley.jpg'</span></span><br></pre></td></tr></table></figure>
 <p><strong>答案：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> PIL, requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># Import image from URL</span></span><br><span class="line">URL = <span class="string">'https://upload.wikimedia.org/wikipedia/commons/8/8b/Denali_Mt_McKinley.jpg'</span></span><br><span class="line">response = requests.get(URL)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Read it as Image</span></span><br><span class="line">I = Image.open(BytesIO(response.content))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Optionally resize</span></span><br><span class="line">I = I.resize([<span class="number">150</span>,<span class="number">150</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert to numpy array</span></span><br><span class="line">arr = np.asarray(I)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Optionaly Convert it back to an image and show</span></span><br><span class="line">im = PIL.Image.fromarray(np.uint8(arr))</span><br><span class="line">Image.Image.show(im)</span><br></pre></td></tr></table></figure>
 <h3 id="14-如何计算两个数组之间的欧氏距离？"><a href="#14-如何计算两个数组之间的欧氏距离？" class="headerlink" title="14. 如何计算两个数组之间的欧氏距离？"></a>14. 如何计算两个数组之间的欧氏距离？</h3><p><strong>问题：</strong>计算两个数组a和数组b之间的欧氏距离。</p>
@@ -462,6 +492,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_strides</span><span class="params">(a, stride_len=<span class="number">5</span>, window_len=<span class="number">5</span>)</span>:</span></span><br><span class="line">    n_strides = ((a.size-window_len)//stride_len) + <span class="number">1</span></span><br><span class="line">    <span class="comment"># return np.array([a[s:(s+window_len)] for s in np.arange(0, a.size, stride_len)[:n_strides]])</span></span><br><span class="line">    <span class="keyword">return</span> np.array([a[s:(s+window_len)] <span class="keyword">for</span> s <span class="keyword">in</span> np.arange(<span class="number">0</span>, n_strides*stride_len, stride_len)])</span><br><span class="line"></span><br><span class="line">print(gen_strides(np.arange(<span class="number">15</span>), stride_len=<span class="number">2</span>, window_len=<span class="number">4</span>))</span><br><span class="line"><span class="comment"># &gt; [[ 0  1  2  3]</span></span><br><span class="line"><span class="comment"># &gt;  [ 2  3  4  5]</span></span><br><span class="line"><span class="comment"># &gt;  [ 4  5  6  7]</span></span><br><span class="line"><span class="comment"># &gt;  [ 6  7  8  9]</span></span><br><span class="line"><span class="comment"># &gt;  [ 8  9 10 11]</span></span><br><span class="line"><span class="comment"># &gt;  [10 11 12 13]]</span></span><br></pre></td></tr></table></figure>
       
     </div>
+
     
     
     
@@ -569,7 +600,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -582,7 +613,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -593,7 +624,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -604,7 +635,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -614,6 +645,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -648,6 +695,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -722,6 +771,8 @@
   
 
 
+  
+
 
 
 
@@ -760,6 +811,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,13 +107,13 @@
 
 
 
-<meta name="description" content="进程控制本文介绍UNIX系统的进程控制，包括创建新进程(fork)、执行程序(exec)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有system函数的介绍。">
+<meta name="description" content="进程控制本文介绍UNIX系统的进程控制，包括创建新进程(fork)、执行程序(exec)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有system函数的介绍。 进程标识每个进程都有一个非负整型表示唯一的进程ID。虽然是唯一的，但是进程ID是可复用的。当一个进程终止后，其进程ID就成为复用的候选者。系统中有一些专用进程，但具体">
 <meta name="keywords" content="Unix,c语言,操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程控制">
 <meta property="og:url" content="http://yoursite.com/2019/06/06/进程控制/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="进程控制本文介绍UNIX系统的进程控制，包括创建新进程(fork)、执行程序(exec)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有system函数的介绍。">
+<meta property="og:description" content="进程控制本文介绍UNIX系统的进程控制，包括创建新进程(fork)、执行程序(exec)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有system函数的介绍。 进程标识每个进程都有一个非负整型表示唯一的进程ID。虽然是唯一的，但是进程ID是可复用的。当一个进程终止后，其进程ID就成为复用的候选者。系统中有一些专用进程，但具体">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/06/进程控制/DeepinScreenshot_select-area_20190605104831.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/06/进程控制/798267-20170106183257487-2024342490.png">
@@ -96,10 +126,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/06/进程控制/081917238792.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/06/进程控制/DeepinScreenshot_select-area_20190606184644.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/06/进程控制/DeepinScreenshot_select-area_20190606201854.png">
-<meta property="og:updated_time" content="2019-06-07T07:26:09.932Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程控制">
-<meta name="twitter:description" content="进程控制本文介绍UNIX系统的进程控制，包括创建新进程(fork)、执行程序(exec)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有system函数的介绍。">
+<meta name="twitter:description" content="进程控制本文介绍UNIX系统的进程控制，包括创建新进程(fork)、执行程序(exec)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有system函数的介绍。 进程标识每个进程都有一个非负整型表示唯一的进程ID。虽然是唯一的，但是进程ID是可复用的。当一个进程终止后，其进程ID就成为复用的候选者。系统中有一些专用进程，但具体">
 <meta name="twitter:image" content="http://yoursite.com/2019/06/06/进程控制/DeepinScreenshot_select-area_20190605104831.png">
 
 
@@ -110,7 +140,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -278,7 +308,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -356,13 +386,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h1><p>本文介绍UNIX系统的进程控制，包括创建新进程(<code>fork</code>)、执行程序(<code>exec</code>)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有<code>system</code>函数的介绍。<a id="more"></a></p>
+        <h1 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h1><p>本文介绍UNIX系统的进程控制，包括创建新进程(<code>fork</code>)、执行程序(<code>exec</code>)、和进程终止。还将说明进程属性的各种ID——实际、有效和保存的用户ID和组ID，以及它们如何受到进程控制原语的影响。还有<code>system</code>函数的介绍。</p>
 <h2 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h2><p>每个进程都有一个非负整型表示唯一的进程ID。虽然是唯一的，但是进程ID是可复用的。当一个进程终止后，其进程ID就成为复用的候选者。系统中有一些专用进程，但具体细节随实现而不同。ID为0通常表示调度进程，即交换进程(swapper)，是内核的一部分，也称为系统进程，不执行任何磁盘操作。ID为1的进程为<code>init</code>进程，<code>init</code>进程不会终止，他是一个普通的用户进程（非内核中的系统进程），需要超级用户特权运行。获取标识符函数如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pid_t</span> getpid(<span class="keyword">void</span>);		<span class="comment">//返回进程的进程ID</span></span><br><span class="line"><span class="keyword">pid_t</span> getppid(<span class="keyword">void</span>);	<span class="comment">//返回调用进程的父进程ID</span></span><br><span class="line"><span class="keyword">gid_t</span> getgid(<span class="keyword">void</span>);     <span class="comment">//返回调用进程的实际组ID</span></span><br><span class="line"><span class="keyword">gid_t</span> getegid(<span class="keyword">void</span>);    <span class="comment">//返回调用进程的有效组ID</span></span><br><span class="line"><span class="keyword">uid_t</span> getuid(<span class="keyword">void</span>);     <span class="comment">//返回调用进程的实际用户ID</span></span><br><span class="line"><span class="keyword">uid_t</span> geteuid(<span class="keyword">void</span>);    <span class="comment">//返回调用进程的有效用户ID</span></span><br></pre></td></tr></table></figure>
 <p>上述函数都没有出错返回。</p>
@@ -751,6 +781,7 @@
 
       
     </div>
+
     
     
     
@@ -860,7 +891,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -873,7 +904,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -884,7 +915,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -895,7 +926,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -905,6 +936,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -939,6 +986,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -1013,6 +1062,8 @@
   
 
 
+  
+
 
 
 
@@ -1051,6 +1102,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

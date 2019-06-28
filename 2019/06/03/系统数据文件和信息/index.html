@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -93,7 +123,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603164448.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/2012121515025942.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/03/系统数据文件和信息/DeepinScreenshot_select-area_20190603171112.png">
-<meta property="og:updated_time" content="2019-06-07T07:26:09.925Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.356Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统数据文件和信息">
 <meta name="twitter:description" content="系统数据文件和信息UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件/etc/passwd和组文件/etc/group就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行ls -l命令时都要使用口令文件。由于历史原因，这些数据文件都是ASCII文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非ASCII文">
@@ -107,7 +137,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -275,7 +305,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -353,13 +383,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="系统数据文件和信息"><a href="#系统数据文件和信息" class="headerlink" title="系统数据文件和信息"></a>系统数据文件和信息</h1><p>UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件<code>/etc/passwd</code>和组文件<code>/etc/group</code>就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行<code>ls -l</code>命令时都要使用口令文件。由于历史原因，这些数据文件都是<code>ASCII</code>文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非<code>ASCII</code>文本格式存放这些文件，但仍向使用其他文件格式的应用程序提供<strong>可移植</strong>接口。<a id="more"></a></p>
+        <h1 id="系统数据文件和信息"><a href="#系统数据文件和信息" class="headerlink" title="系统数据文件和信息"></a>系统数据文件和信息</h1><p>UNIX系统的正常运作需要使用大量与系统有关的数据文件，例如口令文件<code>/etc/passwd</code>和组文件<code>/etc/group</code>就是经常被多个程序频繁使用的两个文件。用户每次登录UNIX系统，以及每次执行<code>ls -l</code>命令时都要使用口令文件。由于历史原因，这些数据文件都是<code>ASCII</code>文本文件，并且使用标准I/O库读取。但是，对于较大的系统，顺序扫描口令文件很花费时间，我们需要能够以非<code>ASCII</code>文本格式存放这些文件，但仍向使用其他文件格式的应用程序提供<strong>可移植</strong>接口。</p>
 <h2 id="口令文件"><a href="#口令文件" class="headerlink" title="口令文件"></a>口令文件</h2><p>UNIX系统口令文件包含在<code>&lt;pwd.h&gt;</code>中定义的<code>passwd</code>结构中。</p>
 <p>结构中的字段一般有如下几个，用冒号隔开，以<code>linux</code>系统为例</p>
 <p>用户名:加密口令:数值用户ID:数值组ID:注释字段:初始工作目录:初始shell</p>
@@ -528,6 +558,7 @@
 
       
     </div>
+
     
     
     
@@ -637,7 +668,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -650,7 +681,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +692,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -672,7 +703,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -682,6 +713,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -716,6 +763,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -790,6 +839,8 @@
   
 
 
+  
+
 
 
 
@@ -828,6 +879,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

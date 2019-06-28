@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="云服务，云计算,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="特殊云机制云使用监控* 云使用监控机制是一种轻量级的自治软件程序  用于收集和处理IT资源的使用数据  使用数据发送到日志数据库，以便进行后续处理和报告。  三种种常见的实现形式：（基于代理）  监控代理（monitoring agent） 监控代理是一个中间的时间驱动程序，对数据流进行透明的监控和分析。   资源代理（resource agent） 资源代理是一种处理模块，在资源软件级别监控预定">
+<meta name="keywords" content="云服务，云计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特殊云机制">
+<meta property="og:url" content="http://yoursite.com/2019/06/14/特殊云机制/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="特殊云机制云使用监控* 云使用监控机制是一种轻量级的自治软件程序  用于收集和处理IT资源的使用数据  使用数据发送到日志数据库，以便进行后续处理和报告。  三种种常见的实现形式：（基于代理）  监控代理（monitoring agent） 监控代理是一个中间的时间驱动程序，对数据流进行透明的监控和分析。   资源代理（resource agent） 资源代理是一种处理模块，在资源软件级别监控预定">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614094613.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614094652.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614094708.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614095611.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614095959.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614100033.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614100044.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614101631.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614102049.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614102132.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614102524.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614102541.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614102634.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614102649.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614103007.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614103218.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614103311.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614103908.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614104050.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614104125.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614104251.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614104308.png">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="特殊云机制">
+<meta name="twitter:description" content="特殊云机制云使用监控* 云使用监控机制是一种轻量级的自治软件程序  用于收集和处理IT资源的使用数据  使用数据发送到日志数据库，以便进行后续处理和报告。  三种种常见的实现形式：（基于代理）  监控代理（monitoring agent） 监控代理是一个中间的时间驱动程序，对数据流进行透明的监控和分析。   资源代理（resource agent） 资源代理是一种处理模块，在资源软件级别监控预定">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/14/特殊云机制/QQ截图20190614094613.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/14/特殊云机制/">
+
+
+
+
+
+  <title>特殊云机制 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/14/特殊云机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">特殊云机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-14T10:58:25+08:00">
+                2019-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/云计算与大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算与大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="特殊云机制"><a href="#特殊云机制" class="headerlink" title="特殊云机制"></a>特殊云机制</h1><h2 id="云使用监控"><a href="#云使用监控" class="headerlink" title="云使用监控*"></a>云使用监控*</h2><ul>
+<li><p>云使用监控机制是一种轻量级的自治软件程序</p>
+</li>
+<li><p>用于收集和处理IT资源的使用数据</p>
+</li>
+<li><p>使用数据发送到日志数据库，以便进行后续处理和报告。</p>
+</li>
+<li><p>三种种常见的实现形式：（基于代理）</p>
+<ul>
+<li><p>监控代理（monitoring agent）</p>
+<p>监控代理是一个中间的时间驱动程序，对数据流进行透明的监控和分析。</p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614094613.png" alt></p>
+</li>
+<li><p>资源代理（resource agent）</p>
+<p>资源代理是一种处理模块，在资源软件级别监控预定义的且可观测事件的使用指标，比如：启动、暂停、恢复和垂直扩展。</p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614094652.png" alt></p>
+</li>
+<li><p>轮询代理（polling agent） </p>
+<p>轮询代理是一种处理模块，通过轮询IT资源来周期性地监控IT资源状态（比如正常运行时间和停机时间） </p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614094708.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="自动伸缩监听器"><a href="#自动伸缩监听器" class="headerlink" title="自动伸缩监听器*"></a>自动伸缩监听器*</h2><ul>
+<li>自动伸缩监听器(automated scaling listener mechanism)<ul>
+<li>是一个服务代理，监控和追踪云服务用户和云服务之间的通讯，用以动态自动伸缩。</li>
+</ul>
+</li>
+<li>通常部署在靠近云中防火墙的位置，来自动追踪负载状态信息。</li>
+<li>对应负载波动的条件，可以提供不同类型的响应：<ul>
+<li>自动伸缩IT资源(auto-scaling)：根据事先定义的参数</li>
+<li>自动通知云用户(auto-notification)：负载过高或过低时 </li>
+</ul>
+</li>
+</ul>
+<p>案例：</p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614095611.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614095959.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614100033.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614100044.png" alt></p>
+<h2 id="负载均衡器"><a href="#负载均衡器" class="headerlink" title="负载均衡器*"></a>负载均衡器*</h2><ul>
+<li><p>负载均衡器(load balancer )机制是一个运行时代理</p>
+</li>
+<li><p>主要用于把负载在两个或更多的IT 资源上做均衡</p>
+</li>
+<li><p>负载均衡器可以执行不同的运行时负载分配功能：</p>
+<ul>
+<li><p>非对称分配(Asymmetric distribution)</p>
+<p>较大的工作负载被送到具有较强处理能力的IT资源</p>
+</li>
+<li><p>负载优先级(Workload prioritization)</p>
+<p>负载根据其优先等级进行调度、排队、丢弃和分配</p>
+</li>
+<li><p>内容（上下文）感知的分配(Content-aware distribution) </p>
+<p>根据请求内容的指示把请求分配到不同的IT资源</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="负载均衡器的实体和部署"><a href="#负载均衡器的实体和部署" class="headerlink" title="负载均衡器的实体和部署"></a>负载均衡器的实体和部署</h3><p>负载均衡器通常位于产生负载的IT资源和执行负载处理的IT资源之间的通讯路径上。</p>
+<p>负载均衡器可以被设计成一个透明的代理 </p>
+<h3 id="负载均衡器机制的载体"><a href="#负载均衡器机制的载体" class="headerlink" title="负载均衡器机制的载体"></a>负载均衡器机制的载体</h3><p>多层网络交换机(multi-layer network switch)</p>
+<p>专门的硬件设备(dedicated hardware appliance)</p>
+<p>专门的基于软件的系统(dedicated software based system (in server OS)) </p>
+<p>服务代理(通常由云管理软件控制)</p>
+<h3 id="调度技术"><a href="#调度技术" class="headerlink" title="调度技术"></a>调度技术</h3><ul>
+<li><p>轮转、负载水平， …</p>
+</li>
+<li><p>同一用户的多个请求调度到同一服务器</p>
+</li>
+<li><p>同一租户的请求调度到尽量少的一组服务器</p>
+</li>
+<li><p>尽量实现不同类型负载的互补 </p>
+</li>
+<li><h6 id="……"><a href="#……" class="headerlink" title="……"></a>……</h6></li>
+</ul>
+<h2 id="SLA监控器"><a href="#SLA监控器" class="headerlink" title="SLA监控器"></a>SLA监控器</h2><ul>
+<li>SLA监控器(SLA monitor)用来专门观察云服务运行时的性能，确保它们履行了SLA报告中约定的QoS需求。</li>
+<li>SLA监控器收集的数据由SLA管理系统处理并集成到SLA报告的标准中 </li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614101631.png" alt></p>
+<h2 id="按使用付费监控器"><a href="#按使用付费监控器" class="headerlink" title="按使用付费监控器*"></a>按使用付费监控器*</h2><ul>
+<li>按使用付费监控器(pay-per-use monitor)</li>
+<li>按照预先定义好的<strong>定价</strong>参数测量云资源使用，并生成使用日志用于计算费用。</li>
+<li>使用数据由<strong>计费管理系统</strong>(billing management system)进行处理 </li>
+<li>一些典型的监控变量包括：<ul>
+<li>请求/响应消息数量</li>
+<li>传送的数据量</li>
+<li>带宽消耗</li>
+</ul>
+</li>
+<li>实现方式<ul>
+<li>资源代理</li>
+<li>监控代理 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614102049.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614102132.png" alt></p>
+<h2 id="故障转移系统"><a href="#故障转移系统" class="headerlink" title="故障转移系统*"></a>故障转移系统*</h2><ul>
+<li>故障转移系统(failover system)通过使用现有的集群技术提供冗余的实现来增加IT资源的可靠性和可用性。</li>
+<li>只要当前活跃的IT资源变得不可用时，便会自动切换到冗余的或待机IT资源实例上。 </li>
+</ul>
+<h3 id="故障转移系统的类型"><a href="#故障转移系统的类型" class="headerlink" title="故障转移系统的类型"></a>故障转移系统的类型</h3><h4 id="主动-主动"><a href="#主动-主动" class="headerlink" title="主动-主动"></a>主动-主动</h4><ul>
+<li>多个实例都处于活动状态，同时提供服务</li>
+<li>IT 资源的冗余实现和负载均衡器是必须要的</li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614102524.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614102541.png" alt></p>
+<h4 id="主动-被动"><a href="#主动-被动" class="headerlink" title="主动-被动"></a>主动-被动</h4><ul>
+<li>一个处于活动状态，一个待机或闲置</li>
+<li>当IT资源变得不可用的时候，就会激活待机实例来接管工作</li>
+<li>相应的工作负载就会被重定向到接管操作的这个实例上 </li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614102634.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614102649.png" alt></p>
+<h2 id="虚拟机监控器"><a href="#虚拟机监控器" class="headerlink" title="虚拟机监控器*"></a>虚拟机监控器*</h2><ul>
+<li>虚拟机监控器(hypervisor)是虚拟化基础设施的最基本部分，主要用来在物理服务器上生成虚拟服务器实例。</li>
+<li>虚拟机监控器通常受限于一台物理服务器，因此只能创建那台服务器的虚拟映像，类似地，虚拟机监控器只能把它自己创建的虚拟服务器分配到位于同一底层物理服务器上的资源池里。</li>
+<li>VIM提供了一组特性来管理跨物理服务器的多虚拟机监控器 </li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614103007.png" alt></p>
+<p>实例：VM Migration(虚拟机迁移)</p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614103218.png" alt></p>
+<h2 id="资源集群"><a href="#资源集群" class="headerlink" title="资源集群*"></a>资源集群*</h2><p>资源集群(resource cluster)把多个IT资源实例分为一组，使得他们能像一个IT资源那样进行操作 ，增强了集群化IT资源的组合计算能力、负载均衡能力和可用性。</p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614103311.png" alt></p>
+<ul>
+<li>通过高速专用网络链接或者集群结点实现工作负载、任务调度、数据共享和系统同步等通讯要求。</li>
+<li>常见的资源集群类型包括：<ul>
+<li>服务器集群——提高性能和可用性</li>
+<li>数据库集群——提高数据可用性，维持数据的一致性</li>
+<li>大数据集集群——数据的分区和分布</li>
+<li>负载均衡的集群——保持集中管理的特性下实现了在集群结点中的分布式工作负载。</li>
+<li>高可用（HA）集群——在多节点失效的情况下保持系统的可用性，需要冗余实现和故障转移机制。 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614103908.png" alt></p>
+<h2 id="多设备代理"><a href="#多设备代理" class="headerlink" title="多设备代理*"></a>多设备代理*</h2><ul>
+<li>多设备代理(multiple-device broker)用于运行时的数据转换</li>
+<li>克服云服务和多样性的云服务用户之间的不兼容性</li>
+<li>使得云服务能够被更广泛的云服务用户程序和设备所使用</li>
+<li>需要创建映射逻辑(mapping logic)来改变运行时交换的信息。</li>
+<li>多设备代理通常是作为网关存在的：<ul>
+<li>XML 网关</li>
+<li>云存储网关</li>
+<li>移动设备网关 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614104050.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614104125.png" alt></p>
+<h2 id="状态管理数据库"><a href="#状态管理数据库" class="headerlink" title="状态管理数据库*"></a>状态管理数据库*</h2><ul>
+<li>状态管理数据库(state management database)是一种存储设备，用来暂时地持久化软件<br>程序的状态数据,软件程序可以把状态数据卸载到数据库中</li>
+<li>替代状态数据缓存在内存中的一种方法，用以降低程序占用的运行时的内存量</li>
+<li>状态管理数据库使得软件程序和周边的基础设施都具有更大的可扩展性 </li>
+</ul>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614104251.png" alt></p>
+<p><img src="/2019/06/14/特殊云机制/QQ截图20190614104308.png" alt></p>
+<p>讨论分析可以用于自动伸缩的判定条件和机制</p>
+<p>分析讨论按使用付费监控器的两种实现方式的优缺点 </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/云服务，云计算/" rel="tag"># 云服务，云计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/13/云计算与大数据处理/" rel="next" title="云计算与大数据处理">
+                <i class="fa fa-chevron-left"></i> 云计算与大数据处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/15/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特殊云机制"><span class="nav-number">1.</span> <span class="nav-text">特殊云机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#云使用监控"><span class="nav-number">1.1.</span> <span class="nav-text">云使用监控*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动伸缩监听器"><span class="nav-number">1.2.</span> <span class="nav-text">自动伸缩监听器*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡器"><span class="nav-number">1.3.</span> <span class="nav-text">负载均衡器*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡器的实体和部署"><span class="nav-number">1.3.1.</span> <span class="nav-text">负载均衡器的实体和部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡器机制的载体"><span class="nav-number">1.3.2.</span> <span class="nav-text">负载均衡器机制的载体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度技术"><span class="nav-number">1.3.3.</span> <span class="nav-text">调度技术</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#……"><span class="nav-number">1.3.3.0.0.1.</span> <span class="nav-text">……</span></a></li></ol></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#SLA监控器"><span class="nav-number">1.4.</span> <span class="nav-text">SLA监控器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按使用付费监控器"><span class="nav-number">1.5.</span> <span class="nav-text">按使用付费监控器*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障转移系统"><span class="nav-number">1.6.</span> <span class="nav-text">故障转移系统*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#故障转移系统的类型"><span class="nav-number">1.6.1.</span> <span class="nav-text">故障转移系统的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主动-主动"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">主动-主动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主动-被动"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">主动-被动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机监控器"><span class="nav-number">1.7.</span> <span class="nav-text">虚拟机监控器*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源集群"><span class="nav-number">1.8.</span> <span class="nav-text">资源集群*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多设备代理"><span class="nav-number">1.9.</span> <span class="nav-text">多设备代理*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态管理数据库"><span class="nav-number">1.10.</span> <span class="nav-text">状态管理数据库*</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

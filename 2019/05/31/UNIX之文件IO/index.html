@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,20 +107,20 @@
 
 
 
-<meta name="description" content="文件I/O文件描述符文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用open函数），内核会向进程返回 一个文件描述符。">
+<meta name="description" content="文件I/O文件描述符文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用open函数），内核会向进程返回 一个文件描述符。 按照惯例，UNIX系统shell将进程的标准输入输出等与对应的文件描述符相关联,定义在&amp;lt;unistd.h&amp;gt; 中。     I/O 文件描述符     STDIN_FILENO 0   S">
 <meta name="keywords" content="Unix,c语言,操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UNIX之文件IO">
 <meta property="og:url" content="http://yoursite.com/2019/05/31/UNIX之文件IO/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="文件I/O文件描述符文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用open函数），内核会向进程返回 一个文件描述符。">
+<meta property="og:description" content="文件I/O文件描述符文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用open函数），内核会向进程返回 一个文件描述符。 按照惯例，UNIX系统shell将进程的标准输入输出等与对应的文件描述符相关联,定义在&amp;lt;unistd.h&amp;gt; 中。     I/O 文件描述符     STDIN_FILENO 0   S">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/31/UNIX之文件IO/20190531224936.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/31/UNIX之文件IO/20190531225011.png">
-<meta property="og:updated_time" content="2019-06-07T07:26:09.904Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UNIX之文件IO">
-<meta name="twitter:description" content="文件I/O文件描述符文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用open函数），内核会向进程返回 一个文件描述符。">
+<meta name="twitter:description" content="文件I/O文件描述符文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用open函数），内核会向进程返回 一个文件描述符。 按照惯例，UNIX系统shell将进程的标准输入输出等与对应的文件描述符相关联,定义在&amp;lt;unistd.h&amp;gt; 中。     I/O 文件描述符     STDIN_FILENO 0   S">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/31/UNIX之文件IO/20190531224936.png">
 
 
@@ -101,7 +131,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -269,7 +299,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -347,13 +377,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用<code>open</code>函数），<strong>内核</strong>会向进程返回 一个文件描述符。<a id="more"></a></p>
+        <h1 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>文件描述符是一个非负整数，对于UNIX内核而言，所有打开的文件都通过文件描述符引用，当打开一个现有文件或新建一个文件时候（比如使用<code>open</code>函数），<strong>内核</strong>会向进程返回 一个文件描述符。</p>
 <p>按照惯例，UNIX系统shell将进程的标准输入输出等与对应的文件描述符相关联,定义在<code>&lt;unistd.h&gt;</code> 中。</p>
 <div class="table-container">
 <table>
@@ -510,6 +540,7 @@
 
       
     </div>
+
     
     
     
@@ -619,7 +650,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -632,7 +663,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -643,7 +674,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -654,7 +685,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -664,6 +695,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -698,6 +745,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -772,6 +821,8 @@
   
 
 
+  
+
 
 
 
@@ -810,6 +861,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

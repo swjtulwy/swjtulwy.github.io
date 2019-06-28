@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,20 +107,20 @@
 
 
 
-<meta name="description" content="假设检验（二）方差已知情况下求均值是Z检验。方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）均值方差都未知求方差是$\chi^2$检验两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。">
+<meta name="description" content="假设检验（二）方差已知情况下求均值是Z检验。方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）均值方差都未知求方差是$\chi^2$检验两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。 Z检验Z检验量(Z-statistic) Z=\frac{\overline{X}-\mu_{\overline{x}}}{\sigma">
 <meta name="keywords" content="统计基础,任务打卡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Statistical-day5">
 <meta property="og:url" content="http://yoursite.com/2019/05/15/Statistical-day5/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="假设检验（二）方差已知情况下求均值是Z检验。方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）均值方差都未知求方差是$\chi^2$检验两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。">
+<meta property="og:description" content="假设检验（二）方差已知情况下求均值是Z检验。方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）均值方差都未知求方差是$\chi^2$检验两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。 Z检验Z检验量(Z-statistic) Z=\frac{\overline{X}-\mu_{\overline{x}}}{\sigma">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/15/Statistical-day5/20190516121733.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/15/Statistical-day5/20190516123915.png">
-<meta property="og:updated_time" content="2019-05-20T02:16:06.045Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Statistical-day5">
-<meta name="twitter:description" content="假设检验（二）方差已知情况下求均值是Z检验。方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）均值方差都未知求方差是$\chi^2$检验两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。">
+<meta name="twitter:description" content="假设检验（二）方差已知情况下求均值是Z检验。方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）均值方差都未知求方差是$\chi^2$检验两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。 Z检验Z检验量(Z-statistic) Z=\frac{\overline{X}-\mu_{\overline{x}}}{\sigma">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/15/Statistical-day5/20190516121733.png">
 
 
@@ -101,7 +131,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -269,7 +299,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -347,13 +377,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="假设检验（二）"><a href="#假设检验（二）" class="headerlink" title="假设检验（二）"></a>假设检验（二）</h1><p>方差已知情况下求均值是Z检验。<br>方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）<br>均值方差都未知求方差是$\chi^2$检验<br>两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。<a id="more"></a></p>
+        <h1 id="假设检验（二）"><a href="#假设检验（二）" class="headerlink" title="假设检验（二）"></a>假设检验（二）</h1><p>方差已知情况下求均值是Z检验。<br>方差未知求均值是$t$检验（样本标准差$s$代替总体标准差$\sigma$，由样本平均数推断总体平均数）<br>均值方差都未知求方差是$\chi^2$检验<br>两个正态分布样本的均值方差都未知情况下求两个总体的方差比值是$F$检验。</p>
 <h2 id="Z检验"><a href="#Z检验" class="headerlink" title="Z检验"></a>Z检验</h2><h3 id="Z检验量-Z-statistic"><a href="#Z检验量-Z-statistic" class="headerlink" title="Z检验量(Z-statistic)"></a>Z检验量(Z-statistic)</h3><script type="math/tex; mode=display">
 Z=\frac{\overline{X}-\mu_{\overline{x}}}{\sigma/\sqrt{n}}=\frac{\overline{X}-\mu_{\overline{x}}}{s/\sqrt{n}}</script><p>当$n$大于等于30时，其分布接近正态分布，否则其分布为$t$ 分布，因为当样本容量较大时，我们可以通过样本标准差来估计总体标准差，这样相当于总体方差已知。而样本容量较小时，我们不能通过样本来估计总体方差，这时相当于总体方差未知，属于$t$ 分布</p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>制药公司宣称他们的新药能够在两周内治愈90%的打鼾患者，外科诊所医生决定对药物进行试验，验证制药公司的说法是否可信，他随机抽取了100名患者，用该药进行了两周的治疗后，有80个人被治愈。现在要通过这个样本来对制药公司的断言进行Z-检验</p>
@@ -504,6 +534,7 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
 
       
     </div>
+
     
     
     
@@ -611,7 +642,7 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -624,7 +655,7 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -635,7 +666,7 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -646,7 +677,7 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -656,6 +687,22 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -690,6 +737,8 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -764,6 +813,8 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
   
 
 
+  
+
 
 
 
@@ -802,6 +853,11 @@ t=\frac{\overline{d}-\mu_d}{S_d-\sqrt{n}}=\frac{812.5-0}{193.1298}=4.2070, v=8-1
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

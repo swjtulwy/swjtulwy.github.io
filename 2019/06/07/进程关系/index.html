@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,13 +107,13 @@
 
 
 
-<meta name="description" content="进程关系本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。 终端登录在早期的UNIX系统中，用户用哑终端进行登录。终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接）。在这两种情况下，登录都经由内核中的终端设备驱动程序。">
+<meta name="description" content="进程关系本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。 终端登录在早期的UNIX系统中，用户用哑终端进行登录。终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接）。在这两种情况下，登录都经由内核中的终端设备驱动程序。 BSD终端登录系统管理员创建通常名为/etc/ttys的文件，其中每个终端设备都有一行，每一行说明">
 <meta name="keywords" content="Unix,c语言,操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程关系">
 <meta property="og:url" content="http://yoursite.com/2019/06/07/进程关系/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="进程关系本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。 终端登录在早期的UNIX系统中，用户用哑终端进行登录。终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接）。在这两种情况下，登录都经由内核中的终端设备驱动程序。">
+<meta property="og:description" content="进程关系本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。 终端登录在早期的UNIX系统中，用户用哑终端进行登录。终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接）。在这两种情况下，登录都经由内核中的终端设备驱动程序。 BSD终端登录系统管理员创建通常名为/etc/ttys的文件，其中每个终端设备都有一行，每一行说明">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/07/进程关系/DeepinScreenshot_select-area_20190607231435.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/07/进程关系/DeepinScreenshot_select-area_20190607231455.png">
@@ -93,10 +123,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/07/进程关系/DeepinScreenshot_select-area_20190607223936.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/07/进程关系/DeepinScreenshot_select-area_20190607231649.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/07/进程关系/DeepinScreenshot_select-area_20190607231707.png">
-<meta property="og:updated_time" content="2019-06-07T15:33:35.034Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程关系">
-<meta name="twitter:description" content="进程关系本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。 终端登录在早期的UNIX系统中，用户用哑终端进行登录。终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接）。在这两种情况下，登录都经由内核中的终端设备驱动程序。">
+<meta name="twitter:description" content="进程关系本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。 终端登录在早期的UNIX系统中，用户用哑终端进行登录。终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接）。在这两种情况下，登录都经由内核中的终端设备驱动程序。 BSD终端登录系统管理员创建通常名为/etc/ttys的文件，其中每个终端设备都有一行，每一行说明">
 <meta name="twitter:image" content="http://yoursite.com/2019/06/07/进程关系/DeepinScreenshot_select-area_20190607231435.png">
 
 
@@ -107,7 +137,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -275,7 +305,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -353,14 +383,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
         <h1 id="进程关系"><a href="#进程关系" class="headerlink" title="进程关系"></a>进程关系</h1><p>本文将介绍进程之间的关系，其中包括进程组和会话的概念，还将介绍登录shell和所有从登录shell启动的进程之间的关系。</p>
-<h2 id="终端登录"><a href="#终端登录" class="headerlink" title="终端登录"></a>终端登录</h2><p>在早期的UNIX系统中，用户用<strong>哑终端</strong>进行登录。<strong>终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接</strong>）。在<strong>这两种情况下，登录都经由内核中的终端设备驱动程序</strong>。<a id="more"></a></p>
+<h2 id="终端登录"><a href="#终端登录" class="headerlink" title="终端登录"></a>终端登录</h2><p>在早期的UNIX系统中，用户用<strong>哑终端</strong>进行登录。<strong>终端要么是本地的（直接连接）要么是远程的（通过调制解调器连接</strong>）。在<strong>这两种情况下，登录都经由内核中的终端设备驱动程序</strong>。</p>
 <h3 id="BSD终端登录"><a href="#BSD终端登录" class="headerlink" title="BSD终端登录"></a>BSD终端登录</h3><p><strong>系统管理员创建通常名为/etc/ttys的文件</strong>，其中每个终端设备都有一行，每一行说明设备名和传递给<code>getty</code>程序的参数，例如，参数之一说明了终端的波特率等。<strong>当系统自举时，内核创建ID为1的进程，也就是<code>init</code>进程</strong>。<strong>init进程使系统进入多用户状态</strong>。<strong><code>init</code>进程读文件/etc/ttys</strong>，<strong>对每一个允许登录的终端设备，<code>init</code>调用一次<code>fork</code></strong>，<strong>它所生成的子进程则执行（exec）<code>getty</code>程序</strong>。</p>
 <p><strong><code>getty</code>为终端设备调用<code>open</code>函数，以读、写方式将终端打开。</strong>如果设备是调制解调器，则<code>open</code>可能会在设备驱动程序中滞留，直到用户拨号调制解调器，并且呼叫被应答。<strong>一旦设备被打开，则文件描述符0、1、2就被设置到该设备</strong>。然后<strong><code>getty</code>输出“login：”之类的信息，并等待用户键入用户名</strong>。如果终端支持多种速度，则<code>getty</code>可以测试特殊字符以便适当地更改终端速度（波特率）。</p>
 <p><strong>当用户键入了用户名后，<code>getty</code>的工作就完成了</strong>。然后它以类似于下面的方式<strong>调用login程序</strong>：</p>
@@ -478,6 +508,7 @@
 
       
     </div>
+
     
     
     
@@ -518,6 +549,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/08/机器学习之朴素贝叶斯分类/" rel="prev" title="机器学习之朴素贝叶斯分类">
+                机器学习之朴素贝叶斯分类 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -583,7 +618,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -596,7 +631,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,7 +642,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -618,7 +653,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -628,6 +663,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -662,6 +713,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -736,6 +789,8 @@
   
 
 
+  
+
 
 
 
@@ -774,6 +829,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

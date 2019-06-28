@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,18 +107,18 @@
 
 
 
-<meta name="description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定：">
+<meta name="description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定： 12a = np.arange(10).reshape(2,-1)b = np.repeat(1, 10).reshape(2,-1) 期望的输出： 1234# &amp;gt; array([[0, 1, 2, 3, 4],# &amp;gt;        [5, 6, 7, 8, 9],# &amp;gt;        [1, 1, 1,">
 <meta name="keywords" content="Python学习,Numpy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Numpy基础学习">
 <meta property="og:url" content="http://yoursite.com/2019/05/20/Numpy基础学习/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定：">
+<meta property="og:description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定： 12a = np.arange(10).reshape(2,-1)b = np.repeat(1, 10).reshape(2,-1) 期望的输出： 1234# &amp;gt; array([[0, 1, 2, 3, 4],# &amp;gt;        [5, 6, 7, 8, 9],# &amp;gt;        [1, 1, 1,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-20T15:58:50.482Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Numpy基础学习">
-<meta name="twitter:description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定：">
+<meta name="twitter:description" content="NumPy 常见问题(难度水平中等)1. 如何垂直叠加两个数组？ 给定： 12a = np.arange(10).reshape(2,-1)b = np.repeat(1, 10).reshape(2,-1) 期望的输出： 1234# &amp;gt; array([[0, 1, 2, 3, 4],# &amp;gt;        [5, 6, 7, 8, 9],# &amp;gt;        [1, 1, 1,">
 
 
 
@@ -98,7 +128,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -266,7 +296,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -344,13 +374,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="NumPy-常见问题-难度水平中等"><a href="#NumPy-常见问题-难度水平中等" class="headerlink" title="NumPy 常见问题(难度水平中等)"></a>NumPy 常见问题(难度水平中等)</h1><h3 id="1-如何垂直叠加两个数组？"><a href="#1-如何垂直叠加两个数组？" class="headerlink" title="1. 如何垂直叠加两个数组？"></a>1. 如何垂直叠加两个数组？</h3><p> <strong>给定：</strong><a id="more"></a></p>
+        <h1 id="NumPy-常见问题-难度水平中等"><a href="#NumPy-常见问题-难度水平中等" class="headerlink" title="NumPy 常见问题(难度水平中等)"></a>NumPy 常见问题(难度水平中等)</h1><h3 id="1-如何垂直叠加两个数组？"><a href="#1-如何垂直叠加两个数组？" class="headerlink" title="1. 如何垂直叠加两个数组？"></a>1. 如何垂直叠加两个数组？</h3><p> <strong>给定：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br><span class="line">b = np.repeat(<span class="number">1</span>, <span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>期望的输出：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt; array([[0, 1, 2, 3, 4],</span></span><br><span class="line"><span class="comment"># &gt;        [5, 6, 7, 8, 9],</span></span><br><span class="line"><span class="comment"># &gt;        [1, 1, 1, 1, 1],</span></span><br><span class="line"><span class="comment"># &gt;        [1, 1, 1, 1, 1]])</span></span><br></pre></td></tr></table></figure>
@@ -560,6 +590,7 @@
 
       
     </div>
+
     
     
     
@@ -667,7 +698,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -680,7 +711,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -691,7 +722,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -702,7 +733,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -712,6 +743,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -746,6 +793,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -820,6 +869,8 @@
   
 
 
+  
+
 
 
 
@@ -858,6 +909,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

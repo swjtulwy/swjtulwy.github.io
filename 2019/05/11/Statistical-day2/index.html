@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,20 +107,20 @@
 
 
 
-<meta name="description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：">
+<meta name="description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：  \lim_{n\to\infty}P\left(\left|\frac{1}{n">
 <meta name="keywords" content="统计基础,任务打卡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Statistical-day2">
 <meta property="og:url" content="http://yoursite.com/2019/05/11/Statistical-day2/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：">
+<meta property="og:description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：  \lim_{n\to\infty}P\left(\left|\frac{1}{n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/1557585731805.png">
-<meta property="og:updated_time" content="2019-05-20T02:16:06.032Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/11/Statistical-day2/1557585731805.png">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Statistical-day2">
-<meta name="twitter:description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：">
-<meta name="twitter:image" content="http://yoursite.com/images/1557585731805.png">
+<meta name="twitter:description" content="大数定律、正态分布大数定律(Law of Large Numbers)大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值 辛钦大数定律定义： 设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：  \lim_{n\to\infty}P\left(\left|\frac{1}{n">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/11/Statistical-day2/1557585731805.png">
 
 
 
@@ -100,7 +130,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -268,7 +298,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -346,7 +376,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -354,7 +384,7 @@
       
         <h1 id="大数定律、正态分布"><a href="#大数定律、正态分布" class="headerlink" title="大数定律、正态分布"></a>大数定律、正态分布</h1><h2 id="大数定律-Law-of-Large-Numbers"><a href="#大数定律-Law-of-Large-Numbers" class="headerlink" title="大数定律(Law of Large Numbers)"></a>大数定律(Law of Large Numbers)</h2><p>大数定律简单地说，就是当样本量足够大时，样本均值会趋近总体期望值</p>
 <p>辛钦大数定律定义：</p>
-<p>设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：<a id="more"></a></p>
+<p>设${a_i,i\geq 1}$ 为独立同分布的随机变量序列，若$a_i$ 的数学期望存在，则服从大数定律：即对任意的$\epsilon\gt 0$ ,有公式：</p>
 <script type="math/tex; mode=display">
 \lim_{n\to\infty}P\left(\left|\frac{1}{n}\sum_{i=1}^na_i-\mu\right|\lt\epsilon\right)=1</script><h2 id="正态分布-Normal-Distribution"><a href="#正态分布-Normal-Distribution" class="headerlink" title="正态分布(Normal Distribution)"></a>正态分布(Normal Distribution)</h2><p>补充点概率知识：</p>
 <p>研究一个随机变量，不只是要看它能取哪些值，更重要的是它取各种值的概率如何！</p>
@@ -381,11 +411,11 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
 <li>使其标准化</li>
 <li>查找概率</li>
 </ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p style="text-align: center;"><img src="\images/1557585731805.png"></p>
-
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/2019/05/11/Statistical-day2/1557585731805.png" alt></p>
 
       
     </div>
+
     
     
     
@@ -493,7 +523,7 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -506,7 +536,7 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +547,7 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -528,7 +558,7 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -538,6 +568,22 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -572,6 +618,8 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -646,6 +694,8 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
   
 
 
+  
+
 
 
 
@@ -684,6 +734,11 @@ f(x)=\frac{1}{\sqrt{2\pi}\cdot\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\r
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

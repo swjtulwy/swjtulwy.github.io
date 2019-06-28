@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,21 +107,21 @@
 
 
 
-<meta name="description" content="标准I/O库引言标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。">
+<meta name="description" content="标准I/O库引言标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。  流和FILE对象对于标准I/O库，它们的操作是围绕流进行的，当用标准I/O库打开或创建一个文件时，我们使一个流与一个文件关联。对于不同的字符集，一个字符用几个字节表示也不统一。标准I/O文件流可以用于单字节">
 <meta name="keywords" content="Unix,c语言,操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="标准IO">
 <meta property="og:url" content="http://yoursite.com/2019/06/02/标准IO/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="标准I/O库引言标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。">
+<meta property="og:description" content="标准I/O库引言标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。  流和FILE对象对于标准I/O库，它们的操作是围绕流进行的，当用标准I/O库打开或创建一个文件时，我们使一个流与一个文件关联。对于不同的字符集，一个字符用几个字节表示也不统一。标准I/O文件流可以用于单字节">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/02/标准IO/DeepinScreenshot_select-area_20190602151221.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/02/标准IO/DeepinScreenshot_select-area_20190602205924.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/02/标准IO/DeepinScreenshot_select-area_20190602221241.png">
-<meta property="og:updated_time" content="2019-06-07T07:26:09.920Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标准IO">
-<meta name="twitter:description" content="标准I/O库引言标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。">
+<meta name="twitter:description" content="标准I/O库引言标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。  流和FILE对象对于标准I/O库，它们的操作是围绕流进行的，当用标准I/O库打开或创建一个文件时，我们使一个流与一个文件关联。对于不同的字符集，一个字符用几个字节表示也不统一。标准I/O文件流可以用于单字节">
 <meta name="twitter:image" content="http://yoursite.com/2019/06/02/标准IO/DeepinScreenshot_select-area_20190602151221.png">
 
 
@@ -102,7 +132,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -270,7 +300,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -348,13 +378,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="标准I-O库"><a href="#标准I-O库" class="headerlink" title="标准I/O库"></a>标准I/O库</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。<a id="more"></a></p>
+        <h1 id="标准I-O库"><a href="#标准I-O库" class="headerlink" title="标准I/O库"></a>标准I/O库</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>标准I/O库是1975年由Dennis Ritchie编写的，已经被大多数操作系统实现，也是ANSI C标准，它可以处理很多细节，比如缓冲区分配、以优化的块长度执行I/O等。</p>
 <p><img src="/2019/06/02/标准IO/DeepinScreenshot_select-area_20190602151221.png" alt></p>
 <h2 id="流和FILE对象"><a href="#流和FILE对象" class="headerlink" title="流和FILE对象"></a>流和FILE对象</h2><p>对于标准I/O库，它们的操作是围绕流进行的，当用标准I/O库打开或创建一个文件时，我们使一个流与一个文件关联。对于不同的字符集，一个字符用几个字节表示也不统一。标准I/O文件流可以用于单字节或多(宽)字节字符集。流的定向(stream’s orientation)决定了所读写的字符是单字节还是多字节的。当一个流被创建时，它并没有被定向。如若在为定向的流上使用一个多字节I/O函数，则会将该字节流定向为宽定向。只有两个函数可以改变流的定向：<code>freopen</code>清除一个流的定向，<code>fwide</code>函数可以用于设置流的定向。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;wchar.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fwide</span><span class="params">(FILE *stream, <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line"><span class="comment">// 宽定向返回正值，字节定向返回负值，为定向返回0</span></span><br></pre></td></tr></table></figure>
@@ -624,7 +654,7 @@
 </ul>
 <h2 id="格式化I-O"><a href="#格式化I-O" class="headerlink" title="格式化I/O"></a>格式化I/O</h2><h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fprintf</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dprintf</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="comment">// 以上三个函数返回值：成功返回输出的字符数，若输出有错返回负值。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="comment">//成功返回存入数组的字符数，编码出错返回负值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">snprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">size_t</span> size, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="comment">// 若缓冲区足够大，返回将要存入数组的字符数；若编码出错，返回负值</span></span><br></pre></td></tr></table></figure>
 <p>格式说明控制其余参数如何编写，以后又如何显示、每个参数都按照转换说明写，转换说明以%开始，形式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%[flags][fldwidth][precision][lenmodifier]convtype</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%[<span class="string">flags</span>][<span class="symbol">fldwidth</span>][<span class="string">precision</span>][<span class="symbol">lenmodifier</span>]convtype</span><br></pre></td></tr></table></figure>
 <p><code>flag</code>标志如下：</p>
 <div class="table-container">
 <table>
@@ -682,6 +712,7 @@
 
       
     </div>
+
     
     
     
@@ -791,7 +822,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -804,7 +835,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -815,7 +846,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -826,7 +857,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -836,6 +867,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -870,6 +917,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -944,6 +993,8 @@
   
 
 
+  
+
 
 
 
@@ -982,6 +1033,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,13 +107,13 @@
 
 
 
-<meta name="description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。">
+<meta name="description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。 main函数c语言总是从main函数开始执行。其原型是： 1int main(int argc, char* argv[]); 其中,argc是命令行参数的数目，argv是指向参数的各个指针所构成的">
 <meta name="keywords" content="Unix,c语言,操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程环境">
 <meta property="og:url" content="http://yoursite.com/2019/06/04/进程环境/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。">
+<meta property="og:description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。 main函数c语言总是从main函数开始执行。其原型是： 1int main(int argc, char* argv[]); 其中,argc是命令行参数的数目，argv是指向参数的各个指针所构成的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/2012121516393376.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604160249.png">
@@ -91,10 +121,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604160343.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/93291_090315085526.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/04/进程环境/DeepinScreenshot_select-area_20190604194351.png">
-<meta property="og:updated_time" content="2019-06-07T07:26:09.945Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程环境">
-<meta name="twitter:description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。">
+<meta name="twitter:description" content="进程环境简介本文介绍：当程序执行时，其main函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。 main函数c语言总是从main函数开始执行。其原型是： 1int main(int argc, char* argv[]); 其中,argc是命令行参数的数目，argv是指向参数的各个指针所构成的">
 <meta name="twitter:image" content="http://yoursite.com/2019/06/04/进程环境/2012121516393376.jpg">
 
 
@@ -105,7 +135,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -273,7 +303,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -351,13 +381,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="进程环境"><a href="#进程环境" class="headerlink" title="进程环境"></a>进程环境</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文介绍：当程序执行时，其<code>main</code>函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。<a id="more"></a></p>
+        <h1 id="进程环境"><a href="#进程环境" class="headerlink" title="进程环境"></a>进程环境</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文介绍：当程序执行时，其<code>main</code>函数是如何被调用的；命令行参数是如何传递给新程序的；典型的存储空间布局是什么样式的；如何分配另外的存储空间；进程如何使用环境变量；进程的各种不同终止方式。</p>
 <h2 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h2><p>c语言总是从<code>main</code>函数开始执行。其原型是：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>;</span><br></pre></td></tr></table></figure>
 <p>其中,<code>argc</code>是命令行参数的数目，<code>argv</code>是指向参数的各个指针所构成的数组。当内核执行c程序时，在调用<code>main</code>前先调用一个特殊的启动例程（START-UP routine）。可执行程序文件将此启动例程指定为程序的起始地址——这是由连接编辑器设置的，而连接编辑器则由c编译器调用。启动例程从内核取得命令行参数和环境变量值，然后为按上述方式调用<code>main</code>函数做好安排。</p>
@@ -458,6 +488,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rlimit</span> &#123;</span></span><br><span class="line">    <span class="keyword">rlim_t</span> rlim_cur;  <span class="comment">/* Soft limit */</span></span><br><span class="line">    <span class="keyword">rlim_t</span> rlim_max;  <span class="comment">/* Hard limit (ceiling for rlim_cur) */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrlimit</span><span class="params">(<span class="keyword">int</span> resource, struct rlimit *rlim)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">const</span> struct rlimit *rlim)</span></span>;</span><br><span class="line"><span class="comment">// 成功返回0 出错返回非0</span></span><br></pre></td></tr></table></figure>
       
     </div>
+
     
     
     
@@ -567,7 +598,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -580,7 +611,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -591,7 +622,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -602,7 +633,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -612,6 +643,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -646,6 +693,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -720,6 +769,8 @@
   
 
 
+  
+
 
 
 
@@ -758,6 +809,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

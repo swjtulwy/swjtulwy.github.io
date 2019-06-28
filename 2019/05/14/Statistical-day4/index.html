@@ -15,6 +15,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -40,6 +44,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,19 +107,19 @@
 
 
 
-<meta name="description" content="假设检验（一）假设检验六步骤 确定要进行检验的假设 （即我们要对其进行试验的断言） 选择检验统计量（我们要选取能最有效地对断言进行检验的统计量） 确定用于做决策的拒绝域（我们需要使用某种确定性水平）">
+<meta name="description" content="假设检验（一）假设检验六步骤 确定要进行检验的假设 （即我们要对其进行试验的断言） 选择检验统计量（我们要选取能最有效地对断言进行检验的统计量） 确定用于做决策的拒绝域（我们需要使用某种确定性水平） 求出检验统计量的p值（我们需要了解在假定断言为真的情况下，我们的试验结果的可信度） 查看样本结果是否位于拒绝域内（接着需要了解试验结果是否位于确定性限值范围中） 做出决策  相关概念原假设：即为你要对">
 <meta name="keywords" content="统计基础,任务打卡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Statistical-day4">
 <meta property="og:url" content="http://yoursite.com/2019/05/14/Statistical-day4/index.html">
 <meta property="og:site_name" content="lwy&#39;s studio">
-<meta property="og:description" content="假设检验（一）假设检验六步骤 确定要进行检验的假设 （即我们要对其进行试验的断言） 选择检验统计量（我们要选取能最有效地对断言进行检验的统计量） 确定用于做决策的拒绝域（我们需要使用某种确定性水平）">
+<meta property="og:description" content="假设检验（一）假设检验六步骤 确定要进行检验的假设 （即我们要对其进行试验的断言） 选择检验统计量（我们要选取能最有效地对断言进行检验的统计量） 确定用于做决策的拒绝域（我们需要使用某种确定性水平） 求出检验统计量的p值（我们需要了解在假定断言为真的情况下，我们的试验结果的可信度） 查看样本结果是否位于拒绝域内（接着需要了解试验结果是否位于确定性限值范围中） 做出决策  相关概念原假设：即为你要对">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/14/Statistical-day4/1557844059971.png">
-<meta property="og:updated_time" content="2019-05-20T02:16:06.041Z">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Statistical-day4">
-<meta name="twitter:description" content="假设检验（一）假设检验六步骤 确定要进行检验的假设 （即我们要对其进行试验的断言） 选择检验统计量（我们要选取能最有效地对断言进行检验的统计量） 确定用于做决策的拒绝域（我们需要使用某种确定性水平）">
+<meta name="twitter:description" content="假设检验（一）假设检验六步骤 确定要进行检验的假设 （即我们要对其进行试验的断言） 选择检验统计量（我们要选取能最有效地对断言进行检验的统计量） 确定用于做决策的拒绝域（我们需要使用某种确定性水平） 求出检验统计量的p值（我们需要了解在假定断言为真的情况下，我们的试验结果的可信度） 查看样本结果是否位于拒绝域内（接着需要了解试验结果是否位于确定性限值范围中） 做出决策  相关概念原假设：即为你要对">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/14/Statistical-day4/1557844059971.png">
 
 
@@ -100,7 +130,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -268,7 +298,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LWY">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -346,7 +376,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -355,7 +385,7 @@
         <h1 id="假设检验（一）"><a href="#假设检验（一）" class="headerlink" title="假设检验（一）"></a>假设检验（一）</h1><h2 id="假设检验六步骤"><a href="#假设检验六步骤" class="headerlink" title="假设检验六步骤"></a>假设检验六步骤</h2><ol>
 <li><strong>确定要进行检验的假设 （即我们要对其进行试验的断言）</strong></li>
 <li><strong>选择检验统计量（我们要选取能最有效地对断言进行检验的统计量）</strong></li>
-<li><strong>确定用于做决策的拒绝域（我们需要使用某种确定性水平）</strong><a id="more"></a></li>
+<li><strong>确定用于做决策的拒绝域（我们需要使用某种确定性水平）</strong></li>
 <li><strong>求出检验统计量的p值（我们需要了解在假定断言为真的情况下，我们的试验结果的可信度）</strong></li>
 <li><strong>查看样本结果是否位于拒绝域内（接着需要了解试验结果是否位于确定性限值范围中）</strong></li>
 <li><strong>做出决策</strong></li>
@@ -404,6 +434,7 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
 
       
     </div>
+
     
     
     
@@ -511,7 +542,7 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="LWY">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
             
               <p class="site-author-name" itemprop="name">LWY</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -524,7 +555,7 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +566,7 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -546,7 +577,7 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -556,6 +587,22 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -590,6 +637,8 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -664,6 +713,8 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
   
 
 
+  
+
 
 
 
@@ -702,6 +753,11 @@ P(第二类错误)=\beta</script><p>求解步骤如下：</p>
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

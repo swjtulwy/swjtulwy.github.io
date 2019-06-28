@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="云服务，云计算,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="云计算与大数据处理云计算数据处理架构  云数据处理关键技术  分布式数据管理 分布式文件系统 分布式数据库   云并行计算技术 分布式协同管理 集群管理   分布式协同管理 共享资源的并行操作→数据不一致 可能会存取和存储不正确的数据，破坏事务的隔离性和数据库的一致性  丢失修改（lost update） 丢失修改是指事务1与事务2从数据库中读入同一数据并修改，事务2的提交结果破坏了事务1提交的结">
+<meta name="keywords" content="云服务，云计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算与大数据处理">
+<meta property="og:url" content="http://yoursite.com/2019/06/13/云计算与大数据处理/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="云计算与大数据处理云计算数据处理架构  云数据处理关键技术  分布式数据管理 分布式文件系统 分布式数据库   云并行计算技术 分布式协同管理 集群管理   分布式协同管理 共享资源的并行操作→数据不一致 可能会存取和存储不正确的数据，破坏事务的隔离性和数据库的一致性  丢失修改（lost update） 丢失修改是指事务1与事务2从数据库中读入同一数据并修改，事务2的提交结果破坏了事务1提交的结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613094359.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613094427.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613094616.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613102527.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613102807.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613103836.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613103852.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613103915.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613104418.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613104618.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613104726.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613110520.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613111032.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613111104.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613112433.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613161706.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613161749.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613161820.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613162231.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613162526.png">
+<meta property="og:updated_time" content="2019-06-14T20:20:42.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="云计算与大数据处理">
+<meta name="twitter:description" content="云计算与大数据处理云计算数据处理架构  云数据处理关键技术  分布式数据管理 分布式文件系统 分布式数据库   云并行计算技术 分布式协同管理 集群管理   分布式协同管理 共享资源的并行操作→数据不一致 可能会存取和存储不正确的数据，破坏事务的隔离性和数据库的一致性  丢失修改（lost update） 丢失修改是指事务1与事务2从数据库中读入同一数据并修改，事务2的提交结果破坏了事务1提交的结">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/13/云计算与大数据处理/QQ截图20190613094359.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/13/云计算与大数据处理/">
+
+
+
+
+
+  <title>云计算与大数据处理 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/云计算与大数据处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">云计算与大数据处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-13T20:58:15+08:00">
+                2019-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/云计算与大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算与大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="云计算与大数据处理"><a href="#云计算与大数据处理" class="headerlink" title="云计算与大数据处理"></a>云计算与大数据处理</h1><h2 id="云计算数据处理架构"><a href="#云计算数据处理架构" class="headerlink" title="云计算数据处理架构"></a>云计算数据处理架构</h2><p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613094359.png" alt></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613094427.png" alt></p>
+<p>云数据处理关键技术</p>
+<ul>
+<li>分布式数据管理<ul>
+<li>分布式文件系统</li>
+<li>分布式数据库</li>
+</ul>
+</li>
+<li>云并行计算技术</li>
+<li>分布式协同管理</li>
+<li>集群管理</li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613094616.png" alt></p>
+<h2 id="分布式协同管理"><a href="#分布式协同管理" class="headerlink" title="分布式协同管理"></a>分布式协同管理</h2><ul>
+<li><p>共享资源的并行操作→数据不一致</p>
+<p>可能会存取和存储不正确的数据，破坏事务的隔离性和数据库的一致性</p>
+<ul>
+<li><p>丢失修改（lost update）</p>
+<p>丢失修改是指事务1与事务2从数据库中读入同一数据并修改，事务2的提交结果破坏了事务1提交的结果，导致事务1的修改被丢失</p>
+</li>
+<li><p>不可重复读（non-repeatable read）</p>
+<p>不可重复读是指事务1读取数据后，事务2执行更新操作，使事务1无法再现前一次读取结果</p>
+</li>
+<li><p>读“脏”数据（dirty read）</p>
+<p>事务1修改某一数据，并将其写回磁盘；事务2读取同一数据后；事务1由于某种原因被撤消，这时事务1已修改过的数据恢复原值；事务2读到的数据就与数据库中的数据不一致，是不正确的数据，又称为“脏”数据</p>
+</li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613102527.png" alt></p>
+</li>
+<li><p>通过同步机制控制并发操作</p>
+<p>并发控制机制的任务：对并发操作进行正确调度 、保证事务的隔离性、保证数据库的一致性</p>
+</li>
+<li><p>常用的并发控制方法</p>
+<ul>
+<li>基于锁的并发控制<br>两阶段锁协议</li>
+<li>基于时间戳的并发控制<br>基于全局唯一的时间戳</li>
+<li>乐观并发控制</li>
+<li>基于版本的并发控制 </li>
+</ul>
+</li>
+</ul>
+<h3 id="并发控制：锁"><a href="#并发控制：锁" class="headerlink" title="并发控制：锁"></a>并发控制：锁</h3><p>封锁就是事务T在对某个数据对象（例如表、记录等）操作之前，先向系统发出请求，对其加锁。</p>
+<p>加锁后事务T就对该数据对象有了一定的控制，在事务T释放它的锁之前，其它的事务不能更新此数据对象。</p>
+<p>封锁是实现并发控制的一个非常重要的技术。</p>
+<h4 id="基本封锁类型"><a href="#基本封锁类型" class="headerlink" title="基本封锁类型"></a>基本封锁类型</h4><ul>
+<li><p>排它锁（Exclusive lock，简记X锁）</p>
+<p>若事务T对数据对象A加上X锁，则只允许T读取和修改A，其它任何事务都不能再对A加任何类型的锁，直到T释放A上的锁</p>
+</li>
+<li><p>共享锁（Share lock， 简记为S锁）</p>
+<p>若事务T对数据对象A加上S锁，则其它事务只能再对A加S锁，而不能加X锁，直到T释放A上的S锁。</p>
+</li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613102807.png" alt></p>
+<h4 id="封锁协议"><a href="#封锁协议" class="headerlink" title="封锁协议"></a>封锁协议</h4><p>在运用X锁和S锁对数据对象加锁时，需要约定一些规则：封锁协议（Locking Protocol） </p>
+<ul>
+<li>何时申请X锁或S锁</li>
+<li>持锁时间、何时释放</li>
+</ul>
+<p>不同的封锁协议，在不同的程度上为并发操作的正确调度提供一定的保证<br>常用的封锁协议：三级封锁协议</p>
+<h4 id="并发调度的可串行性"><a href="#并发调度的可串行性" class="headerlink" title="并发调度的可串行性"></a>并发调度的可串行性</h4><p>并发调度正确的判断：</p>
+<ul>
+<li><p>计算机系统对并行事务中并行操作的调度是的随机的，而不同的调度可能会产生不同的结果。</p>
+</li>
+<li><p>如果一个事务运行过程中没有其他事务在同时运行，也就是说它没有受到其他事务的干扰，那么就可以认为该事务的运行结果是正常的</p>
+</li>
+<li><p>以不同的顺序串行执行事务有可能会产生不同的结果，但由于不会将数据库置于不一致状态，所以都认为是正确的。</p>
+</li>
+<li><p>几个事务的并行执行是正确的，当且仅当其结果与按某一次序串行地执行它们时的结果相同。这种并行调度策略称为可串行化（Serializable）的调度。</p>
+</li>
+<li><p><strong>可串行性是并行事务正确性的唯一准则</strong></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613103836.png" alt></p>
+</li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613103852.png" alt></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613103915.png" alt></p>
+<h4 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h4><ul>
+<li><p>两段锁协议（加锁和解锁）的内容</p>
+<p><strong>在对任何数据进行读、写操作之前，事务首先要获得对该数据的封锁。</strong><br><strong>在释放一个封锁之后，事务不再获得任何其他封锁。</strong></p>
+</li>
+<li><p>“两段”锁的含义</p>
+<ul>
+<li>事务分为两个阶段<br>第一阶段是获得封锁，也称为<strong>扩展阶段；</strong><br>第二阶段是释放封锁，也称为<strong>收缩阶段。</strong></li>
+<li>并行执行的所有事务均遵守两段锁协议，则对这些事务的所有并行调度策略都是可串行化的。所有遵守两段锁协议的事务，其并行执行的结果一定是正确的。</li>
+<li>事务遵守两段锁协议是可串行化调度的充分条件，而不是必要条件。</li>
+<li>可串行化的调度中，不一定所有事务都必须符合两段锁协议。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613104418.png" alt></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613104618.png" alt></p>
+<p>一次封锁法要求每个事务必须一次将所有要使用的数据全部加锁，否则就不能继续执行，因此一次封锁法遵守两段锁协议。但是两段锁协议并不要求事务必须一次将所有要使用的数据全部加锁，因此遵守两段锁协议的事务可能发生死锁</p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613104726.png" alt></p>
+<h4 id="自动获得锁"><a href="#自动获得锁" class="headerlink" title="自动获得锁"></a>自动获得锁</h4><ul>
+<li><p>A transaction $T_i$ issues the standard read/write instruction, without explicit locking calls.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// The operation read(D) is processed as:</span><br><span class="line">if Ti has a lock on D</span><br><span class="line">	then</span><br><span class="line">		read(D)</span><br><span class="line">	else begin</span><br><span class="line">		if necessary wait until no other</span><br><span class="line">			transaction has a lock-X on D</span><br><span class="line">		grant Ti a lock-S on D;</span><br><span class="line">		read(D)</span><br><span class="line">	end</span><br><span class="line">	</span><br><span class="line">// The operationwrite(D) is processed as:</span><br><span class="line">if Ti has a lock-X on D</span><br><span class="line">	then</span><br><span class="line">		write(D)</span><br><span class="line">	else begin</span><br><span class="line">		if necessary wait until no other trans. has any lock on D,</span><br><span class="line">		if Ti has a lock-S on D</span><br><span class="line">			then</span><br><span class="line">				upgrade lock on D to lock-X</span><br><span class="line">			else</span><br><span class="line">				grant Ti a lock-X on D</span><br><span class="line">			write(D)</span><br><span class="line">		end;</span><br></pre></td></tr></table></figure>
+<p><strong>All locks are released after commit or abort</strong> </p>
+</li>
+</ul>
+<h3 id="并发控制：时间戳协议-Timestamp-based-Protocols"><a href="#并发控制：时间戳协议-Timestamp-based-Protocols" class="headerlink" title="并发控制：时间戳协议(Timestamp-based Protocols)"></a>并发控制：时间戳协议(Timestamp-based Protocols)</h3><ul>
+<li>Each transaction is issued a timestamp when it enters the system.（每个事务都分配一个时间戳）</li>
+<li>The timestamp based protocol ensures that any conflicting <strong>read</strong> and <strong>write</strong> operations are executed in timestamp order.</li>
+<li>In order to assure such behavior, the protocol maintains for each data Q two timestamp values:<ul>
+<li><strong>W-timestamp(Q)</strong> is the largest time-stamp of any transaction that executed write(Q) successfully.(写成功的最大时间戳)</li>
+<li><strong>R-timestamp(Q)</strong> is the largest time-stamp of any transaction that executed read(Q) successfully （读成功的最大时间戳）</li>
+</ul>
+</li>
+</ul>
+<p><strong>Suppose a transaction $T_i$ issues a read(Q):</strong></p>
+<ul>
+<li>If TS($T_i$) $\le$ W-timestamp(Q), then$T_i$ needs to read a value of Q that was already overwritten.<br>• Hence, the read operation is rejected, and $T_i$is rolled back.</li>
+<li>If TS($T_i$)$\ge$ W-timestamp(Q), then the read operation is executed, and R-timestamp(Q) is set<br>to <strong>max</strong>(R-timestamp(Q), TS($T_i$)). </li>
+</ul>
+<p><strong>Suppose that transaction $T_i$ issues write(Q).</strong></p>
+<ul>
+<li>If TS($T_i$) &lt; R-timestamp(Q), then the value of Q that $T_i$ is producing was needed previously<br>• Hence, the write operation is rejected, and $T_i$ is rolled back.</li>
+<li>If TS($T_i$) &lt; W-timestamp(Q), then $T_i$ is attempting to write an obsolete value of Q.<br>• Hence, this write operation is rejected, and $T_i$ is rolled back.</li>
+<li>Otherwise, the write operation is executed, and W-timestamp(Q) is set to TS($T_i$) </li>
+</ul>
+<h2 id="分布式文件系统（HDFS）"><a href="#分布式文件系统（HDFS）" class="headerlink" title="分布式文件系统（HDFS）"></a>分布式文件系统（HDFS）</h2><ul>
+<li>基本特征<br>– 透明性、并发访问、高可用性</li>
+<li>基本需求<br>– 数据冗余、异构性、一致性、高效性、安全性</li>
+<li>基本架构<br>– 按块存储、并行读取、效率高<br>– 自动复制、多层次容错、原子操作保证一致性 </li>
+</ul>
+<h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
+<li>多层次容错</li>
+<li>自动复制</li>
+<li>按块存储， 并行读取， 效率高 </li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613110520.png" alt></p>
+<h3 id="HDFS介绍"><a href="#HDFS介绍" class="headerlink" title="HDFS介绍"></a>HDFS介绍</h3><ul>
+<li>GFS的开源实现</li>
+<li>容量大： terabytes or petabytes<br>– 将数据保存到大量的节点当中<br>– 支持很大单个文件</li>
+<li>高可靠性、快速访问、高可扩展<br>– 大量的数据复制<br>– 简单加入更多服务器</li>
+<li>HDFS是针对MapReduce设计<br>– 数据尽可能根据其本地局部性进行访问与计算 </li>
+</ul>
+<h3 id="HDFS的设计"><a href="#HDFS的设计" class="headerlink" title="HDFS的设计"></a>HDFS的设计</h3><ul>
+<li>基于块的文件存储</li>
+<li>块进行复制的形式放置，按照块的方式随<br>机选择存储节点</li>
+<li>副本的默认数目是3</li>
+<li>默认的块的大小是64MB<br>– 减少元数据的量<br>– 有利于顺序读写（在磁盘上数据顺序存放） </li>
+</ul>
+<h3 id="HDFS数据分布设计"><a href="#HDFS数据分布设计" class="headerlink" title="HDFS数据分布设计"></a>HDFS数据分布设计</h3><p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613111032.png" alt></p>
+<h3 id="HDFS体系结构"><a href="#HDFS体系结构" class="headerlink" title="HDFS体系结构"></a>HDFS体系结构</h3><p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613111104.png" alt></p>
+<h3 id="HDFS可靠性"><a href="#HDFS可靠性" class="headerlink" title="HDFS可靠性"></a>HDFS可靠性</h3><ul>
+<li>磁盘数据错误<br>– 心跳<br>– 重新分布</li>
+<li>Data Integrity: checksum（数据完整性校验）</li>
+<li>Metadata Disk Failure（元数据磁盘故障）: Checkpoint</li>
+<li>Snapshots（快照）: used for rollback, not implemented yet </li>
+</ul>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><ul>
+<li><p>加入一个新节点的步骤</p>
+<ul>
+<li>配置新节点上的hadoop程序</li>
+<li>在Master的slaves文件中加入新的slave节点</li>
+<li>启动slave节点上的DataNode，会自动去联系NameNode，加入到集群中</li>
+</ul>
+</li>
+<li><p>Balancer类用来做负载均衡</p>
+<p>默认的均衡参数是10%范围内 </p>
+</li>
+</ul>
+<h2 id="分布式数据库"><a href="#分布式数据库" class="headerlink" title="分布式数据库"></a>分布式数据库</h2><ul>
+<li>Key features (<strong>advantages</strong>):<ul>
+<li>non-relational, don’t require schema（非关系型）</li>
+<li>data are replicated to multiple nodes and can be partitioned:<br>• down nodes easily replaced<br>• no single point of failure</li>
+<li>horizontal scalable</li>
+<li>cheap, easy to implement</li>
+<li>massive write performance</li>
+<li>fast key-value access </li>
+</ul>
+</li>
+</ul>
+<p><strong>Disadvantages</strong>:</p>
+<ul>
+<li>Don’t fully support relational features<br>• no join, group by, order by operations (except within partitions)<br>• no referential integrity constraints across partitions</li>
+<li>No declarative query language (e.g., SQL) → more programming</li>
+<li>Relaxed ACID (see CAP theorem) → fewer guarantees</li>
+<li>No easy integration with other applications that support SQL </li>
+</ul>
+<p>各厂商使用的分布式数据库：</p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613112433.png" alt></p>
+<h3 id="NoSQL-categories"><a href="#NoSQL-categories" class="headerlink" title="NoSQL categories"></a>NoSQL categories</h3><ul>
+<li><p>Key-value</p>
+<p>Example: DynamoDB, Voldermort, Scalaris</p>
+</li>
+<li><p>Document-based</p>
+<p>Example: MongoDB, CouchDB</p>
+</li>
+<li><p>Column-based</p>
+<p>Example: BigTable, Cassandra, Hbased</p>
+</li>
+<li><p>Graph-based</p>
+<p>Example: Neo4J, InfoGrid<br>• “No-schema” is a common characteristics of most NoSQL storage systems<br>• Provide “flexible” data types </p>
+</li>
+</ul>
+<h2 id="MapReduce技术"><a href="#MapReduce技术" class="headerlink" title="MapReduce技术"></a>MapReduce技术</h2><ul>
+<li>Origin from Google, [OSDI’04]</li>
+<li>A simple programming model</li>
+<li>Functional model</li>
+<li>For large-scale data processing<ul>
+<li>Exploits large set of commodity computers</li>
+<li>Executes process in distributed manner</li>
+<li>Offers high availability </li>
+</ul>
+</li>
+</ul>
+<h4 id="Distributed-Word-Count-（案例）"><a href="#Distributed-Word-Count-（案例）" class="headerlink" title="Distributed Word Count （案例）"></a>Distributed Word Count （案例）</h4><p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613161706.png" alt></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613161749.png" alt></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613161820.png" alt></p>
+<h4 id="Functions-in-the-Model"><a href="#Functions-in-the-Model" class="headerlink" title="Functions in the Model"></a>Functions in the Model</h4><ul>
+<li><strong>Map</strong><br>– Process a key/value pair to generate intermediate key/value pairs</li>
+<li><strong>Reduce</strong><br>– Merge all intermediate values associated with the same key</li>
+<li><strong>Partition</strong><br>– By default : hash(key) mod R<br>– Well balanced </li>
+</ul>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613162231.png" alt></p>
+<p><img src="/2019/06/13/云计算与大数据处理/QQ截图20190613162526.png" alt></p>
+<h4 id="Locality-issue"><a href="#Locality-issue" class="headerlink" title="Locality issue"></a>Locality issue</h4><ul>
+<li>Master scheduling policy<ul>
+<li>Asks GFS for locations of replicas of input file blocks</li>
+<li>Map tasks typically split into 64MB (== GFS block size)</li>
+<li>Map tasks scheduled so GFS input block replica are on same machine or same rack</li>
+</ul>
+</li>
+<li>Effect<ul>
+<li>Thousands of machines read input at local disk speed</li>
+<li>Without this, rack switches limit read rate </li>
+</ul>
+</li>
+</ul>
+<h4 id="Fault-Tolerance"><a href="#Fault-Tolerance" class="headerlink" title="Fault Tolerance"></a>Fault Tolerance</h4><ul>
+<li><strong>Reactive way</strong><ul>
+<li>Worker failure<br>• Heartbeat, Workers are periodically pinged by master<pre><code>– NO response = failed worker
+</code></pre>• If the processor of a worker fails, the tasks of that worker are reassigned to another worker.</li>
+<li>Master failure<br>• Master writes periodic checkpoints<br>• Another master can be started from the last checkpointed state<br>• If eventually the master dies, the job will be aborted </li>
+</ul>
+</li>
+<li><strong>Proactive way (Redundant Execution)</strong><ul>
+<li>The problem of “stragglers” (slow workers)<br>• Other jobs consuming resources on machine<br>• Bad disks transfer data very slowly<br>• Weird things: processor caches disabled (!!)</li>
+<li>When computation almost done, reschedule inprogress tasks</li>
+<li>Whenever either the primary or the backup executions finishes, mark it as completed </li>
+</ul>
+</li>
+</ul>
+<h4 id="Points-need-to-be-emphasized"><a href="#Points-need-to-be-emphasized" class="headerlink" title="Points need to be emphasized"></a>Points need to be emphasized</h4><ul>
+<li>No reduce can begin until map is complete</li>
+<li>Master must communicate locations of intermediate files</li>
+<li>Tasks scheduled based on location of data</li>
+<li>If map worker fails any time before reduce finishes, task must be completely rerun</li>
+<li>MapReduce library does most of the hard work for us! </li>
+</ul>
+<h4 id="How-to-use-it"><a href="#How-to-use-it" class="headerlink" title="How to use it"></a>How to use it</h4><p>User to do list:</p>
+<ul>
+<li>indicate:<ul>
+<li>Input/output files</li>
+<li>M: number of map tasks</li>
+<li>R: number of reduce tasks</li>
+<li>W: number of machines</li>
+</ul>
+</li>
+<li>Write map and reduce functions</li>
+<li>Submit the job </li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/云服务，云计算/" rel="tag"># 云服务，云计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/13/云服务概念/" rel="next" title="云服务概念">
+                <i class="fa fa-chevron-left"></i> 云服务概念
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/14/特殊云机制/" rel="prev" title="特殊云机制">
+                特殊云机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#云计算与大数据处理"><span class="nav-number">1.</span> <span class="nav-text">云计算与大数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#云计算数据处理架构"><span class="nav-number">1.1.</span> <span class="nav-text">云计算数据处理架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式协同管理"><span class="nav-number">1.2.</span> <span class="nav-text">分布式协同管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发控制：锁"><span class="nav-number">1.2.1.</span> <span class="nav-text">并发控制：锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本封锁类型"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">基本封锁类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封锁协议"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">封锁协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并发调度的可串行性"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">并发调度的可串行性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两阶段锁协议"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">两阶段锁协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动获得锁"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">自动获得锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发控制：时间戳协议-Timestamp-based-Protocols"><span class="nav-number">1.2.2.</span> <span class="nav-text">并发控制：时间戳协议(Timestamp-based Protocols)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式文件系统（HDFS）"><span class="nav-number">1.3.</span> <span class="nav-text">分布式文件系统（HDFS）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本架构"><span class="nav-number">1.3.1.</span> <span class="nav-text">基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS介绍"><span class="nav-number">1.3.2.</span> <span class="nav-text">HDFS介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS的设计"><span class="nav-number">1.3.3.</span> <span class="nav-text">HDFS的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS数据分布设计"><span class="nav-number">1.3.4.</span> <span class="nav-text">HDFS数据分布设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS体系结构"><span class="nav-number">1.3.5.</span> <span class="nav-text">HDFS体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS可靠性"><span class="nav-number">1.3.6.</span> <span class="nav-text">HDFS可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡"><span class="nav-number">1.3.7.</span> <span class="nav-text">负载均衡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式数据库"><span class="nav-number">1.4.</span> <span class="nav-text">分布式数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NoSQL-categories"><span class="nav-number">1.4.1.</span> <span class="nav-text">NoSQL categories</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce技术"><span class="nav-number">1.5.</span> <span class="nav-text">MapReduce技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Distributed-Word-Count-（案例）"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">Distributed Word Count （案例）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Functions-in-the-Model"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">Functions in the Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Locality-issue"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">Locality issue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fault-Tolerance"><span class="nav-number">1.5.0.4.</span> <span class="nav-text">Fault Tolerance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Points-need-to-be-emphasized"><span class="nav-number">1.5.0.5.</span> <span class="nav-text">Points need to be emphasized</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-use-it"><span class="nav-number">1.5.0.6.</span> <span class="nav-text">How to use it</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
