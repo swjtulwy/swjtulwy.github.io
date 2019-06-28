@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="云服务，云计算,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据中心网络•设计目标与需求、成本、数据中心拓扑结构（分类），常见拓扑结构，重点掌握 FatTree 架构及属性 数据中心应用需求 Data centers typically run two types of applications outward facing (e.g., serving web pages to users)（面向外部） internal computations (e.">
+<meta name="keywords" content="云服务，云计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据中心网络">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/数据中心网络/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="数据中心网络•设计目标与需求、成本、数据中心拓扑结构（分类），常见拓扑结构，重点掌握 FatTree 架构及属性 数据中心应用需求 Data centers typically run two types of applications outward facing (e.g., serving web pages to users)（面向外部） internal computations (e.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618102419.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618153841.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154135.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154143.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154243.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154603.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154617.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154626.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154932.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154939.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618154946.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618155127.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618155254.png">
+<meta property="og:updated_time" content="2019-06-28T03:42:54.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据中心网络">
+<meta name="twitter:description" content="数据中心网络•设计目标与需求、成本、数据中心拓扑结构（分类），常见拓扑结构，重点掌握 FatTree 架构及属性 数据中心应用需求 Data centers typically run two types of applications outward facing (e.g., serving web pages to users)（面向外部） internal computations (e.">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/22/数据中心网络/QQ截图20190618102419.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/22/数据中心网络/">
+
+
+
+
+
+  <title>数据中心网络 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/数据中心网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据中心网络</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-22T19:52:15+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/云计算与大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算与大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据中心网络"><a href="#数据中心网络" class="headerlink" title="数据中心网络"></a>数据中心网络</h1><p>•设计目标与需求、成本、数据中心拓扑结构（分类），常见拓扑结构，重点掌握 FatTree 架构及属性</p>
+<h2 id="数据中心应用需求"><a href="#数据中心应用需求" class="headerlink" title="数据中心应用需求"></a>数据中心应用需求</h2><ul>
+<li>Data centers typically run two types of applications<ul>
+<li>outward facing (e.g., serving web pages to users)（面向外部）</li>
+<li>internal computations (e.g., MapReduce for web indexing) （内部计算）</li>
+</ul>
+</li>
+<li>Workloads often unpredictable（负载不可预测）:<ul>
+<li>Multiple services run concurrently within a DC （多个服务并发）</li>
+<li>Demand for new services may spike unexpected （对新服务的需求可能出乎意料）<ul>
+<li>Spike of demands for new services mean success!</li>
+<li>But this is when success spells trouble (if not prepared)!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Failures of servers are the norm （服务器故障是常态）</li>
+</ul>
+<h2 id="数据中心成本"><a href="#数据中心成本" class="headerlink" title="数据中心成本"></a>数据中心成本</h2><ul>
+<li><p>Total cost varies</p>
+<ul>
+<li>upwards of $1/4 B for mega data center（超级数据中心）</li>
+<li>server costs dominate（服务器成本占主导）</li>
+<li>network costs significant（网络成本显著）</li>
+</ul>
+</li>
+<li><p>Long provisioning timescales:（长供应时间表）</p>
+<ul>
+<li>new servers purchased quarterly at best </li>
+</ul>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618102419.png" alt></p>
+</li>
+</ul>
+<h2 id="数据中心设计目标"><a href="#数据中心设计目标" class="headerlink" title="数据中心设计目标"></a>数据中心设计目标</h2><ul>
+<li><p>Agility – Any service, Any Server（敏捷）</p>
+</li>
+<li><p>Turn the servers into a single large fungible pool（可互换池）</p>
+<ul>
+<li><p>Let services “breathe” : dynamically expand（动态扩展） and contract their footprintas needed</p>
+<p>​    We already see how this is done in terms of Google’s GFS, BigTable, MapReduce</p>
+</li>
+<li><p>Equidistant end-points with non-blocking core（具有非阻塞核心的等距端点）</p>
+</li>
+<li><p>Unlimited workload mobility（无限的工作负载移动性）</p>
+</li>
+</ul>
+</li>
+<li><p>Benefits</p>
+<ul>
+<li>Increase service developer productivity（生产力）</li>
+<li>Lower cost（低成本）</li>
+<li>Achieve high performance and reliability（高性能和可靠性）</li>
+</ul>
+</li>
+<li><p>These are the three motivators（三大动力） for most data center infrastructure projects! </p>
+</li>
+</ul>
+<h2 id="数据中心网络需求"><a href="#数据中心网络需求" class="headerlink" title="数据中心网络需求"></a>数据中心网络需求</h2><ul>
+<li>Uniform high capacity（统一的高容量）<ul>
+<li>Capacity between servers limited only by their NICs（服务器之间的容量仅受其NIC限制）</li>
+<li>No need to consider topology when adding servers（添加服务器时无需考虑拓扑）<ul>
+<li>=&gt; In other words, high capacity between any two servers no matter which racks they are located!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Performance isolation（性能隔离）<ul>
+<li>Traffic of one service should be unaffected by others（一项服务的流量应不受其他服务的影响）</li>
+</ul>
+</li>
+<li>Ease of management: “Plug-&amp;-Play” (layer-2 semantics)（易于管理，即插即用）<ul>
+<li>Flat addressing, so any server can have any IP address</li>
+<li>Server configuration is the same as in a LAN</li>
+<li>Legacy applications depending on broadcast must work </li>
+</ul>
+</li>
+<li>Requirements for scalable（可扩展）, easily manageable, fault tolerant and efficient Data Center Networks (DCN):<ul>
+<li>R1: Any VM may migrate to any physical machine without a change in its IP address</li>
+<li>R2: An administrator should not need to configure any switch before deployment</li>
+<li>R3: Any end host should efficiently communicate with any other end hosts through any available  paths</li>
+<li>R4: No forwarding loops</li>
+<li>R5: Failure detection should be rapid and efficient </li>
+</ul>
+</li>
+<li>Implication on network protocols（对网络协议的影响）:<ul>
+<li>A single layer2 fabric for entire data center (R1&amp;R2)</li>
+<li>Mac forwarding tables with hundreds of thousands entries (R3)</li>
+<li>Efficient routing protocols which disseminate topology changes quickly to all points (R5) </li>
+</ul>
+</li>
+</ul>
+<h2 id="数据中心拓扑结构"><a href="#数据中心拓扑结构" class="headerlink" title="数据中心拓扑结构"></a>数据中心拓扑结构</h2><h3 id="目前典型的数据中心网络拓扑"><a href="#目前典型的数据中心网络拓扑" class="headerlink" title="目前典型的数据中心网络拓扑"></a>目前典型的数据中心网络拓扑</h3><p>Data Center Network topology:</p>
+<ul>
+<li>End hosts connects to top of rack (ToR) switches</li>
+<li>ToR switches contains 48 GigE ports and up to 4 10 GigE uplinks</li>
+<li>ToR switches connect to one or more end of row (EoR) switches </li>
+</ul>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618153841.png" alt></p>
+<h3 id="Full-Mesh-Network"><a href="#Full-Mesh-Network" class="headerlink" title="Full Mesh Network"></a>Full Mesh Network</h3><p><img src="/2019/06/22/数据中心网络/QQ截图20190618154135.png" alt></p>
+<h3 id="Basic-Tree-Topology"><a href="#Basic-Tree-Topology" class="headerlink" title="Basic Tree Topology"></a>Basic Tree Topology</h3><p><img src="/2019/06/22/数据中心网络/QQ截图20190618154143.png" alt></p>
+<h3 id="cisco-推荐案例"><a href="#cisco-推荐案例" class="headerlink" title="cisco 推荐案例"></a>cisco 推荐案例</h3><ul>
+<li>Hierarchical Network: 1+1 redundancy</li>
+<li>Equipment higher in the hierarchy handles more traffic, more expensive, more efforts made at availability -&gt; scale-up design</li>
+<li>Servers connect via 1 Gbps UTP to Top of Rack switches</li>
+<li>Other links are mix of 1G, 10G; fiber, coppe </li>
+</ul>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618154243.png" alt></p>
+<h3 id="实际场景的数据中心网络拓扑"><a href="#实际场景的数据中心网络拓扑" class="headerlink" title="实际场景的数据中心网络拓扑"></a>实际场景的数据中心网络拓扑</h3><h4 id="Clos-Networdks"><a href="#Clos-Networdks" class="headerlink" title="Clos Networdks"></a>Clos Networdks</h4><p><img src="/2019/06/22/数据中心网络/QQ截图20190618154603.png" alt></p>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618154617.png" alt></p>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618154626.png" alt></p>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618154932.png" alt></p>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618154939.png" alt></p>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618154946.png" alt></p>
+<h3 id="学术研究的数据中心网络拓扑"><a href="#学术研究的数据中心网络拓扑" class="headerlink" title="学术研究的数据中心网络拓扑"></a>学术研究的数据中心网络拓扑</h3><h4 id="DCN-拓扑分类体系"><a href="#DCN-拓扑分类体系" class="headerlink" title="DCN 拓扑分类体系"></a>DCN 拓扑分类体系</h4><p><img src="/2019/06/22/数据中心网络/QQ截图20190618155127.png" alt></p>
+<h4 id="Tree-based-拓扑"><a href="#Tree-based-拓扑" class="headerlink" title="Tree-based 拓扑"></a>Tree-based 拓扑</h4><ul>
+<li>Single port on each computer</li>
+<li>Scale up by adding more levels of switches or more ports on switches</li>
+<li>Basic tree, fat tree, Clos Network, …</li>
+<li>Also can be classifed as switch-centric topologies </li>
+</ul>
+<h4 id="Fat-Tree-拓扑"><a href="#Fat-Tree-拓扑" class="headerlink" title="Fat-Tree 拓扑*"></a>Fat-Tree 拓扑*</h4><p>FatTree构建拓扑规则如下：FatTree拓扑中包含的Pod数目为$ k$，每一个pod连接的sever数目为$(k/2)^2 $，每一个pod内的边缘交换机及聚合交换机数量均为$k/2$，核心交换机数量为$ (k/2)^2 $，网络中每一个交换机的端口数量为$k$，网络所能支持的服务器总数为$k^3/4$。</p>
+<p>FatTree结构采用水平扩展的方式，当拓扑中所包含的pod数目增加，交换机的端口数目增加时，FatTree投票能够支持更多的服务器，满足数据中心的扩展需求，如$k=48$时，FatTree能够支持的服务器数目为27648。</p>
+<p>FatTree结构通过在核心层多条链路实现负载的及时处理，避免网络热点；通过在pod内合理分流，避免过载问题。</p>
+<p>FatTree对分带宽随着网络规模的扩展而增大，因此能够为数据中心提供高吞吐传输服务；不同pod之间的服务器间通信，源、目的节点之间具有多条并行路径，因此网络的容错性能良好，一般不会出现单点故障；采用商用设备取代高性能交换设备，大幅度降低网络设备开销；网络直径小，能够保证视频、在线会与等服务对网络实时性的要求；拓扑结构规则、对称，利于网络布线及自动化配置、优化升级等。</p>
+<p>Fat-Tree结构也存在一定的缺陷：Fat-Tree结构的扩展规模在理论上受限于核心交换机的端口数目，不利于数据中心的长期发展要求；对于Pod内部，Fat-Tree容错性能差，对底层交换设备故障非常敏感，当底层交换设备故障时，难以保证服务质量；拓扑结构的特点决定了网络不能很好的支持one-to-all及all-to-all网络通信模式，不利于部署MapReduce、Dryad等现代高性能应用；网络中交换机与服务器的比值较大，在一定程度上使得网络设备成本依然很高，不利于企业的经济发展。</p>
+<p><img src="/2019/06/22/数据中心网络/QQ截图20190618155254.png" alt></p>
+<ul>
+<li><p>Fat-Tree: a special type of Clos Network</p>
+<ul>
+<li>K-ary fat tree: three-layer topology (edge, aggregation and core)</li>
+<li>Split fat tree into $k$ pods</li>
+<li>each pod consists of $d(k/2)^2$ servers &amp; $2$ layers of $k/2$  k-port switches</li>
+<li>each edge switch connects to $k/2$ servers &amp; $k/2$ aggr. switches</li>
+<li>each aggr. switch connects to $k/2$ edge &amp; $k/2$ core switches</li>
+<li>$(k/2)^2$ core switches: each connects to $k$ pods</li>
+<li>Each pod supports non-blocking operation among $(k/2)^2$ hosts</li>
+<li>Each source and destination have $(k/2)^2$ paths </li>
+</ul>
+</li>
+<li><p>Fat-Tree Properties(属性)</p>
+<ul>
+<li>Identical bandwidth at any bisection（二分相同的带宽）</li>
+<li>Each layer has the same aggregated bandwidth（每个层具有相同的聚合带宽）</li>
+</ul>
+</li>
+<li><p>Can be built using cheap devices with uniform capacity（统一容量）</p>
+<ul>
+<li>Each port supports same speed as end host（每个端口支持与终端主机相同的速度）</li>
+<li>All devices can transmit at line speed if packets are distributed uniform along available paths（如果数据包沿可用路径均匀分布，则所有设备都可以以线速传输）</li>
+</ul>
+</li>
+<li><p>Great scalability(出色的扩展): k-port switch supports $k^2/4$ servers </p>
+</li>
+<li><p>Layer 2 switch algorithm（第2层交换机算法）: data plane flooding（数据平面泛滥）!</p>
+</li>
+<li><p>Layer 3 IP routing（第三层IP 路由）:</p>
+<ul>
+<li><p>shortest path IP routing will typically use only one path despite the path diversity in the topology（</p>
+<p>尽管拓扑中存在路径分集，但最短路径IP路由通常仅使用一条路径）</p>
+</li>
+<li><p>if using equal-cost multi-path routing at each switch independently and blindly, packet re-ordering may occur; further load may not necessarily be well-balanced（如果在每个交换机上独立且盲目地使用等价多路径路由，则可能发生分组重新排序; 进一步的负荷可能不一定很平衡）</p>
+</li>
+<li><p>Aside: control plane flooding! </p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Recursive-Topologies"><a href="#Recursive-Topologies" class="headerlink" title="Recursive Topologies"></a>Recursive Topologies</h4><ul>
+<li>Multiple ports on each server<ul>
+<li>Servers act as both computation nodes, and</li>
+<li>Implement traffic forwarding functionality among its ports</li>
+</ul>
+</li>
+<li>Scale up by adding more ports on servers and switches</li>
+<li>FiConn, DCell, BCube, MDCube, …</li>
+<li>Also can be viewed as Server-centric Topologies </li>
+</ul>
+<h4 id="Optical-and-Hybrid-Data-Center-Networks"><a href="#Optical-and-Hybrid-Data-Center-Networks" class="headerlink" title="Optical and Hybrid Data Center Networks"></a>Optical and Hybrid Data Center Networks</h4><ul>
+<li>Problems with Fixed Topology Networks:<ul>
+<li>Inflexibility to traffic characteristics: Attempt to provide uniform high capacity between all the servers -&gt; Underutilization</li>
+<li>Bandwidth oversubscription</li>
+<li>Higher bit-rate links -&gt; Copper-wire links limited in distance due to cost and power requirements</li>
+</ul>
+</li>
+<li>Is Optical switching the saviour?</li>
+<li>Two approaches<ul>
+<li>Hybrid Optical/Electrical switched networks: c-Through, Helios</li>
+<li>Fully optical networks: OSA </li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/云服务，云计算/" rel="tag"># 云服务，云计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/18/线程/" rel="next" title="线程">
+                <i class="fa fa-chevron-left"></i> 线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/云架构/" rel="prev" title="云架构">
+                云架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据中心网络"><span class="nav-number">1.</span> <span class="nav-text">数据中心网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据中心应用需求"><span class="nav-number">1.1.</span> <span class="nav-text">数据中心应用需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据中心成本"><span class="nav-number">1.2.</span> <span class="nav-text">数据中心成本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据中心设计目标"><span class="nav-number">1.3.</span> <span class="nav-text">数据中心设计目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据中心网络需求"><span class="nav-number">1.4.</span> <span class="nav-text">数据中心网络需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据中心拓扑结构"><span class="nav-number">1.5.</span> <span class="nav-text">数据中心拓扑结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目前典型的数据中心网络拓扑"><span class="nav-number">1.5.1.</span> <span class="nav-text">目前典型的数据中心网络拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-Mesh-Network"><span class="nav-number">1.5.2.</span> <span class="nav-text">Full Mesh Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Tree-Topology"><span class="nav-number">1.5.3.</span> <span class="nav-text">Basic Tree Topology</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cisco-推荐案例"><span class="nav-number">1.5.4.</span> <span class="nav-text">cisco 推荐案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际场景的数据中心网络拓扑"><span class="nav-number">1.5.5.</span> <span class="nav-text">实际场景的数据中心网络拓扑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Clos-Networdks"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">Clos Networdks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学术研究的数据中心网络拓扑"><span class="nav-number">1.5.6.</span> <span class="nav-text">学术研究的数据中心网络拓扑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DCN-拓扑分类体系"><span class="nav-number">1.5.6.1.</span> <span class="nav-text">DCN 拓扑分类体系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tree-based-拓扑"><span class="nav-number">1.5.6.2.</span> <span class="nav-text">Tree-based 拓扑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fat-Tree-拓扑"><span class="nav-number">1.5.6.3.</span> <span class="nav-text">Fat-Tree 拓扑*</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursive-Topologies"><span class="nav-number">1.5.6.4.</span> <span class="nav-text">Recursive Topologies</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optical-and-Hybrid-Data-Center-Networks"><span class="nav-number">1.5.6.5.</span> <span class="nav-text">Optical and Hybrid Data Center Networks</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

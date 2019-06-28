@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="云服务，云计算,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基本云架构负载分布架构* 分布式IT资源：  各个同类型IT资源同时提供服务 水平扩展：增加/减少相同的IT资源   负载均衡 Load Balancing  在可用IT资源上均匀分配工作负载   负载均衡器：  资源入口处执行负载均衡的实体  通常位于产生负载的IT资源和执行负载处理的IT资源之间的通讯路径上。 设计成一个透明的代理或是一个代理的组件  调度策略 轮转、负载水平， … 同一用户的">
+<meta name="keywords" content="云服务，云计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云架构">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/云架构/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="基本云架构负载分布架构* 分布式IT资源：  各个同类型IT资源同时提供服务 水平扩展：增加/减少相同的IT资源   负载均衡 Load Balancing  在可用IT资源上均匀分配工作负载   负载均衡器：  资源入口处执行负载均衡的实体  通常位于产生负载的IT资源和执行负载处理的IT资源之间的通讯路径上。 设计成一个透明的代理或是一个代理的组件  调度策略 轮转、负载水平， … 同一用户的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619161731.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162440.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162449.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162459.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162718.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162727.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162154.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619162202.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619163103.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619163556.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619163606.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619163642.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619163649.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619163849.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619164148.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619164609.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619164647.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619164908.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619165130.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619165337.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619165417.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619165436.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619170508.png">
+<meta property="og:updated_time" content="2019-06-28T03:42:54.716Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="云架构">
+<meta name="twitter:description" content="基本云架构负载分布架构* 分布式IT资源：  各个同类型IT资源同时提供服务 水平扩展：增加/减少相同的IT资源   负载均衡 Load Balancing  在可用IT资源上均匀分配工作负载   负载均衡器：  资源入口处执行负载均衡的实体  通常位于产生负载的IT资源和执行负载处理的IT资源之间的通讯路径上。 设计成一个透明的代理或是一个代理的组件  调度策略 轮转、负载水平， … 同一用户的">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/22/云架构/QQ截图20190619161731.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/22/云架构/">
+
+
+
+
+
+  <title>云架构 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/云架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">云架构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-22T19:54:29+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/云计算与大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算与大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基本云架构"><a href="#基本云架构" class="headerlink" title="基本云架构"></a>基本云架构</h1><h2 id="负载分布架构"><a href="#负载分布架构" class="headerlink" title="负载分布架构*"></a>负载分布架构*</h2><ul>
+<li><p>分布式IT资源：</p>
+<ul>
+<li>各个同类型IT资源同时提供服务</li>
+<li>水平扩展：增加/减少相同的IT资源</li>
+</ul>
+</li>
+<li><p>负载均衡 Load Balancing</p>
+<ul>
+<li>在可用IT资源上均匀分配工作负载</li>
+</ul>
+</li>
+<li><p>负载均衡器：</p>
+<ul>
+<li>资源入口处执行负载均衡的实体 </li>
+<li>通常位于产生负载的IT资源和执行负载处理的IT资源之间的通讯路径上。</li>
+<li>设计成一个透明的代理或是一个代理的组件 </li>
+<li>调度策略<ul>
+<li>轮转、负载水平， …</li>
+<li>同一用户的多个请求调度到同一服务器</li>
+<li>同一租户的请求调度到尽量少的一组服务器</li>
+<li>尽量实现不同类型负载的互补 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/22/云架构/QQ截图20190619161731.png" alt></p>
+</li>
+</ul>
+<h2 id="资源池架构"><a href="#资源池架构" class="headerlink" title="资源池架构"></a>资源池架构</h2><h2 id="动态可扩展架构"><a href="#动态可扩展架构" class="headerlink" title="动态可扩展架构*"></a>动态可扩展架构*</h2><ul>
+<li>动态可扩展架构<ul>
+<li>基于预先定义的扩展条件从资源池中动态分配IT资源</li>
+<li>云资源弹性管理的核心机制。</li>
+</ul>
+</li>
+<li>自动扩展监听器<ul>
+<li>实现动态扩展的核心部件</li>
+<li>监听负载状态以决定何时扩展 </li>
+</ul>
+</li>
+</ul>
+<h3 id="动态扩展类型"><a href="#动态扩展类型" class="headerlink" title="动态扩展类型"></a>动态扩展类型</h3><ul>
+<li><p>动态<strong>水平</strong>扩展（Dynamic Horizontal Scaling）</p>
+<ul>
+<li><p>向内或向外扩展IT资源实例</p>
+</li>
+<li><p>自动扩展监听器请求资源复制，并发信号启动IT资源复制</p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162440.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162449.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162459.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>动态<strong>垂直</strong>扩展（Dynamic Vertical Scaling）</p>
+<ul>
+<li>调整单个IT资源的处理容量</li>
+<li>向上或向下扩展IT资源实例</li>
+</ul>
+</li>
+<li><p>动态<strong>重定位</strong>（Dynamic Relocation）</p>
+<ul>
+<li>将IT资源重新放置到更大/更小容量的主机上 </li>
+</ul>
+</li>
+</ul>
+<h2 id="弹性资源容量结构"><a href="#弹性资源容量结构" class="headerlink" title="弹性资源容量结构"></a>弹性资源容量结构</h2><ul>
+<li><p>Elastic Resource Capacity Architecture</p>
+<ul>
+<li>主要与虚拟服务器的动态供给相关</li>
+<li>根据负载变化分配和回收CPU与RAM资源</li>
+</ul>
+</li>
+<li><p>扩展逻辑在智能自动化引擎（不在监听器）</p>
+<ul>
+<li>自动扩展监听器发信号给智能引擎（一种脚本）</li>
+<li>智能引擎运行工作流逻辑，触发扩展</li>
+</ul>
+</li>
+<li><p>扩展属于垂直扩展 </p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162718.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162727.png" alt></p>
+</li>
+</ul>
+<h2 id="服务负载均衡架构"><a href="#服务负载均衡架构" class="headerlink" title="服务负载均衡架构*"></a>服务负载均衡架构*</h2><ul>
+<li><p>Service Load Balance Architecture</p>
+<ul>
+<li><strong>工作负载分布架构</strong>的一个特殊变种</li>
+<li>专门针对扩展云服务实现的</li>
+</ul>
+</li>
+<li><p>基于云服务的<strong>冗余部署</strong></p>
+<ul>
+<li>部署在虚拟机上或容器中的应用程序或软件</li>
+<li>多实例构成资源池</li>
+</ul>
+</li>
+<li><p>两种形式</p>
+<ul>
+<li><p>独立于云设备及主机服务器，或 （<strong>外置方式</strong>）</p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162154.png" alt></p>
+</li>
+<li><p>作为应用程序/服务器环境的内置组件 （<strong>内置方式</strong>） </p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619162202.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="云爆发架构"><a href="#云爆发架构" class="headerlink" title="云爆发架构*"></a>云爆发架构*</h2><ul>
+<li>Cloud Bursting Architecture<ul>
+<li>动态扩展架构的特殊形式</li>
+</ul>
+</li>
+<li>云数据中心和企业IT资源协同<ul>
+<li>企业内部IT资源&lt;—&gt;云IT资源</li>
+<li>Burst-in and burst-out</li>
+</ul>
+</li>
+<li>基于云的IT资源是冗余性预部署<ul>
+<li>保持非活跃状态，直到发生云爆发 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/22/云架构/QQ截图20190619163103.png" alt></p>
+<h2 id="弹性磁盘供给架构"><a href="#弹性磁盘供给架构" class="headerlink" title="弹性磁盘供给架构*"></a>弹性磁盘供给架构*</h2><ul>
+<li><p>Elastic Disk Provisioning Architecture</p>
+<ul>
+<li>动态存储供给系统</li>
+<li>确保按照云用户实际使用的存储量进行精确计费</li>
+</ul>
+</li>
+<li><p>基于自动精简供给技术</p>
+</li>
+<li><p>辅助机制：</p>
+<ul>
+<li>云使用监控器</li>
+<li>资源复制 </li>
+</ul>
+<p><img src="/2019/06/22/云架构/QQ截图20190619163556.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619163606.png" alt></p>
+</li>
+</ul>
+<h2 id="冗余存储架构"><a href="#冗余存储架构" class="headerlink" title="冗余存储架构"></a>冗余存储架构</h2><ul>
+<li>Redundant Storage Architecture</li>
+<li>存储设备故障容错系统的一部分</li>
+<li>与主云存储设备中的数据保持同步</li>
+<li>主设备失效时， 存储设备网关把用户请求转向辅设备 </li>
+</ul>
+<p><img src="/2019/06/22/云架构/QQ截图20190619163642.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619163649.png" alt></p>
+<h3 id="存储复制"><a href="#存储复制" class="headerlink" title="存储复制"></a>存储复制</h3><ul>
+<li>用于主云存储设备与辅云存储设备保持同步</li>
+<li>主辅设备通常在不同的地理区域<ul>
+<li>抗灾容错</li>
+<li>经济成本</li>
+<li>法律问题 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/06/22/云架构/QQ截图20190619163849.png" alt></p>
+<h1 id="高级云架构"><a href="#高级云架构" class="headerlink" title="高级云架构"></a>高级云架构</h1><h2 id="虚拟机监控器集群架构"><a href="#虚拟机监控器集群架构" class="headerlink" title="虚拟机监控器集群架构*"></a>虚拟机监控器集群架构*</h2><p><img src="/2019/06/22/云架构/QQ截图20190619164148.png" alt></p>
+<ul>
+<li>Hypervisor Clustering<ul>
+<li>多个虚拟机监控器构成集群</li>
+<li>跨越多个物理服务器</li>
+<li>实现高可用</li>
+</ul>
+</li>
+<li>虚拟机监控器集群由中心VIM控制<ul>
+<li>通过常规心跳消息来监测虚拟机监控器的状态</li>
+<li>当物理机或者Hypervisor失效时进行在线迁移</li>
+<li>使用共享云存储设备实现在线迁移 </li>
+</ul>
+</li>
+</ul>
+<h3 id="Hypervisor-VS-在线迁移"><a href="#Hypervisor-VS-在线迁移" class="headerlink" title="Hypervisor/VS 在线迁移"></a>Hypervisor/VS 在线迁移</h3><p><img src="/2019/06/22/云架构/QQ截图20190619164609.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619164647.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619164908.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619165130.png" alt></p>
+<h3 id="虚拟机在线迁移机制"><a href="#虚拟机在线迁移机制" class="headerlink" title="虚拟机在线迁移机制"></a>虚拟机在线迁移机制</h3><p><img src="/2019/06/22/云架构/QQ截图20190619165337.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619165417.png" alt></p>
+<p><img src="/2019/06/22/云架构/QQ截图20190619165436.png" alt></p>
+<h2 id="粗粒度负载均衡与资源预留"><a href="#粗粒度负载均衡与资源预留" class="headerlink" title="粗粒度负载均衡与资源预留"></a>粗粒度负载均衡与资源预留</h2><h2 id="云服务容错架构"><a href="#云服务容错架构" class="headerlink" title="云服务容错架构*"></a>云服务容错架构*</h2><ul>
+<li>云服务不可用的原因很多：<ul>
+<li>运行时需求超出处理能力</li>
+<li>维护更新导致的暂时中断</li>
+<li>云服务迁移</li>
+<li>物理机失效、宕机</li>
+</ul>
+</li>
+<li>应对机制<ul>
+<li>服务迁移</li>
+<li>服务故障检测与恢复</li>
+<li>物理机容错 </li>
+</ul>
+</li>
+</ul>
+<h3 id="Detect-Faults-错误检测"><a href="#Detect-Faults-错误检测" class="headerlink" title="Detect Faults(错误检测)"></a>Detect Faults(错误检测)</h3><ul>
+<li><p><strong>Ping/echo:</strong> used to determine reachability and the round-trip delay through the associated network path.</p>
+</li>
+<li><p><strong>Monitor:</strong> a component used to monitor the state of health of other parts of the system </p>
+</li>
+<li><p><strong>Heartbeat</strong> :a periodic message exchange between a system monitor and a process being monitored. </p>
+<ul>
+<li>The process periodically resets the watchdog timer in its monitor,</li>
+<li>Piggybacking the heartbeat messages on to other control messages reduces the overhead </li>
+<li>Difference between ping and heartbeat?<br>– Who initiates the health check? </li>
+</ul>
+</li>
+<li><p><strong>Timestamp:</strong> used to detect incorrect sequences of events, primarily in distributed message-passing systems.</p>
+</li>
+<li><p><strong>Condition Monitoring:</strong> checking conditions in a process or device, or validating assumptions<br>made during the design.</p>
+<ul>
+<li>For example, checksum（校验和） in data storage and transmission </li>
+</ul>
+<p><img src="/2019/06/22/云架构/QQ截图20190619170508.png" alt></p>
+</li>
+</ul>
+<h3 id="Recover-from-Faults-故障恢复"><a href="#Recover-from-Faults-故障恢复" class="headerlink" title="Recover from Faults (故障恢复)"></a>Recover from Faults (故障恢复)</h3><p><strong>Active Redundancy (hot spare):</strong> (主动冗余) 热备用：all nodes in a protection group process identical inputs in parallel,  allowing redundant spares to maintain synchronous state with the active nodes.</p>
+<p><strong>Spare (cold spare):</strong> （冷备用）redundant spares of a protection group remain out of service until a fail-over occurs, at which point a power-on-reset procedure is initiated on the redundant spare prior to its being placed in  service. </p>
+<p><strong>Passive（被动） Redundancy (warm spare)</strong>: only the active members of the protection group process input traffic; </p>
+<p>one of their duties is to provide the redundant spare(s) with periodic state updates. </p>
+<p><strong>Retry:</strong> where a failure is transient and retrying the operation may lead to success.</p>
+<p>​    For example, network re-transmission</p>
+<p><strong>Ignore Faulty Behavior:</strong> ignoring messages sent from a source when it is determined that those messages are spurious.</p>
+<p>​    E.g., ignore the messages from a denial of service attacker </p>
+<h2 id="裸机供给与快速供给架构"><a href="#裸机供给与快速供给架构" class="headerlink" title="裸机供给与快速供给架构"></a>裸机供给与快速供给架构</h2><h2 id="存储负载管理架构"><a href="#存储负载管理架构" class="headerlink" title="存储负载管理架构"></a>存储负载管理架构</h2>
+      
+    </div>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/云服务，云计算/" rel="tag"># 云服务，云计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/数据中心网络/" rel="next" title="数据中心网络">
+                <i class="fa fa-chevron-left"></i> 数据中心网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/移动云计算/" rel="prev" title="移动云计算">
+                移动云计算 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本云架构"><span class="nav-number">1.</span> <span class="nav-text">基本云架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#负载分布架构"><span class="nav-number">1.1.</span> <span class="nav-text">负载分布架构*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源池架构"><span class="nav-number">1.2.</span> <span class="nav-text">资源池架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态可扩展架构"><span class="nav-number">1.3.</span> <span class="nav-text">动态可扩展架构*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态扩展类型"><span class="nav-number">1.3.1.</span> <span class="nav-text">动态扩展类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹性资源容量结构"><span class="nav-number">1.4.</span> <span class="nav-text">弹性资源容量结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务负载均衡架构"><span class="nav-number">1.5.</span> <span class="nav-text">服务负载均衡架构*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云爆发架构"><span class="nav-number">1.6.</span> <span class="nav-text">云爆发架构*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹性磁盘供给架构"><span class="nav-number">1.7.</span> <span class="nav-text">弹性磁盘供给架构*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冗余存储架构"><span class="nav-number">1.8.</span> <span class="nav-text">冗余存储架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储复制"><span class="nav-number">1.8.1.</span> <span class="nav-text">存储复制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级云架构"><span class="nav-number">2.</span> <span class="nav-text">高级云架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机监控器集群架构"><span class="nav-number">2.1.</span> <span class="nav-text">虚拟机监控器集群架构*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hypervisor-VS-在线迁移"><span class="nav-number">2.1.1.</span> <span class="nav-text">Hypervisor/VS 在线迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机在线迁移机制"><span class="nav-number">2.1.2.</span> <span class="nav-text">虚拟机在线迁移机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粗粒度负载均衡与资源预留"><span class="nav-number">2.2.</span> <span class="nav-text">粗粒度负载均衡与资源预留</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云服务容错架构"><span class="nav-number">2.3.</span> <span class="nav-text">云服务容错架构*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Detect-Faults-错误检测"><span class="nav-number">2.3.1.</span> <span class="nav-text">Detect Faults(错误检测)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recover-from-Faults-故障恢复"><span class="nav-number">2.3.2.</span> <span class="nav-text">Recover from Faults (故障恢复)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#裸机供给与快速供给架构"><span class="nav-number">2.4.</span> <span class="nav-text">裸机供给与快速供给架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储负载管理架构"><span class="nav-number">2.5.</span> <span class="nav-text">存储负载管理架构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

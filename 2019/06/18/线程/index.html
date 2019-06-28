@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unix,c语言,操作系统,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="线程线程概念典型的UNIX进程可以看成只有一个控制线程：一个进程在同一时刻只做一件事情。有了多个控制线程（或简称为线程）以后，在程序设计时可以把进程设计成在同一时刻能够做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处：  通过为每种事件类型的处理分配单独的线程，能够简化处理异步事件的代码。每个线程在进行事件处理时可以采用同步编程模式，同步编程模式要比异步编程模式简单得多。 多个进程必须">
+<meta name="keywords" content="Unix,c语言,操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程">
+<meta property="og:url" content="http://yoursite.com/2019/06/18/线程/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="线程线程概念典型的UNIX进程可以看成只有一个控制线程：一个进程在同一时刻只做一件事情。有了多个控制线程（或简称为线程）以后，在程序设计时可以把进程设计成在同一时刻能够做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处：  通过为每种事件类型的处理分配单独的线程，能够简化处理异步事件的代码。每个线程在进行事件处理时可以采用同步编程模式，同步编程模式要比异步编程模式简单得多。 多个进程必须">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618193934.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618200007.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618201804.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618203021.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618203229.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618203418.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618204223.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618204844.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618205036.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618214322.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618220708.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618220721.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618220831.png">
+<meta property="og:updated_time" content="2019-06-28T03:42:54.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程">
+<meta name="twitter:description" content="线程线程概念典型的UNIX进程可以看成只有一个控制线程：一个进程在同一时刻只做一件事情。有了多个控制线程（或简称为线程）以后，在程序设计时可以把进程设计成在同一时刻能够做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处：  通过为每种事件类型的处理分配单独的线程，能够简化处理异步事件的代码。每个线程在进行事件处理时可以采用同步编程模式，同步编程模式要比异步编程模式简单得多。 多个进程必须">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/18/线程/DeepinScreenshot_select-area_20190618193934.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/18/线程/">
+
+
+
+
+
+  <title>线程 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-18T22:30:36+08:00">
+                2019-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><h2 id="线程概念"><a href="#线程概念" class="headerlink" title="线程概念"></a>线程概念</h2><p>典型的UNIX进程可以看成只有一个控制线程：<strong>一个进程在同一时刻只做一件事情。有了多个控制线程（或简称为线程）以后，在程序设计时可以把进程设计成在同一时刻能够做不止一件事，每个线程处理各自独立的任务。</strong>这种方法有很多好处：</p>
+<ul>
+<li>通过为每种事件类型的处理分配单独的线程，能够简化处理异步事件的代码。每个线程在进行事件处理时可以采用同步编程模式，同步编程模式要比异步编程模式简单得多。</li>
+<li>多个进程必须使用操作系统提供的复杂机制才能实现实现内存和文件描述符的共享，而多个线程自动地可以访问相同的存储地址空间和文件描述符。</li>
+<li>有些问题可以通过将其分解从而改善整个程序的吞吐量。在只有一个控制线程的情况下，单个进程需要完成多个任务时，实际上需要把这些任务串行化；有了多个控制线程，相互独立的任务的处理就可以交叉进行，只需要为每个任务分配一个单独的线程，当然只有在处理过程互不依赖的情况下，两个任务的执行才可以穿插进行。</li>
+<li>交互的程序同样可以通过使用多线程实现响应时间的改善，多线程可以把程序中处理用户输入输出的部分与其他部分分开。</li>
+</ul>
+<p>有些人把多线程的程序设计与多处理器系统联系起来，但是即使程序运行在单处理器上，也能得到多线程编程模型的好处。处理器的数量并不影响程序结构，所以不管处理器的个数是多少，程序都可以通过使用线程得以简化。而且，即使多线程程序在串行化任务时不得不阻塞，由于某些线程在阻塞的时候还有另外一些线程可以运行，所以多线程程序在单处理器上运行仍然能够改善响应时间和吞吐量。</p>
+<p>线程包含了表示进程内执行环境必需的信息，其中包括进程中标识线程的线程ID、一组寄存器值、栈、调度优先级和策略、信号屏蔽字、<code>errno</code>变量以及线程私有数据。<strong>进程的所有信息对该进程的所有线程都是共享的</strong>，包括可执行的程序文本、程序的全局内存和堆内存、栈以及文件描述符。</p>
+<p>我们将要讨论的线程接口来自POSIX.1-2001。<strong>线程接口（也称为“pthread”或“POSIX线程”）</strong>在POSIX.1-2001中是一个可选特征。<strong>POSIX线程的特征测试宏是_POSIX_THREADS</strong>，应用程序可以把这个宏用于#ifdef测试，以在编译时确定是否支持线程；也可以把_SC_THREADS常数用于调用<code>sysconf</code>函数，从而在运行时确定是否支持线程。</p>
+<p>进程和线程原语的比较：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618193934.png" alt></p>
+<h2 id="线程标识"><a href="#线程标识" class="headerlink" title="线程标识"></a>线程标识</h2><p>就像每个进程有一个进程ID一样，<strong>每个线程也有一个线程ID</strong>。进程ID在整个系统中是唯一的，但线程ID不同，<strong>线程ID只在它所属的进程环境中有效</strong>。</p>
+<p>进程ID，用pid_t数据类型来表示，是一个非负整数。<strong>线程ID则用pthread_t数据类型来表示</strong>，实现的时候可以用一个结构来代表pthread_t数据类型，所以可移植的操作系统实现不能把它作为整数处理。因此必须使用函数来对两个线程ID进行比较。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_equal</span><span class="params">( <span class="keyword">pthread_t</span> tid1, <span class="keyword">pthread_t</span> tid2 )</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若相等则返回非0值，否则返回0</span></span><br></pre></td></tr></table></figure>
+<p>Linux 2.4.22使用无符号长整型表示pthread_t数据类型。Solaris 9把pthread_t数据类型表示为无符号整数。FreeBSD 5.2.1和Mac OS X10.3用一个指向pthread结构的指针来表示pthread_t数据类型。</p>
+<p>用结果表示pthread_t数据类型的后果是不能用一种可移植的方式打印该数据类型的值。</p>
+<p><strong>线程可以通过调用pthread_self函数获得自身的线程ID。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="keyword">pthread_t</span> pthread_self(<span class="keyword">void</span>);</span><br><span class="line"><span class="comment">// 返回值：调用线程的线程ID</span></span><br></pre></td></tr></table></figure>
+<h2 id="线程创建"><a href="#线程创建" class="headerlink" title="线程创建"></a>线程创建</h2><p>在传统的UNIX进程模型中，每个进程只有一个控制线程。从概念上讲，这与基于线程的模型中只包含一个线程是相同的。在POSIX线程（pthread）的情况下，程序开始运行时，它也是以单进程中的单个控制线程启动的，在创建多个控制线程以前，程序的行为与传统的进程并没有什么区别。<strong>新增的线程可以通过调用pthread_create函数创建</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *<span class="keyword">restrict</span> tidp,</span></span></span><br><span class="line"><span class="function"><span class="params">                  <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                  <span class="keyword">void</span> *(*start_rtn)(<span class="keyword">void</span> *), <span class="keyword">void</span> *<span class="keyword">restrict</span> arg)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p><strong>当pthread_create成功返回时，由tidp指向的内存单元被设置为新创建的线程的线程ID</strong>。<strong>attr参数用于定制各种不同的线程属性</strong>。线程属性在以后介绍，眼下暂时把它设置为NULL，创建默认属性的线程。</p>
+<p><strong>新创建的线程从start_rtn函数的地址开始运行</strong>，<strong>该函数只有一个无类型指针参数arg，如果需要向start_rtn函数传递的参数不止一个，那么需要把这些参数放到一个结构中，然后把这个结构的地址作为arg参数传入</strong>。</p>
+<p>线程创建时并不能保证哪个线程会先运行：是新创建的线程还是调用线程。新创建的线程可以访问进程的地址空间，并且继承调用线程的浮点环境和信号屏蔽字，但是该线程的未决信号集被清除。</p>
+<p>注意<code>pthread</code>函数在调用失败时通常会返回错误码，它们并不像其他的POSIX函数一样设置<code>errno</code>。每个线程都提供<code>errno</code>的副本，这只是为了与使用<code>errno</code>的现有函数兼容。在线程中，从函数中返回错误码更为清晰整洁，不需要依赖那些随着函数执行不断变化的全局状态，因而可以把错误的范围限制在引起出错的函数中。</p>
+<p><strong>实例</strong></p>
+<p>虽然没有可移植的方法打印线程ID，但是可以写一个小的测试程序来完成这个任务，以便更深入地了解线程是如何工作的。程序清单11-1中创建了一个线程并且打印进程ID、新线程的线程ID以及初始线程的线程ID。</p>
+<p><strong>程序清单11-1 打印线程ID</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> ntid;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> </span><br><span class="line">printids(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">pid_t</span>        pid;</span><br><span class="line">    <span class="keyword">pthread_t</span>    tid;</span><br><span class="line"></span><br><span class="line">    pid = getpid();</span><br><span class="line">    tid = pthread_self();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s pid %u tid %u (0x%x) \n"</span>, s, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)pid,</span><br><span class="line">        (<span class="keyword">unsigned</span> <span class="keyword">int</span>)tid, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)tid);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    printids(<span class="string">"new thread : "</span>);</span><br><span class="line">    <span class="keyword">return</span>((<span class="keyword">void</span> *)<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>    err;    </span><br><span class="line">    </span><br><span class="line">    err = pthread_create(&amp;ntid, <span class="literal">NULL</span>, thr_fn, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't create thread: %s\n"</span>, strerror(err));</span><br><span class="line">    printids(<span class="string">"main thread: "</span>);</span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>pthread 库不是 Linux 系统默认的库，连接时需要使用静态库 libpthread.a，所以在使用pthread_create()创建线程，以及调用 pthread_atfork()函数建立fork处理程序时，需要链接该库。 在编译中要加 -lpthread参数</p>
+<p>结果：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618200007.png" alt></p>
+<p>现在我们言归正传，从程序清单11-1运行结果来看，两个线程的进程ID相同，但线程ID不同。不过这不是绝对的，依赖于具体的实现。</p>
+<p>这个实例有两个需要注意的地方：</p>
+<p>（1）<strong>需要处理主线程和新线程之间的竞争</strong>。首先是主线程需要休眠，如果主线程不休眠，它就可能退出，这样在新线程有机会运行之前整个进程可能就已经终止了。这种行为特征依赖于操作系统中的线程实现和调度算法。</p>
+<p>（2）<strong>新线程是通过调用pthread_self函数获取自己的线程ID</strong>，而不是从共享内存中读出或者从线程的启动例程中以参数的形式接收到。回忆pthread_create函数，它会通过第一个参数（tidp）返回新建线程的线程ID。<strong>在本例中，主线程把新线程ID存放在ntid中，但是新建的线程并不能安全地使用它，如果新线程在主线程调用pthread_create返回之前就运行了，那么新线程看到的是未经初始化的ntid的内容</strong>，这个内容并不是正确的线程ID。</p>
+<h2 id="线程终止"><a href="#线程终止" class="headerlink" title="线程终止"></a>线程终止</h2><p>如果进程中的任一线程调用了<code>exit</code>、<code>_Exit</code>或者<code>_exit</code>，那么整个进程就会终止。与此类似，如果信号的默认动作是终止进程，那么，把该信号发送到线程会终止整个进程。</p>
+<p>单个线程可以通过下列三种方式退出，在不终止整个进程的情况下停止它的控制流。</p>
+<p>（1）线程只是从启动例程中返回，返回值是线程的退出码。</p>
+<p>（2）线程可以被同一进程中的其他线程取消(<code>int pthread_cancel(pthread_t tid)</code>)。</p>
+<p>（3）线程调用<code>pthread_exit</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_exit</span><span class="params">(<span class="keyword">void</span> *rval_ptr)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>rval_ptr</code>是一个无类型指针，与传给启动例程的单个参数类似。进程中的其他线程可以通过调用<code>pthread_join</code>函数访问到这个指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **rval_ptr)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p>调用线程将一直阻塞，直到指定的线程调用<code>pthread_exit</code>、从启动例程中返回或者被取消。如果线程只是从它的启动例程返回，<code>rval_ptr</code>将包含返回码。如果线程被取消，由<code>rval_ptr</code>指定的内存单元就置为<code>PTHREAD_CANCELED</code>。</p>
+<p>可以通过调用<code>pthread_join</code>自动把线程置于分离状态，这样资源就可以恢复。如果线程已经处于分离状态，<code>pthread_join</code>调用就会失败，返回<code>EINVAL</code>。</p>
+<p>如果对线程的返回值并不感兴趣，可以把<code>rval_ptr</code>置为NULL。在这种情况下，调用<code>pthread_join</code>函数将等待指定的线程终止，但并不获取线程的终止状态。</p>
+<p><strong>实例</strong></p>
+<p>程序清单11-2说明了如何获取已终止的线程的退出码。</p>
+<p><strong>程序清单11-2 获得线程退出状态</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn1(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 1 returning\n"</span>);</span><br><span class="line">    <span class="keyword">return</span>((<span class="keyword">void</span> *)<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn2(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 2 exiting\n"</span>);</span><br><span class="line">    pthread_exit((<span class="keyword">void</span> *)<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> </span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>         err;</span><br><span class="line">    <span class="keyword">pthread_t</span>    tid1, tid2;</span><br><span class="line">    <span class="keyword">void</span>        *tret;</span><br><span class="line"></span><br><span class="line">    err = pthread_create(&amp;tid1, <span class="literal">NULL</span>, thr_fn1, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't create thread 1: %s\n"</span>, strerror(err));</span><br><span class="line">    err = pthread_create(&amp;tid2, <span class="literal">NULL</span>, thr_fn2, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't create thread 2: %s\n"</span>, strerror(err));</span><br><span class="line">    err = pthread_join(tid1, &amp;tret); <span class="comment">//获得线程1的退出状态</span></span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't join with thread 1: %s\n"</span>, strerror(err));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 1 exit code %d\n"</span>, (<span class="keyword">int</span>)tret);</span><br><span class="line">    err = pthread_join(tid2, &amp;tret); <span class="comment">// 获得线程2的退出状态</span></span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't join with thread 2: %s\n"</span>, strerror(err));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 2 exit code %d\n"</span>, (<span class="keyword">int</span>)tret);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618201804.png" alt></p>
+<p>可以看出，当一个线程通过调用pthread_exit退出或者简单地从启动例程中返回时，<strong>进程中的其他线程可以通过调用pthread_join函数获得该线程的退出状态</strong>。</p>
+<p>pthread_create和pthread_exit函数的无类型指针参数能传递的数值可以不止一个，该指针可以传递包含更复杂信息的结构的地址，但是注意这个结构所使用的内存在调用者完成调用以后必须仍然是有效的，否则就会出现无效或非法内存访问。</p>
+<p><strong>实例</strong></p>
+<p>程序清单11-3中的程序给出了用自动变量（分配在栈上）作为pthread_exit的参数时出现的问题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b, c, d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> </span><br><span class="line">printfoo(<span class="keyword">const</span> <span class="keyword">char</span> *s, <span class="keyword">const</span> struct foo *fp)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"   structure at 0x%x\n"</span>, (<span class="keyword">unsigned</span>)fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"   foo.a = %d\n"</span>, fp-&gt;a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"   foo.b = %d\n"</span>, fp-&gt;b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"   foo.c = %d\n"</span>, fp-&gt;c);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"   foo.d = %d\n"</span>, fp-&gt;d);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn1(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> <span class="title">foo</span> = &#123;</span><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line">    printfoo(<span class="string">"thread 1:\n"</span>, &amp;foo);</span><br><span class="line">    pthread_exit((<span class="keyword">void</span> *)&amp;foo);</span><br><span class="line">    printfoo(<span class="string">"thread 1:\n"</span>, &amp;foo);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn2(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 2: ID is %d\n"</span>, pthread_self());</span><br><span class="line">    pthread_exit((<span class="keyword">void</span> *)<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>         err;</span><br><span class="line">    <span class="keyword">pthread_t</span>    tid1, tid2;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>    *<span class="title">fp</span>;</span></span><br><span class="line">    </span><br><span class="line">    err = pthread_create(&amp;tid1, <span class="literal">NULL</span>, thr_fn1, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't create thread 1: %s\n"</span>, strerror(err));</span><br><span class="line">    err = pthread_join(tid1, (<span class="keyword">void</span> *)&amp;fp);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't join with thread 1: %s\n"</span>, strerror(err));</span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line"><span class="comment">//    printf("parent starting  second thread\n");</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">//    err = pthread_create(&amp;tid2, NULL, thr_fn2, NULL);</span></span><br><span class="line"><span class="comment">//    if(err != 0)</span></span><br><span class="line"><span class="comment">//        err_quit("cant' create thread 2: %s\n", strerror(err));</span></span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line">    printfoo(<span class="string">"parent: \n"</span>, fp);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序清单11-3中的程序得到：</p>
+<p>情况一：把带注释的行去掉注释也编译进程序中时的运行结果：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618203021.png" alt></p>
+<p>情况二：带注释的行不包括在程序中时的运行结果：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618203229.png" alt></p>
+<p>可以看出，当主线程访问这个结构时，结构的内容（在线tid1的栈上分配）已经改变。为了解决这个问题，可以使用全局结构，或者用malloc函数分配结构。</p>
+<p>例如，若把<code>struct foo foo = {1, 2, 3, 4};</code>移到函数外，使其成为全局结构，则可得到如下结果：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618203418.png" alt></p>
+<p>线程可以通过调用pthread_cancel函数来请求取消同一进程中的其他线程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cancel</span><span class="params">(<span class="keyword">pthread_t</span> tid)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p>在默认情况下，<code>pthread_cancel</code>函数会使得由<code>tid</code>标识的线程的行为表现为如同调用了参数为<code>PTHREAD_CANCELED</code>的<code>pthread_exit</code>函数，但是，线程可以选择忽略取消方式或是控制取消方式。注意，<code>pthread_cancel</code>并不等待线程终止，它仅仅提出请求。</p>
+<p>线程可以安排它退出时需要调用的函数，这与进程可以用<code>atexit</code>函数安排进程退出时需要调用的函数是类似的。这样的函数称为<strong>线程清理处理程序（thread cleanup handler</strong>）。线程可以建立多个清理处理程序。处理程序记录在栈中，也就是说它们的执行顺序与它们注册时的顺序相反。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_cleanup_push</span><span class="params">(<span class="keyword">void</span> (*rtn)(<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_cleanup_pop</span><span class="params">(<span class="keyword">int</span> execute)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>当线程执行以下动作时调用清理函数（调用参数为<code>arg</code>，清理函数<code>rtn</code>的调用顺序是由<code>pthread_cleanup_push</code>函数来安排的）：</p>
+<ul>
+<li>调用<code>pthread_exit</code>时。</li>
+<li>相应取消请求时。</li>
+<li>用非零<code>execute</code>参数调用<code>pthread_cleanup_pop</code>时。</li>
+</ul>
+<p>如果<code>execute</code>参数置为0，清理函数将不被调用。无论哪种情况，<code>pthread_cleanup_pop</code>都将删除上次<code>pthread_cleanup_push</code>调用建立的清理处理程序。</p>
+<p>这些函数有一个限制，由于它们可以实现为宏，所以必须在与线程相同的作用域中以匹配对的形式使用，<code>pthread_cleanup_push</code>的宏定义可以包含字符<code>{</code>，在这种情况下对应的匹配字符<code>}</code>就要在<code>pthread_cleanup_pop</code>定义中出现。</p>
+<p><strong>实例</strong></p>
+<p>程序清单11-4显示了如何使用线程清理处理程序。需要把<code>pthread_cleanup_pop</code>调用和<code>pthread_cleanup_push</code>调用匹配起来，否则，程序编译可能通不过。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> </span><br><span class="line">cleanup(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"cleanup: %s\n"</span>, (<span class="keyword">char</span> *)arg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn1(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 1 start\n"</span>);</span><br><span class="line">    pthread_cleanup_push(cleanup, <span class="string">"thread 1 first hanlder"</span>);    </span><br><span class="line">    pthread_cleanup_push(cleanup, <span class="string">"thread 1 second handler"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 1 push complete\n"</span>);</span><br><span class="line">    <span class="keyword">if</span>(arg)</span><br><span class="line">        <span class="keyword">return</span>((<span class="keyword">void</span> *)<span class="number">1</span>);</span><br><span class="line">    pthread_cleanup_pop(<span class="number">0</span>);</span><br><span class="line">    pthread_cleanup_pop(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span>((<span class="keyword">void</span> *)<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn2(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 2 start\n"</span>);</span><br><span class="line">    pthread_cleanup_push(cleanup, <span class="string">"thread 2 first handler"</span>);</span><br><span class="line">    pthread_cleanup_push(cleanup, <span class="string">"thread 2 second handler"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 2 push complete\n"</span>);</span><br><span class="line">    <span class="keyword">if</span> (arg)</span><br><span class="line">        pthread_exit((<span class="keyword">void</span> *)<span class="number">2</span>);</span><br><span class="line">    pthread_cleanup_pop(<span class="number">0</span>);</span><br><span class="line">    pthread_cleanup_pop(<span class="number">0</span>);</span><br><span class="line">    pthread_exit((<span class="keyword">void</span> *)<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>        err;    </span><br><span class="line">    <span class="keyword">pthread_t</span>    tid1, tid2;</span><br><span class="line">    <span class="keyword">void</span>        *tret;</span><br><span class="line"></span><br><span class="line">    err = pthread_create(&amp;tid1, <span class="literal">NULL</span>, thr_fn1, (<span class="keyword">void</span> *)<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't create thread 1: %s\n"</span>, strerror(err));</span><br><span class="line">    err = pthread_create(&amp;tid2, <span class="literal">NULL</span>, thr_fn2, (<span class="keyword">void</span> *)<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't create thread 2: %s\n"</span>, strerror(err));</span><br><span class="line">    err = pthread_join(tid1, &amp;tret);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't join with thread 1: %s\n"</span>, strerror(err));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 1 exit code %d\n"</span>, (<span class="keyword">int</span>)tret);</span><br><span class="line">    err = pthread_join(tid2, &amp;tret);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        err_quit(<span class="string">"can't join with thread 2: %s\n"</span>, strerror(err));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"thread 2 exit code %d\n"</span>, (<span class="keyword">int</span>)tret);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618204223.png" alt></p>
+<p>输出结果可以看出，两个线程都正确地启动和退出了，但是只调用了第二个线程的清理处理程序，所以如果线程是通过从它的启动例程中返回而终止的话，那么它的清理处理程序就不会被调用，还要注意清理处理程序是按照与它们安装时相反的顺序被调用的。</p>
+<p>现在可以开始看出线程函数和进程函数之间的相似之处。</p>
+<p>在默认情况下，线程的终止状态会保存一直等到对该线程调用<code>pthread_join</code>。<strong>如果线程已经处于分离状态，线程的底层存储资源可以在线程终止时立即被收回</strong>。</p>
+<p>在任何一个时间点上，线程是可结合的（joinable），或者是分离的（detached）。一个可结合的线程能够被其他线程收回其资源和杀死；在被其他线程回收之前，它的存储器资源（如栈）是不释放的。相反，一个分离的线程是不能被其他线程回收或杀死的，它的存储器资源在它终止时由系统自动释放。</p>
+<p>线程的分离状态决定一个线程以什么样的方式来终止自己。线程的默认属性，即为非分离状态（即可结合的，joinable，需要回收），这种情况下，原有的线程等待创建的线程结束；只有当<code>pthread_join()</code>函数返回时，创建的线程才算终止，才能释放自己占用的系统资源。而分离线程不是这样子的，它没有被其他的线程所等待，自己运行结束了，线程也就终止了，马上释放系统资源。程序员应该根据自己的需要，选择适当的分离状态。</p>
+<p>当线程被分离时，并不能用<code>pthread_join</code>函数等待它的终止状态。对分离状态的线程进行<code>pthread_join</code>的调用会产生失败，返回<code>EINVAL</code>。<code>pthread_detach</code>调用可以用于使线程进入分离状态。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> tid)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>当多个控制线程共享相同的内存时，需要确保每个线程看到一致的数据视图。如果每个线程使用的变量都是其他线程不会读取或修改的，那么就不会存在一致性问题。同样地，如果变量是只读的，多个线程同时读取该变量也不会有一致性问题。但是，当某个线程可以修改变量，而其他线程也可以读取或修改这个变量的时候，就需要对这些线程进行同步，以确保它们在访问变量的存储内容时不会访问到无效的数值。</p>
+<p>当一个线程修改变量时，其他线程在读取这个变量的值时就可能会看到不一致的数据。在变量修改时间多于一个存储器访问周期的处理器结构中，当存储器读与存储器写这两个周期交叉时，这种潜在的不一致性就会出现。当然，这种行为是与处理器结构相关的，但是可移植性程序并不能对使用何种处理器结果作出假设。</p>
+<p>下图描述了两个线程读写相同变量的假设例子。在这个例子中，线程A读取变量然后给这个变量赋予一个新的值，但写操作需要两个存储器周期。当线程B在这两个存储器写周期中间读取这个相同的变量时，它就会得到不一致的值。</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618204844.png" alt></p>
+<p>为了解决这个问题，线程不得不使用锁，在同一时间只允许一个线程访问该变量。上图描述了这种同步。如果线程B希望读取变量，它首先要获取锁；同样地，当线程A更新变量时，也需要获取这把同样的锁。因而线程B在线程A释放锁以前不能读取变量。</p>
+<p>当两个或多个线程试图在同一时间修改同一变量时，也需要进行同步。考虑变量递增操作的情况（下图），增量操作通常可分为三步：</p>
+<p>（1）从内存单元读入寄存器。</p>
+<p>（2）在寄存器中进行变量值的增加。</p>
+<p>（3）把新的值写回内存单元</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618205036.png" alt></p>
+<p>如果两个线程试图在几乎同一时间对同一变量做增量操作而不进行同步的话，结果就可能出现不一致。变量可能比原来增加了1，也有可能比原来增加了2，具体是1还是2取决于第二个线程开始操作时获取的数值。如果第二个线程执行第一步要比第一个线程执行第三步早，第二个线程读到的初始值就与第一个线程一样，它为变量加1，然后再写回去，事实上没有实际的效果，总的来说变量只增加了1。</p>
+<p>如果修改操作是原子操作，那么就不存在竞争。在前面的例子中，如果增加1只需要一个存储器周期，那么就没有竞争存在。如果数据总是以顺序一致的方式出现，就不需要额外的同步。<strong>当多个线程并不能观察到数据的不一致时，那么操作就是顺序一致的</strong>。在现代计算机系统中，存储访问需要多个总线周期，多处理器的总线周期通常在多个处理器上是交叉的，所以无法保证数据是顺序一致的。</p>
+<p>在顺序一致的环境中，可以把数据修改操作解释为运行线程的顺序操作步骤。可以把这样的情形描述为“线程A对变量增加了1，然后线程B对变量增加了1，所以变量的值比原来的大2”，或者描述为“线程B对变量增加了1，然后线程A对变量增加了1，所以变量的值比原来的大2”。这两个线程的任何操作顺序都不可能让变量出现除了上述值以外的其他数值。</p>
+<p>除了计算机体系结构的因素以外，程序使用变量的方式也会引起竞争，也会导致不一致的情况发生。例如，可能会对某个变量加1，然后基于这个数值作出某种决定。增量操作这一步和作出决定这一步两者的组合并非原子操作，因而给不一致情况的出现提供了可能。</p>
+<h3 id="互斥量"><a href="#互斥量" class="headerlink" title="互斥量"></a>互斥量</h3><p>可以通过使用pthread的互斥接口保护数据，确保同一时间只有一个线程访问数据。<strong>互斥量（mutex</strong>）<strong>从本质上说是一把锁，在访问共享资源前对互斥量进行加锁，在访问完成后释放互斥量上的锁。</strong>对互斥量进行加锁以后，任何其他试图再次对互斥量加锁的线程将会被阻塞直到当前线程释放该互斥锁。如果释放互斥锁时有多个线程阻塞，所有在该互斥锁上的阻塞线程都会变成可运行状态，第一个变为运行状态的线程可以对互斥量加锁，其他线程将会看到互斥锁依然被锁住，只能回去再次等待它重新变为可用。在这种方式下，每次只有一个线程可以向前执行。</p>
+<p><strong>在设计时需要规定所有的线程必须遵守相同的数据访问规则，只有这样，互斥机制才能正常工作。</strong>操作系统并不会做数据访问的串行化。如果允许其中的的某个线程在没有得到锁的情况下也可以访问共享资源，那么即使其他的线程在使用共享资源前都获取了锁，也还是会出现数据不一致的问题。</p>
+<p><strong>互斥变量用<code>pthread_mutex_t</code>数据类型表示</strong>，<strong>在使用互斥变量以前，必须首先对它进行初始化</strong>，可以把它置为常量<code>PTHREAD_MUTEX_INITIALIZER</code>（只对静态分配的互斥量），也可以通过调用<code>pthread_mutex_init</code>函数进行初始化。如果动态地分配互斥量（例如通过调用<code>malloc</code>函数），那么在释放内存前需要调用<code>pthread_mutex_destroy</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex, </span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_destroy</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p>要用默认的属性初始化互斥量，只需把<code>attr</code>设置为NULL。</p>
+<p><strong>对互斥量进行加锁，需要调用<code>pthread_mutex_lock</code></strong>，如果互斥量已经上锁，调用线程将阻塞直到互斥量被解锁。<strong>对互斥量解锁，需要调用<code>pthread_mutex_unlock</code>。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p><strong>如果线程不希望被阻塞，它可以使用<code>pthread_mutex_trylock</code>尝试对互斥量进行加锁</strong>。如果调用<code>pthread_mutex_trylock</code>时互斥量处于未锁住状态，那么<code>pthread_mutex_trylock</code>将锁住互斥量，不会出现阻塞并返回0，否则<code>pthread_mutex_trylock</code>就会失败，不能锁住互斥量，而返回<code>EBUSY</code>。</p>
+<p><strong>实例</strong></p>
+<p>程序清单11-5描述了用于保护某个数据结构的互斥量。当多个线程需要访问动态分配的对象时，可以在对象中嵌入引用计数，确保在所有使用该对象的线程完成数据访问之前，该对象内存空间不会被释放。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span>       　　　　　f_count;</span><br><span class="line">    <span class="keyword">pthread_mutex_t</span>    f_lock;</span><br><span class="line">    <span class="comment">/* more stuff here */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *</span></span><br><span class="line"><span class="class"><span class="title">foo_alloc</span>(<span class="title">void</span>)    /* <span class="title">allocate</span> <span class="title">the</span> <span class="title">object</span> */</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *<span class="title">fp</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((fp = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct foo))) != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fp-&gt;f_count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(pthread_mutex_init(&amp;fp-&gt;f_lock, <span class="literal">NULL</span>) != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(fp);</span><br><span class="line">            <span class="keyword">return</span>(<span class="literal">NULL</span>);</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="comment">/* continue initialization */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(fp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> </span><br><span class="line">foo_hold(struct foo *fp) <span class="comment">/* add a reference to the object */</span></span><br><span class="line">&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">    fp-&gt;f_count++;</span><br><span class="line">    pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">foo_rele(struct foo *fp) <span class="comment">/* release a reference to the object */</span></span><br><span class="line">&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">    <span class="keyword">if</span>(--fp-&gt;f_count == <span class="number">0</span>)    <span class="comment">/* last reference */</span></span><br><span class="line">    &#123;</span><br><span class="line">        pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">        pthread_mutex_destroy(&amp;fp-&gt;f_lock);</span><br><span class="line">        <span class="built_in">free</span>(fp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用该对象前，线程需要对这个对象的引用计数加1，当对象使用完毕时，需要对引用计数减1。当最后一个引用被释放时，对象所占的内存空间就被释放。在对引用计数加1、减1以及检查引用计数是否为0这些操作之前需要锁住互斥量。</p>
+<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>如果线程试图对同一个互斥量加锁两次，那么它自身就会陷入死锁状态，使用互斥量时，还有其他更不明显的方式也能产生死锁。例如，程序中使用多个互斥量时，如果允许一个线程一直占有第一个互斥量，并且在试图锁住第二个互斥量时处于阻塞状态，但是拥有第二个互斥量的线程也在试图锁住第一个互斥量，这时就会发生死锁。因为两个线程都在相互请求另一个线程拥有的资源，所以这两个线程都无法向前运行，于是就产生死锁。</p>
+<p><strong>可以通过小心地控制互斥量加锁的顺序来避免死锁的发生</strong>。例如，假设需要对两个互斥量A和B同时加锁，如果所有线程总是在对互斥量B加锁之前锁住互斥量A，那么使用这两个互斥量不会产生死锁（当然在其他资源上仍可能出现死锁）；类似地，如果所有的线程总是在锁住互斥量A之前锁住互斥量B，那么也不会发生死锁。只有在一个线程试图以与另一个线程相反的顺序锁住互斥量时，才可能出现死锁。</p>
+<p>有时候应用程序的结果使得对互斥量加锁进行排序是很困难的，如果涉及了太多的锁和数据结构，可用的函数并不能把它转换成简单的层次，那么就需要采用另外的方法。<strong>可以先释放占有的锁，然后过一段时间再试。</strong>这种情况可以使用<code>pthread_mutex_trylock</code>接口避免死锁。如果已经占有某些锁而且<code>pthread_mutex_trylock</code>接口返回成功，那么就可以前进；但是，如果不能获取锁，可以先释放已经占有的锁，做好清理工作，然后过一段时间重新尝试。</p>
+<p><strong>实例</strong></p>
+<p>程序清单11-6（修改自程序清单11-5）用以描述两个互斥量的使用方法。当同时使用两个互斥量时，总是让它们以相同的顺序加锁，以避免死锁。第二个互斥量维护着一个用于跟踪foo数据结构的散列列表。这样hashlock互斥量保护foo数据结构中的fh散列表和f_next散列链字段。foo结构中的f_lock互斥量保护对foo结构中的其他字段的访问。</p>
+<p><strong>程序清单11-6 使用两个互斥量</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NHASH    29</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>    HASH(fp)    (((unsigned long)fp)%NHASH)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *<span class="title">fh</span>[<span class="title">NHASH</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> hashlock = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span>        f_count;</span><br><span class="line">    <span class="keyword">pthread_mutex_t</span>    f_lock;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>    *<span class="title">f_next</span>;</span>    <span class="comment">/* protected by hashlock */</span></span><br><span class="line">    <span class="keyword">int</span>        f_id;</span><br><span class="line">    <span class="comment">/* more stuff here */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *</span></span><br><span class="line"><span class="class"><span class="title">foo_alloc</span>(<span class="title">void</span>)    /* <span class="title">allocate</span> <span class="title">the</span> <span class="title">object</span> */</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *<span class="title">fp</span>;</span></span><br><span class="line">    <span class="keyword">int</span>        idx;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((fp = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct foo))) != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fp-&gt;f_count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(pthread_mutex_init(&amp;fp-&gt;f_lock, <span class="literal">NULL</span>) != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(fp);</span><br><span class="line">            <span class="keyword">return</span>(<span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        idx = HASH(fp);</span><br><span class="line">        pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">        fp-&gt;f_next = fh[idx];</span><br><span class="line">        fh[idx] = fp;</span><br><span class="line">        pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">        pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">        <span class="comment">/* continue initialization */</span></span><br><span class="line">        pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(fp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">foo_hold(struct foo *fp)    <span class="comment">/* add a reference to the object */</span></span><br><span class="line">&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">    fp-&gt;f_count++;</span><br><span class="line">    pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *</span></span><br><span class="line"><span class="class"><span class="title">foo_find</span>(<span class="title">int</span> <span class="title">id</span>)    /* <span class="title">find</span> <span class="title">an</span> <span class="title">existing</span> <span class="title">object</span> */</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>    *<span class="title">fp</span>;</span></span><br><span class="line">    <span class="keyword">int</span>           idx;</span><br><span class="line"></span><br><span class="line">    idx = HASH(fp);</span><br><span class="line">    pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">    <span class="keyword">for</span>(fp = fh[idx]; fp != <span class="literal">NULL</span>; fp = fp-&gt;f_next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(fp-&gt;f_id == id)</span><br><span class="line">        &#123;</span><br><span class="line">            foo_hold(fp);</span><br><span class="line">            <span class="keyword">break</span>;    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">    <span class="keyword">return</span>(fp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">foo_rele(struct foo *fp)    <span class="comment">/* release a reference to the object */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>     *<span class="title">tfp</span>;</span></span><br><span class="line">    <span class="keyword">int</span>            idx;</span><br><span class="line"></span><br><span class="line">    pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">    <span class="keyword">if</span>(fp-&gt;f_count == <span class="number">1</span>) <span class="comment">/* last reference */</span></span><br><span class="line">    &#123;</span><br><span class="line">        pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">        pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">        pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">        <span class="comment">/* need to recheck the condition */</span></span><br><span class="line">        <span class="keyword">if</span>(fp-&gt;f_count != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            fp-&gt;f_count--;</span><br><span class="line">            pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">            pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* remove from list */</span></span><br><span class="line">        idx = HASH(fp);</span><br><span class="line">        tfp = fh[idx];</span><br><span class="line">        <span class="keyword">if</span>(tfp == fp)</span><br><span class="line">        &#123;</span><br><span class="line">            fh[idx] = fp-&gt;f_next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(tfp-&gt;f_next != fp)</span><br><span class="line">            tfp = tfp-&gt;f_next;</span><br><span class="line">            tfp-&gt;f_next = fp-&gt;f_next;</span><br><span class="line">        &#125;</span><br><span class="line">        pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">        pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">        pthread_mutex_destroy(&amp;fp-&gt;f_lock);</span><br><span class="line">        <span class="built_in">free</span>(fp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        fp-&gt;f_count--;</span><br><span class="line">        pthread_mutex_unlock(&amp;fp-&gt;f_lock);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比较程序清单11-6和程序清单11-5，可以看出分配函数现在锁住散列列表锁，把新的结构添加到散列存储桶中，在对散列列表的锁解锁之前，先锁住新结构中的互斥量。因为新的结构是放在全局列表中的，其他线程可以找到它，所以在完成初始化之前，需要阻塞其他试图访问新结构的线程。</p>
+<p>foo_find函数锁住散列列表锁，然后搜索被请求的结构。如果找到了，就增加其引用计数并返回指向该结构的指针。注意加锁的顺序是先在foo_find函数中锁定散列列表锁，然后再在foo_hold函数中锁定foo结构中的f_clock互斥量。</p>
+<p>现在有了两个锁以后，foo_rele函数变得更加复杂。如果这是最后一个引用，因为将需要从散列列表中删除这个结构，就要先对这个结构互斥量进行解锁，才可以获取散列列表锁。然后重新获取结构互斥量。从上一次获得结构互斥量以来可能处于被阻塞状态，所以需要重新检查条件，判断是否还需要释放这个结构。如果其他线程在我们为满足锁顺序而阻塞时发现了这个结构并对其引用计数加1，那么只需要简单地对引用计数减1，对所有的东西解锁然后返回。</p>
+<p>如此加、解锁太复杂，所以需要重新审视原来的设计。也可以使用散列列表锁来保护引用计数，使事情大大简化，结构互斥量可以用于保护foo结构中的其他任何东西。程序清单11-7反应了这种变化。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NHASH 29</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HASH(fp)    (((unsigned long)fp)%NHASH)</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *<span class="title">fh</span>[<span class="title">HASH</span>];</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> hashlock = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span>            f_count;    <span class="comment">/* protected by hashlock */</span></span><br><span class="line">    <span class="keyword">pthread_mutext_t</span>    f_lock;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>        *<span class="title">f_next</span>;</span>    <span class="comment">/* protected by hashlock */</span></span><br><span class="line">    <span class="keyword">int</span>            f_id;</span><br><span class="line">    <span class="comment">/* more stuff here */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *</span></span><br><span class="line"><span class="class"><span class="title">foo_alloc</span>(<span class="title">void</span>)    /* <span class="title">allocate</span> <span class="title">the</span> <span class="title">object</span> */</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>     *<span class="title">fp</span>;</span></span><br><span class="line">    <span class="keyword">int</span>        idx;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((fp = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct foo))) != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fp-&gt;f_count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(pthread_mutex_init(&amp;fp-&gt;f_lock, <span class="literal">NULL</span>) != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(fp);</span><br><span class="line">            <span class="keyword">return</span>(<span class="literal">NULL</span>);</span><br><span class="line">        &#125;    </span><br><span class="line">        idx = HASH(fp);</span><br><span class="line">        pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">        fp-&gt;f_next = fh[idx];</span><br><span class="line">        fh[idx] = fp;</span><br><span class="line">        pthread_mutex_lock(&amp;fp-&gt;f_lock);</span><br><span class="line">        pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">        <span class="comment">/* continue initialization */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(fp);    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> </span><br><span class="line">foo_hold(struct foo *fp)    <span class="comment">/* add a reference to the object */</span></span><br><span class="line">&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">    fp-&gt;f_count++;</span><br><span class="line">    pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *</span></span><br><span class="line"><span class="class"><span class="title">foo_find</span>(<span class="title">int</span> <span class="title">id</span>)    /* <span class="title">find</span> <span class="title">a</span> <span class="title">existing</span> <span class="title">object</span> */</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>     *<span class="title">fp</span>;</span>    </span><br><span class="line">    <span class="keyword">int</span>        idx;</span><br><span class="line">        </span><br><span class="line">    idx = HASH(fp);</span><br><span class="line">    pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">    <span class="keyword">for</span>(fp = fh[idx]; fp != <span class="literal">NULL</span>; fp = fp-&gt;f_next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(fp-&gt;f_id == id)</span><br><span class="line">        &#123;</span><br><span class="line">            fp-&gt;f_count++;</span><br><span class="line">            <span class="keyword">break</span>;                                    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">    <span class="keyword">return</span>(fp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">foo_rele(struct foo *fp)    <span class="comment">/* release a reference to the object */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">foo</span>     *<span class="title">tfp</span>;</span></span><br><span class="line">    <span class="keyword">int</span>        idx;</span><br><span class="line">        </span><br><span class="line">    pthread_mutex_lock(&amp;hashlock);</span><br><span class="line">    <span class="keyword">if</span>(--fp-&gt;f_count == <span class="number">0</span>)    <span class="comment">/* last reference, remove from list */</span></span><br><span class="line">    &#123;</span><br><span class="line">        idx = HASH(fp);</span><br><span class="line">        tfp = fh[idx];</span><br><span class="line">        <span class="keyword">if</span>(tfp == fp)</span><br><span class="line">        &#123;</span><br><span class="line">            fh[idx] = fp-&gt;f_next;        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;    </span><br><span class="line">            <span class="keyword">while</span>(tfp-&gt;f_next != fp)</span><br><span class="line">                tfp = tfp-&gt;f_next;</span><br><span class="line">            tfp-&gt;f_next = fp-&gt;f_next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">        pthread_mutex_destroy(&amp;fp-&gt;f_lock);</span><br><span class="line">        <span class="built_in">free</span>(fp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        pthread_mutex_unlock(&amp;hashlock);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，与程序清单11-6中的程序相比，程序清单11-7中的程序简单得多。两种用途使用相同的锁时，围绕散列列表和引用计数的锁的排序问题就随之不见了。多线程的软件设计经常要考虑这类折中处理方案。<strong>如果锁的粒度太粗，就会出现很多线程阻塞等待相同的锁，源自并发性的改善微乎其微。如果锁的粒度太细，那么过多的锁开销会使系统性能受到影响，而且代码变得相当复杂。</strong>作为一个程序员，需要在满足锁需求的情况下，在代码复杂性和优化性能之间找到好平衡点。</p>
+<p>对<code>fp-&gt;f_next = fh[idx]; fh[idx] = fp;</code>的理解： <a href="http://bbs.csdn.net/topics/330092120" target="_blank" rel="noopener">http://bbs.csdn.net/topics/330092120</a></p>
+<h3 id="pthread-mutex-timedlock函数"><a href="#pthread-mutex-timedlock函数" class="headerlink" title="pthread_mutex_timedlock函数"></a>pthread_mutex_timedlock函数</h3><p>当请求一个已经加锁的互斥量时，如果我们想要限定线程阻塞的时间（时间到了就不再阻塞等待），这时需要使用<code>pthread_mutex_timedlock</code>函数。<code>pthread_mutex_timedlock</code>函数类似于<code>pthread_mutex_lock</code>，只不过一旦设置的超时值到达，<code>pthread_mutex_timedlock</code>函数会返回错误代码ETIMEDOUT，线程不再阻塞等待。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_timedlock</span><span class="params">( <span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex,</span></span></span><br><span class="line"><span class="function"><span class="params">                             <span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，失败则返回错误代</span></span><br></pre></td></tr></table></figure>
+<p>超时值指定了我们要等待的时间，它使用绝对时间（而不是相对时间：我们指定线程将一直阻塞等待直到时刻X，而不是说我们将要阻塞X秒钟。）。该时间值用<code>timespec</code>结构表示：秒和纳秒。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> </span><br><span class="line">main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>                err;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span>    <span class="title">timespec</span> <span class="title">tout</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span>     <span class="title">tm</span>     *<span class="title">tmp</span>;</span></span><br><span class="line">    <span class="keyword">char</span>        buf[<span class="number">64</span>];</span><br><span class="line">    <span class="keyword">pthread_mutex_t</span> lock = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line">    pthread_mutex_lock(&amp;lock);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"mutex is locked\n"</span>);</span><br><span class="line">    clock_gettime(CLOCK_REALTIME, &amp;tout);</span><br><span class="line">    tmp = localtime(&amp;tout.tv_sec);</span><br><span class="line">    strftime(buf, <span class="keyword">sizeof</span>(buf), <span class="string">"%r"</span>, tmp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"current time is %s\n"</span>, buf);</span><br><span class="line">    tout.tv_sec += <span class="number">10</span>;    <span class="comment">/* 10 seconds from now */</span></span><br><span class="line">    <span class="comment">/* caution: this could lead to deadlock */</span></span><br><span class="line">    err = pthread_mutex_timedlock(&amp;lock, &amp;tout);</span><br><span class="line">    clock_gettime(CLOCK_REALTIME, &amp;tout);</span><br><span class="line">    tmp = localtime(&amp;tout.tv_sec);</span><br><span class="line">    strftime(buf, <span class="keyword">sizeof</span>(buf), <span class="string">"%r"</span>, tmp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"the time is now %s\n"</span>, buf);</span><br><span class="line">    <span class="keyword">if</span>(err == <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"mutex locked again!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span>    </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"can't lock mutex again: %s\n"</span>, strerror(err));</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618214322.png" alt></p>
+<h3 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h3><p>读写锁与互斥量类似，不过读写锁允许更高的并行性。互斥量要么是锁住状态要么是不加锁状态，而且一次只有一个线程可以对其加锁。<strong>读写锁可以有三种状态：读模式下加锁状态，写模式下加锁状态，不加锁状态。一次只有一个线程可以占有写模式的读写锁，但是多个线程可以同时占有读模式的读写锁</strong>。</p>
+<p><strong>当读写锁是写加锁状态时，在这个锁被解锁之前，所有试图对这个锁加锁的线程都会被阻塞</strong>。<strong>当读写锁在读加锁状态时，所有试图以读模式对它进行加锁的线程都可以得到访问权，但是如果线程希望以写模式对此锁进行加锁，它必须阻塞直到所有的线程释放读锁</strong>。虽然读写锁的实现各不相同，但<strong>当读写锁处于读模式锁住状态时，如果有另外的线程试图以写模式加锁，读写锁通常会阻塞随后的读模式锁请求。这样可以避免读模式锁长期占用，而等待的写模式锁请求一直得不到满足</strong>。</p>
+<p><strong>读写锁非常适合于对数据结构读的次数远大于写的情况</strong>。当读写锁在写模式下时，它所保护的数据结构就可以被安全地修改，因为当前只有一个线程可以在写模式下拥有这个锁。当读写锁在读模式下时，只要线程获取了读模式下的读写锁，该锁所保护的数据结构可以被多个获得读模式锁的线程读取。</p>
+<p><strong>读写锁也叫做共享-独占锁</strong>，当读写锁以读模式锁住时，它是以共享模式锁住的；当它以写模式锁住时，它是以独占模式锁住的。</p>
+<p>与互斥量一样，读写锁在使用之前必须初始化，在释放它们底层的内存前必须销毁。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_init</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">const</span> <span class="keyword">pthread_rwlockattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_destroy</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="comment">// 两者的返回值都是：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p><strong>读写锁通过调用pthread_rwlock_init进行初始化</strong>。如果希望读写锁有默认的属性，可以传一个空指针给attr。</p>
+<p><strong>在释放读写锁占用的内存之前，需要调用<code>pthread_rwlock_destroy</code>做清理工作</strong>。如果<code>pthread_rwlock_init</code>为读写锁分配了资源，<code>pthread_rwlock_destroy</code>将释放这些资源。如果在调用<code>pthread_rwlock_destroy</code>之前就释放了读写锁占用的内存空间，那么分配给这个锁的资源就丢失了。</p>
+<p><strong>要在读模式下锁定读写锁，需要调用<code>pthread_rwlock_rdlock</code></strong>；<strong>要在写模式下锁定读写锁，需要调用<code>pthread_rwlock_wrlock</code></strong>。不管以何种方式锁住读写锁，都可以<strong>调用<code>pthread_rwlock_unlock</code>进行解锁</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_rdlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_wrlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_unlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="comment">// 所有的返回值都是：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p>在实现读写锁的时候可能会对共享模式下可获取的锁的数量进行限制，所以需要检查<code>pthread_rwlock_rdlock</code>的返回值。即使<code>pthread_rwlock_wrlock</code>和<code>pthread_rwlock_unlock</code>有错误的返回值，如果锁设计合理的话，也不需要检查其返回值。错误返回值的定义只是针对不正确地使用读写锁的情况，例如未经初始化的锁，或者试图获取已拥有的锁从而可能产生死锁这样的错误返回等。</p>
+<p>Single UNIX Specification同样定义了有条件的读写锁原语的版本。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_tryrdlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_trywrlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line">两者的返回值都是：若成功则返回<span class="number">0</span>，否则返回错误编号</span><br></pre></td></tr></table></figure>
+<p>可以获取锁时，函数返回0，否则，返回错误EBUSY。这些函数可以用于遵循某种锁层次但还不能完全避免死锁的情况。</p>
+<p> <strong>实例</strong></p>
+<p>程序清单11-8中的程序解释了读写锁的使用。作业请求队列由单个读写锁保护。实现多个工作线程获取由单个主线程分配给它们的作业。</p>
+<p><strong>程序清单11-8 使用读写锁</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">job</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">job</span> *<span class="title">j_next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">job</span> *<span class="title">j_prev</span>;</span></span><br><span class="line">    <span class="keyword">pthread_t</span>  j_id;    <span class="comment">/* tells which thread handles this job */</span></span><br><span class="line">    <span class="comment">/* more stuff here */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">queue</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">job</span>        *<span class="title">q_head</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">job</span>         *<span class="title">q_tail</span>;</span></span><br><span class="line">    <span class="comment">//pthread_rwlock_init</span></span><br><span class="line">    <span class="keyword">pthread_rwlock_t</span>   q_lock;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Initialize a queue. </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">queue_init(struct <span class="built_in">queue</span> *qp)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> err;</span><br><span class="line">    </span><br><span class="line">    qp-&gt;q_head = <span class="literal">NULL</span>;</span><br><span class="line">    qp-&gt;q_tail = <span class="literal">NULL</span>;</span><br><span class="line">    err = pthread_rwlock_init(&amp;qp-&gt;q_lock, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>(err);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* continue initializationn */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Insert a job at the head of the queue.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">job_insert(struct <span class="built_in">queue</span> *qp, struct job *jp)</span><br><span class="line">&#123;</span><br><span class="line">    pthread_rwlock_wrlock(&amp;qp-&gt;q_lock);</span><br><span class="line">    jp-&gt;j_next = qp-&gt;q_head;</span><br><span class="line">    jp-&gt;j_prev = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(qp-&gt;q_head != <span class="literal">NULL</span>)</span><br><span class="line">        qp-&gt;q_head-&gt;j_prev = jp;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        qp-&gt;q_tail = jp;    <span class="comment">/* list was empty */</span></span><br><span class="line">    qp-&gt;q_head = jp;</span><br><span class="line">    pthread_rwlock_unlock(&amp;qp-&gt;q_lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Append a job on the tail of the queue.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> </span><br><span class="line">job_append(struct <span class="built_in">queue</span> *qp, struct job *jp)</span><br><span class="line">&#123;</span><br><span class="line">    pthread_rwlock_wrlock(&amp;qp-&gt;q_lock);</span><br><span class="line">    jp-&gt;j_next = <span class="literal">NULL</span>;</span><br><span class="line">    jp-&gt;j_prev = qp-&gt;q_tail;</span><br><span class="line">    <span class="keyword">if</span>(qp-&gt;q_tail != <span class="literal">NULL</span>)</span><br><span class="line">        qp-&gt;q_tail-&gt;j_next = jp;</span><br><span class="line">    <span class="keyword">else</span>    </span><br><span class="line">        qp-&gt;q_head = jp; <span class="comment">/* list was empty */</span></span><br><span class="line">    qp-&gt;q_tail = jp;</span><br><span class="line">    pthread_rwlock_unlock(&amp;qp-&gt;q_lock);</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Remove the  given job from a queue.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">job_remove(struct <span class="built_in">queue</span> *qp, struct job *jp)</span><br><span class="line">&#123;</span><br><span class="line">    pthread_rwlock_wrlock(&amp;qp-&gt;q_lock);</span><br><span class="line">    <span class="keyword">if</span>(jp == qp-&gt;q_head)</span><br><span class="line">    &#123;</span><br><span class="line">        qp-&gt;q_head = jp-&gt;j_next;</span><br><span class="line">        <span class="keyword">if</span>(qp-&gt;q_tail == jp)</span><br><span class="line">            qp-&gt;q_tail = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (jp == qp-q_tail)</span><br><span class="line">    &#123;</span><br><span class="line">        qp-&gt;q_tail = jp-&gt;j_prev;</span><br><span class="line">        <span class="keyword">if</span>(qp-&gt;q_head == jp)</span><br><span class="line">            qp-&gt;q_head = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;    </span><br><span class="line">        jp-&gt;j_prev-&gt;j_next = jp-&gt;j_next;</span><br><span class="line">        jp-&gt;j_next-&gt;j_prev = jp-&gt;j_prev;    </span><br><span class="line">    &#125;</span><br><span class="line">    pthread_rwlock_unlock(&amp;qp-&gt;q_lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Find a job for the given thread ID.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">job</span> *</span></span><br><span class="line"><span class="class"><span class="title">job_find</span>(<span class="title">struct</span> <span class="title">queue</span> *<span class="title">qp</span>, <span class="title">pthread_t</span> <span class="title">id</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">job</span> *<span class="title">jp</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(pthread_rwlock_rdlock(&amp;qp-&gt;q_lock) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(jp = qp-&gt;q_head; jp != <span class="literal">NULL</span>; jp = jp-&gt;j_next)</span><br><span class="line">        <span class="keyword">if</span>(pthread_equal(jp-&gt;j_id, id))</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    pthread_rwlock_unlock(&amp;qp-&gt;q_lock);</span><br><span class="line">    <span class="keyword">return</span>(jp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，不管什么时候需要增加一个作业到队列中或者从队列中删除作业，都用写模式锁住队列的读写锁。不管何时搜索队列，首先需要获取读模式下的锁，允许所有的工作线程并发地搜索队列。在这种情况下，只有线程搜索队列的频率远远高于增加或删除作业时，使用读写锁才能改善性能。</p>
+<p>工作线程只能从队列中读取与它们的线程ID匹配的作业。既然作业结构同一时间只能由一个线程使用，所以不需要额外加锁。</p>
+<h3 id="带超时限制的读写锁"><a href="#带超时限制的读写锁" class="headerlink" title="带超时限制的读写锁"></a>带超时限制的读写锁</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_timedrdlock</span><span class="params">( <span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_timedwrlock</span><span class="params">( <span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，失败则返回错误代码</span></span><br></pre></td></tr></table></figure>
+<p>同<code>pthread_mutex_timedlock</code>与<code>thread_mutex_lock</code>的区别完全一样。</p>
+<h3 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h3><p>条件变量是线程可用的另一种同步机（<a href="http://www.cnblogs.com/feisky/archive/2010/03/08/1680950.html" target="_blank" rel="noopener">http://www.cnblogs.com/feisky/archive/2010/03/08/1680950.html</a>）。条件变量给多个线程提供了一个会合的场所。条件变量与互斥量一起使用时，允许线程以无竞争的方式等待特定的条件发生。（条件变量基本概念和原理：<a href="http://hipercomer.blog.51cto.com/4415661/914841" target="_blank" rel="noopener">http://hipercomer.blog.51cto.com/4415661/914841</a>）</p>
+<p>（<a href="http://blog.chinaunix.net/uid-28852942-id-3757186.html" target="_blank" rel="noopener">线程同步:条件变量的使用细节分析</a>：<a href="http://blog.chinaunix.net/uid-28852942-id-3757186.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-28852942-id-3757186.html</a>）</p>
+<p><strong>条件本身是由互斥量保护的</strong>。<strong>线程在改变条件状态前必须首先锁住互斥量，其他线程在获得互斥量之前不会察觉到这种改变，因为必须锁定互斥量以后才能计算条件</strong>。</p>
+<p><strong>条件变量使用之前必须首先进行初始化</strong>，<strong><code>pthread_cond_t</code>数据类型代表的条件变量可以用两种方式进行初始化，可以把常量PTHREAD_COND_INITIALIZER赋给静态分配的条件变量，但是如果条件变量是动态分配的，可以使用<code>pthread_cond_init</code>函数进行初始化。</strong></p>
+<p>在释放底层的内存空间之前，<strong>可以使用<code>pthread_cond_destroy</code>函数对条件变量进行去除初始化（<code>deinitialize</code></strong>）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_init</span><span class="params">( <span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,</span></span></span><br><span class="line"><span class="function"><span class="params">           pthread_condattr *<span class="keyword">restrict</span> attr )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_destroy</span><span class="params">( <span class="keyword">pthread_cond_t</span> *cond )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两者的返回值都是：若成功则返回0，否则返回错误代码</span></span><br></pre></td></tr></table></figure>
+<p>除非需要创建一个非默认属性的条件变量，否则<code>pthread_cond_init</code>函数的attr参数可以设置为NULL。</p>
+<p><strong>使用<code>pthread_cond_wait</code>等待条件变为真</strong>，如果在给定的时间内条件不能满足，那么会生成一个代码出错码的返回值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">( <span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,</span></span></span><br><span class="line"><span class="function"><span class="params">             <span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_timedwait</span><span class="params">( <span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> timeout )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两者的返回值都是：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p><strong>传递给<code>pthread_cond_wait</code>的互斥量对条件进行保护，调用者把锁住的互斥量传给函数</strong>。<strong>函数把调用线程放到等待条件的线程列表上，然后对互斥量解锁，这两个操作是原子操作。</strong>这样就关闭了条件检查和线程进入休眠状态等待条件改变这两个操作之间的时间通道，这样线程就不会错过条件的任何变化。<strong><code>pthread_cond_wait</code>返回时，互斥量再次被锁住。</strong></p>
+<p><strong><code>pthread_cond_timedwait</code>函数的工作方式与<code>pthread_cond_wait</code>函数相似，只是多了一个timeout。timeout值指定了等待的时间，它是通过<code>timespec</code>结构指定。</strong>时间值用秒数或者分秒数来表示，分秒数的单位是纳秒。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> &#123;</span></span><br><span class="line">    <span class="keyword">time_t</span>    tv_sec;    <span class="comment">/* seconds */</span></span><br><span class="line">    <span class="keyword">long</span>      tv_nsec;   <span class="comment">/* nanoseconds */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用这个结构时，需要指定愿意等待多长时间，时间值是一个绝对数而不是相对数。例如，如果能等待3分钟，就需要把当前时间加上3分钟再转换到<code>timespec</code>结构，而不是把3分钟转换成<code>timespec</code>结构。</p>
+<p>可以使用gettimeofday获取用timeval结构表示的当前时间，然后把这个时间转换成timespec结构。要得到timeout值的绝对时间，可以使用下面的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> </span><br><span class="line">maketimeout( struct timespec *tsp, <span class="keyword">long</span> minutes )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">now</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* get the current time */</span></span><br><span class="line">    gettimeofday( &amp;now );</span><br><span class="line">    tsp-&gt;tv_sec = now.tv_sec;</span><br><span class="line">    tsp-&gt;tv_nsec = now.tv_usec * <span class="number">1000</span>;    <span class="comment">/* usec to nsec */</span></span><br><span class="line">    <span class="comment">/* add the offset to get timeout value */</span></span><br><span class="line">    tsp-&gt;tv_sec += minutes * <span class="number">60</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如果时间值到了但是条件还是没有出现，<code>pthread_cond_timedwait</code>将重新获取互斥量，然后返回错误ETIMEDOUT</strong>。<strong>从<code>pthread_cond_wait</code>或者<code>pthread_cond_timedwait</code>调用成功返回时，线程需要重新计算条件，因为其他的线程可能已经在运行并改变了条件。</strong></p>
+<p>有两个函数可以用于通知线程条件已经满足。<strong><code>pthread_cond_signal</code>函数将唤醒等待该条件的某个线程，而<code>pthread_cond_broadcast</code>函数将唤醒等待该条件的所有线程。</strong></p>
+<p>POSIX规范为了简化实现，允许<code>pthread_cond_signal</code>在实现的时候可以唤醒不止一个线程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_signal</span><span class="params">( <span class="keyword">pthread_cond_t</span> *cond )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_broadcast</span><span class="params">( <span class="keyword">pthread_cond_t</span> *cond )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两者的返回值都是：若成功则返回0，否则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p>调用<code>pthread_cond_signal</code>或者<code>pthread_cond_broadcast</code>，也称为向线程或条件发送信号。<strong>必须注意一定要在改变条件状态以后再给线程发送信号</strong>。</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618220708.png" alt></p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618220721.png" alt></p>
+<p><strong>实例</strong></p>
+<p><strong>程序清单11-9 使用条件变量</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msg</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">msg</span> *<span class="title">m_next</span>;</span></span><br><span class="line">    <span class="comment">/* ... more stuff here ... */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msg</span> *<span class="title">workq</span>;</span></span><br><span class="line"><span class="keyword">pthread_cond_t</span> qready = PTHREAD_COND_INITIALIZER;</span><br><span class="line"><span class="keyword">pthread_mutex_t</span> qlock = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">process_msg(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">msg</span> *<span class="title">mp</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( ; ; )</span><br><span class="line">    &#123;</span><br><span class="line">        pthread_mutex_lock(&amp;qlock);</span><br><span class="line">        <span class="keyword">while</span>(workq == <span class="literal">NULL</span>)      <span class="comment">/* 从pthread_cond_wait或者pthread_cond_timedwait调用成功返回时，线程需要重新计算条件 */</span></span><br><span class="line">        &#123;</span><br><span class="line">            pthread_cond_wait(&amp;qready, &amp;qlock);</span><br><span class="line">        &#125;        </span><br><span class="line">        mp = workq;</span><br><span class="line">        workq = mp-&gt;m_next;</span><br><span class="line">        pthread_mutex_unlock(&amp;qlock);</span><br><span class="line">        <span class="comment">/* now process the message mp */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line"> enqueue_msg(struct msg *mp)</span><br><span class="line">&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;qlock);</span><br><span class="line">    mp-&gt;m_next = workq;</span><br><span class="line">    workq = mp;</span><br><span class="line">    pthread_mutex_unlock(&amp;qlock);</span><br><span class="line">    pthread_cond_signal(&amp;qready);  <span class="comment">/* 在改变条件状态以后再给线程发送信号 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h3><p>自旋锁与互斥量类似，区别是：若线程不能获取锁，<strong>互斥量是通过休眠的方式（线程被暂时取消调度，切换至其他可运行的线程）来阻塞线程；而自旋锁则是通过忙等（busy-waiting，spinning）的方式（线程不会被取消调度，一直在处于运行状态）来阻塞线程。</strong>自旋锁适于用这样的情况：锁被其他线程短期持有（很快会被释放），而且等待该锁的线程不希望在阻塞期间被取消调度，因为这会带来一些开销。</p>
+<p>自旋锁通常被用作实现其他类型的锁的低级原语。当一个线程在自旋等待一个锁的时候，CPU不能做其他任何事了，这就浪费了CPU资源。这就是为什么要求自旋锁只能被短期保持的原因。</p>
+<p>自旋锁在非抢占式内核中是非常有用的：除了提供互斥机制外，自旋锁可以（以自旋的方式）阻塞中断，这样中断处理程序就不会由于试图获取一个已经被锁住的自旋锁而使系统死锁。在这些非抢占式的内核中，中断处理程序是不能休眠的，所以它们唯一可以使用的同步原语只有自旋锁。</p>
+<p>然而，在用户级，自旋锁并不是十分有用，除非你在一个不允许抢占的实时调度类中运行。在分时调度类中运行的用户级线程可以被取消调度：当它的时间片用完或者一个更高有效级的线程到来的时候。在这种情况下，如果被取消调度的线程原来持有一个自旋锁，那么在该自旋锁上阻塞的其他线程将会自旋比原来更长的时间。</p>
+<p>自旋锁接口与互斥量接口类似。我们可以通过<code>pthread_spin_init</code>函数初始化一个自旋锁。使用<code>pthread_spin_destroy</code>函数对一个自旋锁取消初始化。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_init</span><span class="params">( <span class="keyword">pthread_spinlock_t</span> *lock, <span class="keyword">int</span> pshared )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_destroy</span><span class="params">( <span class="keyword">pthread_spinlock_t</span> *lock )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个函数的返回值：若成功则返回0，失败则返回错误代码</span></span><br></pre></td></tr></table></figure>
+<p>自旋锁只有一个属性，并且只有平台支持线程进程共享同步选项（Thread Process-Shared Synchronization option）该属性才有效。参数pshared代表进程共享（process shared）属性，它指示了自旋锁如何取得。如果把pshared设置为PTHREAD_PROCESS_SHARED，那么自旋锁可以被访问该锁的底层内存的线程获得，即使这些线程来自于不同的进程。如果把pshared设置为PTHREAD_PROCESS_PRIVATE，那么自旋锁只能本进程内初始化的线程获取。</p>
+<p>要给自旋锁加锁，我们可以调用pthread_spin_lock（在获得锁之前，线程会一直自旋），或者pthread_spin_trylock（如果自旋锁不能立即获得，而是返回错误EBUSY，注意，此时线程不自旋）。无论调用哪个函数进行加锁，我们都可以调用pthread_spin_unlock进行解锁。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_lock</span><span class="params">( <span class="keyword">pthread_spinlock_t</span> *lock )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_trylock</span><span class="params">( <span class="keyword">pthread_spinlock_t</span> *lock )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_unlock</span><span class="params">( <span class="keyword">pthread_spinlock_t</span> *lock )</span></span>;</span><br><span class="line"><span class="comment">// 返回值：若成功则返回0，失败则返回出错代码</span></span><br></pre></td></tr></table></figure>
+<p>注意，如果自旋锁当前还没有加锁，那么调用pthread_spin_lock可直接对该自旋锁加锁而不会自旋。如果线程已经对自旋锁加了锁，现在又调用pthread_spin_lock对其加锁，那么结果是未定义的。如果我们对一个没有加锁的自旋锁进行解锁，其结果也是未定义的。</p>
+<p>pthread_spin_lock或者pthread_spin_trylock函数返回0，则自旋锁被加上了锁。我们应该小心，不要调用会在持有自旋锁期间休眠的函数，否则将可能会浪费大量的CPU资源。</p>
+<h3 id="屏障-Barriers"><a href="#屏障-Barriers" class="headerlink" title="屏障(Barriers)"></a>屏障(Barriers)</h3><p><strong>关卡是一种同步机制，它可以协调并行工作的多个线程。关卡使每一个线程等待直到所有合作的线程都到达了同一点，然后再从这一点开始继续执行。</strong>其实我们之前已经见过一种形式的关卡——pthread_join函数，它使一个线程等待另一个线程的结束。</p>
+<p>关卡比pthread_join函数更一般化。它允许任意数量的线程等待，直到所有的线程完成处理，但这些线程不一定退出。当所有的线程都到达这个关卡的时候它们可以继续执行工作。</p>
+<p>我们可以<strong>使用pthread_barrier_init函数初始化一个关卡，使用pthread_barrier_destroy函数对一个关卡进行去除初始化</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_init</span><span class="params">( <span class="keyword">pthread_barrier_t</span> *<span class="keyword">restrict</span> barrier,</span></span></span><br><span class="line"><span class="function"><span class="params">             　　　　　　　　<span class="keyword">const</span> <span class="keyword">pthread_barrierattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">             　　　　　　　　<span class="keyword">unsigned</span> <span class="keyword">int</span> count )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_destroy</span><span class="params">( <span class="keyword">pthread_barrier_t</span> *barrier )</span></span>;</span><br><span class="line"></span><br><span class="line">两个函数的返回值：若成功则返回<span class="number">0</span>，失败则返回出错代码</span><br></pre></td></tr></table></figure>
+<p>当我们初始化一个关卡的时候，使用参数count指定在允许所有线程继续运行之前必须达到该关卡的线程的个数。使用参数attr指定关卡的属性，我们暂时先把attr设为NULL，初始化一个带有默认属性的关卡。如果调用pthread_barrier_init函数时给关卡分配了资源，这些资源会在调用pthread_barrier_destroy函数时释放。</p>
+<p>如果一个线程率先完成了它的工作（到达关卡），该线程可以<strong>调用pthread_barrier_wait函数来等待其他所有的线程来赶上它</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_wait</span><span class="params">( <span class="keyword">pthread_barrier_t</span> *barrier )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值：若成功则返回0或PTHREAD_BARRIER_SERIAL_THREAD，失败则返回错误编号</span></span><br></pre></td></tr></table></figure>
+<p>如果没有达到初始化函数中指定的count个数目的线程全部到达关卡，那么调用pthread_barrier_wait函数的线程会休眠。当count个线程中的最后一个线程调用pthread_barrier_wait函数时，所有的线程会被唤醒。</p>
+<p>To one arbitrary thread, it will appear as if the pthread_barrier_wait function<br>returned a value of PTHREAD_BARRIER_SERIAL_THREAD. The remaining threads see<br>a return value of 0. This allows one thread to continue as the master to act on the results<br>of the work done by all of the other threads.（意思好像是说：有一个线程调用pthread_barrier_wait函数的返回值是PTHREAD_BARRIER_SERIAL_THREAD，而剩余的其他所有线程调用pthread_barrier_wait都返回0，返回PTHREAD_BARRIER_SERIAL_THREAD的那个线程就成为主线程，它负责处理所有线程完成的工作的结果。）</p>
+<p>一旦count个线程都达到了关卡，并且所有线程都被唤醒。这个关卡就可以被再次使用，但是count不能被改变，除非我们调用pthread_barrier_destroy，然后再调用pthread_barrier_init重新初始化一个count。</p>
+<p><img src="/2019/06/18/线程/DeepinScreenshot_select-area_20190618220831.png" alt></p>
+<p><strong>实例：下面的程序展示了使用关卡来同步在单一作业上合作的多个线程</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NTHR      8                <span class="comment">/* number of threads */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUMNUM    8000000L         <span class="comment">/* number of numbers to sort */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TNUM      (NUMNUM/NTHR)    <span class="comment">/* number to sort per thread */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> nums[NUMNUM];</span><br><span class="line"><span class="keyword">long</span> snums[NUMNUM];</span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_barrier_t</span> b;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> SOLARIS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> heapsort qsort</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">heapsort</span><span class="params">(<span class="keyword">void</span> *, <span class="keyword">size_t</span>, <span class="keyword">size_t</span>, <span class="keyword">int</span> (*)(<span class="keyword">const</span> <span class="keyword">void</span> *, <span class="keyword">const</span> <span class="keyword">void</span> *))</span></span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Compare two long integers (helper function for heapsort)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">int</span> </span><br><span class="line">complong(<span class="keyword">const</span> <span class="keyword">void</span> *arg1, <span class="keyword">const</span> <span class="keyword">void</span> *arg2)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">long</span> l1 = *(<span class="keyword">long</span> *)arg1;</span><br><span class="line">    <span class="keyword">long</span> l2 = *(<span class="keyword">long</span> *)arg2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(l1 == l2)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l1 &lt; l2)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Worker thread to sort a portion of the set of numbers.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">thr_fn(<span class="keyword">void</span> *arg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">long</span>    idx = (<span class="keyword">long</span>)arg;</span><br><span class="line"></span><br><span class="line">    heapsort(&amp;num[idx], TNUM, <span class="keyword">sizeof</span>(<span class="keyword">long</span>), complong);</span><br><span class="line">    pthread_barrier_wait(&amp;b);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * Go off and perform more work ...</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span>((<span class="keyword">void</span> *)<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Merge the results of the individual sorted ranges.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">merge()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">long</span>    idx[NTHR];</span><br><span class="line">    <span class="keyword">long</span>    i, minidx, sidx, num;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; NTHR; i++ )</span><br><span class="line">        idx[i] = i * TNUM;</span><br><span class="line">    <span class="keyword">for</span>(sidx = <span class="number">0</span>; sidx &lt; NUMNUM; sidx++ )</span><br><span class="line">    &#123;</span><br><span class="line">        num = LONG_MAX;</span><br><span class="line">        <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; NTHR; i++ )</span><br><span class="line">        &#123;    </span><br><span class="line">            <span class="keyword">if</span>((idx[i] &lt; (i+<span class="number">1</span>)*TNUM) &amp;&amp; (nums[idx[i]] &lt; num ))</span><br><span class="line">            &#123;</span><br><span class="line">                num = nums[idx[i]];</span><br><span class="line">                minidx = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;        </span><br><span class="line">        snums[sidx] = nums[idx[minidx]];</span><br><span class="line">        idx[minidx]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span>     i;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span>    <span class="title">start</span>, <span class="title">end</span>;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span>         startusec, endusec;</span><br><span class="line">    <span class="keyword">double</span>            elapsed;</span><br><span class="line">    <span class="keyword">int</span>               err;</span><br><span class="line">    pthread_T         tid;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * Create the initial set of numbers to sort </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    srandom(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; NUMNUM; i++ )</span><br><span class="line">        nums[i] = random();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * Create 8 threads to sort the numbers.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    gettimeofday(&amp;start, <span class="literal">NULL</span>);</span><br><span class="line">    pthread_barrier_init(&amp;b, <span class="literal">NULL</span>, NTHR+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; NTHR; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        err = pthread_create(&amp;tid, <span class="literal">NULL</span>, thr_fn, (<span class="keyword">void</span> *)(i * TNUM));</span><br><span class="line">        <span class="keyword">if</span>(err != <span class="number">0</span>)</span><br><span class="line">            err_exit(err, <span class="string">"can't create thread"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_barrier_wait(&amp;b);</span><br><span class="line">    merge();</span><br><span class="line">    gettimeofday(&amp;end, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * Print the sorted list. </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    startusec = start.tv_sec * <span class="number">1000000</span> + start.tv_usec;</span><br><span class="line">    endusec = end.tv_sec * <span class="number">1000000</span> + end.tv_usec;</span><br><span class="line">    elapsed = (<span class="keyword">double</span>)(endusec - startusec) / <span class="number">1000000.0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sort took %.4f seconds\n"</span>, elapsed);</span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; NUMNUM; i++ )</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%ld\n"</span>, snums[i]);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子给出了多个线程执行一个任务时，使用屏障的简单情况。在更加实际的情况下，工作线程在调用<code>pthread_barrier_wait</code>函数返回后会接着执行其他的活动。</p>
+<p>在这个实例中，使用8个线程分解了800万个数的排序工作。每个线程用堆排序算法对100万个数进行排序（详细算法参见Knuth[1998]）。然后主线程调用一个函数对这些结果进行合并。</p>
+<p>并不需要使用<code>pthread_barrier_wait</code>函数中的返回值<code>PTHEAD_BARRIER_SERIAL_THREAD</code>来决定哪个线程执行结果合并操作，因为我们使用了主线程来完成这个任务。这也是把屏障计数设为工作线程数加1的原因，主线程也作为其中的一个候选线程。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unix/" rel="tag"># Unix</a>
+          
+            <a href="/tags/c语言/" rel="tag"># c语言</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/17/调度问题与机制/" rel="next" title="调度问题与机制">
+                <i class="fa fa-chevron-left"></i> 调度问题与机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/数据中心网络/" rel="prev" title="数据中心网络">
+                数据中心网络 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">1.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程概念"><span class="nav-number">1.1.</span> <span class="nav-text">线程概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程标识"><span class="nav-number">1.2.</span> <span class="nav-text">线程标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程创建"><span class="nav-number">1.3.</span> <span class="nav-text">线程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程终止"><span class="nav-number">1.4.</span> <span class="nav-text">线程终止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步"><span class="nav-number">1.5.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#互斥量"><span class="nav-number">1.5.1.</span> <span class="nav-text">互斥量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免死锁"><span class="nav-number">1.5.2.</span> <span class="nav-text">避免死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-mutex-timedlock函数"><span class="nav-number">1.5.3.</span> <span class="nav-text">pthread_mutex_timedlock函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写锁"><span class="nav-number">1.5.4.</span> <span class="nav-text">读写锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带超时限制的读写锁"><span class="nav-number">1.5.5.</span> <span class="nav-text">带超时限制的读写锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量"><span class="nav-number">1.5.6.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自旋锁"><span class="nav-number">1.5.7.</span> <span class="nav-text">自旋锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#屏障-Barriers"><span class="nav-number">1.5.8.</span> <span class="nav-text">屏障(Barriers)</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
