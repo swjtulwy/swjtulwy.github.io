@@ -145,16 +145,16 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
+links_title: links
 links_layout: block
 #links_layout: inline
-#links:
-  #Title: http://example.com/
+links:
+  Song: https://duduru.cn
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: /uploads/avatar.png
+avatar: /uploads/123.png
 
 # Table Of Contents in the Sidebar
 toc:
@@ -236,10 +236,10 @@ post_wordcount:
   separated_meta: true
 
 # Wechat Subscriber
-# wechat_subscriber:
-  #enabled: true
-  #qcode: /images/wechat-qcode.jpg
-  #description: ex. subscribe to my blog by scanning my public wechat account
+wechat_subscriber:
+  enabled: true
+  qcode: /uploads/wechat-qcode.jpg
+  description: 欢迎添加我的个人微信交流
 
 # Reward
 #reward_comment: Donate comment here
