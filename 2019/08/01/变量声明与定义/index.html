@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++中的变量声明与定义声明与定义关系为了允许把程序拆分为多个逻辑部分来写，C++文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。 如果将程序分为多个文件，则需要有在文件间共享代码的方法。例如，一个文件的代码可能需要使用另一个文件中定义的变量。一个实际的例子是std::cout 和std::cin，它们定义于标准库，却能被我们写的程序使用。 为了支持分离式编译，C+">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="变量声明与定义">
+<meta property="og:url" content="http://yoursite.com/2019/08/01/变量声明与定义/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="C++中的变量声明与定义声明与定义关系为了允许把程序拆分为多个逻辑部分来写，C++文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。 如果将程序分为多个文件，则需要有在文件间共享代码的方法。例如，一个文件的代码可能需要使用另一个文件中定义的变量。一个实际的例子是std::cout 和std::cin，它们定义于标准库，却能被我们写的程序使用。 为了支持分离式编译，C+">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-01T08:30:57.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="变量声明与定义">
+<meta name="twitter:description" content="C++中的变量声明与定义声明与定义关系为了允许把程序拆分为多个逻辑部分来写，C++文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。 如果将程序分为多个文件，则需要有在文件间共享代码的方法。例如，一个文件的代码可能需要使用另一个文件中定义的变量。一个实际的例子是std::cout 和std::cin，它们定义于标准库，却能被我们写的程序使用。 为了支持分离式编译，C+">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/01/变量声明与定义/">
+
+
+
+
+
+  <title>变量声明与定义 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/变量声明与定义/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">变量声明与定义</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T15:30:21+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-学习/" itemprop="url" rel="index">
+                    <span itemprop="name">C++学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="C-中的变量声明与定义"><a href="#C-中的变量声明与定义" class="headerlink" title="C++中的变量声明与定义"></a>C++中的变量声明与定义</h1><h2 id="声明与定义关系"><a href="#声明与定义关系" class="headerlink" title="声明与定义关系"></a>声明与定义关系</h2><p>为了允许把程序拆分为多个逻辑部分来写，C++文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。</p>
+<p>如果将程序分为多个文件，则需要有在文件间共享代码的方法。例如，一个文件的代码可能需要使用另一个文件中定义的变量。一个实际的例子是<code>std::cout</code> 和<code>std::cin</code>，它们定义于标准库，却能被我们写的程序使用。</p>
+<p>为了支持分离式编译，C++将声明和定义区分开，声明(declaration)使得名字为程序所知，一个文件如果想使用别处定义的名字则必须包含对那个名字的声明。而定义(definition)负责创建与名字关联的实体。</p>
+<p>变量声明规定了变量的类型和名字，在这一点上定义与之相同。但是除此之外，定义还是申请存储空间，也可能会为变量赋一个初始值。</p>
+<p>如果想要单纯声明一个变量，就在变量名前加关键字<code>extern</code>，而不要显式地初始化变量：</p>
+<p>所以，下面的是声明:  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span>   <span class="keyword">int</span>   a;</span><br></pre></td></tr></table></figure>
+<p>下面的是定义  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>   a; <span class="comment">//声明并定义a</span></span><br><span class="line"><span class="keyword">int</span>   a = <span class="number">0</span>; <span class="comment">// 声明并定义初始化a  </span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> a = <span class="number">0</span>;<span class="comment">//// 声明并定义初始化a</span></span><br></pre></td></tr></table></figure>
+<p>在函数体内部，如果试图初始化一个<code>extern</code>关键字标记的变量，将引发错误。总结一下就是：</p>
+<p>根据C++标准的规定，一个变量是声明，必须同时满足两个条件，否则就是定义：  </p>
+<p>①  声明必须使用extern关键字</p>
+<p>②  不能给变量赋初值 </p>
+<p>函数或变量在声明时，并没有给它实际的物理内存空间，它有时候可保证你的程序编译通过；</p>
+<p>函数或变量在定义时，它就在内存中有了实际的物理空间。</p>
+<p>如果你在编译单元中引用的外部变量没有在整个工程中任何一个地方定义的话，那么即使它在编译时可以通过，在连接时也会报错，因为程序在内存中找不到这个变量。</p>
+<p>函数或变量可以声明多次，但定义只能有一次。</p>
+<h2 id="编译单元"><a href="#编译单元" class="headerlink" title="编译单元"></a>编译单元</h2><p>在VC或VS上编写完代码，点击编译按钮准备生成exe文件时，编译器做了两步工作：</p>
+<p>第一步，将每个.cpp(.c)和相应的.h文件编译成obj文件；</p>
+<p>第二步，将工程中所有的obj文件进行LINK，生成最终.exe文件。 </p>
+<p>那么，错误可能在两个地方产生：</p>
+<p>一个，编译时的错误，这个主要是语法错误；</p>
+<p>一个，链接时的错误，主要是重复定义变量等。</p>
+<p>编译单元指在编译阶段生成的每个obj文件。</p>
+<p>一个obj文件就是一个编译单元。</p>
+<p>一个.cpp(.c)和它相应的.h文件共同组成了一个编译单元。</p>
+<p>一个工程由很多编译单元组成，每个obj文件里包含了变量存储的相对地址等。</p>
+<h2 id="全局变量-extern"><a href="#全局变量-extern" class="headerlink" title="全局变量(extern)"></a>全局变量(extern)</h2><p>在函数体外定义的变量，默认是全局变量。</p>
+<p>针对上文提到的一个文件的代码可能需要使用另一个文件中定义的变量情况，推荐的做法是在头文件中声明，对应的源文件中定义的做法。因为声明可以多次，定义只能一次，这样头文件被其他许多文件包含时候，不会出现重复定义的错误。如果将全局变量的声明和定义放在一个头文件中，将不能使用头文件的方式在多个文件文件中共享变量，即使在头文件中加#pragma once，或#ifndef也会出现重复定义，因为每个编译单元是单独的，都会对它各自进行定义。这样的情况下，只能使用<code>extern</code>修饰的声明在其他文件中引用该变量。</p>
+<p>举个例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.h 头文件</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> a; <span class="comment">//声明一个全局变量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.cpp 源文件</span></span><br><span class="line"><span class="keyword">int</span> a; <span class="comment">// 定义该变量，但没有初始化</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.cpp 源文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"1.h"</span> <span class="comment">// 以包含源文件形式引用变量</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//a = 1; //在全局中,语句的执行顺序是没有保证的,所以全局变量不能再函数体外赋值</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">nm</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	a = <span class="number">2</span>;</span><br><span class="line">	nm();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ++a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3.cpp 源文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> a; <span class="comment">// 以extern修饰形式引用变量</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nm</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述程序结果输出为： 23</p>
+<p>2.cpp采用包含头文件的形式引用全局变量，3.cpp采用<code>extern</code> 修饰的声明引用。两者都能正确共享变量。但是，如果在1.h中将声明改成定义，就不能使用头文件引用的形式了。</p>
+<p>总之变量的使用前必须有声明，有定义。</p>
+<p>另外，有一个问题是，在函数体之外，全局变量不能被赋值，因为函数体之外，代码块的执行顺序没有固定要求，视编译器而定，所以如果允许赋值的话，可能会造成先调用后赋值的情况，所以被禁止。</p>
+<p>在上述例子中，2.cpp中引用1.h头文件，并且使用<code>extern</code>修饰的声明语句引用函数nm，在main函数体内，对变量a进行赋值，该变量在1.h中声明，1.cpp中定义，由于包含了1.h，所以2.cpp可以引用它。接着调用nm函数，nm函数来自3.cpp，功能是直接输出a,在3.cpp中是用<code>extern</code>关键字引用的该变量。在调用该函数之前，已经对a赋值过了，所以能够正确输出。实际上，在我的PC上用VS运行，假如在赋值之前调用nm，输出是：03，因为编译器给a默认初始化为0了吧。</p>
+<h2 id="静态全局变量-static"><a href="#静态全局变量-static" class="headerlink" title="静态全局变量(static)"></a>静态全局变量(static)</h2><p>注意使用static修饰变量，就不能使用extern来修饰，即static和extern不可同时出现。</p>
+<p>static修饰的全局变量的声明与定义同时进行，即当你在头文件中使用static声明了全局变量，同时它也被定义了。</p>
+<p>static修饰的全局变量的作用域只能是本身的编译单元。在其他编译单元使用它时，只是简单的把其值复制给了其他编译单元，其他编译单元会另外开个内存保存它，在其他编译单元对它的修改并不影响本身在定义时的值。即在其他编译单元A使用它时，它所在的物理地址，和其他编译单元B使用它时，它所在的物理地址不一样，A和B对它所做的修改都不能传递给对方。</p>
+<p>多个地方引用静态全局变量所在的头文件，不会出现重定义错误，因为在每个编译单元都对它开辟了额外的空间进行存储。</p>
+<h2 id="全局常量-const"><a href="#全局常量-const" class="headerlink" title="全局常量(const)"></a>全局常量(const)</h2><p>const单独使用时，其特性与static一样（每个编译单元中地址都不一样，不过因为是常量，也不能修改，所以就没有多大关系）。</p>
+<p>const与extern一起使用时，其特性与extern一样。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">char</span> g_szBuffer[];      <span class="comment">//写入 .h中</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> g_szBuffer[] = <span class="string">"123456"</span>; <span class="comment">// 写入.cpp中</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/28/网络IPC/" rel="next" title="网络IPC">
+                <i class="fa fa-chevron-left"></i> 网络IPC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-中的变量声明与定义"><span class="nav-number">1.</span> <span class="nav-text">C++中的变量声明与定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明与定义关系"><span class="nav-number">1.1.</span> <span class="nav-text">声明与定义关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译单元"><span class="nav-number">1.2.</span> <span class="nav-text">编译单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量-extern"><span class="nav-number">1.3.</span> <span class="nav-text">全局变量(extern)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态全局变量-static"><span class="nav-number">1.4.</span> <span class="nav-text">静态全局变量(static)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局常量-const"><span class="nav-number">1.5.</span> <span class="nav-text">全局常量(const)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
