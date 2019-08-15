@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++字符串初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本文就重点介绍C++中的字符串和C风格字符串的区别。 首先，明确一点，C语言中的字符串以及相关的标准库都能完全在C++中兼容使用。所以在介绍C++中的字符串特指C++中特有的。下面介绍几个概念 字符串字面值(string literal)字符串字面值">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串释疑">
+<meta property="og:url" content="http://yoursite.com/2019/08/15/字符串释疑/index.html">
+<meta property="og:site_name" content="lwy&#39;s studio">
+<meta property="og:description" content="C++字符串初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本文就重点介绍C++中的字符串和C风格字符串的区别。 首先，明确一点，C语言中的字符串以及相关的标准库都能完全在C++中兼容使用。所以在介绍C++中的字符串特指C++中特有的。下面介绍几个概念 字符串字面值(string literal)字符串字面值">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-15T10:31:46.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符串释疑">
+<meta name="twitter:description" content="C++字符串初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本文就重点介绍C++中的字符串和C风格字符串的区别。 首先，明确一点，C语言中的字符串以及相关的标准库都能完全在C++中兼容使用。所以在介绍C++中的字符串特指C++中特有的。下面介绍几个概念 字符串字面值(string literal)字符串字面值">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/15/字符串释疑/">
+
+
+
+
+
+  <title>字符串释疑 | lwy's studio</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwy's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">keep learning</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/字符串释疑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LWY">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/123.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwy's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">字符串释疑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T18:30:54+08:00">
+                2019-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-学习/" itemprop="url" rel="index">
+                    <span itemprop="name">C++学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="C-字符串"><a href="#C-字符串" class="headerlink" title="C++字符串"></a>C++字符串</h1><p>初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本文就重点介绍C++中的字符串和C风格字符串的区别。</p>
+<p>首先，明确一点，C语言中的字符串以及相关的标准库都能完全在C++中兼容使用。所以在介绍C++中的字符串特指C++中特有的。下面介绍几个概念</p>
+<h2 id="字符串字面值-string-literal"><a href="#字符串字面值-string-literal" class="headerlink" title="字符串字面值(string literal)"></a>字符串字面值(string literal)</h2><p>字符串字面值是一串常量字符，字符串字面值常量用双引号括起来的零个或多个字符表示，为兼容C语言，C++中所有的字符串字面值都由编译器自动在末尾添加一个空字符。<br>字符串没有变量名字，自身表示自身</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Hello World!"</span> <span class="comment">//simple string literal</span></span><br><span class="line"><span class="string">""</span> <span class="comment">//empty string literal</span></span><br><span class="line"><span class="string">"\nCC\toptions\tfile.[cC]\n"</span> <span class="comment">//string literal using newlines and tabs</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">字符字面值： <span class="symbol">'A</span>' //single quote:<span class="built_in">character</span> <span class="keyword">literal</span></span><br><span class="line">字符串字面值： <span class="string">"A"</span> //double quote:<span class="built_in">character</span> <span class="built_in">string</span> <span class="keyword">literal</span>.包含字母A和空字符的字符串</span><br></pre></td></tr></table></figure>
+<p><strong>字符串字面值可以赋值给变量，但是与字符串字面值相关联的内存空间位于只读部分，因此它是常量字符数组。</strong> </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* ptr = <span class="string">"hello"</span>;</span><br><span class="line">ptr[<span class="number">1</span>] = <span class="string">'a'</span>;<span class="comment">//crash! attemps to write to read-only memory. //只读</span></span><br></pre></td></tr></table></figure>
+<p>因此，当引用字符串字面值的时候使用指向const的字符数组。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* ptr = <span class="string">"hello"</span>;</span><br><span class="line">ptr[<span class="number">1</span>] = <span class="string">'a'</span>;<span class="comment">//bug! attempts to write to read-only memory.</span></span><br></pre></td></tr></table></figure>
+<p><strong>当将字符串字面值赋值给字符数组的初始值的时候。由于字符数组存放与栈中，不允许引用其他地方的内存，因此编译器会将字符串字面值复制到栈的数组内存中。因此，可以进行相应的修改。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> stackArray[] = <span class="string">"hello"</span>;</span><br><span class="line">stackArray[<span class="number">1</span>] = <span class="string">'a'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="C风格字符串"><a href="#C风格字符串" class="headerlink" title="C风格字符串"></a>C风格字符串</h2><p>字符串字面值的类型实质是const char类型的数组。C++从C语言继承下来的一种通用结构是C风格字符串，而字符串字面值就是该类型的实例。C风格字符串是以空字符null结束的字符数组。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ca1[]=&#123;<span class="string">'C'</span>, <span class="string">'+'</span>, <span class="string">'+'</span>&#125;; <span class="comment">// no null, not C-style string</span></span><br><span class="line"><span class="keyword">char</span> ca2[]=&#123;<span class="string">'C'</span>, <span class="string">'+'</span>, <span class="string">'+'</span>, <span class="string">'\0'</span>&#125;; <span class="comment">// explicit null</span></span><br><span class="line"><span class="keyword">char</span> ca3[]=<span class="string">"C++"</span>; <span class="comment">// null terminator added automatically</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *cp=<span class="string">"C++"</span>; <span class="comment">// null terminator added automatically</span></span><br><span class="line"><span class="keyword">char</span> *cp1=ca1; <span class="comment">// points to first element of a array, but not C-style string</span></span><br><span class="line"><span class="keyword">char</span> *cp2=ca2; <span class="comment">// points to first element of a null-terminated char array</span></span><br></pre></td></tr></table></figure>
+<p>ca1和cp1都不是C风格字符串：ca1是一个不带结束符null的字符数组，而指针cp1指向ca1，因此，它指向的并不是以null结束的数组。</p>
+<p>C++语言通过(const) char *类型的指针来操纵C风格字符串。</p>
+<p>C风格字符串在C语言中有C标准库函数来处理：<strong>string.h</strong></p>
+<p>C语言中也有对字符进行处理的标准库函数:<strong>ctype.h</strong></p>
+<p>这些库函数在C++中都有对应的版本，只需要去掉.h前面加上c就行了，这样也能在C++区分出这是C风格的函数</p>
+<p>即<strong>cstring</strong>和<strong>cctype</strong></p>
+<p>C风格字符串中带来困恼的原因是字符数组总要以空字符结尾，这给计算数组空间带来不便，也容易引发安全问题，处理字符串的相关复制，移动情形时，调用者必须保证目标字符串有足够的大小。</p>
+<p>另一个苦恼是C风格的字符串的复制，截取等相关操作不能像对待基础数据类型一样方便，这些情况在C++风格的字符串中由重载运算符实现，方便了用户。</p>
+<p>所以一般C++不推荐使用C风格字符串，即使要使用，也尽量在C标准库中使用诸如<strong>strn</strong> 前缀的函数处理，以降低风险。</p>
+<h2 id="C-风格字符串"><a href="#C-风格字符串" class="headerlink" title="C++风格字符串"></a>C++风格字符串</h2><p>C++使用标准库类型string表示可变长的字符序列，标准库中的名称符号都包含在命名空间呢std中。</p>
+<p>在初始化string对象时可以使用多种方式比如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1;  <span class="comment">// 默认初始化，s1是一个空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"hiya"</span>; <span class="comment">// s3是该字符串字面值的副本</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// s4的内容是cccccccccc</span></span><br></pre></td></tr></table></figure>
+<p><code>string</code>对象可以用标准库中的流直接读写</p>
+<p>比如<code>cin</code>，但是读时从非空白开始，即忽略开头的空白，遇到下一处空白结束。</p>
+<p>当要读取一整行的时候可以使用<code>getline(cin,line)</code> ，(<code>line</code>是读取后存放的<code>string</code>对象)该函数从给定的输入流中读取内容，直到遇到换行符为止，换行符也被读取进来，然后把读取的内容存放到<code>line</code>中，不包含换行符。</p>
+<p>string对象可以使用== 、&lt;、&gt;、&gt;=等比较符号，这个很好理解，不多说。</p>
+<p><strong>另外值得注意的是，string对象之间可以相加，字符串字面值和string对象也可以相加，但是字符串字面值之间不能相加！</strong></p>
+<p>最后谈一下C风格的字符串和C++风格字符串怎么转换</p>
+<p>C风格字符串转换到C++的string对象很简单，可以将C风格字符串(包括字面值)作为string初始化的参数即可，或者可以用=号。</p>
+<p>更一般的情况是，任何出现字符串字面值的地方都可以用以空字符结束的字符数组来替代：</p>
+<ul>
+<li><strong>即允许使用以空字符结束的字符数组来初始化string对象或为string对象赋值。</strong></li>
+<li><strong>在string对象的加法运算中允许使用以空字符结束的字符数组作为其中一个运算对象；在string对象的复合赋值运算中允许使用以空字符结束的字符数组作为右侧的运算对象。</strong></li>
+</ul>
+<p><code>string</code>对象转换为C风格字符串则有一个方法<code>c_str()</code> ,直接调用即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"msl"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">"dad"</span>)</span></span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="string">"dsjka"</span>;</span><br><span class="line"><span class="keyword">char</span> p1[] = <span class="string">"das"</span>;</span><br><span class="line"><span class="built_in">string</span> w = s + <span class="string">"da"</span>;</span><br><span class="line"><span class="built_in">string</span> q = s + p;</span><br><span class="line"><span class="built_in">string</span> t = s + p1;</span><br><span class="line"><span class="built_in">string</span> u = p + p1;  <span class="comment">// wrong</span></span><br><span class="line"><span class="built_in">string</span> k = p + <span class="string">"daas"</span>; <span class="comment">// wrong</span></span><br></pre></td></tr></table></figure>
+<p>如上面代码所示，最后两个有错，其余都是允许的。</p>
+<h2 id="字符串与整型的互相转换"><a href="#字符串与整型的互相转换" class="headerlink" title="字符串与整型的互相转换"></a>字符串与整型的互相转换</h2><p>先说string对象与int型转换</p>
+<p>int转换为string对象有全局函数<code>std::to_string()</code>(C++11)。</p>
+<p>当然还可以用其他的stringstream的方式。</p>
+<p>string转为int可以利用标准库中的<code>atoi()</code>函数（ ascii to integer），但要先转为C风格串，从C标准库继承过来，举例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> str = <span class="string">"123"</span>;</span><br><span class="line"><span class="keyword">int</span> n = atoi(str.c_str()); <span class="comment">// 先转为C风格</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;n; <span class="comment">//123</span></span><br></pre></td></tr></table></figure>
+<p>同时除了atoi()还要atof()等一系列函数。</p>
+<p>另外用一些C语言中的格式化输入输出函数也可以实现,比如sprintf,sscanf等。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"1234"</span>;</span><br><span class="line"><span class="keyword">int</span> a = atoi(s1.c_str());</span><br><span class="line"><span class="built_in">string</span> s2 = to_string(a);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="LWY wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎添加我的个人微信交流</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/VS中使用git/" rel="next" title="VS中使用git">
+                <i class="fa fa-chevron-left"></i> VS中使用git
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/123.png" alt="LWY">
+            
+              <p class="site-author-name" itemprop="name">LWY</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/swjtulwy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:swjtulauweiyee@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://duduru.cn" title="Song" target="_blank">Song</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-字符串"><span class="nav-number">1.</span> <span class="nav-text">C++字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串字面值-string-literal"><span class="nav-number">1.1.</span> <span class="nav-text">字符串字面值(string literal)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C风格字符串"><span class="nav-number">1.2.</span> <span class="nav-text">C风格字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-风格字符串"><span class="nav-number">1.3.</span> <span class="nav-text">C++风格字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串与整型的互相转换"><span class="nav-number">1.4.</span> <span class="nav-text">字符串与整型的互相转换</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LWY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
