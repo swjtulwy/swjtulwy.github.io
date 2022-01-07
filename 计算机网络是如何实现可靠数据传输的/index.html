@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>计算机网络是如何实现可靠数据传输的？ - 我的全新 Hugo 网站</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="计算机网络是如何实现可靠数据传输的？" />
-<meta property="og:description" content="可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层和应用层。简单点" />
+<meta property="og:description" content="可靠数据传输原理 可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-07T20:14:59+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
 <meta name="twitter:title" content="计算机网络是如何实现可靠数据传输的？"/>
-<meta name="twitter:description" content="可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层和应用层。简单点"/>
+<meta name="twitter:description" content="可靠数据传输原理 可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84\/"
-        },"genre": "posts","wordcount":  380 ,
+        },"genre": "posts","wordcount":  2968 ,
         "url": "https:\/\/swjtulwy.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84\/","datePublished": "2022-01-07T20:14:59+08:00","dateModified": "2022-01-07T20:14:59+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,33 +106,126 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">计算机网络是如何实现可靠数据传输的？</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-07">2022-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 380 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-07">2022-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2968 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="true">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层和应用层。简单点说，可靠数据传输服务保证了通信过程中的数据接收方接收到的数据与其从数据发送方发出的数据一致。而提供这种可靠数据传输服务的协议称为可靠数据传输协议，例如传输层的TCP协议。</p>
-<p>可靠数据传输为上层实体提供的服务抽象是：数据可以通过一条可靠的信道进行传输。在这条信道中传输的数据bit不会受到损坏和或丢失，而且所有的数据都是按其发送顺序交付。其对应的服务框架如下图所示，TCP协议向调用它的因特网应用所提供的服务模型恰恰如此，所以当谈到可靠数据传输时，不可避免地会涉及大量TCP协议的分析。</p>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#可靠数据传输原理">可靠数据传输原理</a>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#差错检测">差错检测</a></li>
+                <li><a href="#接收方反馈">接收方反馈</a></li>
+                <li><a href="#重传">重传</a></li>
+                <li><a href="#序号">序号</a></li>
+                <li><a href="#倒计数定时器">倒计数定时器</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#从tcp协议中看可靠数据传输">从TCP协议中看可靠数据传输</a>
+      <ul>
+        <li><a href="#流量控制">流量控制</a></li>
+        <li><a href="#拥塞控制">拥塞控制</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="可靠数据传输原理">可靠数据传输原理</h2>
+<p>        可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层和应用层。简单点说，可靠数据传输服务保证了通信过程中的数据接收方接收到的数据与其从数据发送方发出的数据一致。而提供这种可靠数据传输服务的协议称为可靠数据传输协议，例如传输层的TCP协议。</p>
+<p>        可靠数据传输为上层实体提供的服务抽象是：数据可以通过一条可靠的信道进行传输。在这条信道中传输的数据bit不会受到损坏和或丢失，而且所有的数据都是按其发送顺序交付。其对应的服务框架如下图所示，TCP协议向调用它的因特网应用所提供的服务模型恰恰如此，所以当谈到可靠数据传输时，不可避免地会涉及大量TCP协议的分析。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://b23.tv/rm6YT6A"
-        data-srcset="https://b23.tv/rm6YT6A, https://b23.tv/rm6YT6A 1.5x, https://b23.tv/rm6YT6A 2x"
+        data-src="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg"
+        data-srcset="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg, https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg 1.5x, https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg 2x"
         data-sizes="auto"
-        alt="https://b23.tv/rm6YT6A"
-        title="https://b23.tv/rm6YT6A" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/0e7f1e421ded02b6730fe7d14e84e9e2208f8d7b.jpg"
-        data-srcset="https://i0.hdslb.com/bfs/album/0e7f1e421ded02b6730fe7d14e84e9e2208f8d7b.jpg, https://i0.hdslb.com/bfs/album/0e7f1e421ded02b6730fe7d14e84e9e2208f8d7b.jpg 1.5x, https://i0.hdslb.com/bfs/album/0e7f1e421ded02b6730fe7d14e84e9e2208f8d7b.jpg 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/0e7f1e421ded02b6730fe7d14e84e9e2208f8d7b.jpg"
-        title="https://i0.hdslb.com/bfs/album/0e7f1e421ded02b6730fe7d14e84e9e2208f8d7b.jpg" /></p>
-<p>那么一个网络协议要实现可靠数据传输需要具备哪些特性呢？或者说，协议中需要设定哪些规则来避免数据传输的不可靠？我们从一个最简单的协议说起。假设</p>
+        alt="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg"
+        title="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg" /></p>
+<p>        那么一个网络协议要实现可靠数据传输需要具备哪些特性呢？或者说，协议中需要设定哪些规则来避免数据传输的不可靠？为了数据传输的可靠，我们就要解决数据不可靠的情况，而数据传输的不可靠的情形最基本的有如下几种：</p>
+<ul>
+<li>数据在信道中传输时，比特出现了错误，例如本来该bit为0，到了接收端却成为了1</li>
+<li>数据在信道中传输时，比特发生了丢失，例如本来按序发送了16个比特，结果到了接收端只收到了8个比特</li>
+<li>数据在信道中传输时，比特流的顺序发生了变化，例如发送端按照序号1，2，3，4，5发送的比特流，结果到了接收端收到是1，3，2，5，4</li>
+<li>数据在信道中传输时，接收端接收到了重复的数据，例如发送端按照序号1，2，3发送，到了接收端收到是1，2，2，3</li>
+</ul>
+<p>        先思考一下，针对上面的若干基本情况，我们要怎么处理。首先数据在接收方出现了不一致的情况，我们如何得知呢？这就需要通过差错检测机制，通过<strong>差错检测</strong>，我们可以检测到何时何处出现了比特差错。然后，出现了差错该怎么办呢？作为接收方，肯定要告诉发送方我收到的数据有问题，所以就要有<strong>接收方反馈</strong>功能，也就是接收方发送明确的反馈信息给发送方。那么发送方接收了该反馈信息又该怎么做呢？最基本且有效的情况无非就是重新发送一份错误数据对应的原数据，也就是<strong>重传</strong>。</p>
+<h5 id="差错检测">差错检测</h5>
+<p>​ 差错检测主要的实现方式就是在传输的数据流中添加额外的比特信息以增加冗余度，主要分为两大类：奇偶效验和分组检验。其中分组校验中典型的方法有校验和法（IP数据报）和循环冗余校验法。</p>
+<h5 id="接收方反馈">接收方反馈</h5>
+<p>一般是给出肯定确认ACK或否定确认NAK，也可以通过冗余ACK的方式代替否定确认。</p>
+<h5 id="重传">重传</h5>
+<p>在分组传送时，主要有累积重传和选择重传。</p>
+<p>        通过上述几个功能，我们可以设计出能够工作的协议，但是，仔细想象一下你就会发现，这个步骤中有一个致命缺陷。在接收方给发送方发送反馈信息时，假设这个反馈信息也出了错误，那么发送方就无法知道接收方是否正确接收上一次发送的数据了。</p>
+<p>在思考一下，如果我们是协议设计者，会怎么做？可以考虑以下几种方式：</p>
+<ol>
+<li>
+<p>发送方接收到错误的反馈信息表示无法理解时，便又向接收方发送针对该反馈信息的解释请求，即引入了一种新型的从发送方到接收方的分组。就像打电话时一方不理解另一方时会提问“你说啥？”，另一方则会重复回答。要是这个“你说啥”也产生了差错，岂不又是越陷越深了。</p>
+</li>
+<li>
+<p>增加足够的检验和比特，使得发送方不但可以检测差错还可以恢复差错，对于只产生错误而没有丢失的分组，就可以直接解决问题。</p>
+</li>
+<li>
+<p>当发送方收到含糊不清的反馈信息后，只需要重传当前数据分组即可。这种方法在信道中引入了<strong>冗余分组</strong>。而冗余分组所带来一个问题就是，接收方不知道它上次发送的反馈信息是否被发送方正确接收，也就是说接收方无法事先知道接收到的分组时新的还是一次重传，这很重要，因为如果将重传分组当作新的分组，那么数据包就会出错了。</p>
+</li>
+</ol>
+<h5 id="序号">序号</h5>
+<p>​ 为了解决上述冗余分组中的问题，我们就又提出一种协议功能，就是给数据分组编号，这也是包括TCP在内所有的数据分组采用的方法。即在数据分组中添加一个新的字段，让发送方对其数据分组编号，将发送数据分组的<strong>序号</strong>放在该字段。于是，接收方只需要检查序号就可以确定该分组是否是一次重传了。对于停等协议（Stop and Wait，SW）来说，该字段只需要一个比特即可。因为停等协议中，发送方必须等待接收方传回ACK或NAK才能继续发送下一个数据分组。</p>
+<p>        除了具备差错检测与恢复外，我们还需要考虑当分组丢失分情况，而上面的协议功能不足以解决分组丢失的问题。当发送方发送一个数据后，在信道中丢失，接收方自然没有收到数据从而不会发送反馈，于是发送方迟迟没有收到确认。这时候，我们一般情况下都是会等待一定时间后重新发送该分组。所以我们又引入一个新的协议功能：<strong>倒计数定时器</strong>，通过设定一个给定的时间量，当时间量过期后，便重传分组。</p>
+<h5 id="倒计数定时器">倒计数定时器</h5>
+<p>为了容忍数据丢失，我们在发送方引入倒计数定时器。即1. 每次发送一个分组时（包括第一次分组和重传分组），启动一个定时器。2. 响应定时器中断（采取适当动作，比如重传）。3. 终止定时器。</p>
+<p>        综上，在实现了差错检测，接收方反馈，重传，序号，倒计数定时器这些协议功能后，就可以得到一个可靠数据传输协议了。</p>
+<p>具备上述协议功能的协议分为两种，一种是<strong>停止-等待协议</strong>，一种是<strong>流水线协议</strong>，后者是前者的加强版，提升了信道的利用率。实际上ARQ协议也是分为了类似的两类。说到ARQ，那么就介绍一下它：</p>
+<p>        ARQ协议，即<strong>自动重传请求</strong>（Automatic Repeat-reQuest），是OSI模型中数据链路层和传输层的错误纠正协议之一。它通过使用<strong>确认</strong>和<strong>超时</strong>这两个机制，在不可靠服务的基础上实现可靠的信息传输。如果发送方在发送后一段时间之内没有收到确认帧，它通常会<strong>重新发送</strong>。ARQ包括<strong>停止等待ARQ协议</strong>和<strong>连续ARQ协议</strong>，拥有<strong>错误检测</strong>（Error Detection）、<strong>正面确认</strong>（Positive Acknowledgment）、<strong>超时重传</strong>（Retransmission after Timeout）和 <strong>负面确认及重传</strong>（Negative Acknowledgment and Retransmission）等机制。其中，连续ARQ就是一种流水线协议。</p>
+<p>接下来介绍流水线协议</p>
+<p>流水线协议中差错恢复的两种方法：回退N步（G-Back-N,GBN）和选择重传（Selective Repeat,SR）。</p>
+<p>TODO</p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th style="text-align:left">用途和说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>检验和</td>
+<td style="text-align:left">用于检测在一个传输分组中的比特错误</td>
+</tr>
+<tr>
+<td>定时器</td>
+<td style="text-align:left">用于超时/重传一个分组,可能因为该分组(或其ACK)在信道中丢失了。由于当一个分组延时但未丢失，或当一个分组已被接收方接收但从接收方到发送方的ACK丢失时，可能产生超时事件，所以接收方可能会收到一个分组的多个冗余副本</td>
+</tr>
+<tr>
+<td>序号</td>
+<td style="text-align:left">用于为从发送方流向接收方的数据分组按序号编号。所接受分组的序号的空隙可使接收方检测出丢失的分组。具有相同序号的分组可使接收方检测出一个分组的冗余副本</td>
+</tr>
+<tr>
+<td>确认</td>
+<td style="text-align:left">接收方用于告诉发送方一个分组或一组分组已经被正确地接收到了。确认报文通常携带着被确认的分组或多个分组的序号。确认可以是逐个的或积累的，这取决于协议</td>
+</tr>
+<tr>
+<td>否定确认</td>
+<td style="text-align:left">接收方用于告诉发送方某个分组未被正确的接收.否则人确定报文通常携带着未被正确接收的分组的序号</td>
+</tr>
+<tr>
+<td>窗口、流水线</td>
+<td style="text-align:left">发送方也许被限制仅发送那些序号落在一个指定范围内的分组.通过允许一次发送多个分组但未被确认,发送方的利用率可以在停等操作模式上得到增加。我们很快将会看到,窗口长度可根据接收方接收和缓存报文的能力、网络中的拥塞程度或两者的情况来进行设置</td>
+</tr>
+</tbody>
+</table>
+<h2 id="从tcp协议中看可靠数据传输">从TCP协议中看可靠数据传输</h2>
+<h3 id="流量控制">流量控制</h3>
+<h3 id="拥塞控制">拥塞控制</h3>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -146,7 +239,7 @@
                             <a class="link-to-markdown" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？" data-via="xxxx"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？" data-via="xxxx"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/" data-title="计算机网络是如何实现可靠数据传输的？"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
             </div>
         </div>
     </div>
