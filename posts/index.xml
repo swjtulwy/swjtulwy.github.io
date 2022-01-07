@@ -1,14 +1,21 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>所有文章 - 我的全新 Hugo 网站</title>
-        <link>http://example.org/posts/</link>
+        <link>https://swjtulwy.github.io/posts/</link>
         <description>所有文章 | 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 04 Jan 2022 00:15:42 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>计算机网络是如何实现可靠数据传输的？</title>
+    <link>https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/</link>
+    <pubDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/</guid>
+    <description><![CDATA[可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层和应用层。简单点]]></description>
+</item><item>
     <title>First</title>
-    <link>http://example.org/posts/first/</link>
+    <link>https://swjtulwy.github.io/first/</link>
     <pubDate>Tue, 04 Jan 2022 00:15:42 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/first/</guid>
+    <guid>https://swjtulwy.github.io/first/</guid>
     <description><![CDATA[我的第一篇文章 有bug]]></description>
 </item></channel>
 </rss>
