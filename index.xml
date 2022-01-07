@@ -1,23 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>我的全新 Hugo 网站</title>
-        <link>https://swjtulwy.github.io/</link>
-        <description>这是我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</lastBuildDate>
-            <atom:link href="https://swjtulwy.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <title>Weiyee&#39;s Blog</title>
+        <link>https://example.com/</link>
+        <description>关于 LoveIt 主题</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (weiyee)</managingEditor>
+            <webMaster>swjtulauweiyee@gmail.com (weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</lastBuildDate>
+            <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>计算机网络是如何实现可靠数据传输的？</title>
-    <link>https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/</link>
+    <link>https://example.com/reliable_data_transfer/</link>
     <pubDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://swjtulwy.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84/</guid>
+    <guid>https://example.com/reliable_data_transfer/</guid>
     <description><![CDATA[可靠数据传输原理 可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层]]></description>
 </item><item>
-    <title>First</title>
-    <link>https://swjtulwy.github.io/first/</link>
-    <pubDate>Tue, 04 Jan 2022 00:15:42 &#43;0800</pubDate>
+    <title>滕王阁序</title>
+    <link>https://example.com/first/</link>
+    <pubDate>Thu, 04 Nov 2021 00:15:42 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://swjtulwy.github.io/first/</guid>
-    <description><![CDATA[我的第一篇文章 有bug]]></description>
+    <guid>https://example.com/first/</guid>
+    <description><![CDATA[滕王阁序 王勃 【唐代】 豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之]]></description>
 </item></channel>
 </rss>
