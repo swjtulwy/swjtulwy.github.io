@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/reliable_data_transfer\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "可靠数据传输, TCP, 计算机网络","wordcount":  2968 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Reliable Data Transfer, TCP, Computer Network","wordcount":  4211 ,
         "url": "https:\/\/example.com\/reliable_data_transfer\/","datePublished": "2022-01-07T20:14:59+08:00","dateModified": "2022-01-07T20:14:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -110,9 +110,9 @@
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">计算机网络是如何实现可靠数据传输的？</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>计算机网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-07">2022-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2968 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/reliable_data_transfer/" class="leancloud_visitors" data-flag-title="计算机网络是如何实现可靠数据传输的？">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/computer-network/"><i class="far fa-folder fa-fw"></i>Computer Network</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-07">2022-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4211 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/reliable_data_transfer/" class="leancloud_visitors" data-flag-title="计算机网络是如何实现可靠数据传输的？">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -135,6 +135,8 @@
                 <li><a href="#倒计数定时器">倒计数定时器</a></li>
               </ul>
             </li>
+            <li><a href="#回退n步协议gbn">回退N步协议(GBN)</a></li>
+            <li><a href="#选择重传协议sr">选择重传协议(SR)</a></li>
           </ul>
         </li>
         <li><a href="#从tcp协议中看可靠数据传输">从TCP协议中看可靠数据传输</a>
@@ -193,9 +195,36 @@
 <p>        综上，在实现了差错检测，接收方反馈，重传，序号，倒计数定时器这些协议功能后，就可以得到一个可靠数据传输协议了。</p>
 <p>具备上述协议功能的协议分为两种，一种是<strong>停止-等待协议</strong>，一种是<strong>流水线协议</strong>，后者是前者的加强版，提升了信道的利用率。实际上ARQ协议也是分为了类似的两类。说到ARQ，那么就介绍一下它：</p>
 <p>        ARQ协议，即<strong>自动重传请求</strong>（Automatic Repeat-reQuest），是OSI模型中数据链路层和传输层的错误纠正协议之一。它通过使用<strong>确认</strong>和<strong>超时</strong>这两个机制，在不可靠服务的基础上实现可靠的信息传输。如果发送方在发送后一段时间之内没有收到确认帧，它通常会<strong>重新发送</strong>。ARQ包括<strong>停止等待ARQ协议</strong>和<strong>连续ARQ协议</strong>，拥有<strong>错误检测</strong>（Error Detection）、<strong>正面确认</strong>（Positive Acknowledgment）、<strong>超时重传</strong>（Retransmission after Timeout）和 <strong>负面确认及重传</strong>（Negative Acknowledgment and Retransmission）等机制。其中，连续ARQ就是一种流水线协议。</p>
-<p>接下来介绍流水线协议</p>
-<p>流水线协议中差错恢复的两种方法：回退N步（G-Back-N,GBN）和选择重传（Selective Repeat,SR）。</p>
-<p>TODO</p>
+<p>         我们说到流水线协议相对于停止等待协议增加了信道的利用率，但是也带来了一定程度的局限性。例如：</p>
+<ul>
+<li>
+<p>流水线协议必须增加序号的范围，因为每个传输中的分组必须有一个唯一的序号用来区分分组，而且也许在输送中存在多个未确认的报文。而停止等待协议只需一个比特位来给分组编号（即比特交替协议）</p>
+</li>
+<li>
+<p>协议的发送方和接收方两端也许必须缓存多个分组。这样做的目的是为了差错恢复，这取决于协议如何处理丢失、损坏以及时延过大的分组所需序号范围i和对缓冲的要求取决于数据传输协议如何</p>
+</li>
+</ul>
+<p>流水线协议中差错恢复的两种方法：<strong>回退N步</strong>（Go-Back-N,GBN）和<strong>选择重传</strong>（Selective Repeat,SR）。</p>
+<h4 id="回退n步协议gbn">回退N步协议(GBN)</h4>
+<p>        回退N步协议允许发送方发送多个分组而不确认，但是其在流水线中未确认的分组的数量不能超过N。这个协议又被称作滑动窗口协议，是因为流水线中已被发送但还未被确认的分组的许可范围构成了一个在序号范围内长度为N的窗口，N就是窗口的大小，随着协议运行，该窗口的序号空间不断向前滑动。思考一下，为什么要设置这么一个窗口呢？其实是为了流量控制和拥塞控制的需要，我们将在后文介绍。</p>
+<p>在GBN中，发送方必须响应的三种类型事件是：</p>
+<ul>
+<li>
+<p>上层的调用。</p>
+</li>
+<li>
+<p>收到一个ACK，该协议对序号为n的分组的确认采取累积确认的方式，表明接收方已经正确接收到序号为n的以前且包括n在内的所有分组。</p>
+</li>
+<li>
+<p>超时事件，go-back N行为正来自出现丢失或时延过长分组时发送方采取的差错恢复行为。同样也用到了定时器，出现超时的时候，发送方将重传所有已发送但还未被确认的分组，所以在发送方缓存这些分组是十分必要的。如果收到一个ACk,但仍有已发送但未确认的分组，则定时器会被重新启动，如果没有则会终止。</p>
+</li>
+</ul>
+<p>GBN协议中，接收方会丢弃失序的分组，因为GBN采用<strong>累积确认</strong>，一次交付给上层一个分组，接收方必须按序将数据交付给上层，丢失分组是一种简单的方法之一，另外的一种就是放在接收方缓存起来，等带下一个按序的分组，最后在组装正确的数据交付。 </p>
+<h4 id="选择重传协议sr">选择重传协议(SR)</h4>
+<p>GBN虽然采用了流水线解决了信道利用率的问题，但是也会存在另外的性能问题，例如当窗口长度很大或者带宽时延积都很大时，在流水线中有更多的分组时更甚。因为在这些情况下，必须重传大量分组，代价太大了，也许只是窗口中诸多分组的一个或几个分组出现错误，便要重传全部已经发送但未确认的分组，未免太浪费了。</p>
+<p>而选择重传机制就是让发送方仅仅重传那些它怀疑在接收方出错(丢失或受损)的分组，从而避免了不必要的重传。但是这种方式就不能采用累积确认了，而是要求接收方逐个地确认正确接收的分组。即接收方确认正确的分组不管其是否失序，失序的分组将被缓存直到所有比失序分组序号小的分组都被接收为止，才会将一批分组按序交付。</p>
+<p>但是这种方式会带来一个问题，就是接收方和发送方的窗口并不是总是一致的，因为对于哪些分组已经被正确接收，哪些没有，发送方和接收方并不是总能看到一样的结果。这意味着，当序号范围有限时，发送方和接收窗口之间缺乏同步会产生严重的后果。这就要求SR协议中，窗口长度必须小于或等于序号空间大小的一半。后续将证明。</p>
+<p>到现在为止，我们介绍了若干可靠传输机制，下表是一个总结。</p>
 <table>
 <thead>
 <tr>
@@ -231,6 +260,7 @@
 </tbody>
 </table>
 <h3 id="从tcp协议中看可靠数据传输">从TCP协议中看可靠数据传输</h3>
+<p>未完待续</p>
 <h4 id="流量控制">流量控制</h4>
 <h4 id="拥塞控制">拥塞控制</h4>
 </div><div class="post-footer" id="post-footer">
@@ -246,13 +276,13 @@
                             <a class="link-to-markdown" href="/reliable_data_transfer/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？" data-hashtags="可靠数据传输,TCP,计算机网络"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://example.com/reliable_data_transfer/" data-hashtag="可靠数据传输"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？" data-hashtags="Reliable Data Transfer,TCP,Computer Network"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://example.com/reliable_data_transfer/" data-hashtag="Reliable Data Transfer"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/reliable_data_transfer/" data-title="计算机网络是如何实现可靠数据传输的？" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93/">可靠数据传输</a>,&nbsp;<a href="/tags/tcp/">TCP</a>,&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/reliable-data-transfer/">Reliable Data Transfer</a>,&nbsp;<a href="/tags/tcp/">TCP</a>,&nbsp;<a href="/tags/computer-network/">Computer Network</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>

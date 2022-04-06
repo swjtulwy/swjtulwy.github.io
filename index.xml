@@ -20,5 +20,33 @@
     <author>作者</author>
     <guid>https://example.com/first/</guid>
     <description><![CDATA[滕王阁序 王勃 【唐代】 豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之]]></description>
+</item><item>
+    <title>编译与链接</title>
+    <link>https://example.com/compile_link/</link>
+    <pubDate>Wed, 19 May 2021 11:15:56 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/compile_link/</guid>
+    <description><![CDATA[GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c++程序的编译运行流程中将采用gcc做示例。 GCC的初衷是为GNU操作系统专门编写的]]></description>
+</item><item>
+    <title>Makefile与库的制作</title>
+    <link>https://example.com/make_lib/</link>
+    <pubDate>Sun, 04 Apr 2021 21:04:32 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/make_lib/</guid>
+    <description><![CDATA[静态库 库文件是计算机上的一类文件，可以简单的把库文件看成一种代码仓库，它提供给使用者一些可以直接拿来用的变量、函数或类。 库是特殊的一种程序，]]></description>
+</item><item>
+    <title>POSIX是什么</title>
+    <link>https://example.com/posix/</link>
+    <pubDate>Mon, 29 Mar 2021 21:55:57 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/posix/</guid>
+    <description><![CDATA[POSIX简介 1. 概念 POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX，缩写为 POSIX ） 2.发布者-IEEE 发布者为电气与电子工程师]]></description>
+</item><item>
+    <title>关于C语言中的IFNDEF宏</title>
+    <link>https://example.com/ifndef/</link>
+    <pubDate>Fri, 19 Mar 2021 08:55:57 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/ifndef/</guid>
+    <description><![CDATA[IFNDEF ifndef的含义是If not define, 其搭配使用如下 1 2 3 4 5 6 7 8 9 10 11 12 13 // xxx.h #ifndef __INCxxx.h #define __INCxxx.h #ifndef __cpluscplus extern &#34;C&#34; { #endif /*...*/ #ifndef } #endif #endif 1.多次包含的情况 include xxx 就是将xxx的]]></description>
 </item></channel>
 </rss>
