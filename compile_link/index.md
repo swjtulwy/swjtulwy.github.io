@@ -71,9 +71,9 @@ GCC工作流程也就是一个c/c++语言程序从编译到生成可执行程序
 
 ![](https://i0.hdslb.com/bfs/album/49bbda32402529fc9a7ecf6972a4cc193ffc5a6a.png)
 
-![](https://i0.hdslb.com/bfs/album/b6d74249fc912aaf7e4bf34f2286ce2005c61e98.png)
+<img src="https://i0.hdslb.com/bfs/album/b6d74249fc912aaf7e4bf34f2286ce2005c61e98.png" title="" alt="" data-align="center">
 
-![](https://i0.hdslb.com/bfs/album/9b6959f362aa1c9ad1fc10286f904ca77fc931d2.png)
+<img src="https://i0.hdslb.com/bfs/album/9b6959f362aa1c9ad1fc10286f904ca77fc931d2.png" title="" alt="" data-align="center">
 
 下面分别介绍各个阶段,我们的示例代码如下：
 

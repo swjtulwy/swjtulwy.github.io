@@ -25,7 +25,7 @@
 
 当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径。此时就需要系统的动态载入器来获取该绝对路径。对于elf格式的可执行程序，是由ld-linux.so来完成的，它先后搜索elf文件的 **DT_RPATH段** ——> **环境变量LD_LIBRARY_PATH** ——> **/etc/ld.so.cache文件列表** ——> **/lib/，/usr/lib 目录**找到库文件后将其载入内存。
 
-![](https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp)
+<img src="https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp" title="" alt="" data-align="center">
 
 ### 动态库的使用
 
@@ -69,9 +69,9 @@
 
 动态库在程序编译时并不会被连接到目标代码中，而是在程序运行是才被载入。**不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例**，规避了空间浪费问题。动态库在程序运行是才被载入，也解决了静态库对程序的更新、部署和发布页会带来麻烦。用户只需要更新动态库即可，**增量更新**。
 
-![](https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png)
+<img src="https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png" title="" alt="" data-align="center">
 
-![](https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png)
+<img src="https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png" title="" alt="" data-align="center">
 
 ## Makefile
 

@@ -26,6 +26,20 @@
     <guid>https://example.com/compile_link/</guid>
     <description><![CDATA[GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c++程序的编译运行流程中将采用gcc做示例。 GCC的初衷是为GNU操作系统专门编写的]]></description>
 </item><item>
+    <title>Linux多进程通信</title>
+    <link>https://example.com/ipc/</link>
+    <pubDate>Sat, 10 Apr 2021 19:25:54 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/ipc/</guid>
+    <description><![CDATA[多进程通信（IPC） 进程是一个独立的资源分配单元，不同进程（这里所说的进程通常指的是用户进程）之间 的资源是独立的，没有关联，不能在一个进程中]]></description>
+</item><item>
+    <title>Unix文件IO</title>
+    <link>https://example.com/fileio/</link>
+    <pubDate>Thu, 08 Apr 2021 11:14:22 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/fileio/</guid>
+    <description><![CDATA[本文介绍文件IO与标准IO的相关概念，以及一些常用的文件IO函数 基本概念 文件I/O：文件I/O称之为不带缓存的IO（unbuffered I/]]></description>
+</item><item>
     <title>GDB调试基础</title>
     <link>https://example.com/gdb/</link>
     <pubDate>Wed, 07 Apr 2021 08:41:04 &#43;0800</pubDate>
@@ -40,6 +54,13 @@
     <guid>https://example.com/make_lib/</guid>
     <description><![CDATA[静态库 库文件是计算机上的一类文件，可以简单的把库文件看成一种代码仓库，它提供给使用者一些可以直接拿来用的变量、函数或类。 库是特殊的一种程序，]]></description>
 </item><item>
+    <title>进程</title>
+    <link>https://example.com/process/</link>
+    <pubDate>Thu, 01 Apr 2021 22:07:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/process/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>POSIX是什么</title>
     <link>https://example.com/posix/</link>
     <pubDate>Mon, 29 Mar 2021 21:55:57 &#43;0800</pubDate>
@@ -53,19 +74,5 @@
     <author>作者</author>
     <guid>https://example.com/ifndef/</guid>
     <description><![CDATA[IFNDEF ifndef的含义是If not define, 其搭配使用如下 1 2 3 4 5 6 7 8 9 10 11 12 13 // xxx.h #ifndef __INCxxx.h #define __INCxxx.h #ifndef __cpluscplus extern &#34;C&#34; { #endif /*...*/ #ifndef } #endif #endif 1.多次包含的情况 include xxx 就是将xxx的]]></description>
-</item><item>
-    <title>英语语法浅析</title>
-    <link>https://example.com/grammar/</link>
-    <pubDate>Wed, 17 Apr 2019 15:15:01 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/grammar/</guid>
-    <description><![CDATA[作者：若愚英塾 链接：https://www.zhihu.com/question/294752032/answer/2141847794 来源]]></description>
-</item><item>
-    <title>Unix文件IO</title>
-    <link>https://example.com/fileio/</link>
-    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/fileio/</guid>
-    <description><![CDATA[]]></description>
 </item></channel>
 </rss>

@@ -21,7 +21,7 @@
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/make_lib/" /><link rel="prev" href="https://example.com/posix/" /><link rel="next" href="https://example.com/gdb/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/make_lib/" /><link rel="prev" href="https://example.com/process/" /><link rel="next" href="https://example.com/gdb/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -182,14 +182,7 @@
 <p>程序启动之后，动态库会被动态加载到内存中，通过 <code>ldd </code>（list dynamic  dependencies）命令检查动态库依赖关系</p>
 <p>如何定位共享库文件呢？</p>
 <p>当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径。此时就需要系统的动态载入器来获取该绝对路径。对于elf格式的可执行程序，是由ld-linux.so来完成的，它先后搜索elf文件的 <strong>DT_RPATH段</strong> ——&gt; <strong>环境变量LD_LIBRARY_PATH</strong> ——&gt; <strong>/etc/ld.so.cache文件列表</strong> ——&gt; <strong>/lib/，/usr/lib 目录</strong>找到库文件后将其载入内存。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp"
-        data-srcset="https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp, https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp 1.5x, https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp"
-        title="https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp" /></p>
+<img src="https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp" title="" alt="" data-align="center">
 <h3 id="动态库的使用">动态库的使用</h3>
 <p>程序在执行的时候是如何定位共享库文件的呢？</p>
 <ol>
@@ -247,22 +240,8 @@
 </ol>
 <p>静态库对程序的更新、部署和发布页会带来麻烦。如果静态库liba.lib更新了，所以使用它的应用程序都需要重新编译、发布给用户（对于玩家来说，可能是一个很小的改动，却导致整个程序重新下载，<strong>全量更新</strong>）。</p>
 <p>动态库在程序编译时并不会被连接到目标代码中，而是在程序运行是才被载入。<strong>不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例</strong>，规避了空间浪费问题。动态库在程序运行是才被载入，也解决了静态库对程序的更新、部署和发布页会带来麻烦。用户只需要更新动态库即可，<strong>增量更新</strong>。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png, https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png 1.5x, https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png"
-        title="https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png, https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png 1.5x, https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png"
-        title="https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/cd1f80953668fafd7611f2a2f6843835d16cd1cc.png" title="" alt="" data-align="center">
+<img src="https://i0.hdslb.com/bfs/album/bec8136ab4a21b6e79cd57db0b1ea80511f51dde.png" title="" alt="" data-align="center">
 <h2 id="makefile">Makefile</h2>
 <p>一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编<br>
 译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就<br>
@@ -363,7 +342,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posix/" class="prev" rel="prev" title="POSIX是什么"><i class="fas fa-angle-left fa-fw"></i>POSIX是什么</a>
+    <div class="post-nav"><a href="/process/" class="prev" rel="prev" title="进程"><i class="fas fa-angle-left fa-fw"></i>进程</a>
             <a href="/gdb/" class="next" rel="next" title="GDB调试基础">GDB调试基础<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>

@@ -152,14 +152,7 @@
             </div><div class="content" id="content"><h3 id="可靠数据传输原理">可靠数据传输原理</h3>
 <p>        可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层和应用层。简单点说，可靠数据传输服务保证了通信过程中的数据接收方接收到的数据与其从数据发送方发出的数据一致。而提供这种可靠数据传输服务的协议称为可靠数据传输协议，例如传输层的TCP协议。</p>
 <p>        可靠数据传输为上层实体提供的服务抽象是：数据可以通过一条可靠的信道进行传输。在这条信道中传输的数据bit不会受到损坏和或丢失，而且所有的数据都是按其发送顺序交付。其对应的服务框架如下图所示，TCP协议向调用它的因特网应用所提供的服务模型恰恰如此，所以当谈到可靠数据传输时，不可避免地会涉及大量TCP协议的分析。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg"
-        data-srcset="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg, https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg 1.5x, https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg 2x"
-        data-sizes="auto"
-        alt="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg"
-        title="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg" /></p>
+<img src="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg" title="" alt="" data-align="center">
 <p>        那么一个网络协议要实现可靠数据传输需要具备哪些特性呢？或者说，协议中需要设定哪些规则来避免数据传输的不可靠？为了数据传输的可靠，我们就要解决数据不可靠的情况，而数据传输的不可靠的情形最基本的有如下几种：</p>
 <ul>
 <li>数据在信道中传输时，比特出现了错误，例如本来该bit为0，到了接收端却成为了1</li>

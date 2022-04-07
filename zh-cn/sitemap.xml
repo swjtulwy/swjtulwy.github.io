@@ -47,22 +47,27 @@
                     href="https://example.com/"
                     /></url><url>
             <loc>https://example.com/reliable_data_transfer/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/categories/%E6%96%87%E5%AD%A6/</loc><lastmod>2021-11-04T00:15:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/first/</loc><lastmod>2021-11-04T00:15:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/%E9%9A%8F%E7%AC%94/</loc><lastmod>2021-11-04T00:15:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/compile/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/gnu/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/compile_link/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/ipc/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/linux/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/ipc/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/categories/operating-system/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/unix/</loc><lastmod>2021-04-08T11:14:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/fileio/</loc><lastmod>2021-04-08T11:14:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/gdb/</loc><lastmod>2021-04-07T08:41:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/gdb/</loc><lastmod>2021-04-07T08:41:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/categories/tools/</loc><lastmod>2021-04-07T08:41:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/makefile/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/make_lib/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/tags/unix/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/operating-system/</loc><lastmod>2021-03-29T21:55:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/process/</loc><lastmod>2021-04-01T22:07:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/process/</loc><lastmod>2021-04-01T22:07:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/posix/</loc><lastmod>2021-03-29T21:55:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/ifndef/</loc><lastmod>2021-03-19T08:55:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/categories/english/</loc><lastmod>2019-04-17T15:15:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/grammar/</loc><lastmod>2019-04-17T15:15:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/fileio/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
+            <loc>https://example.com/categories/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

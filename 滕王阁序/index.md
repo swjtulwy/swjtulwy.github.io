@@ -1,5 +1,4 @@
-# 滕王阁序
-
+# First
 
 # 滕王阁序
 
@@ -22,6 +21,3 @@
 　　画栋朝飞南浦云，珠帘暮卷西山雨。  
 　　闲云潭影日悠悠，物换星移几度秋。  
 　　阁中帝子今何在？槛外长江空自流。
-
-<img src="https://i0.hdslb.com/bfs/album/66e68bd3a2582f70c278889575e9e16646d3ad43.jpg" title="" alt="" data-align="center">
-

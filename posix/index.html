@@ -21,7 +21,7 @@
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/posix/" /><link rel="prev" href="https://example.com/ifndef/" /><link rel="next" href="https://example.com/make_lib/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/posix/" /><link rel="prev" href="https://example.com/ifndef/" /><link rel="next" href="https://example.com/process/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -156,7 +156,7 @@
 <blockquote>
 <p>IEEE，总部位于美国纽约，是一个国际性的电子技术与信息科学工程师的协会，也是目前全球最大的非营利性专业技术学会。IEEE致力于电气、电子、计算机工程和与科学有关的领域的开发和研究，在太空、计算机、电信、生物医学、电力及消费性电子产品等领域已制定了1300多个行业标准，现已发展成为具有较大影响力的国际学术组织</p>
 </blockquote>
-<img title="" src="https://i0.hdslb.com/bfs/album/cb98cf67e8df04ed8d04e7a022ec4c270b390ac8.png" alt="" width="711">
+<img title="" src="https://i0.hdslb.com/bfs/album/cb98cf67e8df04ed8d04e7a022ec4c270b390ac8.png" alt="" width="711" data-align="center">
 <p>POSIX是IEEE为要在各种UNIX操作系统上运行的软件而定义的一系列API标准的总称，其正式称呼为IEEE 1003，而国际标准名称为ISO/IEC 9945。</p>
 <p>POSIX.1 已经被国际标准化组织（International Standards Organization，ISO）所接受，被命名为 ISO/IEC 9945-1:1990 标准。</p>
 <h3 id="3posix标准相关文件">3.POSIX标准相关文件</h3>
@@ -183,14 +183,7 @@
 <p>局面非常混乱，麻烦也就随之而来了。</p>
 <p>为了提高兼容性和应用程序的可移植性，阻止这种趋势， IEEE(电气和电子工程师协会)开始努力标准化Unix的开发，后来由 Richard Stallman命名为“Posix”。</p>
 <p>这套标准涵盖了很多方面，比如Unix系统调用的C语言接口、shell程序和工具、线程及网络编程。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp"
-        data-srcset="https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp, https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp 1.5x, https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp"
-        title="https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp" /></p>
+<img src="https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp" title="" alt="" data-align="center">
 <h3 id="2标准覆盖">2.标准覆盖</h3>
 <p>市面上绝大多数操作系统厂家都支持该标准，首先就是大名鼎鼎的Unix和Linux了，除此之外还有苹果的操作系统也是Unix-based的。有了这个规范，你就可以调用通用的API了，Linux提供的POSIX系统调用在Unix上也能执行，因此学习Linux的底层接口最好就是理解POSIX标准。Windows从WinNT开始就有兼容POSIX的考虑。这是因为当年在要求严格的领域，Unix地位比Windows高。为了把Unix用户拉到Windows阵营，被迫支持POSIX。</p>
 <p>现在Win10对 Linux/POSIX 支持好，则是因为Linux已经统治了廉价服务器市场。为了提高Windows的竞争力搞的。所以一切都是以市场为主导。</p>
@@ -226,37 +219,16 @@ POSIX则是指一个UNIX的标准体系， 或一个由来自不同公司的代�
 <p>glibc 是 Linux 下使用的开源的标准 C 库，它是 GNU 发布的 libc 库，即运行时库。这些基本函数都是被标准化了的，而且这些函数通常都是用汇编直接实现的。</p>
 <p>glibc 为程序员提供丰富的 API（Application Programming Interface），这些API都是遵循POSIX标准的，API的函数名，返回值，参数类型等都必须按照POSIX标准来定义。</p>
 <p><strong>POSIX兼容也就指定这些接口函数兼容，但是并不管API具体如何实现。</strong></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png, https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png 1.5x, https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png"
-        title="https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png" title="" alt="" data-align="center">
 <h3 id="3库函数api和系统调用的区别">3.库函数API和系统调用的区别</h3>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png, https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png 1.5x, https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png"
-        title="https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png" title="" alt="" data-align="center">
 <p>如上图所示：</p>
 <ul>
 <li>(1) 库函数是语言或应用程序的一部分，而系统调用是内核提供给应用程序的接口，属于系统的一部分</li>
 <li>(2) 库函数在用户地址空间执行，系统调用是在内核地址空间执行，库函数运行时间属于用户时间，系统调用属于系统时间，库函数开销较小，系统调用开销较大</li>
 <li>(3) 系统调用依赖于平台，库函数并不依赖</li>
 </ul>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png, https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png 1.5x, https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png"
-        title="https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png" title="" alt="" data-align="center">
 <p><strong>系统调用是为了方便使用操作系统的接口，而库函数则是为了人们编程的方便。</strong></p>
 <p><strong>库函数调用与系统无关，不同的系统，调用库函数，库函数会调用不同的底层函数实现，因此可移植性好。</strong></p>
 <h3 id="4程序的可移植性及其本质">4.程序的可移植性及其本质</h3>
@@ -325,14 +297,7 @@ POSIX则是指一个UNIX的标准体系， 或一个由来自不同公司的代�
 <p>如下图是Linux系统调用的大概流程。</p>
 <p>当应用程序调用printf()函数时，printf函数会调用C库中的printf，继而调用C库中的write，C库最后调用内核的write()。</p>
 <p>而另一些则不会使用系统调用，比如strlen, strcat, memcpy等。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png, https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png 1.5x, https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png"
-        title="https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png" title="" alt="" data-align="center">
 <p>printf函数执行过程中，程序运行状态切换如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -343,14 +308,7 @@ POSIX则是指一个UNIX的标准体系， 或一个由来自不同公司的代�
 </code></pre></td></tr></table>
 </div>
 </div><p>printf函数、glibc库和系统调用在系统中关系图如下</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png, https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png 1.5x, https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png"
-        title="https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png" title="" alt="" data-align="center">
 <p>实例代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -384,14 +342,7 @@ POSIX则是指一个UNIX的标准体系， 或一个由来自不同公司的代�
 </div><blockquote>
 <p>运行程序前加上strace，可以追踪到函数库调用过程</p>
 </blockquote>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png"
-        data-srcset="https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png, https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png 1.5x, https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png 2x"
-        data-sizes="auto"
-        alt="https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png"
-        title="https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png" /></p>
+<img src="https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png" title="" alt="" data-align="center">
 <p>如执行结果可知：<br>
 我们的程序虽然只有一个printf函数，但是在执行过程中，我们前后调用了execve、access、open、fstat、mmap、brk、write等系统调用。<br>
 其中write系统调用会把字符串：hello world通过设备文件1，发送到驱动，该设备节点对应终端stdout。</p>
@@ -421,7 +372,7 @@ POSIX则是指一个UNIX的标准体系， 或一个由来自不同公司的代�
     </div>
 
     <div class="post-nav"><a href="/ifndef/" class="prev" rel="prev" title="关于C语言中的IFNDEF宏"><i class="fas fa-angle-left fa-fw"></i>关于C语言中的IFNDEF宏</a>
-            <a href="/make_lib/" class="next" rel="next" title="Makefile与库的制作">Makefile与库的制作<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/process/" class="next" rel="next" title="进程">进程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

@@ -13,7 +13,7 @@ POSIX：可移植操作系统接口（Portable Operating System Interface of UNI
 
 > IEEE，总部位于美国纽约，是一个国际性的电子技术与信息科学工程师的协会，也是目前全球最大的非营利性专业技术学会。IEEE致力于电气、电子、计算机工程和与科学有关的领域的开发和研究，在太空、计算机、电信、生物医学、电力及消费性电子产品等领域已制定了1300多个行业标准，现已发展成为具有较大影响力的国际学术组织
 
-<img title="" src="https://i0.hdslb.com/bfs/album/cb98cf67e8df04ed8d04e7a022ec4c270b390ac8.png" alt="" width="711">
+<img title="" src="https://i0.hdslb.com/bfs/album/cb98cf67e8df04ed8d04e7a022ec4c270b390ac8.png" alt="" width="711" data-align="center">
 
 POSIX是IEEE为要在各种UNIX操作系统上运行的软件而定义的一系列API标准的总称，其正式称呼为IEEE 1003，而国际标准名称为ISO/IEC 9945。
 
@@ -57,7 +57,7 @@ POSIX是Unix的标准。
 
 这套标准涵盖了很多方面，比如Unix系统调用的C语言接口、shell程序和工具、线程及网络编程。
 
-![](https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp)
+<img src="https://i0.hdslb.com/bfs/album/626f609cf7844f9866838cc5a3d249e861ceae20.png@1e_1c.webp" title="" alt="" data-align="center">
 
 ### 2.标准覆盖
 
@@ -115,11 +115,11 @@ glibc 为程序员提供丰富的 API（Application Programming Interface），�
 
 **POSIX兼容也就指定这些接口函数兼容，但是并不管API具体如何实现。**
 
-![](https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png)
+<img src="https://i0.hdslb.com/bfs/album/cfe6dfa78cc30b8990c2400a061d6d96c713924d.png" title="" alt="" data-align="center">
 
 ### 3.库函数API和系统调用的区别
 
-![](https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png)
+<img src="https://i0.hdslb.com/bfs/album/f974b607b0f7a6d1ddfb63241a97ca81977be6ff.png" title="" alt="" data-align="center">
 
 如上图所示：
 
@@ -127,7 +127,7 @@ glibc 为程序员提供丰富的 API（Application Programming Interface），�
 - (2) 库函数在用户地址空间执行，系统调用是在内核地址空间执行，库函数运行时间属于用户时间，系统调用属于系统时间，库函数开销较小，系统调用开销较大
 - (3) 系统调用依赖于平台，库函数并不依赖
 
-![](https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png)
+<img src="https://i0.hdslb.com/bfs/album/f0a830e97b6fa6803c70299b4d471b38a1834ea6.png" title="" alt="" data-align="center">
 
 **系统调用是为了方便使用操作系统的接口，而库函数则是为了人们编程的方便。**
 
@@ -207,7 +207,7 @@ glibc 为程序员提供丰富的 API（Application Programming Interface），�
 
 而另一些则不会使用系统调用，比如strlen, strcat, memcpy等。
 
-![](https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png)
+<img src="https://i0.hdslb.com/bfs/album/b6ac2b2d876f1e486d1af887fcc70c20338fa0eb.png" title="" alt="" data-align="center">
 
 printf函数执行过程中，程序运行状态切换如下：
 
@@ -217,7 +217,7 @@ printf函数执行过程中，程序运行状态切换如下：
 
 printf函数、glibc库和系统调用在系统中关系图如下
 
-![](https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png)
+<img src="https://i0.hdslb.com/bfs/album/883a0e8edc90b7bc97798942ce5d523d7808a737.png" title="" alt="" data-align="center">
 
 实例代码如下：
 
@@ -239,7 +239,7 @@ lwy@lwysLaptop:~/workspace$ gcc test.c -o test && strace ./test
 
 > 运行程序前加上strace，可以追踪到函数库调用过程
 
-![](https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png)
+<img src="https://i0.hdslb.com/bfs/album/ff3cbf6e9b619b9642dbbbe161b8807023aa53fc.png" title="" alt="" data-align="center">
 
 如执行结果可知：  
 我们的程序虽然只有一个printf函数，但是在执行过程中，我们前后调用了execve、access、open、fstat、mmap、brk、write等系统调用。  
