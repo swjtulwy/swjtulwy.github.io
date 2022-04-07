@@ -21,7 +21,7 @@
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/make_lib/" /><link rel="prev" href="https://example.com/posix/" /><link rel="next" href="https://example.com/compile_link/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/make_lib/" /><link rel="prev" href="https://example.com/posix/" /><link rel="next" href="https://example.com/gdb/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/make_lib\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Unix, Makefile","wordcount":  2390 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Unix, Makefile","wordcount":  2389 ,
         "url": "https:\/\/example.com\/make_lib\/","datePublished": "2021-04-04T21:04:32+08:00","dateModified": "2021-04-04T21:04:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -110,8 +110,8 @@
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Makefile与库的制作</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/make/"><i class="far fa-folder fa-fw"></i>Make</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-04">2021-04-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2390 字&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw"></i>Tools</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-04">2021-04-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2389 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/make_lib/" class="leancloud_visitors" data-flag-title="Makefile与库的制作">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -326,18 +326,16 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="c">#定义变量
 </span><span class="c"></span><span class="nv">src</span><span class="o">=</span>sub.o add.o mult.o div.o main.o
 <span class="nv">target</span><span class="o">=</span>app
 <span class="nf">$(target)</span><span class="o">:</span><span class="k">$(</span><span class="nv">src</span><span class="k">)</span>
-	<span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>src<span class="k">)</span> -o <span class="k">$(</span>target<span class="k">)</span>
+    <span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>src<span class="k">)</span> -o <span class="k">$(</span>target<span class="k">)</span>
 
 <span class="nf">%.o</span><span class="o">:</span>%.<span class="n">c</span>
-	<span class="k">$(</span>CC<span class="k">)</span> -c $&lt; -o <span class="nv">$@</span>
-
+    <span class="k">$(</span>CC<span class="k">)</span> -c $&lt; -o <span class="nv">$@</span>
 </code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
@@ -366,7 +364,7 @@
     </div>
 
     <div class="post-nav"><a href="/posix/" class="prev" rel="prev" title="POSIX是什么"><i class="fas fa-angle-left fa-fw"></i>POSIX是什么</a>
-            <a href="/compile_link/" class="next" rel="next" title="编译与链接">编译与链接<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/gdb/" class="next" rel="next" title="GDB调试基础">GDB调试基础<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

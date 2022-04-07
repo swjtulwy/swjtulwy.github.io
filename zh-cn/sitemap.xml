@@ -52,7 +52,9 @@
             <loc>https://example.com/tags/compile/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/gnu/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/compile_link/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/make/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/gdb/</loc><lastmod>2021-04-07T08:41:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/gdb/</loc><lastmod>2021-04-07T08:41:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/categories/tools/</loc><lastmod>2021-04-07T08:41:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/makefile/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/make_lib/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/unix/</loc><lastmod>2021-04-04T21:04:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

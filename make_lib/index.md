@@ -25,8 +25,6 @@
 
 当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径。此时就需要系统的动态载入器来获取该绝对路径。对于elf格式的可执行程序，是由ld-linux.so来完成的，它先后搜索elf文件的 **DT_RPATH段** ——> **环境变量LD_LIBRARY_PATH** ——> **/etc/ld.so.cache文件列表** ——> **/lib/，/usr/lib 目录**找到库文件后将其载入内存。
 
-
-
 ![](https://i0.hdslb.com/bfs/album/7becce9fdd2551f092508729af91976812e7a01e.png@1e_1c.webp)
 
 ### 动态库的使用
@@ -163,10 +161,9 @@ CXX : C++ 编译器的名称，默认值为 g++
 src=sub.o add.o mult.o div.o main.o
 target=app
 $(target):$(src)
-	$(CC) $(src) -o $(target)
+    $(CC) $(src) -o $(target)
 
 %.o:%.c
-	$(CC) -c $< -o $@
-
+    $(CC) -c $< -o $@
 ```
 

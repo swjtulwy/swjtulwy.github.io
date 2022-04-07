@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>GDB调试基础 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="GDB调试基础" />
+<meta property="og:description" content="GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境 GDB调试的三种方式： 目标板直" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/gdb/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-07T08:41:04+08:00" />
+<meta property="article:modified_time" content="2021-04-07T08:41:04+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="GDB调试基础"/>
+<meta name="twitter:description" content="GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境 GDB调试的三种方式： 目标板直"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/gdb/" /><link rel="prev" href="https://example.com/make_lib/" /><link rel="next" href="https://example.com/compile_link/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "GDB调试基础",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/gdb\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "GDB, Compile","wordcount":  3390 ,
+        "url": "https:\/\/example.com\/gdb\/","datePublished": "2021-04-07T08:41:04+08:00","dateModified": "2021-04-07T08:41:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gdb/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/gdb/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">GDB调试基础</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw"></i>Tools</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-07">2021-04-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3390 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;<span id="/gdb/" class="leancloud_visitors" data-flag-title="GDB调试基础">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gdb-调试">GDB 调试</a>
+      <ul>
+        <li><a href="#设置断点">设置断点*</a>
+          <ul>
+            <li><a href="#断点commands高级功能">断点commands高级功能</a></li>
+          </ul>
+        </li>
+        <li><a href="#运行">运行</a></li>
+        <li><a href="#显示栈帧">显示栈帧*</a></li>
+        <li><a href="#显示变量">显示变量*</a></li>
+        <li><a href="#显示寄存器">显示寄存器*</a></li>
+        <li><a href="#单步执行">单步执行*</a></li>
+        <li><a href="#继续执行">继续执行*</a></li>
+        <li><a href="#监视点">监视点*</a></li>
+        <li><a href="#改变变量的值">改变变量的值*</a></li>
+        <li><a href="#生成内核转储文件">生成内核转储文件*</a></li>
+        <li><a href="#attach到进程">attach到进程*</a></li>
+        <li><a href="#反复执行">反复执行</a></li>
+        <li><a href="#dump内存到指定文件">dump内存到指定文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境</p>
+</blockquote>
+<p>GDB调试的三种方式：</p>
+<ol>
+<li>
+<p>目标板直接使用GDB进行调试。</p>
+</li>
+<li>
+<p>目标板使用gdbserver，主机使用xxx-linux-gdb作为客户端。</p>
+</li>
+<li>
+<p>目标板使用<code>ulimit -c unlimited</code>，生成core文件；然后主机使用<code>xxx-linux-gdb ./test ./core</code>。</p>
+</li>
+</ol>
+<h2 id="gdb-调试">GDB 调试</h2>
+<p>构造测试程序如下main.c和sum.c如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// main.c:
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span> 
+<span class="k">extern</span> <span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
+ 
+<span class="k">struct</span> <span class="n">inout</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">inout</span> <span class="o">*</span> <span class="n">io</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inout</span> <span class="o">*</span> <span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">inout</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">io</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Malloc failed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Wrong para!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="o">*</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+    <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Your enter: %d, result:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">,</span> <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">result</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// sum.c:
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后<code>gcc main.c sum.c -o main -g</code>, 得到main可执行文件， 输入<code>gdb main</code>可进入调试.</p>
+<p>下面介绍了gdb大部分功能，1.1 设置断点以及 1.3显示栈帧是常用功能；调试过程中可以需要1.6 单步执行，并且1.4 显示变量、1.5显示寄存器、1.8 监视点、1.9 改变变量的值。</p>
+<p>如果进程已经运行中，需要1.11 attach到进程，或者1.10 生成转储文件进行分析。当然为了提高效率可以自定义1.13 初始化文件。</p>
+<h3 id="设置断点">设置断点*</h3>
+<p>设置断点可以通过b或者break设置断点，断点的设置可以通过函数名、行号、文件名+函数名、文件名+行号以及偏移量、地址等进行设置。</p>
+<p>格式为：</p>
+<blockquote>
+<p>break 函数名</p>
+<p>break 行号</p>
+<p>break 文件名:函数名</p>
+<p>break 文件名:行号</p>
+<p>break +偏移量</p>
+<p>break -偏移量</p>
+<p>break *地址</p>
+</blockquote>
+<p>查看断点，通过<code>info break</code>查看断点列表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">(</span>gdb<span class="o">)</span> b <span class="m">13</span>
+Breakpoint <span class="m">1</span> at 0x11aa: file main.c, line 13.
+<span class="o">(</span>gdb<span class="o">)</span> b sum.c:2
+Breakpoint <span class="m">2</span> at 0x123d: file sum.c, line 2.
+<span class="o">(</span>gdb<span class="o">)</span> info b
+Num     Type           Disp Enb Address            What
+<span class="m">1</span>       breakpoint     keep y   0x00000000000011aa in main at main.c:13
+<span class="m">2</span>       breakpoint     keep y   0x000000000000123d in sum at sum.c:2
+</code></pre></td></tr></table>
+</div>
+</div><p>删除断点通过命令包括：</p>
+<blockquote>
+<p>delete &lt;断点id&gt;：删除指定断点</p>
+<p>delete：删除所有断点</p>
+<p>clear</p>
+<p>clear 函数名</p>
+<p>clear 行号</p>
+<p>clear 文件名：行号</p>
+<p>clear 文件名：函数名</p>
+</blockquote>
+<p>断点还可以条件断住</p>
+<blockquote>
+<p>break 断点 if 条件；比如break sum if value==9，当输入的value为9的时候才会断住。</p>
+<p>condition 断点编号：给指定断点删除触发条件</p>
+<p>condition 断点编号 条件：给指定断点添加触发条件</p>
+</blockquote>
+<p>断点还可以通过<code>disable/enable</code>临时停用启用。</p>
+<blockquote>
+<p>disable</p>
+<p>disable 断点编号</p>
+<p>disable display 显示编号</p>
+<p>disable mem 内存区域</p>
+<p>enable</p>
+<p>enable 断点编号</p>
+<p>enable once 断点编号：该断点只启用一次，程序运行到该断点并暂停后，该断点即被禁用。</p>
+<p>enable delete 断点编号</p>
+<p>enable display 显示编号</p>
+<p>enable mem 内存区域</p>
+</blockquote>
+<h4 id="断点commands高级功能">断点commands高级功能</h4>
+<p>大多数时候需要在断点处执行一系列动作，gdb提供了在断点处执行命令的高级功能commands。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>比如需要对如上程序square参数i为5的时候断点，并在此时打印栈、局部变量以及total的值</p>
+<p>编写gdb.init如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">set</span> <span class="n">logging</span> <span class="n">on</span> <span class="n">gdb</span><span class="p">.</span><span class="n">log</span>
+
+
+<span class="n">b</span> <span class="n">square</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="n">commands</span>
+  <span class="n">bt</span> <span class="n">full</span>
+  <span class="n">i</span> <span class="n">locals</span>
+  <span class="n">p</span> <span class="n">total</span>
+  <span class="n">print</span> <span class="s">&#34;Hit break when i == 5&#34;</span>
+<span class="n">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在gdb shell中<code>source gdb.init</code>，然后r执行命令，结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) source gdb.init 
+Breakpoint 1 at 0x1129: file commands.c, line 6.
+(gdb) r
+Starting program: /home/lwy/workspace/gdbtest/commands 
+
+Breakpoint 1, square (i=5) at commands.c:6
+6       {
+#0  square (i=5) at commands.c:6
+        result = 25
+#1  0x000055555555516f in main (argc=1, argv=0x7fffffffe048) at commands.c:20
+        i = 6
+result = 25
+$1 = 55
+$2 = &#34;Hit break when i == 5&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看出断点在i==5的时候断住了，并且此时打印了正确的值。</p>
+<h3 id="运行">运行</h3>
+<p>“<code>gdb 命令</code>”之后，run可以在gdb下运行命令；如果命令需要参数则跟在run之后。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) run 9
+Starting program: /home/lwy/workspace/gdbtest/main 9
+Your enter: 9, result:45
+[Inferior 1 (process 12362) exited normally]
+</code></pre></td></tr></table>
+</div>
+</div><p>如果需要断点在main()处，直接执行<code>start</code>就可以。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) start
+Temporary breakpoint 1 at 0x555555555189: file main.c, line 11.
+Starting program: /home/lwy/workspace/gdbtest/main 9
+
+Temporary breakpoint 1, main (argc=21845, argv=0x0) at main.c:11
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="显示栈帧">显示栈帧*</h3>
+<p>如果遇到断点而暂停执行，或者<code>coredump</code>可以显示栈帧。</p>
+<p>通过bt可以显示栈帧，<code>bt full</code>可以显示<strong>局部变量</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) r 9
+Starting program: /home/lwy/workspace/gdbtest/main 9
+
+Breakpoint 2, sum (value=9) at sum.c:3
+3           int i = 0;
+(gdb) bt
+#0  sum (value=9) at sum.c:3
+#1  0x0000555555555204 in main (argc=2, argv=0x7fffffffe048) at main.c:24
+(gdb) bt full
+#0  sum (value=9) at sum.c:3
+        result = 0
+        i = 32767
+#1  0x0000555555555204 in main (argc=2, argv=0x7fffffffe048) at main.c:24
+        io = 0x5555555592a0
+</code></pre></td></tr></table>
+</div>
+</div><p>命令格式如下：</p>
+<blockquote>
+<p>bt</p>
+<p>bt full：不仅显示backtrace，还显示局部变量</p>
+<p>bt N：显示开头N个栈帧</p>
+<p>bt full N</p>
+</blockquote>
+<h3 id="显示变量">显示变量*</h3>
+<p><code>print 变量名</code>可以显示变量内容。</p>
+<p><code>ptype 变量名</code> 可以打印变量类型</p>
+<p>如果需要一行监控多个变量，可以通过<code>p {var1, var2, var3}</code>。</p>
+<p>如果要跟踪自动显示，可以使用<code>display {var1, var2, var3}</code></p>
+<p>取消跟踪用 <code> undisplay 编号</code></p>
+<p>查看文件代码：<code>list/l [文件名:][行号/函数名]</code></p>
+<p>设置显示的行数：<code>show list/listsize</code> , <code>set list/listsize 行数</code></p>
+<h3 id="显示寄存器">显示寄存器*</h3>
+<p><code>info reg</code>可以显示寄存器内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) i r
+rax            0x9                 9
+rbx            0x555555555270      93824992236144
+rcx            0x5555555592b0      93824992252592
+rdx            0x9                 9
+rsi            0x0                 0
+rdi            0x9                 9
+rbp            0x7fffffffdf20      0x7fffffffdf20
+rsp            0x7fffffffdf20      0x7fffffffdf20
+r8             0x5555555592a0      93824992252576
+r9             0x7ffff7dd1070      140737351848048
+r10            0x7ffff7fb9be0      140737353849824
+r11            0x7ffff7fb9be0      140737353849824
+r12            0x5555555550a0      93824992235680
+r13            0x7fffffffe040      140737488347200
+r14            0x0                 0
+r15            0x0                 0
+rip            0x55555555524b      0x55555555524b &lt;sum+25&gt;
+eflags         0x216               [ PF AF IF ]
+cs             0x33                51
+ss             0x2b                43
+ds             0x0                 0
+es             0x0                 0
+fs             0x0                 0
+gs             0x0                 0
+</code></pre></td></tr></table>
+</div>
+</div><p>在寄存器名之前加$可以显示寄存器内容，</p>
+<blockquote>
+<p>p $寄存器：显示寄存器内容</p>
+<p>p/x $寄存器：十六进制显示寄存器内容。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) p $ss
+$2 = 43
+(gdb) p/x $pc
+$3 = 0x55555555524b
+</code></pre></td></tr></table>
+</div>
+</div><p>用x命令可以显示内容内容，<code>x/格式 地址</code>。</p>
+<blockquote>
+<p>x $pc：显示程序指针内容</p>
+<p>x/i $pc：显示程序指针汇编。</p>
+<p>x/10i $pc：显示程序指针之后10条指令。</p>
+<p>x/128wx 0xfc207000：从0xfc20700开始以16进制打印128个word。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) x $pc
+0x55555555524b &lt;sum+25&gt;:        0x00fc45c7
+(gdb) x/i $pc
+=&gt; 0x55555555524b &lt;sum+25&gt;:     movl   $0x0,-0x4(%rbp)
+(gdb) x/10i $pc
+=&gt; 0x55555555524b &lt;sum+25&gt;:     movl   $0x0,-0x4(%rbp)
+   0x555555555252 &lt;sum+32&gt;:     jmp    0x555555555261 &lt;sum+47&gt;
+   0x555555555254 &lt;sum+34&gt;:     mov    -0x4(%rbp),%eax
+   0x555555555257 &lt;sum+37&gt;:     add    $0x1,%eax
+   0x55555555525a &lt;sum+40&gt;:     add    %eax,-0x8(%rbp)
+   0x55555555525d &lt;sum+43&gt;:     addl   $0x1,-0x4(%rbp)
+   0x555555555261 &lt;sum+47&gt;:     mov    -0x4(%rbp),%eax
+   0x555555555264 &lt;sum+50&gt;:     cmp    -0x14(%rbp),%eax
+   0x555555555267 &lt;sum+53&gt;:     jl     0x555555555254 &lt;sum+34&gt;
+   0x555555555269 &lt;sum+55&gt;:     mov    -0x8(%rbp),%eax
+</code></pre></td></tr></table>
+</div>
+</div><p>还可以通过<code>disassemble</code>指令来反汇编。</p>
+<blockquote>
+<p>disassemble</p>
+<p>disassemble 程序计数器 ：反汇编pc所在函数的整个函数。</p>
+<p>disassemble addr-0x40,addr+0x40：反汇编addr前后0x40大小。</p>
+</blockquote>
+<h3 id="单步执行">单步执行*</h3>
+<p>单步执行有两个命令<code>next</code>和<code>step</code>，缩写为<code>n</code>和<code>s</code>，两者的区别是<code>next</code>遇到函数不会进入函数内部，<code>step</code>会执行到函数内部。</p>
+<p><code>finish </code>（跳出函数体）</p>
+<p>如果需要逐条汇编指令执行，可以分别使用<code>nexti</code>和<code>stepi</code>。</p>
+<h3 id="继续执行">继续执行*</h3>
+<p> 调试时，使用<code>continue</code>命令(缩写：<code>c</code>)继续执行程序。程序遇到断电后再次暂停执行；如果没有断点，就会一直执行到结束。</p>
+<blockquote>
+<p>continue：继续执行</p>
+<p>continue 次数：继续执行一定次数。</p>
+</blockquote>
+<h3 id="监视点">监视点*</h3>
+<p>要想找到变量在何处被改变，可以使用<code>watch</code>命令设置监视点watchpoint。</p>
+<blockquote>
+<p>watch &lt;表达式&gt;：表达式发生变化时暂停运行</p>
+<p>awatch &lt;表达式&gt;：表达式被访问、改变是暂停执行</p>
+<p>rwatch &lt;表达式&gt;：表达式被访问时暂停执行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) watch i
+Hardware watchpoint 3: i
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x0000555555555244 in sum at sum.c:3
+        stop only if value==9
+        breakpoint already hit 1 time
+3       hw watchpoint  keep y  
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="改变变量的值">改变变量的值*</h3>
+<p>通过<code>set variable &lt;变量&gt;=&lt;表达式&gt;</code>来修改变量的值。</p>
+<p>简写<code>set var 变量名=变量值</code> （循环中用的多）</p>
+<p><code>until </code>(跳出循环)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) b main
+Breakpoint 4 at 0x555555555189: file main.c, line 11.
+(gdb) r 9
+Starting program: /home/lwy/workspace/gdbtest/main 9
+
+Breakpoint 4, main (argc=21845, argv=0x0) at main.c:11
+11      {
+(gdb) n
+12          struct inout * io = (struct inout * ) malloc(sizeof(struct inout));
+(gdb) n
+13          if (NULL == io) {
+(gdb) n
+18          if (argc != 2) {
+(gdb) n
+23          io -&gt; value = *argv[1] - &#39;0&#39;;
+(gdb) n
+24          io -&gt; result = sum(io -&gt; value);
+(gdb) print io-&gt;value
+$4 = 9
+(gdb) set variable io-&gt;value=10
+(gdb) n
+25          printf(&#34;Your enter: %d, result:%d\n&#34;, io -&gt; value, io -&gt; result);
+(gdb) n
+Your enter: 10, result:55
+26          return 0;
+</code></pre></td></tr></table>
+</div>
+</div><p><code>set $r0=xxx</code>：设置r0寄存器的值为xxx。</p>
+<h3 id="生成内核转储文件">生成内核转储文件*</h3>
+<p>通过<code>generate-core-file</code>生成core.xxxx转储文件。</p>
+<p>然后<code>gdb ./main ./core.xxxx</code>查看恢复的现场。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) generate-core-file
+warning: target file /proc/14188/cmdline contained unexpected null characters
+Saved corefile core.14188 
+
+
+lwy@lwysLaptop:~/workspace/gdbtest$ gdb ./main ./core.14188 
+Type &#34;apropos word&#34; to search for commands related to &#34;word&#34;...
+Reading symbols from ./main...
+[New LWP 14188]
+Core was generated by `/home/lwy/workspace/gdbtest/main 9&#39;.
+Program terminated with signal SIGTRAP, Trace/breakpoint trap.
+#0  main (argc=2, argv=0x7fffffffe048) at main.c:26
+26          return 0;
+</code></pre></td></tr></table>
+</div>
+</div><p>另一命令<code>gcore</code>可以从命令行直接生成内核转储文件。</p>
+<blockquote>
+<p>gcore <code>pidof 命令</code>：无需停止正在执行的程序以获得转储文件。</p>
+</blockquote>
+<h3 id="attach到进程">attach到进程*</h3>
+<p>如果程序已经运行，或者是调试陷入死循环而无法返回控制台进程，可以使用<code>attach</code>命令。</p>
+<blockquote>
+<p>attach pid</p>
+</blockquote>
+<p>通过ps aux可以查看进程的pid，然后使用bt查看栈帧。</p>
+<p>以top为例操作步骤为：</p>
+<blockquote>
+<ol>
+<li>
+<p>ps -aux查看进程pid，为16974.</p>
+</li>
+<li>
+<p>sudo gdb attach 16974，使用gdb 附着到top命令。</p>
+</li>
+<li>
+<p>使用bt full查看，当前栈帧。此时使用print等查看信息。</p>
+</li>
+<li>
+<p>还可以通过info proc查看进程信息。</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="反复执行">反复执行</h3>
+<p>continue、step、stepi、next、nexti都可以指定重复执行的次数。</p>
+<p><code>ignore 断点编号 次数</code>：可以忽略指定次数断点。</p>
+<h3 id="dump内存到指定文件">dump内存到指定文件</h3>
+<p>在gdb调试中可能需要将一段内存导出到文件中，可以借助<code>dump</code>命令。</p>
+<p>命令格式：</p>
+<blockquote>
+<p>dump binary memory FILE START STOP</p>
+</blockquote>
+<p>比如<code>dump binary memory ./dump.bin 0x0 0x008000000</code>，将内存区间从0x0到0x00800000导出到dump.bin中。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-04-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/gdb/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/gdb/" data-title="GDB调试基础" data-hashtags="GDB,Compile"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://example.com/gdb/" data-hashtag="GDB"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://example.com/gdb/" data-title="GDB调试基础"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://example.com/gdb/" data-title="GDB调试基础"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/gdb/" data-title="GDB调试基础" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/gdb/">GDB</a>,&nbsp;<a href="/tags/compile/">Compile</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/make_lib/" class="prev" rel="prev" title="Makefile与库的制作"><i class="fas fa-angle-left fa-fw"></i>Makefile与库的制作</a>
+            <a href="/compile_link/" class="next" rel="next" title="编译与链接">编译与链接<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
