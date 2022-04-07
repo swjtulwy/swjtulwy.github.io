@@ -61,5 +61,8 @@
             <loc>https://example.com/categories/operating-system/</loc><lastmod>2021-03-29T21:55:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/posix/</loc><lastmod>2021-03-29T21:55:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/ifndef/</loc><lastmod>2021-03-19T08:55:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/categories/english/</loc><lastmod>2019-04-17T15:15:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/grammar/</loc><lastmod>2019-04-17T15:15:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
+            <loc>https://example.com/categories/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/fileio/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

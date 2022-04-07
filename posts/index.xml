@@ -53,5 +53,19 @@
     <author>作者</author>
     <guid>https://example.com/ifndef/</guid>
     <description><![CDATA[IFNDEF ifndef的含义是If not define, 其搭配使用如下 1 2 3 4 5 6 7 8 9 10 11 12 13 // xxx.h #ifndef __INCxxx.h #define __INCxxx.h #ifndef __cpluscplus extern &#34;C&#34; { #endif /*...*/ #ifndef } #endif #endif 1.多次包含的情况 include xxx 就是将xxx的]]></description>
+</item><item>
+    <title>英语语法浅析</title>
+    <link>https://example.com/grammar/</link>
+    <pubDate>Wed, 17 Apr 2019 15:15:01 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/grammar/</guid>
+    <description><![CDATA[作者：若愚英塾 链接：https://www.zhihu.com/question/294752032/answer/2141847794 来源]]></description>
+</item><item>
+    <title>Unix文件IO</title>
+    <link>https://example.com/fileio/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/fileio/</guid>
+    <description><![CDATA[]]></description>
 </item></channel>
 </rss>
