@@ -6,32 +6,32 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="referrer" content="no-referrer">
-        <title>进程 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="进程" />
+        <title>Unix进程模型 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="Unix进程模型" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://example.com/process/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-01T22:07:30+08:00" />
-<meta property="article:modified_time" content="2021-04-01T22:07:30+08:00" />
+<meta property="article:published_time" content="2021-04-06T08:28:33+08:00" />
+<meta property="article:modified_time" content="2021-04-06T08:28:33+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://example.com/logo.png"/>
 
-<meta name="twitter:title" content="进程"/>
+<meta name="twitter:title" content="Unix进程模型"/>
 <meta name="twitter:description" content=""/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/process/" /><link rel="prev" href="https://example.com/posix/" /><link rel="next" href="https://example.com/make_lib/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/process/" /><link rel="prev" href="https://example.com/make_lib/" /><link rel="next" href="https://example.com/gdb/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "进程",
+        "headline": "Unix进程模型",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/process\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Process","wordcount":  0 ,
-        "url": "https:\/\/example.com\/process\/","datePublished": "2021-04-01T22:07:30+08:00","dateModified": "2021-04-01T22:07:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Unix","wordcount":  9230 ,
+        "url": "https:\/\/example.com\/process\/","datePublished": "2021-04-06T08:28:33+08:00","dateModified": "2021-04-06T08:28:33+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -109,23 +109,872 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">进程</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Unix进程模型</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/operating-system/"><i class="far fa-folder fa-fw"></i>Operating System</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-01">2021-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 0 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 0 分钟&nbsp;<span id="/process/" class="leancloud_visitors" data-flag-title="进程">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-06">2021-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9230 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 19 分钟&nbsp;<span id="/process/" class="leancloud_visitors" data-flag-title="Unix进程模型">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp"
+        data-srcset="https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp, https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp 1.5x, https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp 2x"
+        data-sizes="auto"
+        alt="https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp"
+        title="https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp" /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#进程的概念">进程的概念</a></li>
+    <li><a href="#进程的状态模型">进程的状态模型</a></li>
+    <li><a href="#linux进程组织">Linux进程组织</a>
+      <ul>
+        <li><a href="#进程状态">进程状态</a></li>
+        <li><a href="#进程内存布局">进程内存布局</a></li>
+        <li><a href="#孤儿进程orphan">孤儿进程（orphan）</a></li>
+        <li><a href="#僵尸进程zombie">僵尸进程（zombie）</a>
+          <ul>
+            <li><a href="#僵尸进程解决办法">僵尸进程解决办法</a>
+              <ul>
+                <li><a href="#通过信号机制">通过信号机制</a></li>
+                <li><a href="#fork两次">fork两次</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#守护进程">守护进程</a>
+          <ul>
+            <li><a href="#控制终端">控制终端</a></li>
+            <li><a href="#进程组">进程组</a></li>
+            <li><a href="#会话">会话</a></li>
+            <li><a href="#守护进程-1">守护进程</a>
+              <ul>
+                <li><a href="#守护进程特征">守护进程特征</a></li>
+                <li><a href="#一般守护进程创建步骤">一般守护进程创建步骤</a></li>
+              </ul>
+            </li>
+            <li><a href="#示例">示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#进程管理命令">进程管理命令</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#ps">ps</a></li>
+              </ul>
+            </li>
+            <li><a href="#top">top</a></li>
+            <li><a href="#pgrep">pgrep</a></li>
+            <li><a href="#pstree">pstree</a></li>
+            <li><a href="#改变进程的运行方式">改变进程的运行方式</a>
+              <ul>
+                <li><a href="#挂起当前的进程">挂起当前的进程</a></li>
+                <li><a href="#查看后台的进程">查看后台的进程</a></li>
+                <li><a href="#将后台的进程恢复运行">将后台的进程恢复运行</a></li>
+                <li><a href="#用pkill命令终止进程">用pkill命令终止进程</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="进程的概念">进程的概念</h2>
+<p>进程（Process）是计算机中的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。在早期面向进程设计的计算机结构中，进程是程序的基本执行实体；在当代面向线程设计的计算机结构中，进程是线程的容器。程序是指令、数据及其组织形式的描述，进程是程序的实体。</p>
+<p>  一个进程在CPU上运行可以有两种运行模式（进程状态）：用户模式和内核模式。如果当前运行的是用户程序（用户代码），那么对应进程就处于用户模式（用户态），如果出现系统调用或者发生中断，那么对应进程就处于内核模式（核心态）</p>
+<h2 id="进程的状态模型">进程的状态模型</h2>
+<p>下图为进程的7状态模型，常用的5状态模型在该图的基础上去掉了挂起状态。其中包括如下状态：</p>
+<ul>
+<li>
+<p><strong>New State</strong>：New state is the state when the process is under creation</p>
+</li>
+<li>
+<p><strong>Ready State</strong>: When the process is created new state comes, which is called <em>ready state.</em>  After creation process comes under ready state. In ready state more than one process can also come.  For example: One process is created at the same time second process is created then both the process will come under ready state.</p>
+</li>
+<li>
+<p><strong>Running State</strong>: From ready state we have to select a process, and then have to allot CPU to that process for run.  When CPU is allotted to process in ready state that process comes in <em>running state.</em>  In running state only one process can stay at a time. Because CPU can be allotted to single process at a time.</p>
+</li>
+<li>
+<p><strong>Wait State</strong>: When a process request for input/output than that process will left the running state, and will join new state known as wait state.  In wait state more than one process can stay. After completion of I/O request process will go to ready state.</p>
+</li>
+<li>
+<p><strong>Termination State</strong>: When process comes in running state, there is no more input output request by the process, because it’s already get completed.  So process will go to <em>termination state.</em></p>
+</li>
+<li>
+<p><strong>Suspend Ready State</strong>: When ready state is not able to occupy more states in it, than some states are suspended in <em>suspended state.</em> Suspend ready state will be in <em>secondary memory</em> not in primary memory. When ready state get space for new processes than, processes from suspended ready state gets switch back to ready state.  Such transaction is known as <em>resume.</em></p>
+</li>
+<li>
+<p><strong>Suspend Wait State</strong>: Similarly suspend wait state is also reside in process state diagram.</p>
+</li>
+</ul>
+<img src="https://i0.hdslb.com/bfs/album/5d684d7f561832c46614cabf50fb18ac819bc078.png" title="" alt="" data-align="center">
+<h2 id="linux进程组织">Linux进程组织</h2>
+<p>Linux进程通过一个<code>task_struct</code>结构体描述，在<code>linux/sched.h</code>中定义，通过理解该结构，可更清楚的理解linux进程模型。包含进程所有信息的<code>task_struct</code>数据结构是比较庞大的，但是该数据结构本身并不复杂，我们将它的所有域按其功能可做如下划分：</p>
+<ul>
+<li>   进程状态（State）</li>
+<li>   进程调度信息（Scheduling Information）</li>
+<li>   各种标识符（Identifiers）</li>
+<li>   进程通信有关信息（IPC：Inter_Process Communication）</li>
+<li>   时间和定时器信息（Times and Timers）</li>
+<li>   进程链接信息（Links）</li>
+<li>   文件系统信息（File System）</li>
+<li>   虚拟内存信息（Virtual Memory）</li>
+<li>   页面管理信息（page）</li>
+<li>   对称多处理器（SMP）信息</li>
+<li>   和处理器相关的环境（上下文）信息（Processor Specific Context）</li>
+<li>   其他信息</li>
+</ul>
+<h3 id="进程状态">进程状态</h3>
+<p>为了对进程从产生到消亡的整个过程进行跟踪和描述，就需要定义各种进程的各种状态并制定相应的状态转换策略，以此来控制进程的运行。</p>
+<p>Linux系统中，进程状态在 <code>task_struct</code> 中定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">volatile</span> <span class="kt">long</span> <span class="n">state</span><span class="p">;</span>    <span class="cm">/* -1 unrunnable, 0 runnable, &gt;0 stopped */</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其状态取值如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#define TASK_RUNNING        0
+</span><span class="cp">#define TASK_INTERRUPTIBLE  1
+</span><span class="cp">#define TASK_UNINTERRUPTIBLE    2
+</span><span class="cp">#define __TASK_STOPPED      4
+</span><span class="cp">#define __TASK_TRACED       8
+</span><span class="cp"></span><span class="cm">/* in tsk-&gt;exit_state */</span>
+<span class="cp">#define EXIT_ZOMBIE     16
+</span><span class="cp">#define EXIT_DEAD       32
+</span><span class="cp"></span><span class="cm">/* in tsk-&gt;state again */</span>
+<span class="cp">#define TASK_DEAD       64
+</span><span class="cp">#define TASK_WAKEKILL       128
+</span><span class="cp">#define TASK_WAKING     256
+</span><span class="cp">#define TASK_STATE_MAX      512
+</span></code></pre></td></tr></table>
+</div>
+</div><p>对进程每个状态简析如下：</p>
+<ul>
+<li>
+<p><code>TASK_RUNNING </code>（可运行状态）：处于这种状态的进程，要么正在运行、要么正准备运行。正在运行的进程就是当前进程（由<code>current</code>所指向的进程），而准备运行的进程只要得到CPU就可以立即投入运行，CPU是这些进程唯一等待的系统资源。</p>
+</li>
+<li>
+<p><code>TASK_INTERRUPTIBLE</code>（可中断的等待状态）：表示进程被阻塞（睡眠），直到某个条件达成，进程的状态就被设置为<code>TASK_RUNNING</code>。处于该状态的进程正在等待某个事件（<code>event</code>）或某个资源，而被挂起。对应的<code>task_struct</code>结构被放入对应事件的等待队列中。处于可中断等待态的进程可以被信号（外部中断触发或者其他进程触发）唤醒，如果收到信号，该进程就从等待状态进入可运行状态，并且加入到运行队列中，等待被调度。</p>
+</li>
+<li>
+<p><code>TASK_UNINTERRUPTIBLE</code>（不可中断的等待状态）：该状态与 <code>TASK_INTERRUPTIBLE </code>状态类似，也表示进程被阻塞，处于睡眠状态。当进程等待的某些条件被满足了之后，内核也会将该进程的状态设置为 <code>TASK_RUNNING</code>。但是，处于这个状态下的进程不能在接收到某个信号之后立即被唤醒。这时该状态与 <code>TASK_INTERRUPTIBLE</code> 状态唯一的区别。</p>
+</li>
+<li>
+<p><code>__TASK_STOPPED</code>（暂停状态）：此时的进程暂时停止运行来接受某种特殊处理。通常当进程接收到<code>SIGSTOP</code>、<code>SIGTSTP</code>、<code>SIGTTIN</code>或 <code>SIGTTOU</code>信号后就处于这种状态。例如，正接受调试的进程就处于这种状态。</p>
+</li>
+<li>
+<p><code>__TASK_TRACED</code>（跟踪状态）：当前进程正在被另一个进程所监视。</p>
+</li>
+<li>
+<p><code>EXIT_ZOMBIE</code>（僵死状态）：进程虽然已经终止，但由于某种原因，父进程还没有执行wait()系统调用，终止进程的信息也还没有回收。顾名思义，处于该状态的进程就是死进程，这种进程实际上是系统中的垃圾，必须进行相应处理以释放其占用的资源。</p>
+</li>
+<li>
+<p><code>EXIT_DEAD</code>：一个进程的最终状态。</p>
+</li>
+</ul>
+<p>以下是LINUX进程间状态转换和内核调用图解</p>
+<img src="https://i0.hdslb.com/bfs/album/d15e830eabac7e7d47df0ad425732d19366f52a3.png@1e_1c.webp" title="" alt="" data-align="center">
+<h3 id="进程内存布局">进程内存布局</h3>
+<p>每个进程所分配的内存由很多部分组成，通常称之为“段（<code>segment</code>）”：</p>
+<ul>
+<li><strong>文本段</strong>：包含了进程运行的程序机器语言指令。文本段具有只读属性，以防止进程通过错误指针意外修改自身指令。因为多个进程可同时运行同一程序，所以又将文本段设为可共享，这样，一份程序代码的拷贝可以映射到所有这些进程的虚拟地址空间中。</li>
+<li><strong>初始化数据段</strong>：包含显示初始化的全局变量和静态变量。当程序加载到内存时，从可执行文件中读取这些变量的值。</li>
+<li><strong>未初始化数据段</strong>：包含了未进行显示初始化的全局变量和静态变量。程序启动之前，系统将本段内所有内存初始化为0。出于历史原因，此段常被称为<code>BSS</code>段，这源于老版本的汇编语言助记符“block started by symbol”。将经过初始化的全局变量和静态变量与未初始化的全局变量和静态变量分开存放，其主要原因在于程序在磁盘上存储时，没有必要为未经初始化的变量分配存储空间。相反，可执行文件只需记录未初始化数据段的位置及所需大小，直到运行时再由程序加载器来分配空间。</li>
+<li><strong>栈</strong>（<code>stack</code>）：是一个动态增长和收缩的段，有栈帧（<code>stack frames</code>）组成。系统会为每个当前调用的函数分配一个栈帧。栈帧中存储了函数的局部变量（所谓自动变量）、实参和返回值。</li>
+<li><strong>堆</strong>（<code>heap</code>）：是可在运行时（为变量）动态进行内存分配的一块区域。堆顶端称为<code>program break</code>。</li>
+</ul>
+<p>对于初始化和未初始化的数据段而言，不太常用、但表达更清晰的称为分别是用户初始化数据段（<code>user-initialized data segment</code>）和零初始化数据段（<code>zero-initialized data segment</code>）。</p>
+<img src="https://i0.hdslb.com/bfs/album/1bd649c75bd08d9fbae1dbb90374b5fe393e460a.png" title="" alt="" data-align="center">
+<p>在大多数Unix（包括Linux）中的C语言编程环境提供了3个全局符号（symbol）：<code>etext</code>、<code>edata</code>、<code>end</code>，可以在程序中使用这些符号以获取相应程序文本段、初始化数据段和非初始化数据段结尾处下一字节的地址。</p>
+<p>使用这些符号，必须显式声明如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// For example, &amp;etext gives the address of the end of the program text / start of initialized data
+</span><span class="c1"></span><span class="k">extern</span> <span class="kt">char</span> <span class="n">etext</span><span class="p">,</span> <span class="n">edata</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>图中标灰的区域表示这些范围在进程虚拟地址空间中不可用，也就是说，没有为这些区域创建页表（<code>page table</code>）。</p>
+<h3 id="孤儿进程orphan">孤儿进程（orphan）</h3>
+<p>我们知道在unix/linux中，正常情况下，子进程是通过父进程创建的，子进程在创建新的进程。子进程的结束和父进程的运行是一个异步过程,即父进程永远无法预测子进程 到底什么时候结束。 当一个 进程完成它的工作终止之后，它的父进程需要调用<code>wait()</code>或者<code>waitpid()</code>系统调用取得子进程的终止状态。</p>
+<p><strong>孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被<code>init</code>进程(进程号为1)所收养，并由<code>init</code>进程对它们完成状态收集工作。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+    <span class="cm">/*fpid表示fork函数返回的值,fork会返回两次，
+</span><span class="cm">    一次是父进程，返回值是子进程的Pid，在子进程会返回0*/</span>
+    <span class="n">pid_t</span> <span class="n">fpid</span><span class="p">;</span>
+    <span class="n">fpid</span><span class="o">=</span><span class="n">fork</span><span class="p">();</span><span class="c1">//fork后会出现两个分支执行下面的代码，一个父进程，一个新的子进程
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fork error!&#34;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span> <span class="c1">//父进程
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parent id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="c1">//睡眠30s，在子进程之前退出
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parend finally...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="僵尸进程zombie">僵尸进程（zombie）</h3>
+<p><strong>僵尸进程：一个进程使用<code>fork</code>创建子进程，如果子进程退出，而父进程并没有调用<code>wait</code>或<code>waitpid</code>获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中。这种进程称之为僵尸进程。</strong></p>
+<p>unix提供了一种机制可以保证只要父进程想知道子进程结束时的状态信息， 就可以得到。这种机制就是: 在每个进程退出的时候,内核释放该进程所有的资源,包括打开的文件,占用的内存等。 但是仍然为其保留一定的信息(包括进程号the process ID,退出状态the termination status of the process,运行时间the amount of CPU time taken by the process等)。直到父进程通过<code>wait / waitpid</code>来取时才释放。</p>
+<p>但这样就导致了问题，<strong>如果进程不调用<code>wait / waitpid</code>的话，</strong> <strong>那么保留的那段信息就不会释放，其进程号就会一直被占用，但是系统所能使用的进程号是有限的，如果大量的产生僵死进程，将因为没有可用的进程号而导致系统不能产生新的进程. 此即为僵尸进程的危害，应当避免。</strong></p>
+<p><strong>孤儿进程是没有父进程的进程，孤儿进程这个重任就落到了init进程身上</strong>，init进程就好像是一个民政局，专门负责处理孤儿进程的善后工作。每当出现一个孤儿进程的时候，内核就把孤 儿进程的父进程设置为init，而init进程会循环地<code>wait()</code>它的已经退出的子进程。这样，当一个孤儿进程凄凉地结束了其生命周期的时候，init进程就会代表党和政府出面处理它的一切善后工作。<strong>因此孤儿进程并不会有什么危害。</strong></p>
+<p>任何一个子进程(init除外)在<code>exit()</code>之后，并非马上就消失掉，而是留下一个称为僵尸进程(Zombie)的数据结构，等待父进程处理。**这是每个 子进程在结束时都要经过的阶段。如果子进程在<code>exit()</code>之后，父进程没有来得及处理，这时用<code>ps</code>命令就能看到子进程的状态是“Z”。如果父进程能及时 处理，可能用<code>ps</code>命令就来不及看到子进程的僵尸状态，但这并不等于子进程不经过僵尸状态。  如果父进程在子进程结束之前退出，则子进程将由init接管。init将会以父进程的身份对僵尸状态的子进程进行处理。</p>
+<p>僵尸进程危害场景：</p>
+<p>例如有个进程，它定期的产 生一个子进程，这个子进程需要做的事情很少，做完它该做的事情之后就退出了，因此这个子进程的生命周期很短，但是，父进程只管生成新的子进程，至于子进程 退出之后的事情，则一概不闻不问，这样，系统运行上一段时间之后，系统中就会存在很多的僵死进程，倘若用ps命令查看的话，就会看到很多状态为Z的进程。 严格地来说，僵死进程并不是问题的根源，罪魁祸首是产生出大量僵死进程的那个父进程。因此，当我们寻求如何消灭系统中大量的僵死进程时，答案就是把产生大 量僵死进程的那个元凶枪毙掉（也就是通过kill发送SIGTERM或者SIGKILL信号啦）。枪毙了元凶进程之后，它产生的僵死进程就变成了孤儿进 程，这些孤儿进程会被init进程接管，init进程会wait()这些孤儿进程，释放它们占用的系统进程表中的资源，这样，这些已经僵死的孤儿进程 就能瞑目而去了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+    <span class="cm">/*fpid表示fork函数返回的值,fork会返回两次，
+</span><span class="cm">    一次是父进程，返回值是子进程的Pid，在子进程会返回0*/</span>
+    <span class="n">pid_t</span> <span class="n">fpid</span><span class="p">;</span>
+    <span class="n">fpid</span><span class="o">=</span><span class="n">fork</span><span class="p">();</span><span class="c1">//fork后会出现两个分支执行下面的代码，一个父进程，一个新的子进程
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fork error!&#34;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="c1">//睡眠30s，在父进程之前退出
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child finally...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span> <span class="c1">//父进程
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parent id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parend finally...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="僵尸进程解决办法">僵尸进程解决办法</h4>
+<h5 id="通过信号机制">通过信号机制</h5>
+<p>子进程退出时向父进程发送<code>SIGCHILD</code>信号，父进程处理<code>SIGCHILD</code>信号。在信号处理函数中调用<code>wait</code>进行处理僵尸进程。测试程序如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">sig_child</span><span class="p">(</span><span class="kt">int</span> <span class="n">signo</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="c1">//创建捕捉子进程退出信号
+</span><span class="c1"></span>    <span class="n">signal</span><span class="p">(</span><span class="n">SIGCHLD</span><span class="p">,</span><span class="n">sig_child</span><span class="p">);</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am child process,pid id %d.I am exiting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am father process.I will sleep two seconds</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="c1">//等待子进程先退出
+</span><span class="c1"></span>    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="c1">//输出进程信息
+</span><span class="c1"></span>    <span class="n">system</span><span class="p">(</span><span class="s">&#34;ps -o pid,ppid,state,tty,command&#34;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;father process is exiting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">sig_child</span><span class="p">(</span><span class="kt">int</span> <span class="n">signo</span><span class="p">)</span>
+<span class="p">{</span>
+     <span class="n">pid_t</span>        <span class="n">pid</span><span class="p">;</span>
+     <span class="kt">int</span>        <span class="n">stat</span><span class="p">;</span>
+     <span class="c1">//处理僵尸进程
+</span><span class="c1"></span>     <span class="k">while</span> <span class="p">((</span><span class="n">pid</span> <span class="o">=</span> <span class="n">waitpid</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stat</span><span class="p">,</span> <span class="n">WNOHANG</span><span class="p">))</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child %d terminated.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="fork两次">fork两次</h5>
+<p>《Unix 环境高级编程》8.6节说的非常详细。原理是将<mark>子进程成为孤儿进程，从而其的父进程变为init进程</mark>，通过init进程可以处理僵尸进程。测试程序如下所示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">pid_t</span>  <span class="n">pid</span><span class="p">;</span>
+    <span class="c1">//创建第一个子进程
+</span><span class="c1"></span>    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//第一个子进程
+</span><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//子进程再创建子进程
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am the first child process.pid:%d</span><span class="se">\t</span><span class="s">ppid:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">(),</span><span class="n">getppid</span><span class="p">());</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//第一个子进程退出
+</span><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;first procee is exited.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//第二个子进程
+</span><span class="c1"></span>        <span class="c1">//睡眠3s保证第一个子进程退出，这样第二个子进程的父亲就是init进程里
+</span><span class="c1"></span>        <span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am the second child process.pid: %d</span><span class="se">\t</span><span class="s">ppid:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">(),</span><span class="n">getppid</span><span class="p">());</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//父进程处理第一个子进程退出
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pid</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;waitepid error:&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="守护进程">守护进程</h3>
+<h4 id="控制终端">控制终端</h4>
+<p>在 UNIX 系统中，用户通过终端登录系统后得到一个 shell 进程，这个终端成为 shell 进程的<strong>控制终端</strong>（Controlling Terminal），进程中，控制终端是保存在 <code>PCB</code> 中的信息，而 <code>fork() </code>会复制 PCB 中的信息，因此由 shell 进程启动的其它进程的控制终端也是这个终端。</p>
+<p>默认情况下（没有重定向），每个进程的标准输入、标准输出和标准错误输出都指向控制终端，进程从标准输入读也就是读用户的键盘输入，进程往标准输出或标准错误输出写也就是输出到显示器上。</p>
+<p>在控制终端输入一些特殊的控制键可以给前台进程发信号，例如<code>Ctrl + C</code>会产生 <code>SIGINT </code>信号，<code>Ctrl + \ </code>会产生 <code>SIGQUIT </code>信号</p>
+<p><strong>进程组</strong>和<strong>会话</strong>在进程之间形成了一种两级层次关系：<strong>进程组是一组相关进程的集合，会话是一组相关进程组的集合</strong>。进程组和会话是为支持 <strong>shell 作业控制</strong>而定义的抽象概念，用户通过 shell 能够交互式地在前台或后台运行命令。</p>
+<h4 id="进程组">进程组</h4>
+<p>进程组由一个或多个共享同一进程组标识符（<code>PGID</code>）的进程组成。一个进程组拥有一个进程组首进程，该进程是创建该组的进程，其进程 ID 为该进程组的 ID，新进程会继承其父进程所属的进程组 ID。</p>
+<p>进程组拥有一个生命周期，其<strong>开始时间为首进程创建组的时刻，结束时间为最后一个成员进程退出组的时刻</strong>。一个进程可能会因为终止而退出进程组，也可能会因为加入了另外一个进程组而退出进程组。<strong>进程组首进程无需是最后一个离开进程组的成员</strong></p>
+<h4 id="会话">会话</h4>
+<p><strong>会话是一组进程组的集合。会话首进程是创建该新会话的进程</strong>，其进程 ID 会成为会话 ID。新进程会继承其父进程的会话 ID。</p>
+<p><strong>一个会话中的所有进程共享单个控制终端</strong>。控制终端会在会话首进程首次打开一个终端设备时被建立。一个终端最多可能会成为一个会话的控制终端。</p>
+<p><strong>在任一时刻，会话中的其中一个进程组会成为终端的前台进程组，其他进程组会成为后台进程组</strong>。只有前台进程组中的进程才能从控制终端中读取输入。当用户在控制终端中输入终端字符生成信号后，该信号会被发送到前台进程组中的所有成员。</p>
+<p>当控制终端的连接建立起来之后，<strong>会话首进程会成为该终端的控制进程</strong></p>
+<img src="https://i0.hdslb.com/bfs/album/72b29d2f169c0222c15c3cadacae62607bf1c6af.png" title="" alt="" data-align="center">
+<h4 id="守护进程-1">守护进程</h4>
+<p><strong>守护进程</strong>（Daemon Process），也就是通常说的 <code>Daemon </code>进程（精灵进程），是Linux 中的后台服务进程。它是一个生存期较长的进程，通常独立于控制终端并且周期性地执行某种任务或等待处理某些发生的事件。一般采用以 d 结尾的名字。</p>
+<h5 id="守护进程特征">守护进程特征</h5>
+<p>生命周期很长，守护进程会在系统启动的时候被创建并一直运行直至系统被关闭。</p>
+<p>它在后台运行并且不拥有控制终端。没有控制终端确保了内核永远不会为守护进程自动生成任何控制信号以及终端相关的信号（如 <code>SIGINT</code>、<code>SIGQUIT</code>）。</p>
+<h5 id="一般守护进程创建步骤">一般守护进程创建步骤</h5>
+<p>Linux 的大多数服务器就是用守护进程实现的。比如，Internet 服务器 inetd，Web 服务器 httpd 等。</p>
+<ol>
+<li>
+<p>执行一个 <code>fork()</code>，之后父进程退出，子进程继续执行。</p>
+</li>
+<li>
+<p>子进程调用 <code>setsid()</code> 开启一个新会话。</p>
+</li>
+<li>
+<p>清除进程的 <code>umask</code> 以确保当守护进程创建文件和目录时拥有所需的权限。</p>
+</li>
+<li>
+<p>修改进程的当前工作目录，通常会改为根目录（<code>/</code>）。</p>
+</li>
+<li>
+<p>关闭守护进程从其父进程继承而来的所有打开着的文件描述符。</p>
+</li>
+<li>
+<p>在关闭了文件描述符0、1、2之后，守护进程通常会打开<code>/dev/null</code> 并使用<code>dup2() </code>使所有这些描述符指向这个设备。</p>
+</li>
+<li>
+<p>核心业务逻辑</p>
+</li>
+</ol>
+<h4 id="示例">示例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"> <span class="cm">/*
+</span><span class="cm">    写一个守护进程，每隔2s获取一下系统时间，将这个时间写入到磁盘文件中。
+</span><span class="cm">*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 捕捉到信号之后，获取系统时间，写入磁盘文件
+</span><span class="c1"></span>    <span class="n">time_t</span> <span class="n">tm</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tm</span><span class="p">);</span>
+    <span class="c1">// char buf[1024];
+</span><span class="c1"></span>
+    <span class="c1">// sprintf(buf, &#34;%d-%d-%d %d:%d:%d\n&#34;,loc-&gt;tm_year,loc-&gt;tm_mon
+</span><span class="c1"></span>    <span class="c1">// ,loc-&gt;tm_mday, loc-&gt;tm_hour, loc-&gt;tm_min, loc-&gt;tm_sec);
+</span><span class="c1"></span>
+    <span class="c1">// printf(&#34;%s\n&#34;, buf);
+</span><span class="c1"></span>
+    <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="n">asctime</span><span class="p">(</span><span class="n">loc</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;time.txt&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">O_APPEND</span><span class="p">,</span> <span class="mo">0664</span><span class="p">);</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">fd</span> <span class="p">,</span><span class="n">str</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// 1.创建子进程，退出父进程
+</span><span class="c1"></span>    <span class="n">pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 2.将子进程重新创建一个会话
+</span><span class="c1"></span>    <span class="n">setsid</span><span class="p">();</span>
+
+    <span class="c1">// 3.设置掩码
+</span><span class="c1"></span>    <span class="n">umask</span><span class="p">(</span><span class="mo">022</span><span class="p">);</span>
+
+    <span class="c1">// 4.更改工作目录
+</span><span class="c1"></span>    <span class="n">chdir</span><span class="p">(</span><span class="s">&#34;/home/nowcoder/&#34;</span><span class="p">);</span>
+
+    <span class="c1">// 5. 关闭、重定向文件描述符
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;/dev/null&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDIN_FILENO</span><span class="p">);</span>
+    <span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span>
+    <span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDERR_FILENO</span><span class="p">);</span>
+
+    <span class="c1">// 6.业务逻辑
+</span><span class="c1"></span>
+    <span class="c1">// 捕捉定时信号
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">sigaction</span> <span class="n">act</span><span class="p">;</span>
+    <span class="n">act</span><span class="p">.</span><span class="n">sa_flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">act</span><span class="p">.</span><span class="n">sa_handler</span> <span class="o">=</span> <span class="n">work</span><span class="p">;</span>
+    <span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">act</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+    <span class="n">sigaction</span><span class="p">(</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">act</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="k">struct</span> <span class="n">itimerval</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">val</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">val</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">val</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">val</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// 创建定时器
+</span><span class="c1"></span>    <span class="n">setitimer</span><span class="p">(</span><span class="n">ITIMER_REAL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="c1">// 不让进程结束
+</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="进程管理命令">进程管理命令</h3>
+<h5 id="ps">ps</h5>
+<p>ps命令（<code>Processes  Statistic</code>）时Linux系统中最为常用的进程查看工具，主要用于显示包含当前运行的各进程完整信息的静态快照。通过不同的命令选项，可以有选择性地查看进程信息。</p>
+<p>■ a：显示当前终端下的所有进程信息，包括其他用户的进程。与“x”选项结合时将显示系统中所有的进程信息。</p>
+<p>■ u：使用以用户为主的格式输出进程信息。</p>
+<p>■ x：显示当前用户在所有终端下的进程信息。</p>
+<p>■ –e：显示系统内的所有进程信息。</p>
+<p>■ –l：使用长格式显示进程信息。</p>
+<p>■ –f：使用完整的格式显示进程信息。</p>
+<p>以上是ps命令中几个常用的选项，需要注意的是，有一部分选项时不带“-”前缀的。习惯上将上述选项组合在一起使用，如执行“<code>ps aux</code>”或“<code>ps -elf</code>”</p>
+<img src="https://i0.hdslb.com/bfs/album/7acd5951c3a44a4432cabc9d7a16d2ed3440f6c2.png" title="" alt="" data-align="center">
+<p>上述输出信息中，第一行为列表标题，其各字段的含义描述如下。</p>
+<p>■ USER：启动该进程的户账号的名称。</p>
+<p>■ PID：该进程在系统中的数字ID号，在当前系统中是唯一的。</p>
+<p>■ TTY：表明该进程在哪个终端上运行。“？”表示未知或不需要终端。</p>
+<p>■ STAT:显示了进程当前的状态，如S（休眠）、R（运行）、Z（僵死）、&lt;（高优先级）、N（低优先级）、s（父进程）、+（前台进程）。</p>
+<p>■ START：启动该进程的时间。</p>
+<p>■ TIME：该进程占用的CPU时间。</p>
+<p>■ COMMAND：启动该进程的命令的名称。</p>
+<p>■ %CPU：CPU占用的百分比。</p>
+<p>■ %MEM：内存占用的百分比。</p>
+<p>■ VSZ：占用虚拟内存（swap空间）的大小。</p>
+<p>■ RSS：占用常驻内存（物理内存）的大小。</p>
+<h4 id="top">top</h4>
+<p>top命令将会在当前终端以全屏交互式的界面显示进程排名，及时跟踪包括CPU、内存等系统资源占用情况，默认情况下每三秒刷新一次。作用类似Windows系统中的“任务管理器”。</p>
+<img src="https://i0.hdslb.com/bfs/album/bd6bce53bfcc21d7823cd16aabf1da5d883f5372.png" title="" alt="" data-align="center">
+<p>上述输出信息中，开头的部分显示了系统任务（Tasks）、CPU占用、内存占用（Mem）、交换空间（Swap）等汇总信息；汇总信息下方依次显示当前进程的排名情况。相关信息的含义表述如下。</p>
+<p><strong>系统任务（Tasks）信息</strong>：<code>total</code>，总进程数; <code>running</code>,正在运行的进程数；<code>sleeping</code>，休眠的进程数；<code>stopped</code>，终止的进程数；<code>zombie</code>，僵死无响应的进程数。</p>
+<p><strong>CPU占用信息</strong>：<code>us</code>，用户占用；<code>sy</code>，内核占用；<code>ni</code>，优先级调度占用；<code>id</code>，空闲CPU；<code>wa</code>，1/0等占用； <code>hi</code>，硬件中断占用，<code>si</code>，软件中断占用；<code>st</code>，虚拟化占用。</p>
+<p><strong>内存占用（Mem）信息</strong>：<code>total</code>，总内存空间；<code>used</code>，已用内存；<code>free</code>，空闲内存；<code>buffers</code>，缓冲区域。</p>
+<p><strong>交换空间（Swap）占用</strong>：<code>total</code>，总内存空间；<code>used</code>，已用内存；<code>free</code>，空闲内存；     <code>buffers</code>，缓冲区域。</p>
+<p>在<code>top</code>命令的全屏操作界面中：可以按P键根据CPU占用情况对进程列表进行排序。</p>
+<blockquote>
+<p>按M键根据内存占用情况进行排序。</p>
+<p>按N键根据启动时间进行排序。</p>
+<p>按h键可以获得top程序的在线帮助。</p>
+<p>按q键可以正常的退出top程序。</p>
+<p>按k键在列表上方会出现“PID to kill：”的提示信息，根据提示输入指定进程的PID并按Enter键确认即可终止对应的进程。</p>
+</blockquote>
+<h4 id="pgrep">pgrep</h4>
+<p>使用<code>pgrep</code>命令可以根据进程的名称、运行该进程的用户、进程所在的终端等多种属性查询特定进程的PID号。</p>
+<p>通过pgrep命令，可以只指定进程的一部分名称进行查询，结合“-l”选项可同时输出对应的进程名（否则只输PID号，不便于理解）。例如，查询进程中包含“log”的进程及其PID号，可以执行以下操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># pgrep -l “log”</span>
+<span class="m">2538</span>  rsyslog
+<span class="m">2113</span>  mcelog
+</code></pre></td></tr></table>
+</div>
+</div><p>还可以结合“-U”选项查询特定用户的进程、“-t”选项查询在特定终端运行的进程。例如，若要查询用户zhangsan在tty3终端上运行的进程及PID号，可以执行以下操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># pgrep -l -U zhangsan-t tty3</span>
+<span class="m">2105</span> bash
+<span class="m">2122</span> vim
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="pstree">pstree</h4>
+<p><code>pstree</code>命令可以输出Linux系统中各进程的树形结构，以更加直观地判断出各进程之间的相互关系（父、子进程）。</p>
+<p><code>pstree</code>命令默认情况下只显示个进程的名称，结合“-p”选项使用时可以同时列出对应的PID号，结合“-u”选项可以列出对应的用户名，结合“-a”选项可以列出完整的命令信息。例如，执行“<code>pstree -aup</code>”命令可以查看当前系统的进程树，包括个进程对应的PID号、用户名、完整命令等信息。从出输出结果中可以看出，init进程确实是Linux系统中所有进程的“始祖”</p>
+<h4 id="改变进程的运行方式">改变进程的运行方式</h4>
+<h5 id="挂起当前的进程">挂起当前的进程</h5>
+<p>  当Linux系统中的命令正在前台执行时（运行尚未结束），按<code>Ctrl+Z</code>组合键可以将当前进程挂起（调入后台并停止执行），这种操作在需要暂停当前进程并进行其他操作时特别有用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># cp /dev/cdrom/mnt/Redhat6.0.iso</span>
+<span class="o">[</span>1<span class="o">]</span>+ Stopped     cp -i/dev/cdrom /mnt/Redhat6.0.iso
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="查看后台的进程">查看后台的进程</h5>
+<p>查看当前终端中在后台运行的进程任务时，可以使用<code>jobs</code>命令，结合“<code>-l</code>”选项可以同时显示出该进程对应的PID号。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># jobs -l</span>
+<span class="o">[</span>1<span class="o">]</span>+  <span class="m">2193</span> Stopped cp -i /dev/cdrom /mnt/Redhat6.0.iso
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="将后台的进程恢复运行">将后台的进程恢复运行</h5>
+<p>■ 使用<code>bg</code>（BackGround，后台）命令，可以将后台中暂定执行（如按<code>Ctrl+Z</code>组合键挂起）的任务恢复运行，继续在后台执行操作、</p>
+<p>■ 使用<code>fg</code>命令（ForeGround，前台）命令，可以将后台任务重新恢复到前台运行。</p>
+<p>除非后台中的任务只有一个，否则<code>bg</code>和<code>fg</code>命令都需要指定后台进程的任务编号作为参数。</p>
+<p>例如，执行“<code>fg 1</code>”命令可以将之前挂起至后台的cp进程重新调入前台执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># jobs</span>
+<span class="o">[</span>1<span class="o">]</span>+ Stopped         cp -i/dev/cdrom /mnt/Redhat6.0.iso
+<span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># fg 1</span>
+cp -i /dev/cdrom /mnt/Redhat6.0.iso
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="用pkill命令终止进程">用pkill命令终止进程</h5>
+<p>使用pkill命令可以根据进程的名称、运行该进程的用户、进程所在的终端等多种属性终止特定的进程，大部分选项与<code>pgrep</code>命令基本类似，如“<code>-U</code>”（指定用户）、“<code>-t</code>”（指定终端）等选项。</p>
+<p>例如，若要终止由用户zhangsan启动的进程（包括登陆Shell），可以执行以下操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pgrep -l -U&#34;zhangsan&#34;</span>
+<span class="m">2105</span> bash
+<span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pkill -9 -U&#34;zhangsan&#34;</span>
+<span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pgrep -l -U&#34;zhangsan&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2021-04-01</span>
+                <span>更新于 2021-04-06</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -134,20 +983,20 @@
                             <a class="link-to-markdown" href="/process/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/process/" data-title="进程" data-hashtags="Process"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://example.com/process/" data-hashtag="Process"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://example.com/process/" data-title="进程"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://example.com/process/" data-title="进程"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/process/" data-title="进程" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/process/" data-title="Unix进程模型" data-hashtags="Unix"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://example.com/process/" data-hashtag="Unix"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://example.com/process/" data-title="Unix进程模型"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://example.com/process/" data-title="Unix进程模型"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/process/" data-title="Unix进程模型" data-image="https://i0.hdslb.com/bfs/album/8333bd119b871a8e02e37575c8251a40d432e614.png@1e_1c.webp" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/process/">Process</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/unix/">Unix</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posix/" class="prev" rel="prev" title="POSIX是什么"><i class="fas fa-angle-left fa-fw"></i>POSIX是什么</a>
-            <a href="/make_lib/" class="next" rel="next" title="Makefile与库的制作">Makefile与库的制作<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/make_lib/" class="prev" rel="prev" title="Makefile与库的制作"><i class="fas fa-angle-left fa-fw"></i>Makefile与库的制作</a>
+            <a href="/gdb/" class="next" rel="next" title="GDB调试基础">GDB调试基础<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
@@ -163,5 +1012,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
