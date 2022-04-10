@@ -56,10 +56,12 @@
             <loc>https://example.com/tags/compile/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/gnu/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/compile_link/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/socket/</loc><lastmod>2021-04-17T21:58:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/unix/</loc><lastmod>2021-04-17T21:58:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/unix_socket/</loc><lastmod>2021-04-17T21:58:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/linux_multi_threads/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/multithreads/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/categories/operating-system/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/tags/unix/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/ipc/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/linux/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/ipc/</loc><lastmod>2021-04-10T19:25:54&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

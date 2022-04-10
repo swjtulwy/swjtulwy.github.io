@@ -3,8 +3,6 @@
 
 <!--more-->
 
-
-
 https://vim-adventures.com/  
 
 我的配置文件看这里：  
