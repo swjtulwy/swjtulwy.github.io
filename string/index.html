@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>字符串的一些问题 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="字符串的一些问题" />
+<meta property="og:description" content="初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C&#43;&#43;发现字符串的处理可以这么方便。但是C&#43;&#43;又为了兼容C，导致经常有混用的情况。本" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/string/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-08-15T18:30:54+00:00" />
+<meta property="article:modified_time" content="2019-08-15T18:30:54+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="字符串的一些问题"/>
+<meta name="twitter:description" content="初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C&#43;&#43;发现字符串的处理可以这么方便。但是C&#43;&#43;又为了兼容C，导致经常有混用的情况。本"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/string/" /><link rel="prev" href="https://example.com/understand_const/" /><link rel="next" href="https://example.com/ifndef/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "字符串的一些问题",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/string\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  2213 ,
+        "url": "https:\/\/example.com\/string\/","datePublished": "2019-08-15T18:30:54+00:00","dateModified": "2019-08-15T18:30:54+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/string/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/string/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">字符串的一些问题</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-15">2019-08-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2213 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/string/" class="leancloud_visitors" data-flag-title="字符串的一些问题">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串字面值string-literal">字符串字面值(string literal)</a></li>
+    <li><a href="#c风格字符串">C风格字符串</a></li>
+    <li><a href="#c风格字符串-1">C++风格字符串</a></li>
+    <li><a href="#字符串与整型的互相转换">字符串与整型的互相转换</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本文就重点介绍C++中的字符串和C风格字符串的区别。</p>
+<p>首先，明确一点，C语言中的字符串以及相关的标准库都能完全在C++中兼容使用。所以在介绍C++中的字符串特指C++中特有的。下面介绍几个概念</p>
+<h2 id="字符串字面值string-literal">字符串字面值(string literal)</h2>
+<p>字符串字面值是一串常量字符，字符串字面值常量用双引号括起来的零个或多个字符表示，为兼容C语言，C++中所有的字符串字面值都由编译器自动在末尾添加一个空字符。
+字符串没有变量名字，自身表示自身</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="s">&#34;Hello World!&#34;</span> <span class="c1">//simple string literal
+</span><span class="c1"></span><span class="s">&#34;&#34;</span> <span class="c1">//empty string literal
+</span><span class="c1"></span><span class="s">&#34;</span><span class="se">\n</span><span class="s">CC</span><span class="se">\t</span><span class="s">options</span><span class="se">\t</span><span class="s">file.[cC]</span><span class="se">\n</span><span class="s">&#34;</span> <span class="c1">//string literal using newlines and tabs
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">字符字面值： &#39;A&#39; //single quote:character literal
+字符串字面值： &#34;A&#34; //double quote:character string literal.包含字母A和空字符的字符串
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>字符串字面值可以赋值给变量，但是与字符串字面值相关联的内存空间位于只读部分，因此它是常量字符数组。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">char</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+<span class="n">ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span><span class="c1">//crash! attemps to write to read-only memory. //只读
+</span></code></pre></td></tr></table>
+</div>
+</div><p>因此，当引用字符串字面值的时候使用指向const的字符数组。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+<span class="n">ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span><span class="c1">//bug! attempts to write to read-only memory.
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>当将字符串字面值赋值给字符数组的初始值的时候。由于字符数组存放与栈中，不允许引用其他地方的内存，因此编译器会将字符串字面值复制到栈的数组内存中。因此，可以进行相应的修改。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">char</span> <span class="n">stackArray</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+<span class="n">stackArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="c风格字符串">C风格字符串</h2>
+<p>字符串字面值的类型实质是const char类型的数组。C++从C语言继承下来的一种通用结构是C风格字符串，而字符串字面值就是该类型的实例。C风格字符串是以空字符null结束的字符数组。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">char</span> <span class="n">ca1</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;+&#39;</span><span class="p">,</span> <span class="sc">&#39;+&#39;</span><span class="p">};</span> <span class="c1">// no null, not C-style string
+</span><span class="c1"></span><span class="kt">char</span> <span class="n">ca2</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;+&#39;</span><span class="p">,</span> <span class="sc">&#39;+&#39;</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">};</span> <span class="c1">// explicit null
+</span><span class="c1"></span><span class="kt">char</span> <span class="n">ca3</span><span class="p">[]</span><span class="o">=</span><span class="s">&#34;C++&#34;</span><span class="p">;</span> <span class="c1">// null terminator added automatically
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cp</span><span class="o">=</span><span class="s">&#34;C++&#34;</span><span class="p">;</span> <span class="c1">// null terminator added automatically
+</span><span class="c1"></span><span class="kt">char</span> <span class="o">*</span><span class="n">cp1</span><span class="o">=</span><span class="n">ca1</span><span class="p">;</span> <span class="c1">// points to first element of a array, but not C-style string
+</span><span class="c1"></span><span class="kt">char</span> <span class="o">*</span><span class="n">cp2</span><span class="o">=</span><span class="n">ca2</span><span class="p">;</span> <span class="c1">// points to first element of a null-terminated char array
+</span></code></pre></td></tr></table>
+</div>
+</div><p>ca1和cp1都不是C风格字符串：ca1是一个不带结束符null的字符数组，而指针cp1指向ca1，因此，它指向的并不是以null结束的数组。</p>
+<p>C++语言通过(const) char *类型的指针来操纵C风格字符串。</p>
+<p>C风格字符串在C语言中有C标准库函数来处理：<strong>string.h</strong></p>
+<p>C语言中也有对字符进行处理的标准库函数:<strong>ctype.h</strong></p>
+<p>这些库函数在C++中都有对应的版本，只需要去掉.h前面加上c就行了，这样也能在C++区分出这是C风格的函数</p>
+<p>即<strong>cstring</strong>和<strong>cctype</strong></p>
+<p>C风格字符串中带来困恼的原因是字符数组总要以空字符结尾，这给计算数组空间带来不便，也容易引发安全问题，处理字符串的相关复制，移动情形时，调用者必须保证目标字符串有足够的大小。</p>
+<p>另一个苦恼是C风格的字符串的复制，截取等相关操作不能像对待基础数据类型一样方便，这些情况在C++风格的字符串中由重载运算符实现，方便了用户。</p>
+<p>所以一般C++不推荐使用C风格字符串，即使要使用，也尽量在C标准库中使用诸如<strong>strn</strong> 前缀的函数处理，以降低风险。</p>
+<h2 id="c风格字符串-1">C++风格字符串</h2>
+<p>C++使用标准库类型string表示可变长的字符序列，标准库中的名称符号都包含在命名空间呢std中。</p>
+<p>在初始化string对象时可以使用多种方式比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">s1</span><span class="p">;</span>  <span class="c1">// 默认初始化，s1是一个空字符串
+</span><span class="c1"></span><span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="p">;</span> <span class="c1">// s2是s1的副本
+</span><span class="c1"></span><span class="n">string</span> <span class="n">s3</span> <span class="o">=</span> <span class="s">&#34;hiya&#34;</span><span class="p">;</span> <span class="c1">// s3是该字符串字面值的副本
+</span><span class="c1"></span><span class="n">string</span> <span class="nf">s4</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">);</span> <span class="c1">// s4的内容是cccccccccc
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>string</code>对象可以用标准库中的流直接读写</p>
+<p>比如<code>cin</code>，但是读时从非空白开始，即忽略开头的空白，遇到下一处空白结束。</p>
+<p>当要读取一整行的时候可以使用<code>getline(cin,line)</code> ，(<code>line</code>是读取后存放的<code>string</code>对象)该函数从给定的输入流中读取内容，直到遇到换行符为止，换行符也被读取进来，然后把读取的内容存放到<code>line</code>中，不包含换行符。</p>
+<p>string对象可以使用== 、&lt;、&gt;、&gt;=等比较符号，这个很好理解，不多说。</p>
+<p><strong>另外值得注意的是，string对象之间可以相加，字符串字面值和string对象也可以相加，但是字符串字面值之间不能相加！</strong></p>
+<p>最后谈一下C风格的字符串和C++风格字符串怎么转换</p>
+<p>C风格字符串转换到C++的string对象很简单，可以将C风格字符串(包括字面值)作为string初始化的参数即可，或者可以用=号。</p>
+<p>更一般的情况是，任何出现字符串字面值的地方都可以用以空字符结束的字符数组来替代：</p>
+<ul>
+<li><strong>即允许使用以空字符结束的字符数组来初始化string对象或为string对象赋值。</strong></li>
+<li><strong>在string对象的加法运算中允许使用以空字符结束的字符数组作为其中一个运算对象；在string对象的复合赋值运算中允许使用以空字符结束的字符数组作为右侧的运算对象。</strong></li>
+</ul>
+<p><code>string</code>对象转换为C风格字符串则有一个方法<code>c_str()</code> ,直接调用即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;msl&#34;</span><span class="p">;</span>
+<span class="n">string</span> <span class="nf">s1</span><span class="p">(</span><span class="s">&#34;dad&#34;</span><span class="p">);</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="s">&#34;dsjka&#34;</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">p1</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;das&#34;</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">w</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&#34;da&#34;</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">q</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">p</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">t</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">p1</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">u</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p1</span><span class="p">;</span>  <span class="c1">// wrong
+</span><span class="c1"></span><span class="n">string</span> <span class="n">k</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="s">&#34;daas&#34;</span><span class="p">;</span> <span class="c1">// wrong
+</span></code></pre></td></tr></table>
+</div>
+</div><p>如上面代码所示，最后两个有错，其余都是允许的。</p>
+<h2 id="字符串与整型的互相转换">字符串与整型的互相转换</h2>
+<p>先说string对象与int型转换</p>
+<p>int转换为string对象有全局函数<code>std::to_string()</code>(C++11)。</p>
+<p>当然还可以用其他的stringstream的方式。</p>
+<p>string转为int可以利用标准库中的<code>atoi()</code>函数（ ascii to integer），但要先转为C风格串，从C标准库继承过来，举例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span> <span class="c1">// 先转为C风格
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">;</span> <span class="c1">//123
+</span></code></pre></td></tr></table>
+</div>
+</div><p>同时除了atoi()还要atof()等一系列函数。</p>
+<p>另外用一些C语言中的格式化输入输出函数也可以实现,比如sprintf,sscanf等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;1234&#34;</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-08-15</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/string/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/string/" data-title="字符串的一些问题" data-hashtags="C/C&#43;&#43;"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/string/" data-title="字符串的一些问题" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/understand_const/" class="prev" rel="prev" title="理解常量const"><i class="fas fa-angle-left fa-fw"></i>理解常量const</a>
+            <a href="/ifndef/" class="next" rel="next" title="关于C语言中的IFNDEF宏">关于C语言中的IFNDEF宏<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

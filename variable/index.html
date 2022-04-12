@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>C&#43;&#43;变量声明与定义 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="C&#43;&#43;变量声明与定义" />
+<meta property="og:description" content="声明与定义关系 为了允许把程序拆分为多个逻辑部分来写，C&#43;&#43;文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。 如" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/variable/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-08-01T15:30:21+00:00" />
+<meta property="article:modified_time" content="2019-08-01T15:30:21+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="C&#43;&#43;变量声明与定义"/>
+<meta name="twitter:description" content="声明与定义关系 为了允许把程序拆分为多个逻辑部分来写，C&#43;&#43;文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。 如"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/variable/" /><link rel="prev" href="https://example.com/statistical_base/" /><link rel="next" href="https://example.com/understand_const/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "C++变量声明与定义",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/variable\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "declartion, define","wordcount":  2364 ,
+        "url": "https:\/\/example.com\/variable\/","datePublished": "2019-08-01T15:30:21+00:00","dateModified": "2019-08-01T15:30:21+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/variable/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/variable/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">C&#43;&#43;变量声明与定义</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-01">2019-08-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2364 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/variable/" class="leancloud_visitors" data-flag-title="C&#43;&#43;变量声明与定义">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#声明与定义关系">声明与定义关系</a></li>
+    <li><a href="#编译单元">编译单元</a></li>
+    <li><a href="#全局变量extern">全局变量(extern)</a></li>
+    <li><a href="#静态全局变量static">静态全局变量(static)</a></li>
+    <li><a href="#全局常量const">全局常量(const)</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="声明与定义关系">声明与定义关系</h2>
+<p>为了允许把程序拆分为多个逻辑部分来写，C++文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。</p>
+<p>如果将程序分为多个文件，则需要有在文件间共享代码的方法。例如，一个文件的代码可能需要使用另一个文件中定义的变量。一个实际的例子是<code>std::cout</code> 和<code>std::cin</code>，它们定义于标准库，却能被我们写的程序使用。</p>
+<p>为了支持分离式编译，C++将声明和定义区分开，声明(declaration)使得名字为程序所知，一个文件如果想使用别处定义的名字则必须包含对那个名字的声明。而定义(definition)负责创建与名字关联的实体。</p>
+<p>变量声明规定了变量的类型和名字，在这一点上定义与之相同。但是除此之外，定义还是申请存储空间，也可能会为变量赋一个初始值。</p>
+<p>如果想要单纯声明一个变量，就在变量名前加关键字<code>extern</code>，而不要显式地初始化变量：</p>
+<p>所以，下面的是声明:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">extern</span>   <span class="kt">int</span>   <span class="n">a</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面的是定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span>   <span class="n">a</span><span class="p">;</span> <span class="c1">//声明并定义a
+</span><span class="c1"></span><span class="kt">int</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 声明并定义初始化a  
+</span><span class="c1"></span><span class="k">extern</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//// 声明并定义初始化a    
+</span></code></pre></td></tr></table>
+</div>
+</div><p>在函数体内部，如果试图初始化一个<code>extern</code>关键字标记的变量，将引发错误。总结一下就是：</p>
+<p>根据C++标准的规定，一个变量是声明，必须同时满足两个条件，否则就是定义：</p>
+<p>①  声明必须使用extern关键字</p>
+<p>②  不能给变量赋初值</p>
+<p>函数或变量在声明时，并没有给它实际的物理内存空间，它有时候可保证你的程序编译通过；</p>
+<p>函数或变量在定义时，它就在内存中有了实际的物理空间。</p>
+<p>如果你在编译单元中引用的外部变量没有在整个工程中任何一个地方定义的话，那么即使它在编译时可以通过，在连接时也会报错，因为程序在内存中找不到这个变量。</p>
+<p>函数或变量可以声明多次，但定义只能有一次。</p>
+<h2 id="编译单元">编译单元</h2>
+<p>在VC或VS上编写完代码，点击编译按钮准备生成exe文件时，编译器做了两步工作：</p>
+<p>第一步，将每个.cpp(.c)和相应的.h文件编译成obj文件；</p>
+<p>第二步，将工程中所有的obj文件进行LINK，生成最终.exe文件。</p>
+<p>那么，错误可能在两个地方产生：</p>
+<p>一个，编译时的错误，这个主要是语法错误；</p>
+<p>一个，链接时的错误，主要是重复定义变量等。</p>
+<p>编译单元指在编译阶段生成的每个obj文件。</p>
+<p>一个obj文件就是一个编译单元。</p>
+<p>一个.cpp(.c)和它相应的.h文件共同组成了一个编译单元。</p>
+<p>一个工程由很多编译单元组成，每个obj文件里包含了变量存储的相对地址等。</p>
+<h2 id="全局变量extern">全局变量(extern)</h2>
+<p>在函数体外定义的变量，默认是全局变量。</p>
+<p>针对上文提到的一个文件的代码可能需要使用另一个文件中定义的变量情况，推荐的做法是在头文件中声明，对应的源文件中定义的做法。因为声明可以多次，定义只能一次，这样头文件被其他许多文件包含时候，不会出现重复定义的错误。如果将全局变量的声明和定义放在一个头文件中，将不能使用头文件的方式在多个文件文件中共享变量，即使在头文件中加#pragma once，或#ifndef也会出现重复定义，因为每个编译单元是单独的，都会对它各自进行定义。这样的情况下，只能使用<code>extern</code>修饰的声明在其他文件中引用该变量。</p>
+<p>举个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 1.h 头文件
+</span><span class="c1"></span><span class="k">extern</span> <span class="kt">int</span> <span class="n">a</span><span class="p">;</span> <span class="c1">//声明一个全局变量
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 1.cpp 源文件
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// 定义该变量，但没有初始化
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 2.cpp 源文件
+</span><span class="c1"></span><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&#34;1.h&#34; // 以包含源文件形式引用变量</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">//a = 1; //在全局中,语句的执行顺序是没有保证的,所以全局变量不能再函数体外赋值
+</span><span class="c1"></span><span class="k">extern</span> <span class="kt">void</span> <span class="nf">nm</span><span class="p">();</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">nm</span><span class="p">();</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">++</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 3.cpp 源文件
+</span><span class="c1"></span><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">extern</span> <span class="kt">int</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// 以extern修饰形式引用变量
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">nm</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上述程序结果输出为： 23</p>
+<p>2.cpp采用包含头文件的形式引用全局变量，3.cpp采用<code>extern</code> 修饰的声明引用。两者都能正确共享变量。但是，如果在1.h中将声明改成定义，就不能使用头文件引用的形式了。</p>
+<p>总之变量的使用前必须有声明，有定义。</p>
+<p>另外，有一个问题是，在函数体之外，全局变量不能被赋值，因为函数体之外，代码块的执行顺序没有固定要求，视编译器而定，所以如果允许赋值的话，可能会造成先调用后赋值的情况，所以被禁止。</p>
+<p>在上述例子中，2.cpp中引用1.h头文件，并且使用<code>extern</code>修饰的声明语句引用函数nm，在main函数体内，对变量a进行赋值，该变量在1.h中声明，1.cpp中定义，由于包含了1.h，所以2.cpp可以引用它。接着调用nm函数，nm函数来自3.cpp，功能是直接输出a,在3.cpp中是用<code>extern</code>关键字引用的该变量。在调用该函数之前，已经对a赋值过了，所以能够正确输出。实际上，在我的PC上用VS运行，假如在赋值之前调用nm，输出是：03，因为编译器给a默认初始化为0了吧。</p>
+<h2 id="静态全局变量static">静态全局变量(static)</h2>
+<p>注意使用static修饰变量，就不能使用extern来修饰，即static和extern不可同时出现。</p>
+<p>static修饰的全局变量的声明与定义同时进行，即当你在头文件中使用static声明了全局变量，同时它也被定义了。</p>
+<p>static修饰的全局变量的作用域只能是本身的编译单元。在其他编译单元使用它时，只是简单的把其值复制给了其他编译单元，其他编译单元会另外开个内存保存它，在其他编译单元对它的修改并不影响本身在定义时的值。即在其他编译单元A使用它时，它所在的物理地址，和其他编译单元B使用它时，它所在的物理地址不一样，A和B对它所做的修改都不能传递给对方。</p>
+<p>多个地方引用静态全局变量所在的头文件，不会出现重定义错误，因为在每个编译单元都对它开辟了额外的空间进行存储。</p>
+<h2 id="全局常量const">全局常量(const)</h2>
+<p>const单独使用时，其特性与static一样（每个编译单元中地址都不一样，不过因为是常量，也不能修改，所以就没有多大关系）。</p>
+<p>const与extern一起使用时，其特性与extern一样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">g_szBuffer</span><span class="p">[];</span>      <span class="c1">//写入 .h中
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">char</span> <span class="n">g_szBuffer</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;123456&#34;</span><span class="p">;</span> <span class="c1">// 写入.cpp中
+</span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-08-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/variable/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/variable/" data-title="C&#43;&#43;变量声明与定义" data-hashtags="declartion,define"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/variable/" data-title="C&#43;&#43;变量声明与定义" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/declartion/">declartion</a>,&nbsp;<a href="/tags/define/">define</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/statistical_base/" class="prev" rel="prev" title="统计学基础、二项及泊松分布"><i class="fas fa-angle-left fa-fw"></i>统计学基础、二项及泊松分布</a>
+            <a href="/understand_const/" class="next" rel="next" title="理解常量const">理解常量const<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
