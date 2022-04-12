@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>统计学基础、二项及泊松分布 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="统计学基础、二项及泊松分布" />
+<meta property="og:description" content="统计学分类 描述统计学 descriptive statistics 侧重以数字特征描述数据分布情况 推论统计学 Inferential statistics 侧重以数据的子集分布情况来推断数据整体情况 集中趋势(Central Ten" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/statistical_base/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-05-10T18:29:18+00:00" />
+<meta property="article:modified_time" content="2019-05-10T18:29:18+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="统计学基础、二项及泊松分布"/>
+<meta name="twitter:description" content="统计学分类 描述统计学 descriptive statistics 侧重以数字特征描述数据分布情况 推论统计学 Inferential statistics 侧重以数据的子集分布情况来推断数据整体情况 集中趋势(Central Ten"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/statistical_base/" /><link rel="prev" href="https://example.com/grammar/" /><link rel="next" href="https://example.com/ifndef/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "统计学基础、二项及泊松分布",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/statistical_base\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Statistical","wordcount":  2986 ,
+        "url": "https:\/\/example.com\/statistical_base\/","datePublished": "2019-05-10T18:29:18+00:00","dateModified": "2019-05-10T18:29:18+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/statistical_base/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/statistical_base/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">统计学基础、二项及泊松分布</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/math/"><i class="far fa-folder fa-fw"></i>Math</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-10">2019-05-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2986 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/statistical_base/" class="leancloud_visitors" data-flag-title="统计学基础、二项及泊松分布">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#统计学分类">统计学分类</a></li>
+    <li><a href="#集中趋势central-tendency的量度广义平均数average">集中趋势(Central Tendency)的量度:广义平均数(Average)</a></li>
+    <li><a href="#样本sample和总体population">样本(Sample)和总体(Population)</a></li>
+    <li><a href="#离中趋势dispersion分散性与变异性的量度矩">离中趋势(Dispersion)(分散性与变异性)的量度：“矩”</a>
+      <ul>
+        <li><a href="#全矩极差">全矩(极差)</a></li>
+        <li><a href="#四分位矩">四分位矩</a></li>
+        <li><a href="#方差variance">方差(variance)</a></li>
+        <li><a href="#标准分z-score">标准分(Z-Score)</a></li>
+      </ul>
+    </li>
+    <li><a href="#随机变量random-variable">随机变量(Random Variable)</a>
+      <ul>
+        <li><a href="#数学期望expected-value">数学期望(Expected Value)</a></li>
+        <li><a href="#概率密度函数">概率密度函数</a></li>
+      </ul>
+    </li>
+    <li><a href="#二项分布">二项分布</a>
+      <ul>
+        <li><a href="#二项分布定义">二项分布定义</a></li>
+        <li><a href="#二项分布的期望与方差">二项分布的期望与方差</a></li>
+      </ul>
+    </li>
+    <li><a href="#泊松分布">泊松分布</a>
+      <ul>
+        <li><a href="#泊松分布定义">泊松分布定义</a></li>
+        <li><a href="#泊松分布的期望与方差">泊松分布的期望与方差</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="统计学分类">统计学分类</h2>
+<ul>
+<li>
+<p>描述统计学 descriptive statistics</p>
+<p>侧重以数字特征描述数据分布情况</p>
+</li>
+<li>
+<p>推论统计学 Inferential statistics</p>
+<p>侧重以数据的子集分布情况来推断数据整体情况</p>
+</li>
+</ul>
+<h2 id="集中趋势central-tendency的量度广义平均数average">集中趋势(Central Tendency)的量度:广义平均数(Average)</h2>
+<ul>
+<li>
+<p>均值（mean）: 通常指代算术平均数，另外还有几何平均数，调和平均数</p>
+</li>
+<li>
+<p>中位数（medium）： 当数据个数为奇数时，指代中间那个数，否则一般取中间两个数的平均值</p>
+</li>
+<li>
+<p>众数（mode）： 所有数中出现频率最高的数</p>
+</li>
+</ul>
+<p>有时候相较于中位数而言，，均值受到离群值影响较大，不能很好地描述数据的集中趋势。以数据3,3,3,3,100为例，中位数更能代表总体的集中趋势。如果存在异常值，均值会往异常值方向移动</p>
+<table>
+<thead>
+<tr>
+<th>平均数</th>
+<th style="text-align:center">计算方法</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>均值</td>
+<td style="text-align:center">$\frac{\sum\rm{X}}{n}$</td>
+<td>在数据非常对称，且仅显示出一种趋势时使用</td>
+</tr>
+<tr>
+<td>中位数</td>
+<td style="text-align:center">将所有数据按照升序顺序排列，如果有奇数个值，则为中间的数；如果有偶数个值，则为中间两个数的算术平均</td>
+<td>在数据由于异常值而发生偏斜时使用</td>
+</tr>
+<tr>
+<td>众数</td>
+<td style="text-align:center">选出具有最大频数的一个或几个数值，如果数据可分为两组，则为每组找出一个众数</td>
+<td>在遇到类别数据时使用，当数据可以分为两个以上组时使用</td>
+</tr>
+</tbody>
+</table>
+<h2 id="样本sample和总体population">样本(Sample)和总体(Population)</h2>
+<p>可以用样本来分析总体的情况，因为有时候去分析总体的统计量很费时费力。</p>
+<p>可以用随机抽样来获取属于总体的样本。</p>
+<p>$\mu​$ 一般指代总体均值(population mean)  ，$\mu =\frac{\sum_{i=1}^{N}x_i}{N}$</p>
+<p>$\overline{\rm X}​$ 一般指代样本的均值(sample mean)，$\overline{\rm X}=\frac{\sum_{i=1}^{n}x_i}{n}$</p>
+<h2 id="离中趋势dispersion分散性与变异性的量度矩">离中趋势(Dispersion)(分散性与变异性)的量度：“矩”</h2>
+<h3 id="全矩极差">全矩(极差)</h3>
+<p>全矩也称极差，适用于量度数据集分散程度的一种方法，其算法为：<em><strong>上界 -下界</strong></em>， 其中，上界为最大值，下界为最小值，全矩的测量有点像测量数据的宽度</p>
+<p><strong>全矩仅仅描述了数据的宽度，并没有描述数据在上、下界之间的分布形态，且全矩很容易受到异常值的影响</strong></p>
+<h3 id="四分位矩">四分位矩</h3>
+<p>四分位数是这样一些<strong>数值</strong>，<strong>它们将数据一分为四</strong>，最小的四分位数称为下四分位数，最大的四分位数称为上四分位数，中间的四分位数即中位数</p>
+<p><em><strong>四分位矩 =上四分位数-下四分位数</strong></em></p>
+<p>与全矩相比，四分位矩较少受到异常值的影响</p>
+<p>同理，将数据分成十份，有十分位数和十分位矩，将数据分成100份，有百分位矩</p>
+<p>百分位数：第 $k$ 百分位数即位于数据范围 $k%$ 处的数值，即为 $\mathrm{P_k}$</p>
+<h3 id="方差variance">方差(variance)</h3>
+<p>$\sigma^2$ 指代<strong>方差</strong></p>
+<p>$$
+\sigma^2=\frac{\sum_{i=1}^N\left(x_i-\mu\right)^2}{N}
+$$</p>
+<p>方差可以描述数据离均值的远近程度，方差越小表示数据更加集中</p>
+<p>样本方差是用来估计总体方差，为了提供无偏估计，则对应的无偏(unbias)估计样本方差为</p>
+<p>$$
+s^2=\frac{\sum_{i=1}^n\left(x_i-\overline{\rm X}\right)^2}{n-1}
+$$</p>
+<p>    </p>
+<p>$\sigma $ 指代<strong>标准差</strong>(standard variance)，是方差的平方根</p>
+<p>标准差能够在量纲上有更容易理解的表示，它的单位与均值的单位一致，我们平时可以这样描述：该数字里均值相差了几个标准差</p>
+<p>方差公式可以简化如下，更加方便计算</p>
+<p>$$
+\begin{aligned}
+\sigma^2
+&amp;=\frac{\sum_{i=1}^N\left(x_i-\mu\right)^2}{N}\
+&amp;=\frac{\sum_{i=1}^N\left(x_i^2-2x_i\mu+\mu^2\right)}{N}\
+&amp;=\frac{\sum_{i=1}^Nx_i^2-2\mu\sum_{i=1}^Nx_i+\mu^2\sum_{i=1}^N1}{N}\
+&amp;=\frac{\sum_{i=1}^Nx_i^2-2\mu\sum_{i=1}^Nx_i+\mu^2N}{N}\
+&amp;=\frac{\sum_{i=1}^Nx_i^2}{N}-2\mu^2+\mu^2\
+&amp;=\frac{\sum_{i=1}^Nx_i^2}{N}-\mu^2\
+&amp;=E\left(\rm X^2\right)-E\left(\rm X\right)^2
+\end{aligned}
+$$</p>
+<h3 id="标准分z-score">标准分(Z-Score)</h3>
+<p>使用标准分可以对不同数据集的数据进行比较，而这些不同数据集的均值和标准差各不相同——标准分是对不同环境下的相关数据进行比较的一种方法</p>
+<p>通过整个数据集的均值和标准差可以计算出一个特数值的标准分。标准分通常以字母&rsquo;z&rsquo;表示，计算方法如下：</p>
+<p>$$
+z=\frac{x-\mu}{\sigma}
+$$</p>
+<p>通过计算标准差，我们可以把不同数据集的数值视为来自同一个数据集或数据分布，从而进行比较</p>
+<p>标准分的作用是将几个数据集转换成一个理论上的新分布，这个分布的均值为0，标准差为1，这是一种可以用于进行比较的通用分布，即服从标准正态分布</p>
+<p><strong>标准分的含义是距离均值的标准差的个数，即标准分=距离均值的标准差的个数</strong></p>
+<p>Z-Score最大的优点就是简单，容易计算，在R中，不需要加载包，仅仅凭借最简单的数学公式就能够计算出Z-Score并进行比较。此外，Z-Score能够应用于数值型的数据，并且不受数据量级的影响，因为它本身的作用就是消除量级给分析带来的不便。</p>
+<p>但是Z-Score应用也有风险。首先，估算Z-Score需要总体的平均值与方差，但是这一值在真实的分析与挖掘中很难得到，大多数情况下是用样本的均值与标准差替代。其次，Z-Score对于数据的分布有一定的要求，正态分布是最有利于Z-Score计算的。最后，Z-Score消除了数据具有的实际意义，A的Z-Score与B的Z-Score与他们各自的分数不再有关系，因此Z-Score的结果只能用于比较数据间的结果，数据的真实意义还需要还原原值。</p>
+<h2 id="随机变量random-variable">随机变量(Random Variable)</h2>
+<p>一般用大写的英文字母表示，可能是为了和传统的变量区分开来，实际上，它更像是一种函数，将随机过程映射到数字，而这个数字是随机的。</p>
+<ul>
+<li>
+<p>离散(Discrete)随机变量：取值有限</p>
+</li>
+<li>
+<p>连续(Continuous)随机变量：取值无限</p>
+</li>
+</ul>
+<h3 id="数学期望expected-value">数学期望(Expected Value)</h3>
+<p>期望计算：</p>
+<p>$$
+E(X)=\sum{xP(X=x)}
+$$</p>
+<p>方差计算：</p>
+<p>$$
+Var(X)=E(X-\mu)^2
+$$</p>
+<p>利用线性变换计算：</p>
+<p>$$
+\begin{aligned}
+E(aX+b)&amp;=aE(X)+b\
+Var(aX+b)&amp;=a^2Var(X)\
+E(X_1+X_2+&hellip;+X_n)&amp;=nE(X)\
+Var(X_1+X_2+&hellip;+X_n)&amp;=nVar(X)
+\end{aligned}
+$$</p>
+<p>多个随机变量的线性变换：</p>
+<p>$$
+E(X-Y)=E(X)-E(Y)\
+E(X+Y)=E(X)+E(Y)\
+Var(X+Y)=Var(X)+Var(Y)\
+Var(X-Y)=Var(X)+Var(Y)
+$$</p>
+<p>其中X与Y互相独立，独立随机变量做减法运算，方差依然增大</p>
+<h3 id="概率密度函数">概率密度函数</h3>
+<p><strong>概率(probability)</strong></p>
+<p>当我们求取值在某个值附近的概率时，我们会这样表示：$ \rm{P}(|\rm{X}- \textit{value}&lt;0.1|)=0.3$ ,即随机变量$\rm{X}​$ 取值为value附近的概率，精度在0.1之内</p>
+<p>对于一维实随机变量<em>X</em>，设它的累积分布函数是 $\displaystyle F_{X}(x)$ 。如果存在可测函数 $\displaystyle f_{X}(x)$，满足</p>
+<p>$$
+{\displaystyle \forall -\infty &lt;a&lt;\infty ,\quad F_{X}(a)=\int <em>{-\infty }^{a}f</em>{X}(x),dx}
+$$</p>
+<p>其中$\displaystyle f_{X}(x)$ 表示概率密度函数,${\displaystyle F_{X}(x)}$ 表示概率分布函数</p>
+<h2 id="二项分布">二项分布</h2>
+<h3 id="二项分布定义">二项分布定义</h3>
+<p>二项分布包括下列条件</p>
+<ol>
+<li>你正在进行一系列独立试验</li>
+<li>每一次试验都存在失败和成功的可能，每一次试验的成功概率相同(前两个条件和几何分布的条件相同)</li>
+<li>试验次数有限</li>
+</ol>
+<p>二项分布的分布函数如下：</p>
+<p>$$
+P(X=r)=C^n_rp^rq^{1-r}
+$$</p>
+<p>其中，</p>
+<p>$$
+C^r_n=\frac{n!}{r!(n-r)!}
+$$</p>
+<p>$p​$ 是一次试验的成功概率，n是试验次数，服从二项分布写作</p>
+<p>$$
+X\sim{B(n,p)}
+$$</p>
+<h3 id="二项分布的期望与方差">二项分布的期望与方差</h3>
+<p>推导：假设每个$X_i$ 是一次单独的试验</p>
+<p>服从二项分布的试验次数为<em>n</em>， 由于每次试验之间独立，所以有$E(X_1)=E(X_2)=&hellip;E(X_n)$</p>
+<p>且$Var(X)=Var(X_1)+Var(X_2)+&hellip;+Var(X_n)$ ，</p>
+<p>$Var(X)=E(X^2)+E(X)^2=(0q+1p)-p^2=p(1-p)=pq​$</p>
+<p>所以：</p>
+<p>$$
+\begin{aligned}
+E(X)&amp;=E(X_1)+E(X_2)+&hellip;+E(X_n)\
+&amp;=nE(X_i)\
+&amp;=np
+\end{aligned}
+$$</p>
+<p>$$
+\begin{aligned}
+Var(X)&amp;=Var(X_1)+Var(X_2)+&hellip;+Var(X_n)\
+&amp;=nVar(X_i)\
+&amp;=npq
+\end{aligned}
+$$</p>
+<h2 id="泊松分布">泊松分布</h2>
+<h3 id="泊松分布定义">泊松分布定义</h3>
+<ol>
+<li>单独事件在给定的区间内随机、独立地发生，给定区间可以是时间或空间，例如可以是一个星期，也可以是一英里</li>
+<li>已知该区间内的事件平均发生次数(或者叫发生率)，且为有限数值。该事件平均发生次数通常用希腊字母$\lambda​$ 表示</li>
+</ol>
+<p>让我们用X表示给定区间内时间的发生次数，例如一个星期内的损坏次数。如果X符合泊松分布，且每个区间内平均发生$\lambda$ 次，或者说发生率为$\lambda$ ， 则写作</p>
+<p>$$
+X\sim{Po(\lambda)}
+$$</p>
+<p>概率计算如下：</p>
+<p>$$
+P(X=r)=\frac{e^{-\lambda}\lambda^r}{r!}
+$$</p>
+<h3 id="泊松分布的期望与方差">泊松分布的期望与方差</h3>
+<p>很简洁：</p>
+<p>$$
+E(X)=\lambda,Var(X)=\lambda
+$$</p>
+<p>实际上，泊松分布可以看成是二项分布的极限得到，记常数$ \lambda=np​$</p>
+<p>则有如下：</p>
+<p>$$
+\begin{aligned}
+\lim_{n\to\infty,p\to0}C_n^kp^k(1-p)^k&amp;=\lim_{n\to\infty,p\to0}\frac{n(n-1)&hellip;(n+1-k)}{k!}p^k(1-p)^{n-k}\\
+&amp;=\lim_{n\to\infty,p\to0}\frac{n^k}{k!}p^k(1-p)^{\frac{\lambda}{p}-k}\\
+&amp;=\lim_{n\to\infty,p\to0}\frac{\lambda^k}{k!}\left[\left(1-p\right)^{\frac{1}{-p}}\right]^{-\lambda}\frac{1}{(1-p)^k}\\
+&amp;=\lim_{n\to\infty,p\to0}\frac{\lambda^k}{k!}e^{-\lambda}
+\end{aligned}
+$$</p>
+<p>泊松分布形状随着$\lambda$ 的数值发生变化，$\lambda$ 越小，则分布越向右倾斜，随着$\lambda$ 变大，分布逐渐变得对称</p>
+<p>如果$\lambda​$ 是一个整数，则有两个众数，$\lambda​$ 和 $ \lambda-1​$ ，如果$\lambda ​$ 不是整数，则众数为$\lambda​$</p>
+<p>泊松分布随机变量的组合</p>
+<p>$$
+X+Y\sim{Po(\lambda_x+\lambda_y)}
+$$</p>
+<p>当 $n$ 很大且 $p$ 很小时，可以用 $X\sim{Po(np)}$ 近似代替 $X \sim{B(n,p)}$ ,这样可以方便计算</p>
+<h2 id="总结">总结</h2>
+<img src="https://i0.hdslb.com/bfs/album/8569563e510559044f6b1289e2b9cc3c779e6711.png" title="" alt="" data-align="center"></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-05-10</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/statistical_base/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/statistical_base/" data-title="统计学基础、二项及泊松分布" data-hashtags="Statistical"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/statistical_base/" data-title="统计学基础、二项及泊松分布" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/statistical/">Statistical</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/grammar/" class="prev" rel="prev" title="英语语法浅析"><i class="fas fa-angle-left fa-fw"></i>英语语法浅析</a>
+            <a href="/ifndef/" class="next" rel="next" title="关于C语言中的IFNDEF宏">关于C语言中的IFNDEF宏<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

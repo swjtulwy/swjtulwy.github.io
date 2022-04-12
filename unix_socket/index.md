@@ -173,38 +173,6 @@ const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
     返回值：返回转换后的数据的地址（字符串），和 dst 是一样的
 ```
 
-## TCP通信流程
-
-<img src="https://i0.hdslb.com/bfs/album/2aa381a09efab3e9551f4d46adc07782dff6f658.png" title="" alt="" data-align="center">
-
-### 服务器端 （被动接受连接的角色）
-
-1. **创建**一个用于监听的套接字  （监听：监听有客户端的连接；套接字：这个套接字其实就是一个文件描述符  ）
-
-2. 将这个**监听文件描述符**和本地的IP和端口**绑定**（IP和端口就是服务器的地址信息）客户端连接服务器的时候使用的就是这个IP和端口
-
-3. **设置监听**，监听的fd开始工作 
-
-4. 阻塞等待，当有客户端发起连接，解除阻塞，**接受**客户端的连接，会得到一个和客户端通信的套接字（fd）  
-
-5. **通信**  接收数据、发送数据  
-
-6. 通信结束，**断开**
-
-### 客户端
-
-1. **创建**一个用于通信的套接字（fd）
-
-2. **连接**服务器，需要指定连接的服务器的 IP 和 端口
-
-3. 连接成功了，客户端可以直接和服务器**通信**
-   
-   - 接收数据 
-   
-   - 发送数据
-
-4. 通信结束，**断开**
-
 ## 套接字函数
 
 ```c
@@ -261,7 +229,7 @@ ssize_t write(int fd, const void *buf, size_t count);   // 写数据
 ssize_t read(int fd, void *buf, size_t count);          // 读数
 ```
 
-### 示例
+示例如下：
 
 #### 服务器端
 
@@ -426,5 +394,486 @@ int main()
 } 
 ```
 
-   
+## TCP通信流程
+
+<img src="https://i0.hdslb.com/bfs/album/2aa381a09efab3e9551f4d46adc07782dff6f658.png" title="" alt="" data-align="center">
+
+### 服务器端 （被动接受连接的角色）
+
+1. **创建**一个用于监听的套接字  （监听：监听有客户端的连接；套接字：这个套接字其实就是一个文件描述符  ）
+
+2. 将这个**监听文件描述符**和本地的IP和端口**绑定**（IP和端口就是服务器的地址信息）客户端连接服务器的时候使用的就是这个IP和端口
+
+3. **设置监听**，监听的fd开始工作 
+
+4. 阻塞等待，当有客户端发起连接，解除阻塞，**接受**客户端的连接，会得到一个和客户端通信的套接字（fd）  
+
+5. **通信**  接收数据、发送数据  
+
+6. 通信结束，**断开**
+
+### 客户端
+
+1. **创建**一个用于通信的套接字（fd）
+
+2. **连接**服务器，需要指定连接的服务器的 IP 和 端口
+
+3. 连接成功了，客户端可以直接和服务器**通信**
+   
+   - 接收数据 
+   
+   - 发送数据
+
+4. 通信结束，**断开**
+
+### 多进程TCP通信
+
+#### 服务端
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <unistd.h> 
+#include <signal.h>
+#include <wait.h>
+#include <errno.h>
+
+void recyleChild(int arg) {
+    // SIGCHILD信号处理函数
+    // 用于回收资源
+    while (1) {
+        int ret = waitpid(-1, NULL, WNOHANG);
+        if (ret == -1) {
+            // 所有子进程都被回收
+            break;
+        } else if (ret == 0) {
+            // 还有子进程
+            break;
+        } else if (ret > 0) {
+            printf("子进程 %d 被回收了\n", ret);
+        }
+    }
+    return;
+}
+
+int main() {
+    // 注册信号，当子进程退出时，回收资源
+    struct sigaction act;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = 0;
+    act.sa_handler = recyleChild;
+    sigaction(SIGCHLD, &act, NULL);
+
+    // 1 创建监听socket 
+    int lfd = socket(PF_INET, SOCK_STREAM, 0);
+    if (lfd == -1) {
+        perror("socket");
+        exit(-1);
+    }
+
+    // 2 为监听socket绑定端口 bind
+    struct sockaddr_in server_addr; 
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(9999);
+    inet_pton(AF_INET, "127.0.0.1", &server_addr.sin_addr.s_addr);
+    int ret = bind(lfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+    if (ret == -1) {
+        perror("bind");
+        exit(-1);
+    }
+
+    // 3 开始监听 listen
+    ret = listen(lfd, 128);
+    if (ret == -1) {
+        perror("listen");
+        exit(-1);
+    }
+    // 4 循环等待接受请求 accept
+    while (1) {
+        struct sockaddr_in client_add
+r;
+        socklen_t client_socket_len = sizeof(client_addr);
+        // 这里的第三个参数要传长度的指针
+        int cfd = accept(lfd, (struct sockaddr *)&client_addr, &client_socket_len);
+        if (cfd == -1) {
+            // 这里为了避免因为accept被回收资源函数中断而退出程序
+            if(errno == EINTR) {
+                continue;
+            }
+            perror("accept");
+            exit(-1);
+        }
+        printf("client connected, clientSockedFd: %d\n", cfd);
+
+        // 5 创建新进程
+        pid_t pid = fork();
+        if (pid == 0) {
+            // 6 新进程与客户socket通信
+            char buf[1024] = {0};
+            while (1) {
+                // 循环从客户端读取
+                ret = read(cfd, buf, sizeof(buf));
+                if (ret == -1) {
+                    perror("read");
+                    exit(-1);
+                } else if (ret > 0) {
+                    printf("server read data: %s \n", buf);
+                } else if (ret == 0) {
+                    // 读完了
+                    printf("client closed...\n");
+                    break;
+                }
+                // 向客户端写入
+                ret = write(cfd, buf, sizeof(buf));
+                if (ret == -1) {
+                    perror("write");
+                    exit(-1);
+                }
+            }
+            close(cfd);
+            exit(0); // 子进程退出
+        } 
+
+    }
+    // 7 回收子进程资源
+
+    // 8 关闭连接
+    close(lfd);
+
+    return 0;
+}
+```
+
+#### 客户端
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <string.h>
+
+int main() {
+    // 1 创建socket
+    int cfd = socket(PF_INET, SOCK_STREAM, 0);
+    if (cfd == -1) {
+        perror("socket");
+        exit(-1);
+    }
+    // 2 建立连接 connect
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(9999);
+    inet_pton(AF_INET, "127.0.0.1", &server_addr.sin_addr.s_addr);
+    // 注意要类型转换
+    int ret = connect(cfd, (struct sockaddr*)&server_addr, sizeof(server_addr));
+    if (ret == -1) {
+        perror("connect");
+        exit(-1);
+    }
+
+    // 3 通信
+    char buf[1024] = {0};
+    while (1) {
+        scanf("%s", buf);
+        write(cfd, buf, sizeof(buf));
+        int len = read(cfd, buf, sizeof(buf));
+        if (len == -1) {
+            perror("read");
+            exit(-1);
+        } else if (len > 0) {
+            if (strcmp(buf, "quit") == 0) {
+                printf("client quit... \n");
+                break;
+            } else {
+                printf("receive server data: %s\n", buf);
+            }
+        } else if (len == 0){
+            // 读取完了服务器断开连接
+            printf("server closed");
+            break;
+        }
+    }
+
+    // 4 关闭连接
+    close(cfd);
+
+    return 0;
+}
+```
+
+### 多线程TCP通信
+
+#### 服务端
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <string.h>
+
+struct sockInfo
+{
+    // 线程号
+    pthread_t tid;
+    // 通信的文件描述符
+    int fd;
+    struct sockaddr_in addr;
+
+};
+
+struct sockInfo sockinfos[128];
+
+void* work(void * arg) 
+{
+    // 6 在新线程中通信
+    struct sockInfo* pinfo = (struct sockInfo*) arg;
+    int cfd = pinfo->fd;
+    // 打印客户端的IP和端口
+    char clientIp[16];
+    inet_ntop(AF_INET, &pinfo->addr.sin_addr.s_addr, clientIp, sizeof(clientIp));
+    unsigned short clientPort = ntohs(pinfo->addr.sin_port);
+    printf("client ip is : %s, port is : %d\n", clientIp, clientPort);
+
+    char buf[1024];
+    while (1) {
+        // 循环从客户端读取
+        int len = read(cfd, buf, sizeof(buf));
+        if (len == -1) {
+            perror("read");
+            exit(-1);
+        } else if (len > 0) {
+            // 接收到了数据
+            printf("server reveiced data: %s\n", buf);
+        } else if (len == 0) {
+            // 读完了，关闭连接
+            printf("client closed\n");
+            break;
+        }
+        // 往客户端写数据
+        write(pinfo->fd, buf, sizeof(buf));
+    }
+    close(pinfo->fd);
+    return NULL;
+
+}
+
+
+int main() {
+    // 1 创建socket
+    int lfd = socket(PF_INET, SOCK_STREAM, 0);
+    if (lfd == -1) {
+        perror("socket");
+        exit(-1);
+    }
+
+    // 2 为socket绑定IP端口 bind
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(9999);
+    inet_pton(AF_INET, "127.0.0.1", &server_addr.sin_addr.s_addr);
+    int ret = bind(lfd, (struct sockaddr*)&server_addr, sizeof(server_addr));
+    if (ret == -1) {
+        perror("bind");
+        exit(-1);
+    }
+
+    // 3 开启监听 listen
+    ret = listen(lfd, 128);
+    if (ret == -1) {
+        perror("listen");
+        exit(-1);
+    }
+
+    // 初始化线程池
+    int max = sizeof(sockinfos) / sizeof(sockinfos[0]);
+    for (int i = 0; i < max; ++i) {
+        bzero(&sockinfos[i], sizeof(sockinfos[i]));
+        sockinfos[i].fd = -1;
+        sockinfos[i].tid = -1;
+    }
+    while (1) {
+        // 4 循环监听 接受连接 accept
+        struct sockaddr_in client_addr;
+        int len = sizeof(client_addr);
+        int cfd = accept(lfd, (struct sockaddr*)&client_addr, &len);
+        if (cfd == -1) {
+            perror("accept");
+            exit(-1);
+        }
+        // 5 开启新线程
+
+        // 寻找可用线程
+        struct sockInfo *pinfo;
+        for (int i = 0; i < max; ++i) {
+            if (sockinfos[i].fd == -1) {
+                pinfo = &sockinfos[i];
+                break;
+            } else {
+                // 线程池满
+                if (i == max - 1) {
+                    sleep(1);
+                    --i;
+                }
+            }
+        }
+        // 记录客户端文件描述符
+        pinfo->fd = cfd;
+        // 记录客户端地址信息
+        memcpy(&pinfo->addr, &client_addr, sizeof(client_addr));
+        // 创建线程
+        pthread_create(&pinfo->tid, NULL, work, pinfo);
+
+        // 分离线程
+        pthread_detach(pinfo->tid);
+
+    }
+
+    // 7 关闭
+    close(lfd);
+    return 0;
+}
+```
+
+## UDP通信流程
+
+<img src="https://i0.hdslb.com/bfs/album/92a4b797fd76a5bf3d65d976dfe969bb5e019e0e.png" title="" alt="" data-align="center">
+
+```c
+#include <sys/types.h>
+#include <sys/socket.h>
+ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
+                      const struct sockaddr *dest_addr, socklen_t addrlen);
+        - 参数：
+            - sockfd : 通信的fd
+            - buf : 要发送的数据
+            - len : 发送数据的长度
+            - flags : 0
+            - dest_addr : 通信的另外一端的地址信息
+            - addrlen : 地址的内存大小
+                
+ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
+                        struct sockaddr *src_addr, socklen_t *addrlen);
+        - 参数：
+            - sockfd : 通信的fd
+            - buf : 接收数据的数组
+            - len : 数组的大小 
+            - flags : 0
+            - src_addr : 用来保存另外一端的地址信息，不需要可以指定为NULL
+            - addrlen : 地址的内存大
+
+
+```
+
+### 服务端
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <arpa/inet.h>
+
+int main() {
+
+    // 1.创建一个通信的socket
+    int fd = socket(PF_INET, SOCK_DGRAM, 0);
+    
+    if(fd == -1) {
+        perror("socket");
+        exit(-1);
+    }   
+
+    struct sockaddr_in addr;
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(9999);
+    addr.sin_addr.s_addr = INADDR_ANY;
+
+    // 2.绑定
+    int ret = bind(fd, (struct sockaddr *)&addr, sizeof(addr));
+    if(ret == -1) {
+        perror("bind");
+        exit(-1);
+    }
+
+    // 3.通信
+    while(1) {
+        char recvbuf[128];
+        char ipbuf[16];
+
+        struct sockaddr_in cliaddr;
+        int len = sizeof(cliaddr);
+
+        // 接收数据
+        int num = recvfrom(fd, recvbuf, sizeof(recvbuf), 0, (struct sockaddr *)&cliaddr, &len);
+
+        printf("client IP : %s, Port : %d\n", 
+            inet_ntop(AF_INET, &cliaddr.sin_addr.s_addr, ipbuf, sizeof(ipbuf)),
+            ntohs(cliaddr.sin_port));
+
+        printf("client say : %s\n", recvbuf);
+
+        // 发送数据
+        sendto(fd, recvbuf, strlen(recvbuf) + 1, 0, (struct sockaddr *)&cliaddr, sizeof(cliaddr));
+
+    }
+
+    close(fd);
+    return 0;
+}
+```
+
+### 客户端
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <arpa/inet.h>
+
+int main() {
+
+    // 1.创建一个通信的socket
+    int fd = socket(PF_INET, SOCK_DGRAM, 0);
+    
+    if(fd == -1) {
+        perror("socket");
+        exit(-1);
+    }   
+
+    // 服务器的地址信息
+    struct sockaddr_in saddr;
+    saddr.sin_family = AF_INET;
+    saddr.sin_port = htons(9999);
+    inet_pton(AF_INET, "127.0.0.1", &saddr.sin_addr.s_addr);
+
+    int num = 0;
+    // 3.通信
+    while(1) {
+
+        // 发送数据
+        char sendBuf[128];
+        sprintf(sendBuf, "hello , i am client %d \n", num++);
+        sendto(fd, sendBuf, strlen(sendBuf) + 1, 0, (struct sockaddr *)&saddr, sizeof(saddr));
+
+        // 接收数据
+        int num = recvfrom(fd, sendBuf, sizeof(sendBuf), 0, NULL, NULL);
+        printf("server say : %s\n", sendBuf);
+
+        sleep(1);
+    }
+
+    close(fd);
+    return 0;
+}
+```
+
+## 参考
+
+[Socket原理详解 - 编程宝库 (codebaoku.com)](http://www.codebaoku.com/it-c/it-c-230866.html)
 

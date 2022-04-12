@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/ipc\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "IPC, Linux","wordcount":  12261 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "IPC, Linux","wordcount":  13224 ,
         "url": "https:\/\/example.com\/ipc\/","datePublished": "2021-04-10T19:25:54+08:00","dateModified": "2021-04-10T19:25:54+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -111,8 +111,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Linux多进程通信</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/operating-system/"><i class="far fa-folder fa-fw"></i>Operating System</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-10">2021-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12261 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 25 分钟&nbsp;<span id="/ipc/" class="leancloud_visitors" data-flag-title="Linux多进程通信">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-10">2021-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 13224 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 27 分钟&nbsp;<span id="/ipc/" class="leancloud_visitors" data-flag-title="Linux多进程通信">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="featured-image"><img
@@ -166,7 +166,17 @@
       </ul>
     </li>
     <li><a href="#信号量semaphore-array">信号量（Semaphore Array）</a></li>
-    <li><a href="#套接字socke">套接字（Socke）</a></li>
+    <li><a href="#套接字socke">套接字（Socke）</a>
+      <ul>
+        <li><a href="#本地套接字">本地套接字</a>
+          <ul>
+            <li><a href="#服务端">服务端</a></li>
+            <li><a href="#客户端">客户端</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#远程过程调用rpc-remote-procedure-call">远程过程调用（RPC, Remote Procedure Call）</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="多进程通信ipc">多进程通信（IPC）</h2>
@@ -2505,7 +2515,389 @@ close(fd);
 </div>
 </div><h2 id="信号量semaphore-array">信号量（Semaphore Array）</h2>
 <h2 id="套接字socke">套接字（Socke）</h2>
-<p>未完待续</p>
+<h3 id="本地套接字">本地套接字</h3>
+<p>本地套接字的作用：本地的进程间通信, 适用于有关系的进程间的通信和没有关系的进程间的通信</p>
+<p>本地套接字实现流程和网络套接字类似，一般呢采用TCP的通信流</p>
+<img src="https://i0.hdslb.com/bfs/album/96c89b02d535bca9ad4e2f0903da9b264d6dfb6d.png@1e_1c.webp" title="" alt="" data-align="center">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 本地套接字通信的流程 - tcp
+</span><span class="c1">// 服务器端
+</span><span class="c1"></span><span class="mf">1.</span> <span class="err">创建监听的套接字</span>
+    <span class="kt">int</span> <span class="n">lfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_UNIX</span><span class="o">/</span><span class="n">AF_LOCAL</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mf">2.</span> <span class="err">监听的套接字绑定本地的套接字文件</span> <span class="o">-&gt;</span> <span class="n">server端</span>
+    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">addr</span><span class="p">;</span>
+    <span class="c1">// 绑定成功之后，指定的sun_path中的套接字文件会自动生成。
+</span><span class="c1"></span>    <span class="n">bind</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<span class="mf">3.</span> <span class="err">监听</span>
+    <span class="n">listen</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="mf">4.</span> <span class="err">等待并接受连接请求</span>
+    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">cliaddr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">cfd</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cliaddr</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<span class="mf">5.</span> <span class="err">通信</span>
+    <span class="err">接收数据：</span><span class="n">read</span><span class="o">/</span><span class="n">recv</span>
+    <span class="err">发送数据：</span><span class="n">write</span><span class="o">/</span><span class="n">send</span>
+<span class="mf">6.</span> <span class="err">关闭连接</span>
+    <span class="n">close</span><span class="p">();</span>
+
+<span class="c1">// 客户端的流程
+</span><span class="c1"></span><span class="mf">1.</span> <span class="err">创建通信的套接字</span>
+    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_UNIX</span><span class="o">/</span><span class="n">AF_LOCAL</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mf">2.</span> <span class="err">监听的套接字绑定本地的</span><span class="n">IP</span> <span class="err">端口</span>
+    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">addr</span><span class="p">;</span>
+    <span class="c1">// 绑定成功之后，指定的sun_path中的套接字文件会自动生成。
+</span><span class="c1"></span>    <span class="n">bind</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<span class="mf">3.</span> <span class="err">连接服务器</span>
+    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">serveraddr</span><span class="p">;</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">serveraddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">serveraddr</span><span class="p">));</span>
+<span class="mf">4.</span> <span class="err">通信</span>
+    <span class="err">接收数据：</span><span class="n">read</span><span class="o">/</span><span class="n">recv</span>
+    <span class="err">发送数据：</span><span class="n">write</span><span class="o">/</span><span class="n">send</span>
+<span class="mf">5.</span> <span class="err">关闭连接</span>
+    <span class="n">close</span><span class="p">();</span>
+
+<span class="c1">// 头文件:  sys/un.h
+</span><span class="c1"></span><span class="cp">#define UNIX_PATH_MAX 108
+</span><span class="cp"></span><span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="p">{</span>
+    <span class="n">sa_family_t</span> <span class="n">sun_family</span><span class="p">;</span> <span class="c1">// 地址族协议 af_local
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">sun_path</span><span class="p">[</span><span class="n">UNIX_PATH_MAX</span><span class="p">];</span>   <span class="c1">// 套接字文件的路径, 这是一个伪文件, 大小永远=0
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="服务端">服务端</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/un.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">unlink</span><span class="p">(</span><span class="s">&#34;server.sock&#34;</span><span class="p">);</span>
+
+    <span class="c1">// 1.创建监听的套接字
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">lfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_LOCAL</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lfd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;socket&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 2.绑定本地套接字文件
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">addr</span><span class="p">;</span>
+    <span class="n">addr</span><span class="p">.</span><span class="n">sun_family</span> <span class="o">=</span> <span class="n">AF_LOCAL</span><span class="p">;</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">addr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">,</span> <span class="s">&#34;server.sock&#34;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">addr</span><span class="p">));</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;bind&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 3.监听
+</span><span class="c1"></span>    <span class="n">ret</span> <span class="o">=</span> <span class="n">listen</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;listen&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 4.等待客户端连接
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">cliaddr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">cliaddr</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">cfd</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">lfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">cliaddr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">len</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">cfd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;accept&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;client socket filename: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">cliaddr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">);</span>
+
+    <span class="c1">// 5.通信
+</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">perror</span><span class="p">(</span><span class="s">&#34;recv&#34;</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;client closed....</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;client say : %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+            <span class="n">send</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="n">close</span><span class="p">(</span><span class="n">cfd</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">lfd</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="客户端">客户端</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/un.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">unlink</span><span class="p">(</span><span class="s">&#34;client.sock&#34;</span><span class="p">);</span>
+
+    <span class="c1">// 1.创建套接字
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">cfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_LOCAL</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">cfd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;socket&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 2.绑定本地套接字文件
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">addr</span><span class="p">;</span>
+    <span class="n">addr</span><span class="p">.</span><span class="n">sun_family</span> <span class="o">=</span> <span class="n">AF_LOCAL</span><span class="p">;</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">addr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">,</span> <span class="s">&#34;client.sock&#34;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">addr</span><span class="p">));</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;bind&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 3.连接服务器
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">seraddr</span><span class="p">;</span>
+    <span class="n">seraddr</span><span class="p">.</span><span class="n">sun_family</span> <span class="o">=</span> <span class="n">AF_LOCAL</span><span class="p">;</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">seraddr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">,</span> <span class="s">&#34;server.sock&#34;</span><span class="p">);</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">seraddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">seraddr</span><span class="p">));</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;connect&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 4.通信
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// 发送数据
+</span><span class="c1"></span>        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+        <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&#34;hello, i am client %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">num</span><span class="o">++</span><span class="p">);</span>
+        <span class="n">send</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;client say : %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+
+        <span class="c1">// 接收数据
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">perror</span><span class="p">(</span><span class="s">&#34;recv&#34;</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;server closed....</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;server say : %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="n">close</span><span class="p">(</span><span class="n">cfd</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="远程过程调用rpc-remote-procedure-call">远程过程调用（RPC, Remote Procedure Call）</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

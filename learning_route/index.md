@@ -107,7 +107,7 @@
 
 - [ ] 网络IO模型，阻塞/非阻塞，同步异步
 
-- [ ] io多路复用 select/poll/epoll
+- [x] io多路复用 select/poll/epoll
 
 - [ ] epoll reactor, proactor
 
