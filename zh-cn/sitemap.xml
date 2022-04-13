@@ -93,8 +93,19 @@
             <loc>https://example.com/variable/</loc><lastmod>2019-08-01T15:30:21&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/declartion/</loc><lastmod>2019-08-01T15:30:21&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/define/</loc><lastmod>2019-08-01T15:30:21&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/math/</loc><lastmod>2019-05-10T18:29:18&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/tags/statistical/</loc><lastmod>2019-05-10T18:29:18&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/linear-regression/</loc><lastmod>2019-05-16T20:17:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/categories/math/</loc><lastmod>2019-05-16T20:17:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/statistical/</loc><lastmod>2019-05-16T20:17:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/linear_regression/</loc><lastmod>2019-05-16T20:17:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/hypothesis-testing/</loc><lastmod>2019-05-14T15:49:45&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/hypothesis_testing/</loc><lastmod>2019-05-14T15:49:45&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/central-limit-theorem/</loc><lastmod>2019-05-13T10:06:52&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/central_limit_theorem/</loc><lastmod>2019-05-13T10:06:52&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/law-of-large-numbers/</loc><lastmod>2019-05-11T19:52:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/normal-distribution/</loc><lastmod>2019-05-11T19:52:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/normal_distribution/</loc><lastmod>2019-05-11T19:52:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/binomial-distribution/</loc><lastmod>2019-05-10T18:29:18&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/poisson-distribution/</loc><lastmod>2019-05-10T18:29:18&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/statistical_base/</loc><lastmod>2019-05-10T18:29:18&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/categories/english/</loc><lastmod>2019-04-17T15:15:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/grammar/</loc><lastmod>2019-04-17T15:15:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

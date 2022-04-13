@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>线性回归 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="线性回归" />
+<meta property="og:description" content="概念 在统计学中，线性回归（英语：linear regression）是利用称为线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系进行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/linear_regression/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-05-16T20:17:34+00:00" />
+<meta property="article:modified_time" content="2019-05-16T20:17:34+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="线性回归"/>
+<meta name="twitter:description" content="概念 在统计学中，线性回归（英语：linear regression）是利用称为线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系进行"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/linear_regression/" /><link rel="prev" href="https://example.com/hypothesis_testing/" /><link rel="next" href="https://example.com/variable/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "线性回归",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/linear_regression\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Statistical, Linear Regression","wordcount":  2915 ,
+        "url": "https:\/\/example.com\/linear_regression\/","datePublished": "2019-05-16T20:17:34+00:00","dateModified": "2019-05-16T20:17:34+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/linear_regression/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/linear_regression/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">线性回归</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/math/"><i class="far fa-folder fa-fw"></i>Math</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-16">2019-05-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2915 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/linear_regression/" class="leancloud_visitors" data-flag-title="线性回归">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概念">概念</a></li>
+    <li><a href="#理论模型">理论模型</a>
+      <ul>
+        <li><a href="#相关系数">相关系数</a></li>
+        <li><a href="#决定系数">决定系数</a></li>
+      </ul>
+    </li>
+    <li><a href="#最小二乘回归法">最小二乘回归法</a></li>
+    <li><a href="#协方差">协方差</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="概念">概念</h2>
+<p>在统计学中，<strong>线性回归</strong>（英语：linear regression）是利用称为线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系进行建模的一种<a href="https://zh.wikipedia.org/wiki/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90" title="回归分析" target="_blank" rel="noopener noreffer">回归分析</a>。这种函数是一个或多个称为回归系数的模型参数的线性组合。只有一个自变量的情况称为简单回归，大于一个自变量情况的叫做<a href="https://zh.wikipedia.org/wiki/%E4%B8%80%E8%88%AC%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B" title="一般线性模型" target="_blank" rel="noopener noreffer">多元回归</a>（multivariable linear regression）。</p>
+<p>在线性回归中，数据使用线性预测函数来建模，并且未知的模型参数也是通过数据来估计。这些模型被叫做线性模型。最常用的线性回归建模是给定X值的y的条件均值是X的仿射函数。不太一般的情况，线性回归模型可以是一个中位数或一些其他的给定X的条件下y的条件分布的分位数作为X的线性函数表示。像所有形式的回归分析一样，线性回归也把焦点放在给定X值的y的条件概率分布，而不是X和y的联合概率分布（多元分析领域）。</p>
+<p>线性回归是回归分析中第一种经过严格研究并在实际应用中广泛使用的类型。这是因为线性依赖于其未知参数的模型比非线性依赖于其未知参数的模型更容易拟合，而且产生的估计的统计特性也更容易确定。</p>
+<p>线性回归有很多实际用途。分为以下两大类：</p>
+<ol>
+<li>如果目标是预测或者映射，线性回归可以用来对观测数据集的和X的值拟合出一个预测模型。当完成这样一个模型以后，对于一个新增的X值，在没有给定与它相配对的y的情况下，可以用这个拟合过的模型预测出一个y值。</li>
+<li>给定一个变量y和一些变量 $X_1,&hellip;,X_p$，这些变量有可能与y相关，线性回归分析可以用来量化y与 $X_j$ 之间相关性的强度，评估出与y不相关的 $X_j$，并识别出哪些 $X_j$ 的子集包含了关于y的冗余信息。</li>
+</ol>
+<p>线性回归模型经常用最小二乘逼近来拟合，但他们也可能用别的方法来拟合，比如用最小化“拟合缺陷”在一些其他规范里（比如最小绝对误差回归），或者在桥回归中最小化最小二乘损失函数的惩罚。相反，最小二乘逼近可以用来拟合那些非线性的模型。因此，尽管“最小二乘法”和“线性模型”是紧密相连的，但他们是不能划等号的。</p>
+<h2 id="理论模型">理论模型</h2>
+<p>给一个随机样本${\displaystyle (Y_{i},X_{i1},\ldots ,X_{ip}),,i=1,\ldots ,n}$，一个线性回归模型假设回归子${\displaystyle Y_{i}}$和回归量${\displaystyle X_{i1},\ldots ,X_{ip}}$之间的关系是除了$X$的影响以外，还有其他的变量存在。我们加入一个误差项 ${\displaystyle \varepsilon_{i}}$（也是一个随机变量）来捕获除了${\displaystyle X_{i1},\ldots ,X_{ip}}$之外任何对${\displaystyle Y_{i}}$的影响。所以一个多变量线性回归模型表示为以下的形式：
+${\displaystyle Y_{i}=\beta_{0}+\beta_{1}X_{i1}+\beta_{2}X_{i2}+\ldots +\beta_{p}X_{ip}+\varepsilon_{i},\qquad i=1,\ldots ,n}$</p>
+<p>其他的模型可能被认定成非线性模型。一个线性回归模型不需要是自变量的线性函数。线性在这里表示${\displaystyle Y_{i}}$的条件均值在参数${\displaystyle \beta }$里是线性的。例如：模型${\displaystyle Y_{i}=\beta_{1}X_{i}+\beta_{2}X_{i}^{2}+\varepsilon_{i}}$在${\displaystyle \beta_{1}}$和${\displaystyle \beta_{2}}$里是线性的，但在${\displaystyle X_{i}^{2}}$里是非线性的，它是${\displaystyle X_{i}}$的非线性函数。</p>
+<ul>
+<li>
+<p>单变量数据考虑的是一个单一变量的频数或概率，所描述的对象只有一种</p>
+</li>
+<li>
+<p>二变量数据能够了解不同变量之间的关系</p>
+</li>
+</ul>
+<p><strong>两个变量之间存在相关关系并不一定意味着一个变量会影响另一个变量，也不意味着二者存在实际关系</strong></p>
+<p><strong>SSE</strong>: 误差平方和，$SS-E=\sum(y-\hat{y})^2$</p>
+<p>我们用 $y=ax+b$ 来拟合数据，其中 $a$ 代表这条直线的斜率，使得 $SSE$ 最小的 $a$ 值计算如下：</p>
+<p>$$
+a=\frac{\sum{((x-\overline{x})(y-\overline{y}))}}{\sum{(x-\overline{x})^2}}
+$$</p>
+<p>或者</p>
+<p>$$
+a=\frac{\overline{xy}-\overline{x}\cdot\overline{y}}{\overline{x^2}-\overline{x}^2}
+$$</p>
+<p>$$
+b=\overline{y}-a\overline{x}
+$$</p>
+<h3 id="相关系数">相关系数</h3>
+<p>相关系数可以指出数据点与直线的拟合程度，同时能够指出我们的期望预测结果能够达到的精确程度。相关系数是介于-1和1之间的一个数，描述了各个数据点与直线的偏离程度，通过它就可以量度回归线与数据的拟合度，通常用字母$R​$ 表示</p>
+<p>如果$R$ 等于-1，则数据为完全负线性相关，所有数据点都在一条直线上；如果$R$ 等于1，则数据完全正线性相关。如果$R$ 等于0，则不存在相关性，$R$越接近0，线性相关性越弱</p>
+<p>$$
+R=\frac{as_x}{s_y}
+$$</p>
+<p>$a$是已经求出的最佳拟合线的斜率，$s_x$ 是样本中$x$值的标准差，$s_y$是$y$值的标准差</p>
+<p>$$
+s_x=\sqrt{\frac{\sum{(x-\overline{x})^2}}{n-1}}
+$$</p>
+<p>直线的平方误差显示出，总波动中有多少没有被回归线描述</p>
+<h3 id="决定系数">决定系数</h3>
+<p>决定系数（coefficient of determination）:在$Y$的总平方和中，由X引起的平方和所占的比例，记为$R^2 $(R的平方)，有的教材上翻译为判定系数，也称为拟合优度。是相关系数的平方。表示可根据自变量的变异来解释因变量的变异部分。</p>
+<p>当$R^ 2$越接近1时，表示相关的方程式参考价值越高；相反，越接近0时，表示参考价值越低。这是在一元回归分析中的情况。但从本质上说决定系数和回归系数没有关系，就像标准差和标准误差在本质上没有关系一样。</p>
+<p>意义：拟合优度越大，自变量对因变量的解释程度越高，自变量引起的变动占总变动的百分比高。观察点在回归直线附近越密集。</p>
+<p>表达式：$R^2=SSR/SST=1-SSE/SST​$</p>
+<p>其中：$SST=SSR+SSE$，$SST$ (total sum of squares)为总平方和，$SSR$ (regression sum of squares)为回归平方和，$SSE$ (error sum of squares) 为残差平方和。</p>
+<ul>
+<li>
+<p>回归平方和(已解释方差平方和)：</p>
+<p>$SSR(Sum ; of ;  Squares ; for;  regression) = ESS (explained ; sum ; of ; squares)$</p>
+</li>
+<li>
+<p>残差平方和：</p>
+<p>$SSE（Sum;  of ; Squares;  for;  Error） = RSS (residual;  sum;  of;  squares) =SSR(sum;  of ; squared;  residuals)$</p>
+</li>
+<li>
+<p>总离差平方和：</p>
+<p>$SST(Sum ; of ; Squares ; for;  total) = TSS(total ; sum ; of ; squares)​$</p>
+<p>决定系数与相关系数区别</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>判定系数</th>
+<th>相关系数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>就模型而言</td>
+<td>就两个变量而言</td>
+</tr>
+<tr>
+<td>说明解释变量对因变量的解释程度</td>
+<td>度量两个变量线性依存程度</td>
+</tr>
+<tr>
+<td>度量不对称的因果关系</td>
+<td>度量不含因果关系的对称相关关系</td>
+</tr>
+<tr>
+<td>取值：[0,1]</td>
+<td>取值：[－1,1]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="最小二乘回归法">最小二乘回归法</h2>
+<p>最小二乘回归法是一种数学方法，可用一条最佳拟合线将一组二维变量数据拟合，通过将公式$y=ax+b​$ 的一条直线与一组数值相拟合，使得误差平方和最小——即，使得实际数值与这些数值的估计值之间的差值最小。</p>
+<p>这条直线称为回归线，在预测一个特定$x$值对应的$y$ 值时，要避免对已知数据点范围以外的值进行预测</p>
+<h2 id="协方差">协方差</h2>
+<p>协方差（Covariance）在概率论和统计学中用于衡量两个变量的总体误差。而方差是协方差的一种特殊情况，即当两个变量是相同的情况。</p>
+<p>协方差表示的是两个变量的总体的误差，这与只表示一个变量误差的方差不同。 如果两个变量的变化趋势一致，也就是说如果其中一个大于自身的期望值，另外一个也大于自身的期望值，那么两个变量之间的协方差就是正值。 如果两个变量的变化趋势相反，即其中一个大于自身的期望值，另外一个却小于自身的期望值，那么两个变量之间的协方差就是负值。</p>
+<p>期望值分别为$E(X)$与$E(Y)$的两个实随机变量$X$与$Y$之间的协方差$Cov(X,Y)$定义为：</p>
+<p>$$
+\begin{aligned}
+Cov(X,Y)&amp;=E((X-E(X)(Y-E(Y))\\
+&amp;=E(XY)-2E(Y)E(X)+E(X)E(Y)\\
+&amp;=E(XY)-E(X)E(Y)
+\end{aligned}
+$$</p>
+<p>协方差为0的两个随机变量称为是不相关的。</p>
+<p>皮尔森相关系数（$Pearson$）</p>
+<p>$$
+\rho_{XY}=\frac{Cov(X,Y)}{\sqrt {D(X)}\cdot\sqrt{D(Y)}}
+$$</p>
+<h2 id="总结">总结</h2>
+<img src="https://i0.hdslb.com/bfs/album/852d886b39c81c8066bd3d94e085869c5d169590.png" title="" alt="" data-align="center"></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-05-16</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/linear_regression/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/linear_regression/" data-title="线性回归" data-hashtags="Statistical,Linear Regression"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/linear_regression/" data-title="线性回归" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/statistical/">Statistical</a>,&nbsp;<a href="/tags/linear-regression/">Linear Regression</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/hypothesis_testing/" class="prev" rel="prev" title="假设检验"><i class="fas fa-angle-left fa-fw"></i>假设检验</a>
+            <a href="/variable/" class="next" rel="next" title="C&#43;&#43;变量声明与定义">C&#43;&#43;变量声明与定义<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

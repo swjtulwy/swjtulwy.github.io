@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="referrer" content="no-referrer">
         <title>统计学基础、二项及泊松分布 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="统计学基础、二项及泊松分布" />
-<meta property="og:description" content="统计学分类 描述统计学 descriptive statistics 侧重以数字特征描述数据分布情况 推论统计学 Inferential statistics 侧重以数据的子集分布情况来推断数据整体情况 集中趋势(Central Ten" />
+<meta property="og:description" content="统计学分类 描述统计学 descriptive statistics 侧重以数字特征描述数据分布情况 推论统计学 Inferential statistics 侧重以数据的子集分布情况来推断数据整体情况 集中趋势的量度:广义平均数 在统" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://example.com/statistical_base/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-05-10T18:29:18+00:00" />
@@ -17,11 +17,11 @@
 <meta name="twitter:image" content="https://example.com/logo.png"/>
 
 <meta name="twitter:title" content="统计学基础、二项及泊松分布"/>
-<meta name="twitter:description" content="统计学分类 描述统计学 descriptive statistics 侧重以数字特征描述数据分布情况 推论统计学 Inferential statistics 侧重以数据的子集分布情况来推断数据整体情况 集中趋势(Central Ten"/>
+<meta name="twitter:description" content="统计学分类 描述统计学 descriptive statistics 侧重以数字特征描述数据分布情况 推论统计学 Inferential statistics 侧重以数据的子集分布情况来推断数据整体情况 集中趋势的量度:广义平均数 在统"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/statistical_base/" /><link rel="prev" href="https://example.com/grammar/" /><link rel="next" href="https://example.com/variable/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/statistical_base/" /><link rel="prev" href="https://example.com/grammar/" /><link rel="next" href="https://example.com/normal_distribution/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/statistical_base\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Statistical","wordcount":  2993 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Statistical, Binomial distribution, Poisson distribution","wordcount":  3688 ,
         "url": "https:\/\/example.com\/statistical_base\/","datePublished": "2019-05-10T18:29:18+00:00","dateModified": "2019-05-10T18:29:18+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -111,8 +111,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">统计学基础、二项及泊松分布</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/math/"><i class="far fa-folder fa-fw"></i>Math</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-10">2019-05-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2993 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/statistical_base/" class="leancloud_visitors" data-flag-title="统计学基础、二项及泊松分布">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-10">2019-05-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3688 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;<span id="/statistical_base/" class="leancloud_visitors" data-flag-title="统计学基础、二项及泊松分布">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -123,17 +123,17 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#统计学分类">统计学分类</a></li>
-    <li><a href="#集中趋势central-tendency的量度广义平均数average">集中趋势(Central Tendency)的量度:广义平均数(Average)</a></li>
-    <li><a href="#样本sample和总体population">样本(Sample)和总体(Population)</a></li>
-    <li><a href="#离中趋势dispersion分散性与变异性的量度矩">离中趋势(Dispersion)(分散性与变异性)的量度：“矩”</a>
+    <li><a href="#集中趋势的量度广义平均数">集中趋势的量度:广义平均数</a></li>
+    <li><a href="#样本和总体">样本和总体</a></li>
+    <li><a href="#离中趋势的量度矩">离中趋势的量度：“矩”</a>
       <ul>
         <li><a href="#全矩极差">全矩(极差)</a></li>
         <li><a href="#四分位矩">四分位矩</a></li>
-        <li><a href="#方差variance">方差(variance)</a></li>
+        <li><a href="#方差">方差</a></li>
         <li><a href="#标准分z-score">标准分(Z-Score)</a></li>
       </ul>
     </li>
-    <li><a href="#随机变量random-variable">随机变量(Random Variable)</a>
+    <li><a href="#随机变量">随机变量</a>
       <ul>
         <li><a href="#数学期望expected-value">数学期望(Expected Value)</a></li>
         <li><a href="#概率密度函数">概率密度函数</a></li>
@@ -165,7 +165,8 @@
 <p>侧重以数据的子集分布情况来推断数据整体情况</p>
 </li>
 </ul>
-<h2 id="集中趋势central-tendency的量度广义平均数average">集中趋势(Central Tendency)的量度:广义平均数(Average)</h2>
+<h2 id="集中趋势的量度广义平均数">集中趋势的量度:广义平均数</h2>
+<p>在统计学中，[集中趋势](<a href="https://zh.wikipedia.org/wiki/%E9%9B%86%E4%B8%AD%E8%B6%8B%E5%8A%BF" target="_blank" rel="noopener noreffer">集中趋势 - 维基百科，自由的百科全书 (wikipedia.org)</a>)（central tendency）或<strong>中央趋势</strong>，在口语上也经常被称为<strong>平均</strong>，表示一个机率分布的中间值。 最常见的几种集中趋势包括<strong>算数平均数、中位数及众数</strong>。集中趋势可以由有限的数组（如一群样本）中或理论上的机率分配（如<a href="https://baike.baidu.com/item/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83" target="_blank" rel="noopener noreffer">正态分布</a>）中求得。有些人使用集中趋势（或<strong>集中性</strong>）这个词汇以表示“数量化的资料之中央值的趋势”。在这种意义下，我们可以利用资料的<a href="https://baike.baidu.com/item/%E7%A6%BB%E6%95%A3%E7%A8%8B%E5%BA%A6" target="_blank" rel="noopener noreffer">离散程度</a>（例如<a href="https://baike.baidu.com/item/%E6%A0%87%E5%87%86%E5%81%8F%E5%B7%AE" target="_blank" rel="noopener noreffer">标准偏差</a>或<a href="https://baike.baidu.com/item/%E5%9B%9B%E5%88%86%E5%B7%AE" target="_blank" rel="noopener noreffer">四分差</a>等相似的统计量）判别其集中趋势的程度。</p>
 <ul>
 <li>
 <p>均值（mean）: 通常指代算术平均数，另外还有几何平均数，调和平均数</p>
@@ -178,6 +179,7 @@
 </li>
 </ul>
 <p>有时候相较于中位数而言，，均值受到离群值影响较大，不能很好地描述数据的集中趋势。以数据3,3,3,3,100为例，中位数更能代表总体的集中趋势。如果存在异常值，均值会往异常值方向移动</p>
+<p>下面是常用的三种集中趋势的统计量（广义平均数，average）</p>
 <table>
 <thead>
 <tr>
@@ -204,12 +206,13 @@
 </tr>
 </tbody>
 </table>
-<h2 id="样本sample和总体population">样本(Sample)和总体(Population)</h2>
-<p>可以用样本来分析总体的情况，因为有时候去分析总体的统计量很费时费力。</p>
+<h2 id="样本和总体">样本和总体</h2>
+<p>可以用样本(Sample)来分析总体(Population)的情况，因为有时候去分析总体的统计量很费时费力。</p>
 <p>可以用随机抽样来获取属于总体的样本。</p>
 <p>$\mu​$ 一般指代总体均值(population mean)  ，$\mu =\frac{\sum_{i=1}^{N}x_i}{N}$</p>
 <p>$\overline{\rm X}​$ 一般指代样本的均值(sample mean)，$\overline{\rm X}=\frac{\sum_{i=1}^{n}x_i}{n}$</p>
-<h2 id="离中趋势dispersion分散性与变异性的量度矩">离中趋势(Dispersion)(分散性与变异性)的量度：“矩”</h2>
+<h2 id="离中趋势的量度矩">离中趋势的量度：“矩”</h2>
+<p>离中趋势(Dispersion)表现为分散性与变异性</p>
 <h3 id="全矩极差">全矩(极差)</h3>
 <p>全矩也称极差，适用于量度数据集分散程度的一种方法，其算法为：<em><strong>上界 -下界</strong></em>， 其中，上界为最大值，下界为最小值，全矩的测量有点像测量数据的宽度</p>
 <p><strong>全矩仅仅描述了数据的宽度，并没有描述数据在上、下界之间的分布形态，且全矩很容易受到异常值的影响</strong></p>
@@ -219,8 +222,8 @@
 <p>与全矩相比，四分位矩较少受到异常值的影响</p>
 <p>同理，将数据分成十份，有十分位数和十分位矩，将数据分成100份，有百分位矩</p>
 <p>百分位数：第 $k$ 百分位数即位于数据范围 $k%$ 处的数值，即为 $\mathrm{P_k}$</p>
-<h3 id="方差variance">方差(variance)</h3>
-<p>$\sigma^2$ 指代<strong>方差</strong></p>
+<h3 id="方差">方差</h3>
+<p>$\sigma^2$ 指代<strong>方差(variance)</strong></p>
 <p>$$
 \sigma^2=\frac{\sum_{i=1}^N\left(x_i-\mu\right)^2}{N}
 $$</p>
@@ -230,7 +233,7 @@ $$</p>
 s^2=\frac{\sum_{i=1}^n\left(x_i-\overline{\rm X}\right)^2}{n-1}
 $$</p>
 <p>    </p>
-<p>$\sigma $ 指代<strong>标准差</strong>(standard variance)，是方差的平方根</p>
+<p>$\sigma $ 指代<strong>标准差</strong>(<strong>standard variance</strong>)，是方差的平方根</p>
 <p>标准差能够在量纲上有更容易理解的表示，它的单位与均值的单位一致，我们平时可以这样描述：该数字里均值相差了几个标准差</p>
 <p>方差公式可以简化如下，更加方便计算</p>
 <p>$$
@@ -256,8 +259,8 @@ $$</p>
 <p><strong>标准分的含义是距离均值的标准差的个数，即标准分=距离均值的标准差的个数</strong></p>
 <p>Z-Score最大的优点就是简单，容易计算，在R中，不需要加载包，仅仅凭借最简单的数学公式就能够计算出Z-Score并进行比较。此外，Z-Score能够应用于数值型的数据，并且不受数据量级的影响，因为它本身的作用就是消除量级给分析带来的不便。</p>
 <p>但是Z-Score应用也有风险。首先，估算Z-Score需要总体的平均值与方差，但是这一值在真实的分析与挖掘中很难得到，大多数情况下是用样本的均值与标准差替代。其次，Z-Score对于数据的分布有一定的要求，正态分布是最有利于Z-Score计算的。最后，Z-Score消除了数据具有的实际意义，A的Z-Score与B的Z-Score与他们各自的分数不再有关系，因此Z-Score的结果只能用于比较数据间的结果，数据的真实意义还需要还原原值。</p>
-<h2 id="随机变量random-variable">随机变量(Random Variable)</h2>
-<p>一般用大写的英文字母表示，可能是为了和传统的变量区分开来，实际上，它更像是一种函数，将随机过程映射到数字，而这个数字是随机的。</p>
+<h2 id="随机变量">随机变量</h2>
+<p>随机变量(Random Variable)一般用大写的英文字母表示，可能是为了和传统的变量区分开来，实际上，它更像是一种函数，将随机过程映射到数字，而这个数字是随机的。</p>
 <ul>
 <li>
 <p>离散(Discrete)随机变量：取值有限</p>
@@ -299,11 +302,14 @@ $$</p>
 <p>当我们求取值在某个值附近的概率时，我们会这样表示：$ \rm{P}(|\rm{X}- \textit{value}&lt;0.1|)=0.3$ ,即随机变量$\rm{X}​$ 取值为value附近的概率，精度在0.1之内</p>
 <p>对于一维实随机变量<em>X</em>，设它的累积分布函数是 $\displaystyle F_{X}(x)$ 。如果存在可测函数 $\displaystyle f_{X}(x)$，满足</p>
 <p>$$
-{\displaystyle \forall \-\infty &lt;a&lt;\infty ,\quad F_{X}(a)=\int <em>{\-\infty }^{a}f</em>{X}(x),dx}
+\begin{aligned}
+\forall -\infty &lt;a&lt;\infty ,\quad F_{X}(a)=\int_{-\infty }^{a}f_{X}(x)dx
+\end{aligned}
 $$</p>
 <p>其中$\displaystyle f_{X}(x)$ 表示概率密度函数,${\displaystyle F_{X}(x)}$ 表示概率分布函数</p>
 <h2 id="二项分布">二项分布</h2>
 <h3 id="二项分布定义">二项分布定义</h3>
+<p>在概率论和统计学中，<strong>二项分布</strong>（Binomial distribution）是<em>n</em>个<a href="https://zh.wikipedia.org/wiki/%E7%B5%B1%E8%A8%88%E7%8D%A8%E7%AB%8B%E6%80%A7" title="统计独立性" target="_blank" rel="noopener noreffer">独立</a>的是/非试验中成功的次数的<a href="https://zh.wikipedia.org/wiki/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83" title="离散概率分布" target="_blank" rel="noopener noreffer">离散概率分布</a>，其中每次试验的成功概率为<em>p</em>。这样的单次成功/失败试验又称为<a href="https://zh.wikipedia.org/wiki/%E4%BC%AF%E5%8A%AA%E5%88%A9%E8%A9%A6%E9%A9%97" title="伯努利试验" target="_blank" rel="noopener noreffer">伯努利试验</a>。实际上，当<em>n</em> = 1时，二项分布就是<a href="https://zh.wikipedia.org/wiki/%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83" title="伯努利分布" target="_blank" rel="noopener noreffer">伯努利分布</a>。二项分布是<a href="https://zh.wikipedia.org/wiki/%E6%98%BE%E8%91%97%E6%80%A7%E5%B7%AE%E5%BC%82" title="显著性差异" target="_blank" rel="noopener noreffer">显著性差异</a>的<a href="https://zh.wikipedia.org/w/index.php?title=%E4%BA%8C%E9%A1%B9%E8%AF%95%E9%AA%8C&amp;action=edit&amp;redlink=1" title="二项试验（页面不存在）" target="_blank" rel="noopener noreffer">二项试验</a>的基础。</p>
 <p>二项分布包括下列条件</p>
 <ol>
 <li>你正在进行一系列独立试验</li>
@@ -344,6 +350,8 @@ Var(X)&amp;=Var(X_1)+Var(X_2)+&hellip;+Var(X_n)\\
 $$</p>
 <h2 id="泊松分布">泊松分布</h2>
 <h3 id="泊松分布定义">泊松分布定义</h3>
+<p><strong>泊松分布</strong>（法语：loi de Poisson；英语：Poisson distribution）又称<strong>Poisson分布</strong>、<strong>帕松分布</strong>、<strong>布瓦松分布</strong>、<strong>布阿松分布</strong>、<strong>普阿松分布</strong>、<strong>波以松分布</strong>、<strong>卜氏分布</strong>、<strong>帕松小数法则</strong>（Poisson law of small numbers），是一种<a href="https://zh.wikipedia.org/wiki/%E7%B5%B1%E8%A8%88" title="统计" target="_blank" rel="noopener noreffer">统计</a>与<a href="https://zh.wikipedia.org/wiki/%E6%A6%82%E7%8E%87" title="概率" target="_blank" rel="noopener noreffer">概率</a>学里常见到的<a href="https://zh.wikipedia.org/wiki/%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88" title="概率分布" target="_blank" rel="noopener noreffer">离散概率分布</a>，由法国数学家<a href="https://zh.wikipedia.org/wiki/%E8%A5%BF%E8%8E%AB%E6%81%A9%C2%B7%E4%B8%B9%E5%B0%BC%C2%B7%E6%B3%8A%E6%9D%BE" title="西莫恩·丹尼·泊松" target="_blank" rel="noopener noreffer">西莫恩·德尼·泊松</a>在1838年时发表。</p>
+<p>泊松分布适合于描述单位时间内随机事件发生的次数的概率分布。如某一服务设施在一定时间内受到的服务请求的次数，电话交换机接到呼叫的次数、汽车站台的候客人数、机器出现的故障数、自然灾害发生的次数、DNA序列的变异数、放射性原子核的衰变数、激光的光子数分布等等。</p>
 <ol>
 <li>单独事件在给定的区间内随机、独立地发生，给定区间可以是时间或空间，例如可以是一个星期，也可以是一英里</li>
 <li>已知该区间内的事件平均发生次数(或者叫发生率)，且为有限数值。该事件平均发生次数通常用希腊字母$\lambda​$ 表示</li>
@@ -392,20 +400,20 @@ $$</p>
                             <a class="link-to-markdown" href="/statistical_base/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/statistical_base/" data-title="统计学基础、二项及泊松分布" data-hashtags="Statistical"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/statistical_base/" data-title="统计学基础、二项及泊松分布" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/statistical_base/" data-title="统计学基础、二项及泊松分布" data-hashtags="Statistical,Binomial distribution,Poisson distribution"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/statistical_base/" data-title="统计学基础、二项及泊松分布" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/statistical/">Statistical</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/statistical/">Statistical</a>,&nbsp;<a href="/tags/binomial-distribution/">Binomial distribution</a>,&nbsp;<a href="/tags/poisson-distribution/">Poisson distribution</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
     <div class="post-nav"><a href="/grammar/" class="prev" rel="prev" title="英语语法浅析"><i class="fas fa-angle-left fa-fw"></i>英语语法浅析</a>
-            <a href="/variable/" class="next" rel="next" title="C&#43;&#43;变量声明与定义">C&#43;&#43;变量声明与定义<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/normal_distribution/" class="next" rel="next" title="正态分布">正态分布<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
