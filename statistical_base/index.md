@@ -83,14 +83,14 @@ $$
 
 $$
 \begin{aligned}
-\sigma^2
-&=\frac{\sum_{i=1}^N\left(x_i-\mu\right)^2}{N}\\
-&=\frac{\sum_{i=1}^N\left(x_i^2-2x_i\mu+\mu^2\right)}{N}\\
-&=\frac{\sum_{i=1}^Nx_i^2-2\mu\sum_{i=1}^Nx_i+\mu^2\sum_{i=1}^N1}{N}\\
-&=\frac{\sum_{i=1}^Nx_i^2-2\mu\sum_{i=1}^Nx_i+\mu^2N}{N}\\
-&=\frac{\sum_{i=1}^Nx_i^2}{N}-2\mu^2+\mu^2\\
-&=\frac{\sum_{i=1}^Nx_i^2}{N}-\mu^2\\
-&=E\left(\rm X^2\right)-E\left(\rm X\right)^2
+\sigma^2 
+&=\frac{\sum_{i=1}^N\left(x_i-\mu\right)^2}{N}\\\
+&=\frac{\sum_{i=1}^N\left(x_i^2-2x_i\mu+\mu^2\right)}{N}\\\
+&=\frac{\sum_{i=1}^Nx_i^2-2\mu\sum_{i=1}^Nx_i+\mu^2\sum_{i=1}^N1}{N}\\\
+&=\frac{\sum_{i=1}^Nx_i^2-2\mu\sum_{i=1}^Nx_i+\mu^2N}{N}\\\
+&=\frac{\sum_{i=1}^Nx_i^2}{N}-2\mu^2+\mu^2\\\
+&=\frac{\sum_{i=1}^Nx_i^2}{N}-\mu^2\\\
+&=E\left(\rm X^2\right)-E\left(\rm X\right)^2\\\
 \end{aligned}
 $$
 
@@ -140,20 +140,22 @@ $$
 
 $$
 \begin{aligned}
-E(aX+b)&=aE(X)+b\\
-Var(aX+b)&=a^2Var(X)\\
-E(X_1+X_2+...+X_n)&=nE(X)\\
-Var(X_1+X_2+...+X_n)&=nVar(X)
+E(aX+b)&=aE(X)+b \\\
+Var(aX+b)&=a^2Var(X) \\\
+E(X_1+X_2+...+X_n)&=nE(X) \\\
+Var(X_1+X_2+...+X_n)&=nVar(X) \\\
 \end{aligned}
 $$
 
 多个随机变量的线性变换：
 
 $$
-E(X-Y)=E(X)-E(Y)\\
-E(X+Y)=E(X)+E(Y)\\
-Var(X+Y)=Var(X)+Var(Y)\\
-Var(X-Y)=Var(X)+Var(Y)
+\begin{aligned}
+E(X-Y)=E(X)-E(Y)\\\
+E(X+Y)=E(X)+E(Y) \\\
+Var(X+Y)=Var(X)+Var(Y)\\\
+Var(X-Y)=Var(X)+Var(Y)\\\
+\end{aligned}
 $$
 
 其中X与Y互相独立，独立随机变量做减法运算，方差依然增大
@@ -167,7 +169,7 @@ $$
 对于一维实随机变量*X*，设它的累积分布函数是 $\displaystyle F_{X}(x)$ 。如果存在可测函数 $\displaystyle f_{X}(x)$，满足
 
 $$
-{\displaystyle \forall -\infty <a<\infty ,\quad F_{X}(a)=\int _{-\infty }^{a}f_{X}(x)\,dx}
+{\displaystyle \forall \\-\infty <a<\infty ,\quad F_{X}(a)=\int _{\\-\infty }^{a}f_{X}(x)\,dx}
 $$
 
 其中$\displaystyle f_{X}(x)$ 表示概率密度函数,${\displaystyle F_{X}(x)}$ 表示概率分布函数
@@ -214,17 +216,17 @@ $Var(X)=E(X^2)+E(X)^2=(0q+1p)-p^2=p(1-p)=pq​$
 
 $$
 \begin{aligned}
-E(X)&=E(X_1)+E(X_2)+...+E(X_n)\\
-&=nE(X_i)\\
-&=np
+E(X)&=E(X_1)+E(X_2)+...+E(X_n)\\\
+&=nE(X_i)\\\
+&=np\\\
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-Var(X)&=Var(X_1)+Var(X_2)+...+Var(X_n)\\
-&=nVar(X_i)\\
-&=npq
+Var(X)&=Var(X_1)+Var(X_2)+...+Var(X_n)\\\
+&=nVar(X_i)\\\
+&=npq\\\
 \end{aligned}
 $$
 

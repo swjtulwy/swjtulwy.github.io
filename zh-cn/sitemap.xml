@@ -58,14 +58,14 @@
                     href="https://example.com/categories/documentation/"
                     /></url><url>
             <loc>https://example.com/learning_route/</loc><lastmod>2022-04-09T15:44:08&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://example.com/categories/tools/</loc><lastmod>2022-04-08T20:51:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://example.com/tags/vim/</loc><lastmod>2022-04-08T20:51:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://example.com/vim/</loc><lastmod>2022-04-08T20:51:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://example.com/tags/computer-network/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/categories/computer-network/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/reliable-data-transfer/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/tcp/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/reliable_data_transfer/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/categories/tools/</loc><lastmod>2021-10-08T20:51:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/tags/vim/</loc><lastmod>2021-10-08T20:51:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://example.com/vim/</loc><lastmod>2021-10-08T20:51:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/compile/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/gnu/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/compile_link/</loc><lastmod>2021-05-19T11:15:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
