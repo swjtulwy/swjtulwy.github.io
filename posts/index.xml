@@ -4,7 +4,21 @@
         <link>https://example.com/posts/</link>
         <description>所有文章 | Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 11 Apr 2022 10:19:08 &#43;0800</lastBuildDate><atom:link href="https://example.com/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 19 Apr 2022 08:46:08 &#43;0800</lastBuildDate><atom:link href="https://example.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>二分查找法之细节</title>
+    <link>https://example.com/binary_search/</link>
+    <pubDate>Tue, 19 Apr 2022 08:46:08 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/binary_search/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>开源学习资料</title>
+    <link>https://example.com/learing_resources/</link>
+    <pubDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/learing_resources/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>Hugo使用技巧</title>
     <link>https://example.com/hugo/</link>
     <pubDate>Mon, 11 Apr 2022 10:19:08 &#43;0800</pubDate>
@@ -27,13 +41,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg" referrerpolicy="no-referrer">
             </div>可靠数据传输原理 可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层]]></description>
-</item><item>
-    <title>Vim</title>
-    <link>https://example.com/vim/</link>
-    <pubDate>Fri, 08 Oct 2021 20:51:31 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/vim/</guid>
-    <description><![CDATA[]]></description>
 </item><item>
     <title>编译与链接</title>
     <link>https://example.com/compile_link/</link>
@@ -60,6 +67,13 @@
                 <img src="https://i0.hdslb.com/bfs/album/df7b6d46621859c99357ddcadc6d21f5a3495eba.png" referrerpolicy="no-referrer">
             </div>]]></description>
 </item><item>
+    <title>CMake使用方法</title>
+    <link>https://example.com/cmake_tutorial/</link>
+    <pubDate>Sat, 17 Apr 2021 16:16:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/cmake_tutorial/</guid>
+    <description><![CDATA[CMake 介绍 cmake的定义是什么 ？&mdash;&ndash;高级编译配置工具 当多个人用不同的语言或者编译器开发一个项目，最终要输出一个可执行文]]></description>
+</item><item>
     <title>Linux下的多线程</title>
     <link>https://example.com/linux_multi_threads/</link>
     <pubDate>Mon, 12 Apr 2021 16:18:55 &#43;0800</pubDate>
@@ -68,23 +82,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i0.hdslb.com/bfs/album/233aa1a553ddf86da52e30838d8b82e69bc4fdba.webp" referrerpolicy="no-referrer">
             </div>]]></description>
-</item><item>
-    <title>Linux多进程通信</title>
-    <link>https://example.com/ipc/</link>
-    <pubDate>Sat, 10 Apr 2021 19:25:54 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/ipc/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://i0.hdslb.com/bfs/album/6c693a5a9100c03c21a2473bbc378de14543a4ec.png" referrerpolicy="no-referrer">
-            </div>多进程通信（IPC） 进程是一个独立的资源分配单元，不同进程（这里所说的进程通常指的是用户进程）之间 的资源是独立的，没有关联，不能在一个进程中]]></description>
-</item><item>
-    <title>Unix文件IO</title>
-    <link>https://example.com/fileio/</link>
-    <pubDate>Thu, 08 Apr 2021 11:14:22 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/fileio/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://i0.hdslb.com/bfs/album/a5956cbf6cc82995ce1afdcdf77e73d9c14748b2.png@1e_1c.webp" referrerpolicy="no-referrer">
-            </div>本文介绍文件IO与标准IO的相关概念，以及一些常用的文件IO函数 基本概念 文件I/O：文件I/O称之为不带缓存的IO（unbuffered I/]]></description>
 </item></channel>
 </rss>
