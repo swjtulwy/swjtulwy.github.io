@@ -303,8 +303,6 @@ gcc -o test.out test.o include/mymath.o
 
 {{< /admonition>}}
 
-
-
 {{< admonition info"执行">}}
 ./test.out
 {{< /admonition>}}

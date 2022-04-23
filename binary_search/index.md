@@ -236,6 +236,9 @@ int binarySearch(int[] nums, int target) {
     // 或者可以这样写
     // if (left != nums.length && nums[left] == target) return left;
     // return -1;
+
+    // 或者以下统一形式
+    return (left != nums.length && nums[left] == target) left : -1;
 }
 ```
 
@@ -301,4 +304,207 @@ int binarySearch(vector<int>& nums, int target){
     return -1;
 }
 ```
+
+## 若干条经验
+
+- 当搜寻单个值时，用模板一，更易于理解，每次二分都直接进行了判断，
+
+- 当搜寻某个最值或者区间端点时，用模板二
+
+- 当使用模板一时，`whie(left <= right)`常常与`right = size() - 1` 连用
+
+- 当用模板二时，`while (left < right)`常常与 `right = size() `连用（不确定，有时也看情况）
+
+- 当使用模板二时，`int mid = left + (right - left) / 2` 与 `left = mid + 1`连用，避免死循环，同理`int mid = left + (right - left + 1) / 2`与`left = mid``连用
+
+- 当使用模板二时，考虑采用`left = mid + 1` 还是` left = mid` 时，可以做如下思考：当前基于`mid`判断的`nums[mid]`**是否可能**出现在结果区间内，如果可能，考虑二分的那一侧应该包含`mid`, 即`left = mid `或` right = mid`,同理，当不可能出现在结果区间内，则应坚决排除，即`left = mid + 1 `或` right  = mid + 1`
+
+## 实例研究
+
+### 单一值查找情况
+
+[力扣-二分查找](https://leetcode-cn.com/problems/binary-search/)
+
+#### 模板一
+
+初始时`right`必须是`len - 1`, 否则在`left = mid + 1`时，可能取到`left == right` 且` left == len`， 访问越界数组!
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size();
+        int left = 0, right = len - 1; 
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+};
+```
+
+#### 模板二
+
+注意： 下面文字说明中 ”=“ 不表示赋值
+
+下面这种情况，初始时`right = len - 1`, 结束条件为`left == right`
+
+- 当`target`大于区间所有元素时，搜索区间右端点始终固定为`len - 1`
+  
+  - 若最后搜索区间缩小到`[left, right]`，`left = right - 1`, 这时，`mid = left`, 下一步`left = mid + 1 = right = len - 1`, 然后有 `left == right`, 搜索结束。不会出现越界的情况
+
+- 当`target`小于区间所有元素时，搜索区间左端点始终固定为0
+  
+  - 若最后搜素区间缩小到`[left, right]`，`left = right - 1,` 这时，`mid = left`, 下一步`right = mid = left`,  此时`left = right`, 搜索结束。也不会出现越界
+  
+  上述两种情况，最后都是`left = right`时结束，但`left`下标的值却没有验证检查是否等于`target`，所以最后要做一个补充检查。此时`left`取值范围在`[0, len - 1]`, 很安全，所以直接取值判断即可。
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size();
+        int left = 0, right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return nums[left] == target ? left : -1;
+    }
+};
+```
+
+下面情况， 我们将`right`初始值取为`len`，看看会发生什么变化
+
+- 当`target`大于区间所有元素时，搜索区间右端点始终<mark>固定为`len`</mark>
+  
+  - 若最后搜索区间缩小到`[left, right]`，`left = right - 1`, 这时，`mid = left`, 下一步`left = mid + 1 = right = len`, 然后有 `left == right`, 搜索结束。注意这时`left = len`，下标已经越界了, 如果最后直接取`nums[left]`会访问越界！
+
+- 当`target`小于区间所有元素时，搜索区间左端点始终固定为0
+  
+  - 若最后搜素区间缩小到`[left, right]`，`left = right - 1,` 这时，`mid = left`, 下一步`right = mid = left`, 此时`left = right`, 搜索结束。也不会出现越界。
+  
+  上述两种情况，最后都是`left = right`时结束，但`left`下标的值却没有验证检查是否等于`target`，同样最后要做一个补充检查，但是补充检查时，因为`left`取值范围为`[0, len]`, 取值范围不安全，所以要多一个排除条件`left != len`。
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size();
+        int left = 0, right = len;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return (left != len && nums[left] == target) left : -1;
+    }
+};
+```
+
+再看看下面的代码，又在上面的代码上做了点小小的改动，即每次判断后下一搜索区间的取值范围，这里实际上把`nums[mid] > target`条件下的`right`更新为了`mid - 1`, 可以看出没有丝毫影响，因为我们要找的是`target`, 当指明了`target`小于某个值，当然可以跳过该`mid`索引了，想一下，当`nums[mid] == target`时，我们为什么要取`=mid`, 因为满足此条件的任何`mid`索引对应的值都有可能出现在结果区间中，我们不能用`left = mid + 1 `或 `right = mid - 1`来跳过。那为什么不能取`left=mid`，这就是前文所述的死循环问题了，与`mid`取值有关，不做赘述。
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size();
+        int left = 0, right = len;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                right = mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            }
+        }
+        return (left != len && nums[left] == target) ? left : -1;
+    }
+};
+```
+
+##### 小结
+
+可以看出对于寻找单一值得情况，模板二中初始值 `right = len` 还是 `right = len - 1`，都是可以找到结果得，只是最后`left`的取值区间不一致，当`right`取`len`时，`left`取值空间包括了`len`，应该在后处理中做出排除。
+
+当搜索区间断点时，比如以下搜索出现数字的最小位置和最大位置的代码：
+
+```cpp
+int binarySearch(vector<int>& nums, int target) {
+    int left = 0, right = nums.size();
+    while(left < right) { 
+        int mid = left + (right - left) / 2;
+        if (nums[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid; 
+        }
+    }
+    return (left != nums.size() && nums[left] == target) left : -1;
+}
+```
+
+下面代码中，区别在于当`nums[mid] = target`时，所采取的动作，当搜索最大索引时，收紧左边界，但是由于避免死循环，所以`left = mid + 1`,导致结果区间中，`left `为 最大目标索引的下一个位置，所以目标索引应该取`left - 1` 或`right - 1`,又由于left的取值区间为`[0, nums.size()]` ， 但我们只需关心`left - 1`的取值区间，即`[-1, nums.size() - 1]`,发现这种情况相对于搜索最小位置的代码而言，自然优化了区间右端点，却导致了左端点越界，所以要额外检查左端点越界的情况。
+
+```cpp
+int binarySearch(vector<int>& nums, int target) {
+    int left = 0, right = nums.size();
+    while(left < right) { 
+        int mid = left + (right - left) / 2;
+        if (nums[mid] <= target) {
+            left = mid + 1; 
+        } else (nums[mid] > target) {
+            right = mid; 
+        }
+    }
+    return (left != 0 && nums[left - 1] == target) ? (left - 1) : -1; 
+}
+```
+
+所以我们又可以考虑，当搜索右端点时，right初始化为nums.size() - 1时，要作何改变，代码如下
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        if (left == right) return nums[0] == target ? 0 : -1;
+        while(left < right) { 
+            int mid = left + (right - left) / 2;
+            if (nums[mid] <= target) {
+                left = mid + 1; 
+            } else {
+                right = mid; 
+            }
+        }
+        if (left > 0 &&  nums[left - 1] == target) {
+            return left - 1;
+        } 
+        if ((left == nums.size() - 1) && nums[left] == target) {
+            return left;
+        }
+        return -1; 
+    }
+};
+```
+
+因为，`left`最终取值区间为`[0, nums.size() - 1]`, 我们区间右端点为`left - 1`, 则，`left - 1`的取值区间为`[-1, nums.size() - 2]`, 可见出来处理越界操作外，还出现了一个问题就是，`nums.size() - 1 `索引对应的值，会被漏掉，因此要额外判断。为什么会被漏掉呢？我们可以这么想，上述搜索等于目标值的最大索引，实际上是最后得到的是目标值的下一个位置，也就是大于目标值的第一个元素索引。所以当目标值比较大时，`right`始终固定为`nums.size() - 1,` `left `一直往右移动直到`left = mid + 1 = nums.size() - 1`时， 有`left = right` ，搜索结束，注意，此时`nums.size() - 1 `索引位置的值我们并没有和`target`做过判断，就这么漏掉了，所以后处理要补充检查最后一个元素，当然右边不可能越界了。
+
+由此，我们可以总结，在使用 `left < right`时，若采取`right` 初始化为`num.size()` 的形式，还是`num.size() - 1`的形式区别在于是否要在后处理中做额外的区间越界检查。所以我建议在寻找单个值而不是端点时，尽量初始化为`nums.size() - 1`, 可以免去越界检查，而在寻找端点时，应该取`nums.size()`，避免搜索右端点时额外的检查。
 

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>右值引用与移动语义 - Weiyee&#39;s Blog</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="右值引用与移动语义" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/rvalue_ref/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-21T18:23:44+08:00" />
+<meta property="article:modified_time" content="2022-04-21T18:23:44+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="右值引用与移动语义"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/rvalue_ref/" /><link rel="prev" href="https://example.com/binary_search/" /><link rel="next" href="https://example.com/binary_tree/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "右值引用与移动语义",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/rvalue_ref\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "cpp11","wordcount":  2695 ,
+        "url": "https:\/\/example.com\/rvalue_ref\/","datePublished": "2022-04-21T18:23:44+08:00","dateModified": "2022-04-21T18:23:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/rvalue_ref/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/rvalue_ref/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">右值引用与移动语义</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-21">2022-04-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2695 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/rvalue_ref/" class="leancloud_visitors" data-flag-title="右值引用与移动语义">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#左值与右值">左值与右值</a>
+      <ul>
+        <li><a href="#标准定义">标准定义</a></li>
+        <li><a href="#通俗解释">通俗解释</a></li>
+      </ul>
+    </li>
+    <li><a href="#左值引用与右值引用">左值引用与右值引用</a>
+      <ul>
+        <li><a href="#左值引用">左值引用</a></li>
+        <li><a href="#右值引用">右值引用</a></li>
+        <li><a href="#move-与forward">move 与 forward</a>
+          <ul>
+            <li><a href="#move">move</a></li>
+            <li><a href="#forward">forward</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://www.cnblogs.com/qicosmos/p/4283455.html" target="_blank" rel="noopener noreffer">从4行代码看右值引用 - qicosmos(江南) - 博客园</a></p>
+<p><a href="https://en.cppreference.com/w/cpp/language/value_category" target="_blank" rel="noopener noreffer">Value categories - cppreference.com</a></p>
+<p><a href="https://www.stroustrup.com/terminology.pdf" target="_blank" rel="noopener noreffer">https://www.stroustrup.com/terminology.pdf</a></p>
+<h2 id="左值与右值">左值与右值</h2>
+<h3 id="标准定义">标准定义</h3>
+<p>每个 C++ 表达式（一个操作符和它的操作数，一个字面值，一个变量名等等）都代表着两个独立属性：类型+属性分类。，属性分类也叫<strong>值类别</strong>。 值类别是编译器在表达式计算期间创建、复制和移动临时对象时必须遵循的规则的基础。</p>
+<p>C++17 标准定义表达式值类别，如下所示：</p>
+<ul>
+<li><em>glvalue</em> (general lvalue)： <strong>泛左值，由(lvalue)和(xvalue)构成。</strong></li>
+<li><em>rvalue</em> 右值，<strong>由(xvalue)和(prvalue)构成。右值具有潜在的可移动性</strong></li>
+<li><em>prvalue</em>(pure rvaluue) ： <strong>纯右值，即传统意义上的右值</strong></li>
+<li>xvalue : <strong>中间值？将亡值？，指通过“右值引用”产生的对象。 这里x可以理解为即将消失(expiring)，也可理解为中间（横跨左值和右值）</strong></li>
+<li><em>lvalue</em> ：<strong>传统意义上的左值</strong></li>
+</ul>
+<img src="https://i0.hdslb.com/bfs/album/5e059d54a34e5b1bc26e4d5026aea8366d529f89.png" title="" alt="" data-align="center">
+<p>详细的定义可以参考：<a href="https://www.cnblogs.com/Philip-Tell-Truth/p/6370019.html" target="_blank" rel="noopener noreffer">C++ lvalue，prvalue，xvalue，glvalue和rvalue详解（from cppreference） - PhiliAI - 博客园 (cnblogs.com)</a></p>
+<h3 id="通俗解释">通俗解释</h3>
+<p>C/C++ 语言中可以放在赋值符号左边的变量，左值表示存储在计算机内存的对象，左值相当于地址值。右值：当一个符号或者常量放在操作符右边的时候，计算机就读取他们的“右值”，也就是其代表的真实值，右值相当于数据值。</p>
+<p><strong>左值是可以取地址的，这也是区分左值和右值的唯一正确的标志</strong></p>
+<p>左值(lvalue)：可以出现在 = 左边
+右值(rvalue)：只能出现在 = 右边
+看一些左值和右值的例子，下面是整型的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="c1">// 左值为表达式
+</span><span class="c1"></span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+=</span> <span class="mi">28</span><span class="p">;</span> <span class="c1">// 左值是一个表达式 a=4，这句话结果为 a=32
+</span><span class="c1">// 左值为变量
+</span><span class="c1"></span><span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// a 和 b 都是左值
+</span><span class="c1"></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>    <span class="c1">// Error, a + b整体只是右值，出现右边，这句话出错
+</span></code></pre></td></tr></table>
+</div>
+</div><p>看一个关于 string 类型的</p>
+<p><strong>特别注意，C++规定字符串是左值</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="nf">s1</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>
+<span class="n">string</span> <span class="nf">s2</span><span class="p">(</span><span class="s">&#34;World&#34;</span><span class="p">);</span>
+<span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s2</span><span class="p">;</span>    <span class="c1">// s1 + s2 是右值，但是这里编译成功了，后面看一下
+</span><span class="c1"></span><span class="n">string</span><span class="p">()</span> <span class="o">=</span> <span class="s">&#34;World&#34;</span><span class="p">;</span> <span class="c1">// 编译通过，左边是临时对象， 竟然也可以赋值
+</span></code></pre></td></tr></table>
+</div>
+</div><p>在函数中也会用到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">5</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// 函数返回的是一个右值
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">foo</span><span class="p">();</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">foo</span><span class="p">();</span>  <span class="c1">//Error，对函数的返回值取地址，但是函数返回值为右值，取地址不行
+</span><span class="c1"></span><span class="n">foo</span><span class="p">()</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>        <span class="c1">// Error，函数返回值为右值，只能出现在右边
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>简单的来说，能取地址的变量一定是左值，有名字的变量也一定是左值，最经典的void fun(p&amp;&amp; shit)，其中shit也是左值，因为右值引用是左值（所以才会有move，forward这些函数的产生，其中move出来一定是右值，forward保持变量形式和之前的不变，就是为了解决右值引用是左值的问题）。</p>
+<p>至于为什么不能把等号左边看成左值，因为在C++中，等号是可以运算符重载的，等号完全可以重载成为等号左边为右值的形式</p>
+</blockquote>
+<blockquote>
+<p>纯右值是传统右值的一部分，纯右值是表达式产生的中间值，不能取地址</p>
+</blockquote>
+<blockquote>
+<p>本质上，消亡值就是通过右值引用产生的值。右值一定会在表达式结束后被销毁，比如return x（x被copy以后会被销毁）, 1+2（3这个中间值会被销毁）。</p>
+</blockquote>
+<h2 id="左值引用与右值引用">左值引用与右值引用</h2>
+<p>当右值出现在operater = (copy assignment) 的右侧，我们认为对其资源进行偷取/搬移（move）而非拷贝是可以的，是合理的。</p>
+<p>那么就得有如下机制：</p>
+<ul>
+<li>
+<p>必须有语法让我们在调用端告诉编译器，这是一个”Rvalue“</p>
+</li>
+<li>
+<p>必须有语法让我们在被调用端写出一个专门处理”Rvalue“的所谓move assignment函数</p>
+</li>
+</ul>
+<h3 id="左值引用">左值引用</h3>
+<p>左值引用根据其修饰符 <code>const </code>的不同，可以区分为<strong>常量左值引用</strong>和<strong>非常量左值引用</strong>。左值引用实际上就是指针。</p>
+<p>非常量左值引用只能绑定到非常量左值，不能绑定到常量左值和常量右值，（因为非常左值可以改变其值，但常量不可改变，性质相矛盾）</p>
+<p>非常量右值。而如果绑定到非常量右值，就有可能指向一个已经被销毁的对象。</p>
+<p>常量左值引用能绑定到<strong>非常量左值，常量左值，非常量右值，常量右值</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">aRef1</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>                    <span class="c1">// 非常量左值引用 &lt;----&gt; 非常量左值
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">aRef2</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>              <span class="c1">// 常量左值引用   &lt;----&gt; 非常量左值
+</span><span class="c1"></span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>   
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">bRef1</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>                    <span class="c1">// Error，非常量左值不能绑定常量右值
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">bRef2</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>              <span class="c1">// 常量左值引用 &lt;----&gt; 常量左值
+</span><span class="c1"></span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref1</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>               <span class="c1">// 常量左值引用 &lt;----&gt; 右值（具体某个值）
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref2</span> <span class="o">=</span> <span class="n">a</span><span class="o">==</span><span class="mi">2</span><span class="p">;</span>                <span class="c1">// 常量左值引用 &lt;----&gt; 右值（表达式）
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="右值引用">右值引用</h3>
+<p>为什么要用到右值引用？</p>
+<p>从实践角度讲，它能够完美解决 C++ 中长久以来为人所诟病的临时对象效率问题。从语言本身讲，它健全了 C++ 中的引用类型在左值右值方面的缺陷。从库设计者的角度讲，它给库设计者又带来了一把利器。从库使用者的角度讲，不动一兵一卒便可以获得“免费的”效率提升…</p>
+<p>右值引用 (Rvalue Referene) 是 C++ 新标准 (C++11, 11 代表 2011 年 ) 中引入的新特性 , 它实现了转移语义 (Move Sementics) 和完美转发 (Perfect Forwarding)。它的主要目的有两个方面：</p>
+<ul>
+<li>
+<p>消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。</p>
+</li>
+<li>
+<p>能够更简洁明确地定义泛型函数。</p>
+</li>
+</ul>
+<p>为了区别，C++ 把 <code>&amp;</code> 作为左值引用的声明符，把 <code>&amp;&amp;</code> 作为右值引用的声明符。例如，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">GetValue</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">&amp;</span><span class="n">alRef</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>                  <span class="c1">// 左值引用
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rRef1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                 <span class="c1">// 临时对象是右值
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rRef2</span> <span class="o">=</span> <span class="n">GetValue</span><span class="p">();</span>        <span class="c1">// 调用的函数返回值为右值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">ProcessValue</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>                         <span class="c1">// 左值引用
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;lValue processed: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">ProcessValue</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>                        <span class="c1">// 右值引用
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;rValue processed: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">GetValue</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>                <span class="c1">// 左值
+</span><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>                <span class="c1">// 临时对象是右值
+</span><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">GetValue</span><span class="p">());</span>        <span class="c1">// 调用的函数为右值
+</span><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">);</span>                <span class="c1">// 左值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从内存角度来看，我们给变量 a 分配好了内存，所以它是正统的内存使用者；而像函数的返回值、临时对象这样的右值，我们找不到它的内存，所以是盗版的内存使用者，这就是左值和右值的区别。</p>
+<p>关于右值引用：</p>
+<ul>
+<li>具名右值引用被视为左值。</li>
+<li>无名右值引用被视为x值（将亡值）。</li>
+<li>对函数的右值引用无论具名与否都将被视为左值。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">m</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">A</span><span class="o">&amp;&amp;</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span>
+<span class="n">A</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">();</span>
+<span class="n">A</span> <span class="n">a</span><span class="p">;</span>
+<span class="n">A</span><span class="o">&amp;&amp;</span> <span class="n">ar</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里表达式 <code>f(), f().m, static_cast&lt;A&amp;&amp;&gt;(a)</code>, 以及 <code>a + a </code>都是 x值。</p>
+<p>而表达式 <code>ar</code> 为 A 类型的左值。</p>
+<h3 id="move-与forward">move 与 forward</h3>
+<h4 id="move">move</h4>
+<p><code>std::move</code>可以获取一个表达式的右值引用在C++11中，标准库在<code>&lt;utility&gt;</code>中提供了一个有用的函数<code>std::move</code>，<code>std::move</code>并不能移动任何东西，它唯一的功能是将一个左值强制转化为右值引用，继而可以通过右值引用使用该值，以用于移动语义。从实现上讲，<code>std::move</code>基本等同于一个类型转换：<code>static_cast&lt;T&amp;&amp;&gt;(lvalue);</code></p>
+<p><code>std::move</code>是将对象的状态或者所有权从一个对象转移到另一个对象，只是转移，没有内存的搬迁或者内存拷贝所以可以提高利用效率,改善性能.。</p>
+<h4 id="forward">forward</h4>
+<p>可参考：<a href="https://zhuanlan.zhihu.com/p/161039484" target="_blank" rel="noopener noreffer">聊聊C++中的完美转发 - 知乎 (zhihu.com)</a></p>
+<p><code>std::forward</code>被称为<strong>完美转发</strong>，它的作用是保持原来的<strong>值属性</strong>不变。啥意思呢？通俗的讲就是，如果原来的值是左值，经<code>std::forward</code>处理后该值还是左值；如果原来的值是右值，经<code>std::forward</code>处理后它还是右值。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-04-21</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/rvalue_ref/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/rvalue_ref/" data-title="右值引用与移动语义" data-hashtags="cpp11"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/rvalue_ref/" data-title="右值引用与移动语义" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cpp11/">cpp11</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/binary_search/" class="prev" rel="prev" title="二分查找法之细节"><i class="fas fa-angle-left fa-fw"></i>二分查找法之细节</a>
+            <a href="/binary_tree/" class="next" rel="next" title="二叉树">二叉树<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

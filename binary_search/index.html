@@ -21,7 +21,7 @@
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/binary_search/" /><link rel="prev" href="https://example.com/learing_resources/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/binary_search/" /><link rel="prev" href="https://example.com/learing_resources/" /><link rel="next" href="https://example.com/rvalue_ref/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/binary_search\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Binary Search","wordcount":  2972 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Binary Search","wordcount":  5966 ,
         "url": "https:\/\/example.com\/binary_search\/","datePublished": "2022-04-19T08:46:08+08:00","dateModified": "2022-04-19T08:46:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -111,8 +111,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">二分查找法之细节</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/algorithm/"><i class="far fa-folder fa-fw"></i>Algorithm</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2972 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/binary_search/" class="leancloud_visitors" data-flag-title="二分查找法之细节">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5966 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 12 分钟&nbsp;<span id="/binary_search/" class="leancloud_visitors" data-flag-title="二分查找法之细节">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -138,6 +138,21 @@
       </ul>
     </li>
     <li><a href="#第三种模板">第三种模板</a></li>
+    <li><a href="#若干条经验">若干条经验</a></li>
+    <li><a href="#实例研究">实例研究</a>
+      <ul>
+        <li><a href="#单一值查找情况">单一值查找情况</a>
+          <ul>
+            <li><a href="#模板一">模板一</a></li>
+            <li><a href="#模板二">模板二</a>
+              <ul>
+                <li><a href="#小结">小结</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Donald Knuth（高德纳）曾经说过二分法思路很简单，细节是魔鬼。本文就来探讨下二分法中的那些“魔鬼”细节</p>
@@ -460,6 +475,9 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="kt">int</span><span class="p">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
@@ -482,7 +500,10 @@
     <span class="c1">// 或者可以这样写
 </span><span class="c1"></span>    <span class="c1">// if (left != nums.length &amp;&amp; nums[left] == target) return left;
 </span><span class="c1"></span>    <span class="c1">// return -1;
-</span><span class="c1"></span><span class="p">}</span>
+</span><span class="c1"></span>
+    <span class="c1">// 或者以下统一形式
+</span><span class="c1"></span>    <span class="k">return</span> <span class="p">(</span><span class="n">left</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="nl">left</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="搜索右端点-1">搜索右端点</h3>
@@ -593,7 +614,344 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="若干条经验">若干条经验</h2>
+<ul>
+<li>
+<p>当搜寻单个值时，用模板一，更易于理解，每次二分都直接进行了判断，</p>
+</li>
+<li>
+<p>当搜寻某个最值或者区间端点时，用模板二</p>
+</li>
+<li>
+<p>当使用模板一时，<code>whie(left &lt;= right)</code>常常与<code>right = size() - 1</code> 连用</p>
+</li>
+<li>
+<p>当用模板二时，<code>while (left &lt; right)</code>常常与 <code>right = size() </code>连用（不确定，有时也看情况）</p>
+</li>
+<li>
+<p>当使用模板二时，<code>int mid = left + (right - left) / 2</code> 与 <code>left = mid + 1</code>连用，避免死循环，同理<code>int mid = left + (right - left + 1) / 2</code>与`left = mid``连用</p>
+</li>
+<li>
+<p>当使用模板二时，考虑采用<code>left = mid + 1</code> 还是<code> left = mid</code> 时，可以做如下思考：当前基于<code>mid</code>判断的<code>nums[mid]</code><strong>是否可能</strong>出现在结果区间内，如果可能，考虑二分的那一侧应该包含<code>mid</code>, 即<code>left = mid </code>或<code> right = mid</code>,同理，当不可能出现在结果区间内，则应坚决排除，即<code>left = mid + 1 </code>或<code> right  = mid + 1</code></p>
+</li>
+</ul>
+<h2 id="实例研究">实例研究</h2>
+<h3 id="单一值查找情况">单一值查找情况</h3>
+<p><a href="https://leetcode-cn.com/problems/binary-search/" target="_blank" rel="noopener noreffer">力扣-二分查找</a></p>
+<h4 id="模板一">模板一</h4>
+<p>初始时<code>right</code>必须是<code>len - 1</code>, 否则在<code>left = mid + 1</code>时，可能取到<code>left == right</code> 且<code> left == len</code>， 访问越界数组!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> 
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="模板二">模板二</h4>
+<p>注意： 下面文字说明中 ”=“ 不表示赋值</p>
+<p>下面这种情况，初始时<code>right = len - 1</code>, 结束条件为<code>left == right</code></p>
+<ul>
+<li>
+<p>当<code>target</code>大于区间所有元素时，搜索区间右端点始终固定为<code>len - 1</code></p>
+<ul>
+<li>若最后搜索区间缩小到<code>[left, right]</code>，<code>left = right - 1</code>, 这时，<code>mid = left</code>, 下一步<code>left = mid + 1 = right = len - 1</code>, 然后有 <code>left == right</code>, 搜索结束。不会出现越界的情况</li>
+</ul>
+</li>
+<li>
+<p>当<code>target</code>小于区间所有元素时，搜索区间左端点始终固定为0</p>
+<ul>
+<li>若最后搜素区间缩小到<code>[left, right]</code>，<code>left = right - 1,</code> 这时，<code>mid = left</code>, 下一步<code>right = mid = left</code>,  此时<code>left = right</code>, 搜索结束。也不会出现越界</li>
+</ul>
+<p>上述两种情况，最后都是<code>left = right</code>时结束，但<code>left</code>下标的值却没有验证检查是否等于<code>target</code>，所以最后要做一个补充检查。此时<code>left</code>取值范围在<code>[0, len - 1]</code>, 很安全，所以直接取值判断即可。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span> <span class="o">?</span> <span class="nl">left</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面情况， 我们将<code>right</code>初始值取为<code>len</code>，看看会发生什么变化</p>
+<ul>
+<li>
+<p>当<code>target</code>大于区间所有元素时，搜索区间右端点始终<mark>固定为<code>len</code></mark></p>
+<ul>
+<li>若最后搜索区间缩小到<code>[left, right]</code>，<code>left = right - 1</code>, 这时，<code>mid = left</code>, 下一步<code>left = mid + 1 = right = len</code>, 然后有 <code>left == right</code>, 搜索结束。注意这时<code>left = len</code>，下标已经越界了, 如果最后直接取<code>nums[left]</code>会访问越界！</li>
+</ul>
+</li>
+<li>
+<p>当<code>target</code>小于区间所有元素时，搜索区间左端点始终固定为0</p>
+<ul>
+<li>若最后搜素区间缩小到<code>[left, right]</code>，<code>left = right - 1,</code> 这时，<code>mid = left</code>, 下一步<code>right = mid = left</code>, 此时<code>left = right</code>, 搜索结束。也不会出现越界。</li>
+</ul>
+<p>上述两种情况，最后都是<code>left = right</code>时结束，但<code>left</code>下标的值却没有验证检查是否等于<code>target</code>，同样最后要做一个补充检查，但是补充检查时，因为<code>left</code>取值范围为<code>[0, len]</code>, 取值范围不安全，所以要多一个排除条件<code>left != len</code>。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">len</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">left</span> <span class="o">!=</span> <span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="nl">left</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再看看下面的代码，又在上面的代码上做了点小小的改动，即每次判断后下一搜索区间的取值范围，这里实际上把<code>nums[mid] &gt; target</code>条件下的<code>right</code>更新为了<code>mid - 1</code>, 可以看出没有丝毫影响，因为我们要找的是<code>target</code>, 当指明了<code>target</code>小于某个值，当然可以跳过该<code>mid</code>索引了，想一下，当<code>nums[mid] == target</code>时，我们为什么要取<code>=mid</code>, 因为满足此条件的任何<code>mid</code>索引对应的值都有可能出现在结果区间中，我们不能用<code>left = mid + 1 </code>或 <code>right = mid - 1</code>来跳过。那为什么不能取<code>left=mid</code>，这就是前文所述的死循环问题了，与<code>mid</code>取值有关，不做赘述。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">len</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">left</span> <span class="o">!=</span> <span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="o">?</span> <span class="nl">left</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="小结">小结</h5>
+<p>可以看出对于寻找单一值得情况，模板二中初始值 <code>right = len</code> 还是 <code>right = len - 1</code>，都是可以找到结果得，只是最后<code>left</code>的取值区间不一致，当<code>right</code>取<code>len</code>时，<code>left</code>取值空间包括了<code>len</code>，应该在后处理中做出排除。</p>
+<p>当搜索区间断点时，比如以下搜索出现数字的最小位置和最大位置的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">left</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="nl">left</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面代码中，区别在于当<code>nums[mid] = target</code>时，所采取的动作，当搜索最大索引时，收紧左边界，但是由于避免死循环，所以<code>left = mid + 1</code>,导致结果区间中，<code>left </code>为 最大目标索引的下一个位置，所以目标索引应该取<code>left - 1</code> 或<code>right - 1</code>,又由于left的取值区间为<code>[0, nums.size()]</code> ， 但我们只需关心<code>left - 1</code>的取值区间，即<code>[-1, nums.size() - 1]</code>,发现这种情况相对于搜索最小位置的代码而言，自然优化了区间右端点，却导致了左端点越界，所以要额外检查左端点越界的情况。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> 
+        <span class="p">}</span> <span class="k">else</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">left</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以我们又可以考虑，当搜索右端点时，right初始化为nums.size() - 1时，要作何改变，代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">right</span><span class="p">)</span> <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> 
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> 
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>  <span class="n">nums</span><span class="p">[</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> 
+        <span class="k">if</span> <span class="p">((</span><span class="n">left</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> 
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>因为，<code>left</code>最终取值区间为<code>[0, nums.size() - 1]</code>, 我们区间右端点为<code>left - 1</code>, 则，<code>left - 1</code>的取值区间为<code>[-1, nums.size() - 2]</code>, 可见出来处理越界操作外，还出现了一个问题就是，<code>nums.size() - 1 </code>索引对应的值，会被漏掉，因此要额外判断。为什么会被漏掉呢？我们可以这么想，上述搜索等于目标值的最大索引，实际上是最后得到的是目标值的下一个位置，也就是大于目标值的第一个元素索引。所以当目标值比较大时，<code>right</code>始终固定为<code>nums.size() - 1,</code> <code>left </code>一直往右移动直到<code>left = mid + 1 = nums.size() - 1</code>时， 有<code>left = right</code> ，搜索结束，注意，此时<code>nums.size() - 1 </code>索引位置的值我们并没有和<code>target</code>做过判断，就这么漏掉了，所以后处理要补充检查最后一个元素，当然右边不可能越界了。</p>
+<p>由此，我们可以总结，在使用 <code>left &lt; right</code>时，若采取<code>right</code> 初始化为<code>num.size()</code> 的形式，还是<code>num.size() - 1</code>的形式区别在于是否要在后处理中做额外的区间越界检查。所以我建议在寻找单个值而不是端点时，尽量初始化为<code>nums.size() - 1</code>, 可以免去越界检查，而在寻找端点时，应该取<code>nums.size()</code>，避免搜索右端点时额外的检查。</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -618,7 +976,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/learing_resources/" class="prev" rel="prev" title="开源学习资料"><i class="fas fa-angle-left fa-fw"></i>开源学习资料</a></div>
+    <div class="post-nav"><a href="/learing_resources/" class="prev" rel="prev" title="开源学习资料"><i class="fas fa-angle-left fa-fw"></i>开源学习资料</a>
+            <a href="/rvalue_ref/" class="next" rel="next" title="右值引用与移动语义">右值引用与移动语义<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
