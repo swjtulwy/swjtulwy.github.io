@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/binary_tree\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Binary Tree","wordcount":  2174 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Binary Tree","wordcount":  4033 ,
         "url": "https:\/\/example.com\/binary_tree\/","datePublished": "2022-04-23T11:46:43+08:00","dateModified": "2022-04-23T11:46:43+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -111,8 +111,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">二叉树</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/algorithm/"><i class="far fa-folder fa-fw"></i>Algorithm</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-23">2022-04-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2174 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/binary_tree/" class="leancloud_visitors" data-flag-title="二叉树">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-23">2022-04-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4033 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/binary_tree/" class="leancloud_visitors" data-flag-title="二叉树">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -154,8 +154,15 @@
     <li><a href="#morris遍历">Morris遍历</a></li>
     <li><a href="#通用框架">通用框架</a>
       <ul>
-        <li><a href="#迭代解法前中序统一">迭代解法（前、中序统一）</a></li>
+        <li><a href="#迭代解法之先入栈法前中序统一">迭代解法之先入栈法（前、中序统一）</a>
+          <ul>
+            <li><a href="#前序和中序的统一">前序和中序的统一</a></li>
+            <li><a href="#后序">后序</a></li>
+          </ul>
+        </li>
+        <li><a href="#迭代解法之先出栈法-前后序统一">迭代解法之先出栈法（ 前、后序统一）</a></li>
         <li><a href="#递归解法-前中后序统一">递归解法 (前、中、后序统一)</a></li>
+        <li><a href="#morris解法前中序统一">Morris解法（前、中序统一）</a></li>
       </ul>
     </li>
   </ul>
@@ -446,10 +453,82 @@
 </div><h4 id="方法二-硬迭代较难">方法二： 硬迭代（较难）</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">traversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="c1">// 特例判定
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="c1">// 当前结点初始化为根节点
+</span><span class="c1"></span>        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">// prev为记录的前继结点
+</span><span class="c1"></span>        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">prev</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="c1">// 循环判断栈非空 或者 当前结点为空
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">node</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="c1">// 先往左走，走到底了就往右，接着重复同样操作
+</span><span class="c1"></span>            <span class="k">while</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> <span class="c1">// 入栈
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span> <span class="c1">// 继续往左下迭代
+</span><span class="c1"></span>            <span class="p">}</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> 
+            <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 出栈
+</span><span class="c1"></span>            <span class="c1">// 以下if判断为后序遍历特有的
+</span><span class="c1"></span>            <span class="c1">// 当前结点右子树为空（之前已经入栈了，等于是也遍历完了左右子树了）或刚从右子树上来
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">||</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">prev</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">ans</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+                <span class="c1">// 更新前继结点为当前结点
+</span><span class="c1"></span>                <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+                <span class="c1">// node已经访问过了，现在往上走，为了防止node被压入栈，所以要置空
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// 从左边上来的时候，往右下角走之前也要入栈
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> 
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span> <span class="c1">// 往右子树走一次
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="递归解法-2">递归解法</h3>
@@ -558,7 +637,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="morris遍历">Morris遍历</h2>
-<p>本方法适用于前序和中序遍历，当然有了前序，后序自然就有了</p>
+<p>本方法适用于前序和中序遍历和后序遍历</p>
 <p>morris遍历的思想是，通过记忆当前遍历节点的前继节点，建立一个回溯的通道，避免了栈的开销，空间复杂度为常数级。其原理如下代码注释所示</p>
 <p>Morris遍历也有中序版本，只需要将对当前节点的操作放到已经遍历完左子树节点的位置即可。</p>
 <div class="highlight"><div class="chroma">
@@ -654,7 +733,23 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="通用框架">通用框架</h2>
-<h3 id="迭代解法前中序统一">迭代解法（前、中序统一）</h3>
+<h3 id="迭代解法之先入栈法前中序统一">迭代解法之先入栈法（前、中序统一）</h3>
+<p>核心思想为：</p>
+<ol>
+<li>
+<p>每拿到一个 节点 就把它保存在 栈 中</p>
+</li>
+<li>
+<p>继续对这个节点的 左子树 重复 <strong>过程1</strong>，直到左子树为 空</p>
+</li>
+<li>
+<p>因为保存在 栈 中的节点都遍历了 左子树 但是没有遍历 右子树，所以对栈中节点 出栈 并对它的 右子树 重复 <strong>过程1</strong></p>
+</li>
+<li>
+<p>直到遍历完所有节点</p>
+</li>
+</ol>
+<h4 id="前序和中序的统一">前序和中序的统一</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -711,6 +806,205 @@
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
+</div><p>上述解法的后序遍历需要一些额外的操作，需要以</p>
+<h4 id="后序">后序</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">traversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="c1">// 特例判定
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="c1">// 当前结点初始化为根节点
+</span><span class="c1"></span>        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">// prev为记录的前继结点
+</span><span class="c1"></span>        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">prev</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="c1">// 循环判断栈非空 或者 当前结点为空
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">node</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="c1">// 先往左走，走到底了就往右，接着重复同样操作
+</span><span class="c1"></span>            <span class="k">while</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> <span class="c1">// 入栈
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span> <span class="c1">// 继续往左下迭代
+</span><span class="c1"></span>            <span class="p">}</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> 
+            <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 出栈
+</span><span class="c1"></span>            <span class="c1">// 以下if判断为后序遍历特有的
+</span><span class="c1"></span>            <span class="c1">// 当前结点右子树为空（之前已经入栈了，等于是也遍历完了左右子树了）或刚从右子树上来
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">||</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">prev</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">ans</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+                <span class="c1">// 更新前继结点为当前结点
+</span><span class="c1"></span>                <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+                <span class="c1">// node已经访问过了，现在往上走，为了防止node被压入栈，所以要置空
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// 从左边上来的时候，往右下角走之前也要入栈
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> 
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span> <span class="c1">// 往右子树走一次
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="迭代解法之先出栈法-前后序统一">迭代解法之先出栈法（ 前、后序统一）</h3>
+<p>这里的后序还是采用的逆前序入栈在逆序输出的方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span> <span class="c1">// 相对于前序遍历，这更改一下入栈顺序 （空节点不入栈）
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span> <span class="c1">// 空节点不入栈
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="n">reverse</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">result</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// 将结果反转之后就是左右中的顺序了
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>中序遍历的方式通过插入空结点作为标记</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+           <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 将该节点弹出，避免重复操作，下面再将右中左节点添加到栈中
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> 
+                <span class="c1">// 添加右节点（空节点不入栈）
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>  
+                <span class="c1">// 添加中节点
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> 
+                <span class="c1">// 中节点访问过，但是还没有处理，加入空节点做为标记。
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span> 
+                <span class="c1">// 添加左节点（空节点不入栈）
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>    
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> 
+                <span class="c1">// 只有遇到空节点的时候，才将下一个节点放进结果集
+</span><span class="c1"></span>                <span class="c1">// 将空节点弹出
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>      
+                <span class="c1">// 重新取出栈中元素     
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>    
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="c1">// 加入到结果集
+</span><span class="c1"></span>                <span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span> 
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
 </div><h3 id="递归解法-前中后序统一">递归解法 (前、中、后序统一)</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -762,11 +1056,189 @@
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h3 id="morris解法前中序统一">Morris解法（前、中序统一）</h3>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">traversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="c1">// 初始化迭代指针p1, p1始终指向需要进行操作的结点
+</span><span class="c1"></span>        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">// p2 指针指向p1的前继结点, 一般为p1的左子树的最右下角的结点
+</span><span class="c1"></span>        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="c1">// 终止条件为 p1 非空
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">p1</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// p2 初始化为p1的左子树根节点
+</span><span class="c1"></span>            <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="c1">// p2 非空, 才要遍历左子树，否则直接遍历右子树
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">p2</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// p2 往右下角一直走，直到其指向最右下角的结点
+</span><span class="c1"></span>                <span class="k">while</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">!=</span> <span class="n">p1</span><span class="p">)</span> 
+                    <span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+                <span class="c1">// p2 没有后继（p2-&gt;right）结点, 那么改变其后继为p1
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// !!!!!!!前序遍历的操作位置在这里!!!!!!!!
+</span><span class="c1"></span>                    <span class="c1">// 【ans.emplace_back(p1 -&gt; val);】
+</span><span class="c1"></span>                    <span class="c1">// 建立 p1 的前继结点
+</span><span class="c1"></span>                    <span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+                    <span class="c1">// p1 向左下角继续遍历
+</span><span class="c1"></span>                    <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// p2 的后继为 p1, 说明已经遍历过了当前节点的左子树
+</span><span class="c1"></span>                    <span class="c1">// 那么将这种关系删除，恢复原状，接着遍历右子树 
+</span><span class="c1"></span>                    <span class="c1">// !!!!!!!!中序遍历 操作的位置在这里！！！！！！
+</span><span class="c1"></span>                    <span class="c1">// 【ans.emplace_back(p1 -&gt; val);】
+</span><span class="c1"></span>                    <span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+                    <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// p2 为空，那么直接对当前遍历结点 p1 操作，然后遍历右子树
+</span><span class="c1"></span>                <span class="n">ans</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">);</span>  
+                <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+            <span class="p">}</span>    
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>后序解法需要做一些修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">addPath</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vec</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+            <span class="n">vec</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">reverse</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="n">count</span> <span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">p1</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">p2</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="n">p1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+                    <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">p2</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+                    <span class="n">addPath</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">addPath</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
