@@ -259,11 +259,7 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 思考：加载哪个CMakeLists.txt当中
 
-{{< admonition tip>}}
-
 哪里要改变目标存放路径，就在哪里加入上述的定义，所以应该在src下的CMakeLists.txt下写
-
-{{< /admonition >}}
 
 ## 源码编译安装
 

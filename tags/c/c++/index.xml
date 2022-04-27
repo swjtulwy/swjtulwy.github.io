@@ -1,0 +1,38 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>C/C&#43;&#43; - 标签 - Weiyee&#39;s Blog</title>
+        <link>https://example.com/tags/c/c&#43;&#43;/</link>
+        <description>C/C&#43;&#43; - 标签 - Weiyee&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://example.com/tags/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+    <title>程序从编辑到链接简介</title>
+    <link>https://example.com/compile_link/</link>
+    <pubDate>Wed, 19 May 2021 11:15:56 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/compile_link/</guid>
+    <description><![CDATA[GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c++程序的编译运行流程中将采用gcc做示例。 GCC的初衷是为GNU操作系统专门编写的]]></description>
+</item><item>
+    <title>Unix文件IO</title>
+    <link>https://example.com/fileio/</link>
+    <pubDate>Thu, 08 Apr 2021 11:14:22 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/fileio/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://i0.hdslb.com/bfs/album/a5956cbf6cc82995ce1afdcdf77e73d9c14748b2.png@1e_1c.webp" referrerpolicy="no-referrer">
+            </div>本文介绍文件IO与标准IO的相关概念，以及一些常用的文件IO函数 基本概念 文件I/O：文件I/O称之为不带缓存的IO（unbuffered I/]]></description>
+</item><item>
+    <title>字符串的一些问题</title>
+    <link>https://example.com/string/</link>
+    <pubDate>Thu, 15 Aug 2019 18:30:54 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/string/</guid>
+    <description><![CDATA[初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本]]></description>
+</item><item>
+    <title>理解常量const</title>
+    <link>https://example.com/understand_const/</link>
+    <pubDate>Sat, 03 Aug 2019 15:31:57 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/understand_const/</guid>
+    <description><![CDATA[常量const通俗理解 首先先讲一讲常量，为什么要使用常量，因为不变的值更易于理解、跟踪和分析，所以应该尽可能地使用常量代替变量。 C++ 语言可以用]]></description>
+</item></channel>
+</rss>

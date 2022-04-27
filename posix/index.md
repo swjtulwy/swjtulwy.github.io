@@ -169,9 +169,9 @@ glibc 为程序员提供丰富的 API（Application Programming Interface），�
 
 ```c
 #ifndef _WINDOWS_
-       #include <windows.h>
+#include <windows.h>
 #else
-       #include <thread.h>
+#include <thread.h>
 #endif
 ```
 

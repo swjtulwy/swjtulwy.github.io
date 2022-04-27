@@ -286,7 +286,7 @@ gcc -o test.out test.o include/mymath.o
 # 这里用g++也可，当是c++程序时倾向使用g++
 ```
 
-{{< admonition success "结果">}}
+目录树：
 
 ```bash
 .
@@ -301,21 +301,17 @@ gcc -o test.out test.o include/mymath.o
 └── test.s
 ```
 
-{{< /admonition>}}
-
-{{< admonition info"执行">}}
-./test.out
-{{< /admonition>}}
-
 结果为：
-{{< admonition success "输出">}}
+
+```bash
 lwy@lwysLaptop:~/workspace/test$ ./test.out
 
 hello world
-{{< /admonition>}}
+```
+
 经过以上分析，我们发现编译过程并不像想象的那么简单，而是要经过预处理、编译、汇编、链接。尽管我们平时使用gcc命令的时候没有关心中间结果，但每次程序的编译都少不了这几个步骤。也不用为上述繁琐过程而烦恼，因为你仍然可以：
 
-{{< admonition success "输出">}}
+```bash
 gcc/g++ -c test.c -o test.out
-{{< /admonition>}}
+```
 

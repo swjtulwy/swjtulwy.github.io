@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>multiplexingIO - 标签 - Weiyee&#39;s Blog</title>
+        <link>https://example.com/tags/multiplexingio/</link>
+        <description>multiplexingIO - 标签 - Weiyee&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 12 May 2021 16:38:03 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/multiplexingio/" rel="self" type="application/rss+xml" /><item>
+    <title>IO多路复用</title>
+    <link>https://example.com/io_multiplexing/</link>
+    <pubDate>Wed, 12 May 2021 16:38:03 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/io_multiplexing/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://i0.hdslb.com/bfs/album/65c3cf7499158a6bb894934fc4751bb362f95bec.png@1e_1c.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item></channel>
+</rss>

@@ -755,7 +755,7 @@ ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
             - flags : 0
             - dest_addr : 通信的另外一端的地址信息
             - addrlen : 地址的内存大小
-                
+
 ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
                         struct sockaddr *src_addr, socklen_t *addrlen);
         - 参数：
@@ -765,8 +765,6 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
             - flags : 0
             - src_addr : 用来保存另外一端的地址信息，不需要可以指定为NULL
             - addrlen : 地址的内存大
-
-
 ```
 
 ### 服务端
@@ -782,7 +780,7 @@ int main() {
 
     // 1.创建一个通信的socket
     int fd = socket(PF_INET, SOCK_DGRAM, 0);
-    
+
     if(fd == -1) {
         perror("socket");
         exit(-1);
@@ -840,7 +838,7 @@ int main() {
 
     // 1.创建一个通信的socket
     int fd = socket(PF_INET, SOCK_DGRAM, 0);
-    
+
     if(fd == -1) {
         perror("socket");
         exit(-1);

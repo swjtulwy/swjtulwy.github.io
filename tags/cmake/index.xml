@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>CMake - 标签 - Weiyee&#39;s Blog</title>
+        <link>https://example.com/tags/cmake/</link>
+        <description>CMake - 标签 - Weiyee&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 17 Apr 2021 16:16:35 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/cmake/" rel="self" type="application/rss+xml" /><item>
+    <title>CMake使用方法</title>
+    <link>https://example.com/cmake_tutorial/</link>
+    <pubDate>Sat, 17 Apr 2021 16:16:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/cmake_tutorial/</guid>
+    <description><![CDATA[CMake 介绍 cmake的定义是什么 ？&mdash;&ndash;高级编译配置工具 当多个人用不同的语言或者编译器开发一个项目，最终要输出一个可执行文]]></description>
+</item></channel>
+</rss>
