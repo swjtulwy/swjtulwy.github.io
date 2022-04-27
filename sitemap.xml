@@ -13,8 +13,8 @@
             <loc>https://example.com/rvalue_ref/</loc><lastmod>2022-04-21T18:23:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://example.com/tags/binary-search/</loc><lastmod>2022-04-19T08:46:08&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://example.com/binary_search/</loc><lastmod>2022-04-19T08:46:08&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://example.com/categories/document/</loc><lastmod>2022-04-15T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://example.com/tags/open-source/</loc><lastmod>2022-04-15T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://example.com/categories/tools/</loc><lastmod>2022-04-15T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://example.com/learing_resources/</loc><lastmod>2022-04-15T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://example.com/learning_route/</loc><lastmod>2022-04-09T15:44:08&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://example.com/tags/computer-network/</loc><lastmod>2022-01-07T20:14:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -32,7 +32,6 @@
             <loc>https://example.com/unix_socket/</loc><lastmod>2021-04-17T21:58:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/cmake/</loc><lastmod>2021-04-17T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/cmake_tutorial/</loc><lastmod>2021-04-17T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://example.com/categories/tools/</loc><lastmod>2021-04-17T16:16:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/linux_multi_threads/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/tags/multithreads/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://example.com/categories/operating-system/</loc><lastmod>2021-04-12T16:18:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
