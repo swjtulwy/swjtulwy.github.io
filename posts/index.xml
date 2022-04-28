@@ -4,7 +4,14 @@
         <link>https://example.com/posts/</link>
         <description>所有文章 | Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 11:46:43 &#43;0800</lastBuildDate><atom:link href="https://example.com/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</lastBuildDate><atom:link href="https://example.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>精选题目</title>
+    <link>https://example.com/leetcode/</link>
+    <pubDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/leetcode/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>二叉树</title>
     <link>https://example.com/binary_tree/</link>
     <pubDate>Sat, 23 Apr 2022 11:46:43 &#43;0800</pubDate>
@@ -54,7 +61,7 @@
     <pubDate>Wed, 19 May 2021 11:15:56 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://example.com/compile_link/</guid>
-    <description><![CDATA[GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c++程序的编译运行流程中将采用gcc做示例。 GCC的初衷是为GNU操作系统专门编写的]]></description>
+    <description><![CDATA[本文只是简单介绍用GCC编译C或C++文件的基本流程，不涉及对编译和链接的深入分析 GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c+]]></description>
 </item><item>
     <title>IO多路复用</title>
     <link>https://example.com/io_multiplexing/</link>
@@ -73,12 +80,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i0.hdslb.com/bfs/album/df7b6d46621859c99357ddcadc6d21f5a3495eba.png" referrerpolicy="no-referrer">
             </div>]]></description>
-</item><item>
-    <title>CMake使用方法</title>
-    <link>https://example.com/cmake_tutorial/</link>
-    <pubDate>Sat, 17 Apr 2021 16:16:35 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/cmake_tutorial/</guid>
-    <description><![CDATA[CMake 介绍 cmake的定义是什么 ？&mdash;&ndash;高级编译配置工具 当多个人用不同的语言或者编译器开发一个项目，最终要输出一个可执行文]]></description>
 </item></channel>
 </rss>

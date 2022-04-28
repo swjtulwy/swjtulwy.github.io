@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/string\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  2213 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  2207 ,
         "url": "https:\/\/example.com\/string\/","datePublished": "2019-08-15T18:30:54+00:00","dateModified": "2019-08-15T18:30:54+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -107,7 +107,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">字符串的一些问题</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-15">2019-08-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2213 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-15">2019-08-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2207 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -125,7 +125,7 @@
             </div><div class="content" id="content"><p>初学C语言会觉得字符串处理是一件比较繁琐的事情，后来学了C++发现字符串的处理可以这么方便。但是C++又为了兼容C，导致经常有混用的情况。本文就重点介绍C++中的字符串和C风格字符串的区别。</p>
 <p>首先，明确一点，C语言中的字符串以及相关的标准库都能完全在C++中兼容使用。所以在介绍C++中的字符串特指C++中特有的。下面介绍几个概念</p>
 <h2 id="字符串字面值string-literal">字符串字面值(string literal)</h2>
-<p>字符串字面值是一串常量字符，字符串字面值常量用双引号括起来的零个或多个字符表示，为兼容C语言，C++中所有的字符串字面值都由编译器自动在末尾添加一个空字符。
+<p>字符串字面值是一串常量字符，字符串字面值常量用双引号括起来的零个或多个字符表示，为兼容C语言，C++中所有的字符串字面值都由编译器自动在<strong>末尾添加一个空字符</strong>。
 字符串没有变量名字，自身表示自身</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -149,7 +149,7 @@
 字符串字面值： &#34;A&#34; //double quote:character string literal.包含字母A和空字符的字符串
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>字符串字面值可以赋值给变量，但是与字符串字面值相关联的内存空间位于只读部分，因此它是常量字符数组。</strong></p>
+</div><p>字符串字面值可以赋值给变量，但是与字符串字面值相关联的内存空间位于<strong>只读部分</strong>，因此它是<strong>常量字符数组</strong>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -171,7 +171,7 @@
 <span class="n">ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span><span class="c1">//bug! attempts to write to read-only memory.
 </span></code></pre></td></tr></table>
 </div>
-</div><p><strong>当将字符串字面值赋值给字符数组的初始值的时候。由于字符数组存放与栈中，不允许引用其他地方的内存，因此编译器会将字符串字面值复制到栈的数组内存中。因此，可以进行相应的修改。</strong></p>
+</div><p>当将字符串字面值赋值给<strong>字符数组的初始值</strong>的时候。由于<strong>字符数组存放与栈中</strong>，不允许引用其他地方的内存，因此编译器会将字符串字面值<strong>复制</strong>到栈的数组内存中。因此，<strong>可以进行相应的修改</strong>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -183,7 +183,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="c风格字符串">C风格字符串</h2>
-<p>字符串字面值的类型实质是const char类型的数组。C++从C语言继承下来的一种通用结构是C风格字符串，而字符串字面值就是该类型的实例。C风格字符串是以空字符null结束的字符数组。</p>
+<p>字符串字面值的类型实质是<code>const char</code>类型的数组。C++从C语言继承下来的一种通用结构是C风格字符串，而字符串字面值就是该类型的实例。C风格字符串是以空字符null结束的字符数组。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -202,18 +202,18 @@
 </span><span class="c1"></span><span class="kt">char</span> <span class="o">*</span><span class="n">cp2</span><span class="o">=</span><span class="n">ca2</span><span class="p">;</span> <span class="c1">// points to first element of a null-terminated char array
 </span></code></pre></td></tr></table>
 </div>
-</div><p>ca1和cp1都不是C风格字符串：ca1是一个不带结束符null的字符数组，而指针cp1指向ca1，因此，它指向的并不是以null结束的数组。</p>
-<p>C++语言通过(const) char *类型的指针来操纵C风格字符串。</p>
-<p>C风格字符串在C语言中有C标准库函数来处理：<strong>string.h</strong></p>
-<p>C语言中也有对字符进行处理的标准库函数:<strong>ctype.h</strong></p>
-<p>这些库函数在C++中都有对应的版本，只需要去掉.h前面加上c就行了，这样也能在C++区分出这是C风格的函数</p>
-<p>即<strong>cstring</strong>和<strong>cctype</strong></p>
-<p>C风格字符串中带来困恼的原因是字符数组总要以空字符结尾，这给计算数组空间带来不便，也容易引发安全问题，处理字符串的相关复制，移动情形时，调用者必须保证目标字符串有足够的大小。</p>
+</div><p>ca1和cp1都不是C风格字符串：ca1是一个不带结束符<code>null</code>的字符数组，而指针cp1指向ca1，因此，它指向的并不是以null结束的数组。</p>
+<p>C++语言通过<code>(const) char *</code>类型的指针来操纵C风格字符串。</p>
+<p>C 风格字符串在C语言中有C标准库函数来处理：<code>string.h</code></p>
+<p>C 语言中也有对字符进行处理的标准库函数: <code>ctype.h</code></p>
+<p>这些库函数在C++中都有对应的版本，只需要去掉<code>.h</code>前面加上c就行了，这样也能在C++区分出这是C风格的函数</p>
+<p>即<code>cstring</code>和<code>cctype</code></p>
+<p>C风格字符串中带来困恼的原因是字符数组总要<strong>以空字符结尾</strong>，这给计算数组空间带来不便，也容易引发安全问题，处理字符串的相关复制，移动情形时，调用者必须保证目标字符串有足够的大小。</p>
 <p>另一个苦恼是C风格的字符串的复制，截取等相关操作不能像对待基础数据类型一样方便，这些情况在C++风格的字符串中由重载运算符实现，方便了用户。</p>
-<p>所以一般C++不推荐使用C风格字符串，即使要使用，也尽量在C标准库中使用诸如<strong>strn</strong> 前缀的函数处理，以降低风险。</p>
+<p>所以一般C++不推荐使用C风格字符串，即使要使用，也尽量在C标准库中使用诸如<code>strn</code>前缀的函数处理，以降低风险。</p>
 <h2 id="c风格字符串-1">C++风格字符串</h2>
-<p>C++使用标准库类型string表示可变长的字符序列，标准库中的名称符号都包含在命名空间呢std中。</p>
-<p>在初始化string对象时可以使用多种方式比如：</p>
+<p>C++使用标准库类型string表示可变长的字符序列，标准库中的名称符号都包含在命名空间呢<code>std</code>中。</p>
+<p>在初始化<code>string</code>对象时可以使用多种方式比如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -230,11 +230,11 @@
 </div>
 </div><p><code>string</code>对象可以用标准库中的流直接读写</p>
 <p>比如<code>cin</code>，但是读时从非空白开始，即忽略开头的空白，遇到下一处空白结束。</p>
-<p>当要读取一整行的时候可以使用<code>getline(cin,line)</code> ，(<code>line</code>是读取后存放的<code>string</code>对象)该函数从给定的输入流中读取内容，直到遇到换行符为止，换行符也被读取进来，然后把读取的内容存放到<code>line</code>中，不包含换行符。</p>
-<p>string对象可以使用== 、&lt;、&gt;、&gt;=等比较符号，这个很好理解，不多说。</p>
+<p>当要读取一整行的时候可以使用<code>getline(cin,line)</code> ，(<code>line</code>是读取后存放的<code>string</code>对象)该函数从给定的输入流中读取内容，<strong>直到遇到换行符为止</strong>，换行符<strong>也被读取进来</strong>，然后把读取的内容存放到<code>line</code>中，不包含换行符。</p>
+<p><code>string</code>对象可以使用== 、&lt;、&gt;、&gt;=等比较符号，这个很好理解，不多说。</p>
 <p><strong>另外值得注意的是，string对象之间可以相加，字符串字面值和string对象也可以相加，但是字符串字面值之间不能相加！</strong></p>
 <p>最后谈一下C风格的字符串和C++风格字符串怎么转换</p>
-<p>C风格字符串转换到C++的string对象很简单，可以将C风格字符串(包括字面值)作为string初始化的参数即可，或者可以用=号。</p>
+<p>C风格字符串转换到C++的string对象很简单，可以将C风格字符串(包括字面值)作为string初始化的参数即可，或者可以用<code>=</code>号。</p>
 <p>更一般的情况是，任何出现字符串字面值的地方都可以用以空字符结束的字符数组来替代：</p>
 <ul>
 <li><strong>即允许使用以空字符结束的字符数组来初始化string对象或为string对象赋值。</strong></li>
@@ -267,10 +267,10 @@
 </div>
 </div><p>如上面代码所示，最后两个有错，其余都是允许的。</p>
 <h2 id="字符串与整型的互相转换">字符串与整型的互相转换</h2>
-<p>先说string对象与int型转换</p>
-<p>int转换为string对象有全局函数<code>std::to_string()</code>(C++11)。</p>
-<p>当然还可以用其他的stringstream的方式。</p>
-<p>string转为int可以利用标准库中的<code>atoi()</code>函数（ ascii to integer），但要先转为C风格串，从C标准库继承过来，举例</p>
+<p>先说<code>string</code>对象与int型转换</p>
+<p><code>int</code>转换为<code>string</code>对象有全局函数<code>std::to_string()</code>(C++11)。</p>
+<p>当然还可以用其他的<code>stringstream</code>的方式。</p>
+<p><code>string</code>转为<code>int</code>可以利用标准库中的<code>atoi()</code>函数（ <em>ascii to integer</em>），但要先转为C风格串，从C标准库继承过来，举例</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -283,8 +283,8 @@
 </span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">;</span> <span class="c1">//123
 </span></code></pre></td></tr></table>
 </div>
-</div><p>同时除了atoi()还要atof()等一系列函数。</p>
-<p>另外用一些C语言中的格式化输入输出函数也可以实现,比如sprintf,sscanf等。</p>
+</div><p>同时除了<code>atoi()</code>还要<code>atof()</code>等一系列函数。</p>
+<p>另外用一些C语言中的格式化输入输出函数也可以实现,比如<code>sprintf,sscanf</code>等。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -323,7 +323,7 @@
     </div>
 
     <div class="post-nav"><a href="/understand_const/" class="prev" rel="prev" title="理解常量const"><i class="fas fa-angle-left fa-fw"></i>理解常量const</a>
-            <a href="/ifndef/" class="next" rel="next" title="关于C语言中的IFNDEF宏">关于C语言中的IFNDEF宏<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/ifndef/" class="next" rel="next" title="条件编译与保护符">条件编译与保护符<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

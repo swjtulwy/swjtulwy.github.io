@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="referrer" content="no-referrer">
-        <title>关于C语言中的IFNDEF宏 - Weiyee&#39;s Blog</title><meta name="Description" content="记录个人学习的博客"><meta property="og:title" content="关于C语言中的IFNDEF宏" />
+        <title>条件编译与保护符 - Weiyee&#39;s Blog</title><meta name="Description" content="记录个人学习的博客"><meta property="og:title" content="条件编译与保护符" />
 <meta property="og:description" content="IFNDEF ifndef的含义是If not define, 其搭配使用如下 1 2 3 4 5 6 7 8 9 10 11 12 13 // xxx.h #ifndef __INCxxx.h #define __INCxxx.h #ifndef __cpluscplus extern &#34;C&#34; { #endif /*...*/ #ifndef } #endif #endif 1.多次包含的情况 include xxx 就是将xxx的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://example.com/ifndef/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://example.com/logo.png"/>
 
-<meta name="twitter:title" content="关于C语言中的IFNDEF宏"/>
+<meta name="twitter:title" content="条件编译与保护符"/>
 <meta name="twitter:description" content="IFNDEF ifndef的含义是If not define, 其搭配使用如下 1 2 3 4 5 6 7 8 9 10 11 12 13 // xxx.h #ifndef __INCxxx.h #define __INCxxx.h #ifndef __cpluscplus extern &#34;C&#34; { #endif /*...*/ #ifndef } #endif #endif 1.多次包含的情况 include xxx 就是将xxx的"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -25,12 +25,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "关于C语言中的IFNDEF宏",
+        "headline": "条件编译与保护符",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/ifndef\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1620 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1811 ,
         "url": "https:\/\/example.com\/ifndef\/","datePublished": "2021-03-19T08:55:57+08:00","dateModified": "2021-03-19T08:55:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -105,9 +105,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">关于C语言中的IFNDEF宏</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">条件编译与保护符</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-19">2021-03-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1620 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-19">2021-03-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1811 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -126,6 +126,7 @@
         <li><a href="#6重复的定义保护符">6.重复的定义保护符</a></li>
       </ul>
     </li>
+    <li><a href="#pragma-once">Pragma once</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="ifndef">IFNDEF</h2>
@@ -256,8 +257,8 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>重复写N次也没关系。</p>
-<p>但头文件中会出现一类&quot;定义&quot;， 在同一翻译单元中是不能重复的。<br>
-比如：</p>
+<p>但头文件中会出现一类&quot;定义&quot;， 在<strong>同一翻译单元</strong>中是不能重复的。</p>
+<p>比如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -397,8 +398,8 @@ X
 <p>而内部保护符可以降低a.h和b.h, c.h之间的耦合。</p>
 <h3 id="5定义保护符">5.定义保护符</h3>
 <p>马上就要到主题了……</p>
-<p>将头文件保护符的用法扩展一下， 就变成了定义保护符（这个名字是我捏造的）。<br>
-保护的不是某个&quot;头文件&quot; 而是某个&quot;定义&quot;， 如：</p>
+<p>将头文件保护符的用法扩展一下， 就变成了定义保护符（这个名字是我捏造的）。</p>
+<p>保护的不是某个&quot;头文件&quot; 而是某个&quot;定义&quot;， 如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -513,6 +514,12 @@ X
 </span></code></pre></td></tr></table>
 </div>
 </div><p>或者也可能将若干定义分组， 共用一个保护符。</p>
+<h2 id="pragma-once">Pragma once</h2>
+<p>维基百科定义如下</p>
+<p>In the the C and C++ programming languages, <code># pragma once</code> is a non-standard but widely supported preprocessor directive designed to cause the current source file to be included only once in a single compilation. Thus, <code>#pragma once</code> serves the same purpose as include guards, but with several advantages, including: less code, avoidance of name clashes, and sometimes improvement in compilation speed. On the other hand, <code>#pragma once</code> is not necessarily available in all compilers and its implementation is tricky and might not always be reliable.</p>
+<p>意思就是可以用来代替<code>#IFNDEF</code>的的头文件保护符的预编译指令，非标准，看编译器支持情况，目前大多都支持了。</p>
+<p><code>pragma</code>还有更多有用的指令，可以参考：</p>
+<p><a href="https://www.jianshu.com/p/b019a3ca1c71" target="_blank" rel="noopener noreffer">#pragma编译指令大全（上） - 简书 (jianshu.com)</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -526,7 +533,7 @@ X
                             <a class="link-to-markdown" href="/ifndef/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/ifndef/" data-title="关于C语言中的IFNDEF宏"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/ifndef/" data-title="关于C语言中的IFNDEF宏" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/ifndef/" data-title="条件编译与保护符"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/ifndef/" data-title="条件编译与保护符" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>

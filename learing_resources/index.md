@@ -113,6 +113,36 @@ xv6-book (翻译)：[FrankZn/xv6-riscv-book-Chinese (github.com)](https://github
 
 《Effective C++》
 
+《Modern Effective C++》
+
+《现代 C++ 教程：高速上手 C++ 11/14/17/20》
+
+### 视频教程
+
+#### 南科大[于仕琪](https://link.zhihu.com/?target=https%3A//space.bilibili.com/519963684)老师的C/C++课程
+
+所有课程资料均开源，包括Lecture slides, Lecture notes和Lab。建议1.25倍速观看。
+
+非常基础的入门课程，但是老师Hands on coding的教学方法和清晰的思路让学习者如沐春风。
+
+[ShiqiYu/CPP: Lecture notes, projects and other materials for Course 'CS205 C/C++ Program Design' at Southern University of Science and Technology. (github.com)](https://github.com/ShiqiYu/CPP)
+
+[快速学习C和C++，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)](https://www.bilibili.com/video/BV1Vf4y1P7pq?share_source=copy_web)
+
+#### 彭于斌的高性能并行编程与优化课程
+
+课程同样完全开源，视频，幻灯片，代码和作业都可在GitHub上找到。建议1.5倍速观看。
+
+本课程的优势在于涉及面非常广，而且全是作者工程多年工程实践下来的精华（虽然作者只是个在校学生orz），从Cmake开始讲到编译器优化，从TBB讲到CUDA，涉及到C++编程规范和高性能编程的方方面面。
+
+[parallel101/course: 高性能并行编程与优化 - 课件 (github.com)](https://github.com/parallel101/course)
+
+https://www.bilibili.com/video/BV1fa411r7zp?share_source=copy_web 
+
+### 博客推荐
+
+[C++ 并发编程（从C++11到C++17） (paul.pub)](https://paul.pub/cpp-concurrency/)
+
 ## 开源项目
 
 ### BRPC

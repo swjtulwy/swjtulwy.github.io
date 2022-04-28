@@ -1,4 +1,4 @@
-# 关于C语言中的IFNDEF宏
+# 条件编译与保护符
 
 
 ## IFNDEF
@@ -88,7 +88,8 @@ struct x;
 
 重复写N次也没关系。  
 
-但头文件中会出现一类"定义"， 在同一翻译单元中是不能重复的。  
+但头文件中会出现一类"定义"， 在**同一翻译单元**中是不能重复的。  
+
 比如：
 
 ```c
@@ -184,6 +185,7 @@ C
 马上就要到主题了……  
 
 将头文件保护符的用法扩展一下， 就变成了定义保护符（这个名字是我捏造的）。  
+
 保护的不是某个"头文件" 而是某个"定义"， 如：  
 
 ```c
@@ -260,4 +262,16 @@ typedef unsigned xxx size_t;
 ```
 
 或者也可能将若干定义分组， 共用一个保护符。  
+
+## Pragma once
+
+维基百科定义如下
+
+In the the C and C++ programming languages, `# pragma once` is a non-standard but widely supported preprocessor directive designed to cause the current source file to be included only once in a single compilation. Thus, `#pragma once` serves the same purpose as include guards, but with several advantages, including: less code, avoidance of name clashes, and sometimes improvement in compilation speed. On the other hand, `#pragma once` is not necessarily available in all compilers and its implementation is tricky and might not always be reliable.
+
+意思就是可以用来代替`#IFNDEF`的的头文件保护符的预编译指令，非标准，看编译器支持情况，目前大多都支持了。
+
+`pragma`还有更多有用的指令，可以参考：
+
+[#pragma编译指令大全（上） - 简书 (jianshu.com)](https://www.jianshu.com/p/b019a3ca1c71)
 

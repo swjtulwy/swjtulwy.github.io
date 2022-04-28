@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/example.com\/binary_search\/"
-        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Binary Search","wordcount":  5966 ,
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Binary Search","wordcount":  6009 ,
         "url": "https:\/\/example.com\/binary_search\/","datePublished": "2022-04-19T08:46:08+08:00","dateModified": "2022-04-19T08:46:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
@@ -107,7 +107,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">二分查找法之细节</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/algorithm/"><i class="far fa-folder fa-fw"></i>Algorithm</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5966 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6009 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 12 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -116,6 +116,15 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#reference">Reference</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#二分查找通用框架">二分查找通用框架</a></li>
     <li><a href="#第一种模板">第一种模板</a>
       <ul>
@@ -150,9 +159,9 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Donald Knuth（高德纳）曾经说过二分法思路很简单，细节是魔鬼。本文就来探讨下二分法中的那些“魔鬼”细节</p>
-<p>Reference</p>
-<p><a href="https://leetcode-cn.com/leetbook/read/binary-search/" target="_blank" rel="noopener noreffer">力扣</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/441033451" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/441033451</a></p>
+<h4 id="reference">Reference</h4>
+<p><a href="https://leetcode-cn.com/leetbook/read/binary-search/" target="_blank" rel="noopener noreffer">力扣-二分查找Leetbook</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/441033451" target="_blank" rel="noopener noreffer">知乎-谈二分查找-小范同学</a></p>
 <h2 id="二分查找通用框架">二分查找通用框架</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -194,6 +203,7 @@
 <p>其中 &hellip; 标记的部分，就是可能出现细节问题的地方，当你见到一个二分查找的代码时，首先注意这几个地方。后文用实例分析这些地方能有什么样的变化。</p>
 <p>另外声明一下，计算 mid 时需要防止溢出，代码中<code>left + (right - left) / 2</code>就和 <code>(left + right) / 2 </code>的结果相同，但是有效防止了 left 和 right 太大直接相加导致溢出。</p>
 <p>这里我提供两个小诀窍，第一是尝试熟练使用一种写法，比如左闭右开（满足 C++、Python 等语言的习惯）或左闭右闭（便于处理边界条件），尽量只保持这一种写法；第二是在刷题时思考如果最后区间只剩下一个数或者两个数，自己的写法是否会陷入死循环，如果某种写法无法跳出死循环，则考虑尝试另一种写法。</p>
+<p>开门见山，下图就是三种主要模板的框架</p>
 <img src="https://i0.hdslb.com/bfs/album/3fd3c02e25774c07bd65385dbb86a26dd7136ff4.png" title="" alt="" data-align="center">
 <p>这 3 个模板的不同之处在于：</p>
 <p>左、中、右索引的分配。
@@ -218,7 +228,7 @@
 保证查找空间在每个步骤中至少有 3 个元素。
 需要进行后处理。 当剩下 2 个元素时，循环 / 递归结束。 需要评估其余元素是否符合条件。</p>
 <h2 id="第一种模板">第一种模板</h2>
-<p><strong>本模板while条件采用 &lt;= 符号，索引初始的搜索区间右端点应为nums.length-1</strong></p>
+<p><strong>本模板while条件采用 &lt;= 符号，索引初始的搜索区间右端点应为<mark>nums.length-1</mark></strong></p>
 <h3 id="搜索单个值">搜索单个值</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

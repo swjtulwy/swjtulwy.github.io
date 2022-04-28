@@ -5,11 +5,11 @@
 
 Donald Knuth（高德纳）曾经说过二分法思路很简单，细节是魔鬼。本文就来探讨下二分法中的那些“魔鬼”细节
 
-Reference
+#### Reference
 
-[力扣](https://leetcode-cn.com/leetbook/read/binary-search/)
+[力扣-二分查找Leetbook](https://leetcode-cn.com/leetbook/read/binary-search/)
 
-https://zhuanlan.zhihu.com/p/441033451
+[知乎-谈二分查找-小范同学](https://zhuanlan.zhihu.com/p/441033451)
 
 ## 二分查找通用框架
 
@@ -38,6 +38,8 @@ int binarySearch(int[] nums, int target) {
 另外声明一下，计算 mid 时需要防止溢出，代码中` left + (right - left) / 2 `就和 `(left + right) / 2 `的结果相同，但是有效防止了 left 和 right 太大直接相加导致溢出。
 
 这里我提供两个小诀窍，第一是尝试熟练使用一种写法，比如左闭右开（满足 C++、Python 等语言的习惯）或左闭右闭（便于处理边界条件），尽量只保持这一种写法；第二是在刷题时思考如果最后区间只剩下一个数或者两个数，自己的写法是否会陷入死循环，如果某种写法无法跳出死循环，则考虑尝试另一种写法。
+
+开门见山，下图就是三种主要模板的框架
 
 <img src="https://i0.hdslb.com/bfs/album/3fd3c02e25774c07bd65385dbb86a26dd7136ff4.png" title="" alt="" data-align="center">
 
@@ -74,7 +76,7 @@ int binarySearch(int[] nums, int target) {
 
 ## 第一种模板
 
-**本模板while条件采用 <= 符号，索引初始的搜索区间右端点应为nums.length-1**
+**本模板while条件采用 <= 符号，索引初始的搜索区间右端点应为<mark>nums.length-1</mark>**
 
 ### 搜索单个值
 

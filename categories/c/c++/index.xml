@@ -17,7 +17,7 @@
     <pubDate>Wed, 19 May 2021 11:15:56 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://example.com/compile_link/</guid>
-    <description><![CDATA[GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c++程序的编译运行流程中将采用gcc做示例。 GCC的初衷是为GNU操作系统专门编写的]]></description>
+    <description><![CDATA[本文只是简单介绍用GCC编译C或C++文件的基本流程，不涉及对编译和链接的深入分析 GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c+]]></description>
 </item><item>
     <title>Unix文件IO</title>
     <link>https://example.com/fileio/</link>
@@ -28,7 +28,7 @@
                 <img src="https://i0.hdslb.com/bfs/album/a5956cbf6cc82995ce1afdcdf77e73d9c14748b2.png@1e_1c.webp" referrerpolicy="no-referrer">
             </div>本文介绍文件IO与标准IO的相关概念，以及一些常用的文件IO函数 基本概念 文件I/O：文件I/O称之为不带缓存的IO（unbuffered I/]]></description>
 </item><item>
-    <title>关于C语言中的IFNDEF宏</title>
+    <title>条件编译与保护符</title>
     <link>https://example.com/ifndef/</link>
     <pubDate>Fri, 19 Mar 2021 08:55:57 &#43;0800</pubDate>
     <author>作者</author>
