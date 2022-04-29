@@ -143,6 +143,10 @@ https://www.bilibili.com/video/BV1fa411r7zp?share_source=copy_web
 
 [C++ 并发编程（从C++11到C++17） (paul.pub)](https://paul.pub/cpp-concurrency/)
 
+### 练手项目
+
+[有没有在线练习C++的网站？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/21925214)
+
 ## 开源项目
 
 ### BRPC

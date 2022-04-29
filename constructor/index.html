@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>构造与析构 - Weiyee&#39;s Blog</title><meta name="Description" content="记录个人学习的博客"><meta property="og:title" content="构造与析构" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/constructor/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-29T20:10:43+08:00" />
+<meta property="article:modified_time" content="2022-04-29T20:10:43+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="构造与析构"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/constructor/" /><link rel="prev" href="https://example.com/leetcode/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "构造与析构",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/constructor\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Cpp","wordcount":  3453 ,
+        "url": "https:\/\/example.com\/constructor\/","datePublished": "2022-04-29T20:10:43+08:00","dateModified": "2022-04-29T20:10:43+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/example.com\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 📔 所有文章 </a><a class="menu-item" href="/tags/"> 🏷️ 标签 </a><a class="menu-item" href="/categories/"> 🗂️ 分类 </a><a class="menu-item" href="/right-resume_free_1-2-0/"> 👨‍💻 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">📔 所有文章</a><a class="menu-item" href="/tags/" title="">🏷️ 标签</a><a class="menu-item" href="/categories/" title="">🗂️ 分类</a><a class="menu-item" href="/right-resume_free_1-2-0/" title="">👨‍💻 关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">构造与析构</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-29">2022-04-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3453 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#深拷贝与浅拷贝">深拷贝与浅拷贝</a></li>
+    <li><a href="#构造函数">构造函数</a>
+      <ul>
+        <li><a href="#一般构造函数">一般构造函数</a></li>
+        <li><a href="#拷贝构造函数">拷贝构造函数</a></li>
+        <li><a href="#移动构造函数">移动构造函数</a>
+          <ul>
+            <li><a href="#最佳实践">最佳实践</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#析构函数">析构函数</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="深拷贝与浅拷贝">深拷贝与浅拷贝</h2>
+<img src="https://i0.hdslb.com/bfs/album/571b0a8c704f97aefe803b72937d0dcefe1b6383.webp" title="" alt="" data-align="center">
+<p>基本数据类型的特点：直接存储在栈(stack)中的数据</p>
+<p>引用数据类型的特点：存储的是该对象在栈中引用，真实的数据存放在堆内存里</p>
+<p>引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体。</p>
+<p>在C++中：</p>
+<p>1  在未定义显示拷贝构造函数的情况下，系统会调用<strong>默认的拷贝函数</strong>——即<strong>浅拷贝</strong>，它能够完成成员的一一复制。当数据成员中<strong>没有指针</strong>时，浅拷贝是可行的；但当数据成员中有指针时，如果采用简单的浅拷贝，则两类中的两个指针将指向同一个地址，当对象快结束时，会调用<strong>两次析构函数</strong>，而导致<strong>指针悬挂</strong>现象，所以，此时，<strong>必须</strong>采用深拷贝。</p>
+<p>2 深拷贝与浅拷贝的区别就在于深拷贝会在堆内存中<strong>另外申请空间</strong>来储存数据，从而也就解决了指针悬挂的问题。简而言之，当数据成员中有指针时，<strong>必须要用深拷贝</strong>。</p>
+<h2 id="构造函数">构造函数</h2>
+<p>首先明确以下一个事实：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">();</span> <span class="c1">// 这是定义，不会进入赋值运算符的成员函数
+</span><span class="c1"></span><span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">();</span> <span class="c1">// 这时赋值, 会进入赋值运算符的成员函数
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>C++的构造函数的作用：初始化类对象的数据成员。</strong></p>
+<p>即类的对象被创建的时候，编译系统对该对象<strong>分配内存空间</strong>，并自动调用构造函数，<strong>完成类成员的初始化</strong>，可以理解为构造函数的作用就是给类的各个非静态成员变量申请内存并赋初值。</p>
+<p>当直接调用类的构造函数时，其生成的对象内存分配在<strong>栈</strong>上，例如 <code>A a = A(); 或 A();</code></p>
+<p>当使用new运算符生成指向对象的指针时，其生成的对象内存分配在<strong>堆</strong>上，例如<code>A a = new A();</code></p>
+<p>注意，对象的成员变量的初始化动作发生在<strong>进入构造函数本体之前</strong>，在构造函数内，都不算是被初始化，而是被赋值</p>
+<p>如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Student</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">score</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 在花括号里面的都是赋值不是初始化
+</span><span class="c1"></span>        <span class="n">m_Id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+        <span class="n">m_Name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+        <span class="n">m_Score</span> <span class="o">=</span> <span class="n">score</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">m_Id</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_Name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">m_Score</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面的方法才是正确的初始化方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Student</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">score</span><span class="p">)</span> <span class="o">:</span>
+        <span class="n">m_Id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">m_Name</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">m_Score</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">m_Id</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_Name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">m_Score</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>构造函数的特点：以类名作为函数名，无返回类型。</strong></p>
+<p>我们常说的构造函数大致分为三种，即一般的构造函数、拷贝构造函数和移动构造函数。</p>
+<h3 id="一般构造函数">一般构造函数</h3>
+<ul>
+<li>
+<p>无参数构造函数/默认构造函数</p>
+<ul>
+<li>
+<p>当调用构造函数不提供参数时，就会调用上述构造函数</p>
+</li>
+<li>
+<p>若没有定义任何构造函数时，编译器会自动创建一个没有参数的构造函数，称为<strong>合成构造函数</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>带参数的构造函数</p>
+<ul>
+<li>带参数的构造函数中，新的标准是可以用类中其余的构造函数在本构造函数中初始化部分成员变量，称其为<strong>委托构造函数</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="拷贝构造函数">拷贝构造函数</h3>
+<p>当一个构造函数的参数为类的引用时，其就是一个拷贝构造函数。</p>
+<p>若我们没有给一个类定义一个拷贝构造函数，编译器会自动给我们生成一个构造函数，称为<strong>合成拷贝构造函数</strong> ，除非我们在该拷贝构造函数的声明中指定为<code>=delete</code>。</p>
+<p>合成拷贝构造函数执行的拷贝动作<strong>都是浅拷贝</strong>，即只对当前栈上内容进行拷贝，不会对栈中指针指向的内容进行拷贝。</p>
+<p>拷贝构造函数的参数必须为本类的引用，否则会引发死循环</p>
+<p>考虑以下情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Person</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Person</span><span class="p">();</span>
+<span class="n">Person</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们直到在函数中传参数的话，若不加引用就是值传递，那么每个实参都会复制一份，在栈中生成临时对象，然后该临时对象作用域在函数内部。</p>
+<p>构造函数同理，若其参数不是本对象的引用，那么当调用该构造函数时，需要复制一份实参生成临时对象，而此时实参也是该类的一个对象，那么这个临时对象的构造又命中了拷贝构造函数，等于是套娃了，形成了死循环。所以拷贝构造函数的参数必须为本类的引用，另外最佳实践是，形参加上<code>cosnt</code>修饰，因为一般也不会用于修改被用于构造的对象。</p>
+<blockquote>
+<p>最佳实践：当本类不包含指针类型的成员变量时，可以使用合成的拷贝构造，即全都是浅拷贝，当本类包含指针类型的成员变量时，应使用自定义的拷贝构造并实现深拷贝。最好给参数加上<code>const</code>修饰符</p>
+</blockquote>
+<p>看如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">Buffer</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">Buffer</span><span class="p">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="p">)</span> <span class="o">:</span> <span class="n">capacity</span><span class="p">(</span><span class="n">capacity</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">buf</span><span class="p">(</span><span class="k">new</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="p">[</span><span class="n">capacity</span><span class="p">]{</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">GetLength</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">length</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">GetCapacity</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="nf">write</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">==</span> <span class="n">capacity</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="n">buf</span><span class="p">[</span><span class="n">length</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Buffer</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">delete</span><span class="p">[]</span> <span class="n">buf</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">friend</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span> <span class="n">Buffer</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span> <span class="n">Buffer</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Buffer(&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">buffer</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;/&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;)[&#34;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">buffer</span><span class="p">.</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;, &#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;]&#34;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">buffer2</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="mi">65</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">buffer</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">buffer2</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Buffer(1/10)[65, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]
+Buffer(0/10)[65, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]
+进程已结束,退出代码-1073740940 (0xC0000374)
+</code></pre></td></tr></table>
+</div>
+</div><p>看到没，由于没有定义拷贝构造函数，所以<code>buffer2</code>没有写却出现了65这个值。另外进程突出代码为一个负数，说明出现了异常，是因为，进行了两次析构。</p>
+<p>在上述代码中加入深复制操作后，就有了正确的结果了，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Buffer</span><span class="p">(</span><span class="k">const</span> <span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span> <span class="o">==</span> <span class="k">this</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// 判断是否自赋值，避免后续操作开销
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="p">[</span><span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">buf</span><span class="p">,</span> <span class="n">buffer</span><span class="p">.</span><span class="n">buf</span> <span class="o">+</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">,</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Buffer<span class="o">(</span>1/10<span class="o">)[</span>65, 0, 0, 0, 0, 0, 0, 0, 0, 0, <span class="o">]</span>
+Buffer<span class="o">(</span>0/10<span class="o">)[</span>0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <span class="o">]</span>
+进程已结束,退出代码0
+</code></pre></td></tr></table>
+</div>
+</div><p>此外赋值运算符重载函数 的功能和拷贝构造函数类似，</p>
+<blockquote>
+<p>最佳实践：当定义了拷贝构造函数时，也应一起定义赋值运算符重载函数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Buffer</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span> <span class="o">==</span> <span class="k">this</span><span class="p">)</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="k">delete</span><span class="p">[]</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="p">[</span><span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">,</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意的是这里开头也要做自赋值判断，目的是为了避免多余的开销</p>
+<h3 id="移动构造函数">移动构造函数</h3>
+<p>在拷贝构造函数中，若有如下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 第一次构造
+</span><span class="c1"></span><span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span> <span class="c1">// 这里构造了一个临时对象， 并将临时对象拷贝进行了一次拷贝
+</span><span class="c1"></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">buffer</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行结果为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Constructor: Buffer<span class="o">(</span>0/10<span class="o">)[</span>0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <span class="o">]</span>
+Constructor: Buffer<span class="o">(</span>0/16<span class="o">)[</span>0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <span class="o">]</span>
+Copy: Buffer<span class="o">(</span>0/10<span class="o">)[</span>0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <span class="o">]</span>
+Destructor: Buffer<span class="o">(</span>0/16<span class="o">)[</span>0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <span class="o">]</span>
+Buffer<span class="o">(</span>0/16<span class="o">)[</span>0, 25, 151, 226, 40, 2, 0, 0, 80, 1, 151, 226, 40, 2, 0, 0, <span class="o">]</span>
+Destructor: Buffer<span class="o">(</span>0/16<span class="o">)[</span>0, 25, 151, 226, 40, 2, 0, 0, 80, 1, 151, 226, 40, 2, 0, 0, <span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到首先构造了一个<code>buffer</code>，调用了第一次构造函数，然后在赋值运算符的右侧，构造了一个临时对象，然后将这临时对象进行了一次拷贝赋值。然后临时对象销毁，接着打印<code>buffer</code>,最后<code>buffer</code>销毁</p>
+<p>为了解决这种不必要的拷贝，C++11引入了一个新的概念也就是移动语义，同时带来了移动构造函数和移动赋值运算符</p>
+<p>由此，我们加入以下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Buffer</span><span class="p">(</span><span class="n">Buffer</span><span class="o">&amp;&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Move Constructor: &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="c1">// 你的归我了
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">buf</span><span class="p">;</span>
+    <span class="c1">// 你的删除
+</span><span class="c1"></span>    <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">buf</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Buffer</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Buffer</span><span class="o">&amp;&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Move: &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span> <span class="o">==</span> <span class="k">this</span><span class="p">)</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="k">delete</span><span class="p">[]</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">buf</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">buf</span><span class="p">;</span>
+
+    <span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">buf</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>最佳实践，一要加上noexcept保证不发生异常，二移动赋值时要进行自赋值判断，三被移动的对象的指针要赋值为空指针</p>
+</blockquote>
+<p>结果如下，可以看到Copy操作变为了Move操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="nl">Constructor</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">10</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">]</span>
+<span class="nl">Constructor</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">]</span>
+<span class="nl">Move</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">10</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">]</span>
+<span class="nl">Destructor</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="p">)[]</span>
+<span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">]</span>
+<span class="nl">Destructor</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当加入如下代码或者在诸如<code>vector</code>的一些支持移动操作的标准库容器中，也会使用到移动构造函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">buffer1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Move</span> <span class="nl">Constructor</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">0</span><span class="p">)[]</span>
+<span class="nl">Destructor</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="p">)[]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="最佳实践">最佳实践</h4>
+<p>为了减少重复代码，可以在拷贝构造函数中调用拷贝赋值函数，移动构造函数同理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 初始化，指针要为空，因为赋值操作中有 先delete[] 操作。
+</span><span class="c1"></span><span class="n">Buffer</span><span class="p">(</span><span class="k">const</span> <span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="o">:</span> <span class="n">capacity</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">buf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">){</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Copy Constructor: &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="o">*</span><span class="k">this</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 要将buffer左值转为右值，这里buffer具名，是一个左值
+</span><span class="c1"></span><span class="n">Buffer</span><span class="p">(</span><span class="n">Buffer</span><span class="o">&amp;&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">capacity</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">buf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">){</span>
+    <span class="o">*</span><span class="k">this</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>更进一步，拷贝赋值和移动赋值还是有些重复代码，无非就是把一个对象的值转移到另一对象，为了解决这一问题，出现一个新的编程范式：Copy &amp; Swap</p>
+<p>首先在类中定义一个交换函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">void</span> <span class="nf">Swap</span><span class="p">(</span><span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">lhs</span><span class="p">.</span><span class="n">buf</span><span class="p">,</span> <span class="n">rhs</span><span class="p">.</span><span class="n">buf</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">lhs</span><span class="p">.</span><span class="n">capacity</span><span class="p">,</span> <span class="n">rhs</span><span class="p">.</span><span class="n">capacity</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">lhs</span><span class="p">.</span><span class="n">length</span><span class="p">,</span> <span class="n">rhs</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>接着改进拷贝构造和拷贝赋值，其中，拷贝构造只需将将其他的值复制给自己的初始化列表即可，而拷贝赋值则是将形参由引用变成值传递，所以直接和临时对象交换即可，保证了异常安全</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 再改进版
+</span><span class="c1"></span><span class="n">Buffer</span><span class="p">(</span><span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="o">:</span> <span class="n">capacity</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">),</span>
+                        <span class="n">length</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">length</span><span class="p">),</span>
+                        <span class="n">buf</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span> <span class="o">?</span> <span class="k">new</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="p">[</span><span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">]</span> <span class="o">:</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Copy Constructor: &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 改进版 Copy &amp; Swap, 异常安全，因为传进来的是拷贝的临时对象，
+</span><span class="c1"></span><span class="n">Buffer</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Buffer</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Copy &amp; Swap: &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">Swap</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>接着改进移动构造和移动赋值，由于移动构造传进来的是一个<code>xvalue</code>,将亡值，所以可以毫不犹豫交换，自己可以初始化为0先然后调用交换函数即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Buffer</span><span class="p">(</span><span class="n">Buffer</span><span class="o">&amp;&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">capacity</span><span class="p">){</span>
+    <span class="n">Swap</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="err">其实这时已经不需要移动赋值了，将亡值可以和拷贝赋值一起操作</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="析构函数">析构函数</h2>
+<p>析构函数用于在销毁一个对象动作完成前执行一些操作</p>
+<p><strong>当一个类具有子类时，或者一个类有可能被继承时，应该将其析构函数设置为虚析构函数。</strong></p>
+<p>这时因为，当一个类中有指针成员时，在多态的场景中，例如有一个指向父类类型的指针被赋值了一个子类对象的地址时，若析构函数不是虚函数，那么该对象析构时调用的是父类的析构函数而不是子类对象的析构函数，那么会导致子类的一些特有成员变量未被销毁，从而造成<strong>内存泄漏</strong>。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-04-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/constructor/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://example.com/constructor/" data-title="构造与析构" data-hashtags="Cpp"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://example.com/constructor/" data-title="构造与析构" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cpp/">Cpp</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/leetcode/" class="prev" rel="prev" title="精选题目"><i class="fas fa-angle-left fa-fw"></i>精选题目</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

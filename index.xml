@@ -4,9 +4,16 @@
         <link>https://example.com/</link>
         <description>记录个人学习的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</lastBuildDate>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 29 Apr 2022 20:10:43 &#43;0800</lastBuildDate>
             <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>构造与析构</title>
+    <link>https://example.com/constructor/</link>
+    <pubDate>Fri, 29 Apr 2022 20:10:43 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://example.com/constructor/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>精选题目</title>
     <link>https://example.com/leetcode/</link>
     <pubDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</pubDate>
@@ -72,15 +79,6 @@
     <guid>https://example.com/io_multiplexing/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i0.hdslb.com/bfs/album/65c3cf7499158a6bb894934fc4751bb362f95bec.png@1e_1c.webp" referrerpolicy="no-referrer">
-            </div>]]></description>
-</item><item>
-    <title>Unix套接字编程</title>
-    <link>https://example.com/unix_socket/</link>
-    <pubDate>Sat, 17 Apr 2021 21:58:29 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://example.com/unix_socket/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://i0.hdslb.com/bfs/album/df7b6d46621859c99357ddcadc6d21f5a3495eba.png" referrerpolicy="no-referrer">
             </div>]]></description>
 </item></channel>
 </rss>
