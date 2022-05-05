@@ -11,14 +11,20 @@ License: https://angrystudio.com/license/
 :root {
     --main-color: #ff4100;
     --main-hover-color: #eb4d17;
+    --day-bg-color: #fff;
+    --day-color: #161209;
+    --night-bg-color: #292a2d;
+    --night-color: #a9a9b3;
 }
+
 body {
-    background-color: #101115;
-    color: #85879d;
+    /* #fff; #161209; */
+    background-color: var(--night-bg-color);
+    color: var(--night-color);
     line-height: 1.7em;
     font-family: "Roboto", sans-serif;
     font-size: 1.125rem;
-    background-image: linear-gradient(to bottom, rgb(12 14 17), rgb(19 20 32 / 90%)), url(../images/bg.jpg);
+    background-image: linear-gradient(to bottom, rgb(12 14 17), rgb(19 20 32 / 20%)), url(../images/pexels-faik-akmd-1025469.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -62,6 +68,7 @@ body {
 }
 .sidebar {
     background: #161820;
+    /* background:rgb(107, 118, 135); */
     position: sticky;
     top: 20px;
 }
