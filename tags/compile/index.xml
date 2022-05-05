@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Compile - 标签 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/tags/compile/</link>
+        <link>https://swjtulwy.github.io/tags/compile/</link>
         <description>Compile - 标签 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 19 May 2021 11:15:56 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/compile/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 19 May 2021 11:15:56 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/tags/compile/" rel="self" type="application/rss+xml" /><item>
     <title>程序从编辑到链接简介</title>
-    <link>https://example.com/compile_link/</link>
+    <link>https://swjtulwy.github.io/compile_link/</link>
     <pubDate>Wed, 19 May 2021 11:15:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/compile_link/</guid>
+    <guid>https://swjtulwy.github.io/compile_link/</guid>
     <description><![CDATA[本文只是简单介绍用GCC编译C或C++文件的基本流程，不涉及对编译和链接的深入分析 GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c+]]></description>
 </item><item>
     <title>GDB调试基础</title>
-    <link>https://example.com/gdb/</link>
+    <link>https://swjtulwy.github.io/gdb/</link>
     <pubDate>Wed, 07 Apr 2021 08:41:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/gdb/</guid>
+    <guid>https://swjtulwy.github.io/gdb/</guid>
     <description><![CDATA[GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境 GDB调试的三种方式： 目标板直]]></description>
 </item></channel>
 </rss>

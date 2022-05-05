@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Open Source - 标签 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/tags/open-source/</link>
+        <link>https://swjtulwy.github.io/tags/open-source/</link>
         <description>Open Source - 标签 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/open-source/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/tags/open-source/" rel="self" type="application/rss+xml" /><item>
     <title>开源学习资料</title>
-    <link>https://example.com/learing_resources/</link>
+    <link>https://swjtulwy.github.io/learing_resources/</link>
     <pubDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/learing_resources/</guid>
+    <guid>https://swjtulwy.github.io/learing_resources/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

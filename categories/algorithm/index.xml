@@ -1,29 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Algorithm - 分类 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/categories/algorithm/</link>
+        <link>https://swjtulwy.github.io/categories/algorithm/</link>
         <description>Algorithm - 分类 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</lastBuildDate><atom:link href="https://example.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
     <title>精选题目</title>
-    <link>https://example.com/leetcode/</link>
+    <link>https://swjtulwy.github.io/leetcode/</link>
     <pubDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/leetcode/</guid>
+    <guid>https://swjtulwy.github.io/leetcode/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>二叉树</title>
-    <link>https://example.com/binary_tree/</link>
+    <link>https://swjtulwy.github.io/binary_tree/</link>
     <pubDate>Sat, 23 Apr 2022 11:46:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/binary_tree/</guid>
+    <guid>https://swjtulwy.github.io/binary_tree/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>二分查找法之细节</title>
-    <link>https://example.com/binary_search/</link>
+    <link>https://swjtulwy.github.io/binary_search/</link>
     <pubDate>Tue, 19 Apr 2022 08:46:08 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/binary_search/</guid>
+    <guid>https://swjtulwy.github.io/binary_search/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

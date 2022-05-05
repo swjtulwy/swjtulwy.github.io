@@ -1,36 +1,36 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>tools - 分类 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/categories/tools/</link>
+        <link>https://swjtulwy.github.io/categories/tools/</link>
         <description>tools - 分类 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</lastBuildDate><atom:link href="https://example.com/categories/tools/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/categories/tools/" rel="self" type="application/rss+xml" /><item>
     <title>开源学习资料</title>
-    <link>https://example.com/learing_resources/</link>
+    <link>https://swjtulwy.github.io/learing_resources/</link>
     <pubDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/learing_resources/</guid>
+    <guid>https://swjtulwy.github.io/learing_resources/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>CMake使用方法</title>
-    <link>https://example.com/cmake_tutorial/</link>
+    <link>https://swjtulwy.github.io/cmake_tutorial/</link>
     <pubDate>Sat, 17 Apr 2021 16:16:35 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/cmake_tutorial/</guid>
+    <guid>https://swjtulwy.github.io/cmake_tutorial/</guid>
     <description><![CDATA[CMake 介绍 cmake的定义是什么 ？&mdash;&ndash;高级编译配置工具 当多个人用不同的语言或者编译器开发一个项目，最终要输出一个可执行文]]></description>
 </item><item>
     <title>GDB调试基础</title>
-    <link>https://example.com/gdb/</link>
+    <link>https://swjtulwy.github.io/gdb/</link>
     <pubDate>Wed, 07 Apr 2021 08:41:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/gdb/</guid>
+    <guid>https://swjtulwy.github.io/gdb/</guid>
     <description><![CDATA[GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境 GDB调试的三种方式： 目标板直]]></description>
 </item><item>
     <title>Makefile与库的制作</title>
-    <link>https://example.com/make_lib/</link>
+    <link>https://swjtulwy.github.io/make_lib/</link>
     <pubDate>Sun, 04 Apr 2021 21:04:32 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/make_lib/</guid>
+    <guid>https://swjtulwy.github.io/make_lib/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i0.hdslb.com/bfs/album/f0c218a3bd675d2e36dbb4f7244fd6a035c1c248.png" referrerpolicy="no-referrer">
             </div>静态库 库文件是计算机上的一类文件，可以简单的把库文件看成一种代码仓库，它提供给使用者一些可以直接拿来用的变量、函数或类。 库是特殊的一种程序，]]></description>

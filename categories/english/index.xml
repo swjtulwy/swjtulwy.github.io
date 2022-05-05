@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>English - 分类 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/categories/english/</link>
+        <link>https://swjtulwy.github.io/categories/english/</link>
         <description>English - 分类 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 17 Apr 2019 15:15:01 &#43;0800</lastBuildDate><atom:link href="https://example.com/categories/english/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 17 Apr 2019 15:15:01 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/categories/english/" rel="self" type="application/rss+xml" /><item>
     <title>英语语法浅析</title>
-    <link>https://example.com/grammar/</link>
+    <link>https://swjtulwy.github.io/grammar/</link>
     <pubDate>Wed, 17 Apr 2019 15:15:01 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/grammar/</guid>
+    <guid>https://swjtulwy.github.io/grammar/</guid>
     <description><![CDATA[作者：若愚英塾 链接：https://www.zhihu.com/question/294752032/answer/2141847794 来源]]></description>
 </item></channel>
 </rss>

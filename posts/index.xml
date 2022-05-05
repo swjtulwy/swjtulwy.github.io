@@ -1,80 +1,80 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>所有文章 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/posts/</link>
+        <link>https://swjtulwy.github.io/posts/</link>
         <description>所有文章 | Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 29 Apr 2022 20:10:43 &#43;0800</lastBuildDate><atom:link href="https://example.com/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 29 Apr 2022 20:10:43 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>构造与析构</title>
-    <link>https://example.com/constructor/</link>
+    <link>https://swjtulwy.github.io/constructor/</link>
     <pubDate>Fri, 29 Apr 2022 20:10:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/constructor/</guid>
+    <guid>https://swjtulwy.github.io/constructor/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>精选题目</title>
-    <link>https://example.com/leetcode/</link>
+    <link>https://swjtulwy.github.io/leetcode/</link>
     <pubDate>Thu, 28 Apr 2022 17:47:46 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/leetcode/</guid>
+    <guid>https://swjtulwy.github.io/leetcode/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>二叉树</title>
-    <link>https://example.com/binary_tree/</link>
+    <link>https://swjtulwy.github.io/binary_tree/</link>
     <pubDate>Sat, 23 Apr 2022 11:46:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/binary_tree/</guid>
+    <guid>https://swjtulwy.github.io/binary_tree/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>右值引用与移动语义</title>
-    <link>https://example.com/rvalue_ref/</link>
+    <link>https://swjtulwy.github.io/rvalue_ref/</link>
     <pubDate>Thu, 21 Apr 2022 18:23:44 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/rvalue_ref/</guid>
+    <guid>https://swjtulwy.github.io/rvalue_ref/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>二分查找法之细节</title>
-    <link>https://example.com/binary_search/</link>
+    <link>https://swjtulwy.github.io/binary_search/</link>
     <pubDate>Tue, 19 Apr 2022 08:46:08 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/binary_search/</guid>
+    <guid>https://swjtulwy.github.io/binary_search/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>开源学习资料</title>
-    <link>https://example.com/learing_resources/</link>
+    <link>https://swjtulwy.github.io/learing_resources/</link>
     <pubDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/learing_resources/</guid>
+    <guid>https://swjtulwy.github.io/learing_resources/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>学习路线（持续更新）</title>
-    <link>https://example.com/learning_route/</link>
+    <link>https://swjtulwy.github.io/learning_route/</link>
     <pubDate>Sat, 09 Apr 2022 15:44:08 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/learning_route/</guid>
+    <guid>https://swjtulwy.github.io/learning_route/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>可靠数据传输</title>
-    <link>https://example.com/reliable_data_transfer/</link>
+    <link>https://swjtulwy.github.io/reliable_data_transfer/</link>
     <pubDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/reliable_data_transfer/</guid>
+    <guid>https://swjtulwy.github.io/reliable_data_transfer/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://gitee.com/lauweiyee/pic-bed/raw/master/202201072059380.jpg" referrerpolicy="no-referrer">
             </div>可靠数据传输原理 可靠数据传输(Reliable Data Transfer)是一个很大的概念，在计算机网络的五层模型中，它可以出现在传输层、数据链路层]]></description>
 </item><item>
     <title>程序从编辑到链接简介</title>
-    <link>https://example.com/compile_link/</link>
+    <link>https://swjtulwy.github.io/compile_link/</link>
     <pubDate>Wed, 19 May 2021 11:15:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/compile_link/</guid>
+    <guid>https://swjtulwy.github.io/compile_link/</guid>
     <description><![CDATA[本文只是简单介绍用GCC编译C或C++文件的基本流程，不涉及对编译和链接的深入分析 GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c+]]></description>
 </item><item>
     <title>IO多路复用</title>
-    <link>https://example.com/io_multiplexing/</link>
+    <link>https://swjtulwy.github.io/io_multiplexing/</link>
     <pubDate>Wed, 12 May 2021 16:38:03 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://example.com/io_multiplexing/</guid>
+    <guid>https://swjtulwy.github.io/io_multiplexing/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i0.hdslb.com/bfs/album/65c3cf7499158a6bb894934fc4751bb362f95bec.png@1e_1c.webp" referrerpolicy="no-referrer">
             </div>]]></description>

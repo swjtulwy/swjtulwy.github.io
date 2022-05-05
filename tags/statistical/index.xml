@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Statistical - 标签 - Weiyee&#39;s Blog</title>
-        <link>https://example.com/tags/statistical/</link>
+        <link>https://swjtulwy.github.io/tags/statistical/</link>
         <description>Statistical - 标签 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
-            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 14 May 2019 15:49:45 &#43;0000</lastBuildDate><atom:link href="https://example.com/tags/statistical/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 14 May 2019 15:49:45 &#43;0000</lastBuildDate><atom:link href="https://swjtulwy.github.io/tags/statistical/" rel="self" type="application/rss+xml" /><item>
     <title>假设检验</title>
-    <link>https://example.com/hypothesis_testing/</link>
+    <link>https://swjtulwy.github.io/hypothesis_testing/</link>
     <pubDate>Tue, 14 May 2019 15:49:45 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://example.com/hypothesis_testing/</guid>
+    <guid>https://swjtulwy.github.io/hypothesis_testing/</guid>
     <description><![CDATA[假设检验（Hypothesis testing）是推论统计中用于检验统计假设的一种方法。而“统计假设”是可通过观察一组随机变量的模型进行检验的]]></description>
 </item></channel>
 </rss>
