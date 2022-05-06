@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>C和C&#43;&#43;中的输入输出 - Weiyee&#39;s Blog</title><meta name="Description" content="记录个人学习的博客"><meta property="og:title" content="C和C&#43;&#43;中的输入输出" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://swjtulwy.github.io/c_and_cpp_io/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-06T17:56:55+08:00" />
+<meta property="article:modified_time" content="2022-05-06T17:56:55+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
+
+<meta name="twitter:title" content="C和C&#43;&#43;中的输入输出"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/blogging.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://swjtulwy.github.io/c_and_cpp_io/" /><link rel="prev" href="https://swjtulwy.github.io/constructor/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "C和C++中的输入输出",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/swjtulwy.github.io\/c_and_cpp_io\/"
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "IO","wordcount":  1941 ,
+        "url": "https:\/\/swjtulwy.github.io\/c_and_cpp_io\/","datePublished": "2022-05-06T17:56:55+08:00","dateModified": "2022-05-06T17:56:55+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 📔 所有文章 </a><a class="menu-item" href="/tags/"> 🏷️ 标签 </a><a class="menu-item" href="/categories/"> 🗂️ 分类 </a><a class="menu-item" href="/mypage/"> 👨‍💻 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">📔 所有文章</a><a class="menu-item" href="/tags/" title="">🏷️ 标签</a><a class="menu-item" href="/categories/" title="">🗂️ 分类</a><a class="menu-item" href="/mypage/" title="">👨‍💻 关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">C和C&#43;&#43;中的输入输出</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-06">2022-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1941 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#c语言io">C语言IO</a>
+      <ul>
+        <li><a href="#文件访问">文件访问</a></li>
+        <li><a href="#直接输入输出">直接输入输出</a></li>
+        <li><a href="#未格式化输入输出">未格式化输入输出</a>
+          <ul>
+            <li><a href="#输入输出单个字符">输入输出单个字符</a></li>
+            <li><a href="#输入输出字符串">输入输出字符串</a></li>
+          </ul>
+        </li>
+        <li><a href="#格式化输入输出">格式化输入输出</a></li>
+        <li><a href="#文件定位">文件定位</a></li>
+        <li><a href="#错误处理">错误处理</a></li>
+        <li><a href="#若干宏常量">若干宏常量</a></li>
+      </ul>
+    </li>
+    <li><a href="#cio流">C++IO流</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="c语言io">C语言IO</h2>
+<p>C语言定义了一套跨平台的带缓冲的输入输出函数，相对于Unix系统I/O，我们称之为标准I/O。标准<strong>I/O</strong> 库在用户空间维护了自己的 stdio 缓冲区，所以标准<strong>I/O</strong> 是带有缓存的，而<strong>文件 I/O</strong> 在用户空间是不带有缓存的，所以在性能、效率上，标准<strong>I/O</strong> 要优于 <strong>文件I/O</strong>。</p>
+<p>理解上述概念后，就知道了由于标准I/O带有缓存区，所以标准I/O相关函数都不可避免的要显示提供一个缓存区buffer，这个<code>buffer</code> 一般是一个指针，指向一块连续的内存，其最常见的形式是字节数组，因为字节是表示存储的最小单元，但也可以是其类型的数组。另外，为了知道缓冲区内部数据的多少，我们往往还需要一个参数表示缓冲区中要写入或读取的数据的数量。由于我们只是传入了缓冲区的指针，对于缓冲区内部单个数据的大小也要指定，通过单个数据大小和数据数量我们就间接指定了缓冲区内进行操作的数据大小了。总结一下，主要的参数有如下：</p>
+<ul>
+<li>
+<p><code>void *buffer</code>: 指向缓冲区的指针，可以是任意类型</p>
+</li>
+<li>
+<p><code>size_t size</code> ：缓冲区内每个对象的大小（字节为单位）</p>
+</li>
+<li>
+<p><code>size_t count</code>: 需要进行操作的对象数量</p>
+</li>
+<li>
+<p><code>FILE *stream</code>: 需要进行操作的文件流</p>
+</li>
+</ul>
+<p>C语言中，头文件 <code>&lt;stdio.h&gt;</code> 提供了通用的文件操作函数以支持窄字符的的输入输出 ，而 <code>&lt;wchar.h&gt;</code> 头文件则提供了支持宽字符的输入输出。</p>
+<p>I/O流操作有两个重要的数据结构，一个是 <code>FILE</code> 类型的结构体表示，我们能通过<code>FILE*</code> 类型的指针访问和操作其关联的流。每个流都与一个外部物理设备（文件、标准输入流、打印机、串行端口等）相对应。另一个就是<code>fpos_t</code>，表示文件中位置和状态的结构类型，能够在文件中唯一指定一个位置和多字节解析器状态。</p>
+<p>C标准库中有三个预定义标准流：</p>
+<ul>
+<li>
+<p><code>stdin</code>:标准输入流</p>
+</li>
+<li>
+<p><code>stdout</code>:标准输出流</p>
+</li>
+<li>
+<p><code>stderr</code>标准错误输出流</p>
+</li>
+</ul>
+<h3 id="文件访问">文件访问</h3>
+<p>主要有如下几个函数：</p>
+<ul>
+<li>
+<p><code>FILE *fopen( const char *filename, const char *mode );</code> : 用于打开文件，返回指向<code>FILE*</code>结构的对应的文件指针</p>
+</li>
+<li>
+<p><code>int fclose(FILE *stream );</code>：用于关闭打开的文件，成功返回0否则返回EOF</p>
+</li>
+<li>
+<p><code>int fflush(FILE *stream );</code> : 对于输出流（以及输出最后一个操作的更新流），将任何未写入的数据从流的缓冲区写入关联的输出设备。对于输入流（以及输入最后一个操作的更新流），行为是未定义的。如果 stream 是空指针，则所有打开的输出流都将被刷新，包括在库包中操作或程序无法直接访问的输出流。</p>
+<ul>
+<li><code>setbuf</code>：手动设置缓冲区大小</li>
+</ul>
+</li>
+</ul>
+<h3 id="直接输入输出">直接输入输出</h3>
+<ul>
+<li>
+<p><code>size_t fread(void *buffer, size_t size, size_t count, FILE *stream );</code> 用于从指定的流中读取<code>count</code>个<code>size</code>大小的对象到<code>buffer</code>中，返回读取成功的字节数</p>
+</li>
+<li>
+<p><code>size_t fwrite(const void *buffer, size_t size, size_t count, FILE *stream );</code> 用于将<code>buffer</code>中<code>count</code>个<code>size</code>大小的对象写入到指定的流中，返回写入成功的字节数</p>
+</li>
+</ul>
+<h3 id="未格式化输入输出">未格式化输入输出</h3>
+<h4 id="输入输出单个字符">输入输出单个字符</h4>
+<ul>
+<li>
+<p><code>int fgetc( FILE *stream );</code>/<code>int getc( FILE *stream );</code> : 成功返回字符对应的int值，否则返回EOF</p>
+</li>
+<li>
+<p><code>int getchar(void);</code> 等价于<code>getc(stdin)</code></p>
+</li>
+<li>
+<p><code>int fputc(int ch, FILE *stream)</code>/<code>int putc(int ch, FILE *stream)</code>:成功返回字符对应的int值，否则返回EOF并在流中设置error</p>
+</li>
+<li>
+<p><code>int putchar(int ch);</code> 等价于<code>putc(ch, stdout)</code>;</p>
+</li>
+</ul>
+<h4 id="输入输出字符串">输入输出字符串</h4>
+<ul>
+<li>
+<p><code>char *fgets(char *str, int count, FILE* stream);</code> 从给定的文件流中读取最多count - 1个字符并将其存储到str指向的字符数组中。当解析到换行符时就会停止，这时str会包含该换行符，或者当检测到EOF标记时也会停止。如果读取中没有发生错误，那么会在结尾写入一个空字符。</p>
+</li>
+<li>
+<p><code>int fputs(const char *str, FILE *stream);</code> 将<code>str</code>中每个非空字符写入输出流<code>stream</code>,就像一致重复地在执行<code>fgetc</code>. 结尾的空字符不会别写入</p>
+</li>
+<li>
+<p><code>char *gets_s( char *str, rsize_t n ); / char *gets( char *str );</code>从<code>stdin</code>中读取最多<code>count - 1</code>个字符并将其存储到str指向的字符数组中 . 当解析到换行符或者EOF标记时停止，如果读取中没有发生错误，那么会在结尾写入一个空字符。 如果碰到换行符，则会直接丢弃，且不会被计算到写入的字符数量中</p>
+</li>
+<li>
+<p><code>int puts( const char *str );</code> 将<code>str</code>中每个非空字符写入<code>stdout</code>,然后追加一个换行符，就像一致重复地在执行<code>fgetc</code>. 结尾的空字符不会别写入</p>
+</li>
+</ul>
+<h3 id="格式化输入输出">格式化输入输出</h3>
+<ul>
+<li>
+<p><code>int scanf( const char*format, ... );</code>从<code>stdin</code>中读取输入</p>
+</li>
+<li>
+<p><code>int fscanf(FILE *stream, const char *format, ... );</code> 从<code>stream</code>中读取输入</p>
+</li>
+<li>
+<p><code>int sscanf( const char *buffer, const char *format, ... );</code>: 从<code>buffer</code>中按照格式输入</p>
+</li>
+<li>
+<p><code>int printf( const char *format, ... );</code> 输出到<code>stdout</code></p>
+</li>
+<li>
+<p><code>int fprintf(FILE *stream, const char *format, ... );</code> 输出到<code>stream</code></p>
+</li>
+<li>
+<p><code>int sprintf( char *buffer, const char *format, ... );</code> 输出到<code>buffer</code></p>
+</li>
+<li>
+<p><code>int snprintf( char *restrict buffer, size_t bufsz, const char *restrict format, ... );</code>  按照格式<code>format</code>写入<code>buffer</code> 指定长度<code>bufsz</code>防止缓冲区溢出，更推荐这个</p>
+</li>
+</ul>
+<h3 id="文件定位">文件定位</h3>
+<ul>
+<li>
+<p><code>long ftell(FILE *stream );</code> 返回流中的位置指示器， <code>stream</code> 如果流以二进制模式打开，那么这个函数返回文件中的字节数，从头开始计数</p>
+</li>
+<li>
+<p><code>int fseek(FILE *stream, long offset, int origin );</code> 设置文件的位置指示器，<code>origin</code>表示起始位置，<code>offert</code>表示偏移量。 <code>origin</code>有<code>SEEK_SET</code>、<code>SEEK_CUR</code>和<code>SEEK_END</code></p>
+</li>
+</ul>
+<h3 id="错误处理">错误处理</h3>
+<ul>
+<li>
+<p><code>void clearerr(FILE *stream );</code> 重置错误标志和EOF指示器</p>
+</li>
+<li>
+<p><code>int feof(FILE *stream );</code> 检查是否到达文件末尾，非零就是到了，0就是没</p>
+</li>
+<li>
+<p><code>int ferror( FILE *stream );</code> 检查流是否出现错误</p>
+</li>
+<li>
+<p><code>void perror( const char *s );</code> 打印错误码<code>errno</code>对应的字符描述到<code>stdout</code></p>
+</li>
+</ul>
+<h3 id="若干宏常量">若干宏常量</h3>
+<p><code>EOF, FOPEN_MAX,FILENAME_MAX,BUFSIZ</code></p>
+<h2 id="cio流">C++IO流</h2></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-05-06</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/c_and_cpp_io/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://swjtulwy.github.io/c_and_cpp_io/" data-title="C和C&#43;&#43;中的输入输出" data-hashtags="IO"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://swjtulwy.github.io/c_and_cpp_io/" data-title="C和C&#43;&#43;中的输入输出" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/io/">IO</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/constructor/" class="prev" rel="prev" title="构造与析构"><i class="fas fa-angle-left fa-fw"></i>构造与析构</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

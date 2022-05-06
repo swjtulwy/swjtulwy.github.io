@@ -12,7 +12,7 @@
     <guid>https://swjtulwy.github.io/compile_link/</guid>
     <description><![CDATA[本文只是简单介绍用GCC编译C或C++文件的基本流程，不涉及对编译和链接的深入分析 GCC 编译工具 GCC是一款强大的编译工具，下文在介绍c以及c+]]></description>
 </item><item>
-    <title>Unix文件IO</title>
+    <title>Unix FileIO</title>
     <link>https://swjtulwy.github.io/fileio/</link>
     <pubDate>Thu, 08 Apr 2021 11:14:22 &#43;0800</pubDate>
     <author>作者</author>
