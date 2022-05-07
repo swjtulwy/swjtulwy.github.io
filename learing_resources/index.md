@@ -7,6 +7,8 @@
 
 [名校公开课程评价网 (conanhujinming.github.io)](https://conanhujinming.github.io/comments-for-awesome-courses/)
 
+[yet another insignificant Programming Notes (ntu.edu.sg)](https://www3.ntu.edu.sg/home/ehchua/programming/index.html)
+
 ## 操作系统
 
 ### 推荐书籍

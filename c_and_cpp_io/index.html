@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/c_and_cpp_io\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "IO","wordcount":  1941 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "IO","wordcount":  4751 ,
         "url": "https:\/\/swjtulwy.github.io\/c_and_cpp_io\/","datePublished": "2022-05-06T17:56:55+08:00","dateModified": "2022-05-06T17:56:55+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,8 +105,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">C和C&#43;&#43;中的输入输出</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-06">2022-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1941 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-06">2022-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4751 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -122,15 +122,44 @@
           <ul>
             <li><a href="#输入输出单个字符">输入输出单个字符</a></li>
             <li><a href="#输入输出字符串">输入输出字符串</a></li>
+            <li><a href="#按行读取">按行读取</a></li>
           </ul>
         </li>
         <li><a href="#格式化输入输出">格式化输入输出</a></li>
         <li><a href="#文件定位">文件定位</a></li>
         <li><a href="#错误处理">错误处理</a></li>
         <li><a href="#若干宏常量">若干宏常量</a></li>
+        <li><a href="#示例">示例</a>
+          <ul>
+            <li><a href="#文件复制">文件复制</a></li>
+            <li><a href="#测试">测试</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#cio流">C++IO流</a></li>
+    <li><a href="#cio流">C++IO流</a>
+      <ul>
+        <li><a href="#io的步骤">IO的步骤</a></li>
+        <li><a href="#io流类库组成结构">IO流类库组成结构</a></li>
+        <li><a href="#标准输入流cin">标准输入流cin</a>
+          <ul>
+            <li><a href="#字符输入">字符输入</a></li>
+            <li><a href="#字符串输入">字符串输入</a></li>
+            <li><a href="#直接输入">直接输入</a></li>
+          </ul>
+        </li>
+        <li><a href="#标准输出流cout">标准输出流cout</a></li>
+        <li><a href="#流状态">流状态</a></li>
+        <li><a href="#文件输入和输出">文件输入和输出</a>
+          <ul>
+            <li><a href="#输出文件步骤">输出文件步骤</a></li>
+            <li><a href="#输入文件步骤">输入文件步骤</a></li>
+            <li><a href="#流状态检查">流状态检查</a></li>
+            <li><a href="#文件模式">文件模式</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="c语言io">C语言IO</h2>
@@ -220,6 +249,15 @@
 <p><code>int puts( const char *str );</code> 将<code>str</code>中每个非空字符写入<code>stdout</code>,然后追加一个换行符，就像一致重复地在执行<code>fgetc</code>. 结尾的空字符不会别写入</p>
 </li>
 </ul>
+<h4 id="按行读取">按行读取</h4>
+<ul>
+<li>
+<p><code>ssize_t getline(char **lineptr, size_t *n, FILE *stream);</code> 等价于<code>getdelim(lineptr, n, '\n', stream)</code></p>
+</li>
+<li>
+<p><code>ssize_t getdelim(char ** restrict lineptr, size_t* restrict n, int delimiter, FILE* stream);</code>  : 像fgetc一样从流stream中读取字符，直到遇到分隔符delimiter, 将读取到的字符串存储到<code>lineptr</code>指向的地址，自动增加其大小，就好像对输入使用了<code>realloc</code>一样，存储的字符包含了分隔符，并且添加了一个空字符在结尾。成功返回存储在<code>buffer</code>中的字符数量，包含分隔符，但是不包括空字符。错误则返回-1并在流中设置<code>feof</code>和<code>ferror</code></p>
+</li>
+</ul>
 <h3 id="格式化输入输出">格式化输入输出</h3>
 <ul>
 <li>
@@ -270,7 +308,408 @@
 </ul>
 <h3 id="若干宏常量">若干宏常量</h3>
 <p><code>EOF, FOPEN_MAX,FILENAME_MAX,BUFSIZ</code></p>
-<h2 id="cio流">C++IO流</h2></div><div class="post-footer" id="post-footer">
+<h3 id="示例">示例</h3>
+<h4 id="文件复制">文件复制</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">FILE</span><span class="o">*</span> <span class="n">fpr</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r+&#34;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fpr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error of opening a file : file.txt</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">FILE</span><span class="o">*</span> <span class="n">fpw</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;newfile.txt&#34;</span><span class="p">,</span> <span class="s">&#34;w+&#34;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fpw</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error of opening a file : newfile.txt</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BUFSIZ</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">),</span> <span class="n">BUFSIZ</span><span class="p">,</span> <span class="n">fpr</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fwrite</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">),</span> <span class="n">len</span><span class="p">,</span> <span class="n">fpw</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;copy file success!&#34;</span><span class="p">);</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fpw</span><span class="p">);</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fpr</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="测试">测试</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">void</span> <span class="nf">test_getchar</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="n">printf</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;\n&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;\t&#39;</span> <span class="o">?</span> <span class="s">&#34;输入的字符是换行或空格&#34;</span> <span class="o">:</span> <span class="s">&#34;输入的字符是：%c&#34;</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">test_fgetc</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">FILE</span><span class="o">*</span> <span class="n">f</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;open file error</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BUFSIZ</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">val</span> <span class="o">=</span> <span class="n">fgetc</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="o">!=</span> <span class="sc">&#39;\n&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;从文件file.txt中读取到的第一行字符串为: %s&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">test_fgets</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">FILE</span><span class="o">*</span> <span class="n">f</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;open file error</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BUFSIZ</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">feof</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puts</span><span class="p">(</span><span class="s">&#34;End of File!&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">test_getchar</span><span class="p">();</span>
+    <span class="n">test_fgetc</span><span class="p">();</span>
+    <span class="n">test_fgets</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="cio流">C++IO流</h2>
+<p><a href="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp10_io.html" target="_blank" rel="noopener noreffer">C++ IO Streams and File Input/Output (ntu.edu.sg)</a></p>
+<p>C++把输入和输出看作字节流，输入时，程序从输入流中抽取字节；输出时，程序将字节插入到输出流中。对于面向文本的程序来说， 每个字节代表一个字符，更通俗地说，字节可以构成字符或数值数据的二进制表示。</p>
+<p>IO操作的过程中，任何需要被传递的数据，在经过IO类库处理前后是不同的。这样，我们可以把数据的表示分为两种：内部表示和外部表示。</p>
+<p>数据的内部表示便于程序进行数据处理。典型的内部表示有：整型数的二进制表示、浮点数的IEEE表示、字符的ASCII或Unicode编码表示。数据的外部表示则根据不同的外部设备的需要，有具体不同的表现形式。如果外部数据表示是可读的字符序列，则称为文本IO，否则为二进制IO。标准IO流的主要目的是支持文本IO，不直接支持二进制IO。</p>
+<p>虽然IO流是以流的方式进行数据传递，但这并不表明传递的数据不能有任何结构，而是指IO流的概念是以流的方式进行输入输出，所传递数据的内部结构隐藏在对流数据的解释中</p>
+<h3 id="io的步骤">IO的步骤</h3>
+<p>在IO流里，输入输出分为4步：格式化/解析，缓冲，编码转换和传递。</p>
+<p><strong>格式化/解析</strong>：在内部数据表示（以字节为单位）与外部数据表示（以字符为单位）之间进行双向转换。例如一个2字节的整数10002，就需要5个字符来表示。</p>
+<p><strong>缓冲</strong>：用于在格式/解析与传递只加缓存字符序列。对于输出，较短的字符序列格式化之后并不马上输出，而是保存在缓冲区里，待累积到一定规模之后再传递到外部设备。相反，从外部设备读入的大量数据也是先放在缓冲区，然后逐步取出完成输入。默认时，IO流的输入输出都是经过缓冲的，也可以让IO流工作在无缓冲模式下。</p>
+<p><strong>编码转换</strong>： 是将一种字符表达式转换成另一种字符表达式。如果格式化产生的字符表达式与外部字符表达式不同（输出时），或者外部表达式与IO流能解析的表达式不同（输入时），就必须进行编码转换。如多字节编码与宽字符编码之间的转换等。多数情况下并不需要进行编码转换。</p>
+<p><strong>传递</strong>：主要是与外部设备进行通信。输出时，传递负责将经过格式化、缓冲即编码转换后的字符序列发送到外部设备；输入时，则负责将外部设备抽取数据，为其后进行的编码转换、缓冲及解析提供字符序列。</p>
+<h3 id="io流类库组成结构">IO流类库组成结构</h3>
+<p>IO流类库在不同平台的具体实现上，可能会有所变化，但从总体设计上来看，C++流库主要由两个流类层次组成：</p>
+<p><strong>（1）以streambuf类为父类的类层次</strong></p>
+<p>主要完成信息通过缓冲区的交换。派生层次如下</p>
+<img src="https://i0.hdslb.com/bfs/album/35937d9dfbbddaeec0a0f765e2077cf718b2ba03.png" title="" alt="" data-align="center">
+<p>缓冲区：是一个队列数据结构，由一字符序列和两个指针组成，这两个指针分别指向字符要被插入或被取出的位置。</p>
+<p><code>streambuf</code>类为所有的<code>streambuf</code>类层次对象设置了一个固定的内存缓冲区，动态划分为两部分：</p>
+<p>用做输入的取区，用取指针指示当前取字符位置。</p>
+<p>用做输出的存区，用存指针指示当前存字符位置。</p>
+<p><strong>（2）以ios类为父类的类层次</strong></p>
+<p>ios类及其派生类是在<code>streambuf</code>类实现的通过缓冲区的信息交换的基础上，进一步增加了各种格式化的输入/输出控制方法。它们为用户提供使用流类的接口，它们均有一个指向<code>streambuf</code>的指针。</p>
+<p>ios类有四个直接派生类：</p>
+<ol>
+<li><code>istream</code></li>
+<li><code>ostream</code></li>
+<li><code>fstreambase</code></li>
+<li><code>strstreambase</code></li>
+</ol>
+<p>这四种流作为流库中的基本流类。ios类的派生层次如下：</p>
+<img src="https://i0.hdslb.com/bfs/album/0448f281752dc07fda3e89ba2ea29f27ca4daae0.png" title="" alt="" data-align="center">
+<h3 id="标准输入流cin">标准输入流cin</h3>
+<p>不同版本的抽取运算符（&raquo;）查看输入流的方法是相同的，它们<strong>跳过</strong>空白（空格、换行和制表符）直到遇到非空白字符。</p>
+<p>一般情况下可以使用如下方式测试流状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">while</span><span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">input</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">input</span><span class="p">;</span> <span class="c1">// 这里流已经无效了，应该使用cin.clear() 重置流
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">cin</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;End of File&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="字符输入">字符输入</h4>
+<p><code>cin.get(ch) </code>读取单个字符，不会跳过空白，返回流对象cin</p>
+<p><code>cin.get()</code>，读取单个字符，不会跳过空白，返回读取的字符</p>
+<p>考虑包含空包的输入时可以有如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ch</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">((</span><span class="n">ch</span> <span class="o">=</span> <span class="n">cin</span><span class="p">.</span><span class="n">get</span><span class="p">())</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// process input;
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>使用哪种方式（&raquo; , cin.get(ch), cin.get()）读取字符取决于是否希望跳过空白</strong></p>
+<h4 id="字符串输入">字符串输入</h4>
+<p>cin提供了用于字符串输入的成员函数：</p>
+<ul>
+<li>
+<p><code>istream&amp; get(char*, int, char)</code> 第一个参数时要放置的字符串地址，第二个是比要读取的字符数大1，第三个指定分界符</p>
+</li>
+<li>
+<p><code>istream&amp; get(char*, int)</code> 默认指定换行符号为分界符</p>
+</li>
+<li>
+<p><code>istream&amp; getline(char*, int, char)</code></p>
+</li>
+<li>
+<p><code>istream&amp; get(char*, int, char)</code></p>
+</li>
+</ul>
+<p><code>get</code>和<code>getline</code>方法的区别是<code>get</code>不会丢弃换行符，也就是换行符依旧停留在输入流中，而<code>getline</code>会<strong>抽取并丢弃</strong>换行符</p>
+<h4 id="直接输入">直接输入</h4>
+<p><code>istream&amp; read(char*, int, char)</code> <code>read</code>方法不会在输入后加上空字符，因此不能将输入转换为字符串。其与<code>ostream.write()</code>搭配使用完成文件的输入输出</p>
+<h3 id="标准输出流cout">标准输出流cout</h3>
+<p>以下代码很好地展示了用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;iomanip&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;cmath&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">fixed</span> <span class="o">&lt;&lt;</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;N&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;square root&#34;</span>
+         <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;fourth root</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">root</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>  <span class="o">&lt;&lt;</span> <span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="n">setfill</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span> 
+             <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">setprecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">root</span>
+             <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">setprecision</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">     N   square root   fourth root
+....10       3.162        1.7783
+....20       4.472        2.1147
+....30       5.477        2.3403
+....40       6.325        2.5149
+....50       7.071        2.6591
+....60       7.746        2.7832
+....70       8.367        2.8925
+....80       8.944        2.9907
+....90       9.487        3.0801
+...100      10.000        3.1623
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="流状态">流状态</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i0.hdslb.com/bfs/album/a65839112efeadc333780c62fa0cb2c5d43a1ba9.png"
+        data-srcset="https://i0.hdslb.com/bfs/album/a65839112efeadc333780c62fa0cb2c5d43a1ba9.png, https://i0.hdslb.com/bfs/album/a65839112efeadc333780c62fa0cb2c5d43a1ba9.png 1.5x, https://i0.hdslb.com/bfs/album/a65839112efeadc333780c62fa0cb2c5d43a1ba9.png 2x"
+        data-sizes="auto"
+        alt="https://i0.hdslb.com/bfs/album/a65839112efeadc333780c62fa0cb2c5d43a1ba9.png"
+        title="https://i0.hdslb.com/bfs/album/a65839112efeadc333780c62fa0cb2c5d43a1ba9.png" /></p>
+<h3 id="文件输入和输出">文件输入和输出</h3>
+<h4 id="输出文件步骤">输出文件步骤</h4>
+<ol>
+<li>
+<p>创建一个<code>ofstream</code>对象来管理输出流</p>
+</li>
+<li>
+<p>将该对象与特定的文件关联起来</p>
+</li>
+<li>
+<p>以使用<code>cout</code>的方式使用该对象，唯一的区别是输出将进入文件而不是屏幕</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ofstream</span> <span class="n">fout</span><span class="p">;</span>
+<span class="n">fout</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">);</span>
+<span class="n">fout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;data...&#34;</span><span class="p">;</span>
+<span class="c1">// 或者
+</span><span class="c1"></span><span class="n">ofstream</span> <span class="nf">fout</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">);</span>
+<span class="n">fout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;data...&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>警告：以默认模式打开文件进行输出，将直接将文件长度截短为0，相当于删除了文件之前的内容</p>
+</blockquote>
+<h4 id="输入文件步骤">输入文件步骤</h4>
+<ol>
+<li>
+<p>创建一个<code>ifstream</code>对象来管理输出流</p>
+</li>
+<li>
+<p>将该对象与特定的文件关联起来</p>
+</li>
+<li>
+<p>以使用<code>cin</code>的方式使用该对象</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ifstream</span> <span class="n">fin</span><span class="p">;</span>
+<span class="n">fin</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">);</span>
+<span class="kt">char</span> <span class="n">ch</span><span class="p">;</span>
+<span class="n">fin</span> <span class="o">&gt;&gt;</span> <span class="n">ch</span><span class="p">;</span>
+<span class="c1">// 或者
+</span><span class="c1"></span><span class="n">ifstream</span> <span class="nf">fin</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">);</span>
+<span class="n">fin</span> <span class="o">&gt;&gt;</span> <span class="n">ch</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="流状态检查">流状态检查</h4>
+<p><img src="https://i0.hdslb.com/bfs/album/855715d124b3b31be658855b2e01697d971a54b6.png" title="" alt="" data-align="center">检查文件是否打开：<code>in.is_open()</code> 相对于以前的方式更好，因为它能够检测出其他方式不能检测出的微妙问题，如上图所示</p>
+<h4 id="文件模式">文件模式</h4>
+<img src="https://i0.hdslb.com/bfs/album/638a84a1f2149662103ce9d40528d86a4d78f781.png" title="" alt="" data-align="center">
+<img src="https://i0.hdslb.com/bfs/album/b5e184ea78a043a6fa5610e4002fb6121e022269.png" title="" alt="" data-align="center"></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
