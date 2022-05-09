@@ -17,7 +17,7 @@
     <pubDate>Sat, 17 Apr 2021 16:16:35 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://swjtulwy.github.io/cmake_tutorial/</guid>
-    <description><![CDATA[CMake 介绍 cmake的定义是什么 ？&mdash;&ndash;高级编译配置工具 当多个人用不同的语言或者编译器开发一个项目，最终要输出一个可执行文]]></description>
+    <description><![CDATA[CMake 介绍 参考：【使用CMake组织C++工程】2：CMake 常用命令和变量 (elloop.github.io) cmake的定义是什么 ？&mdash;&ndash;高级编译配置工]]></description>
 </item><item>
     <title>GDB调试基础</title>
     <link>https://swjtulwy.github.io/gdb/</link>

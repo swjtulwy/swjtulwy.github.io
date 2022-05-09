@@ -3,6 +3,8 @@
 
 ## CMake 介绍
 
+参考：[【使用CMake组织C++工程】2：CMake 常用命令和变量 (elloop.github.io)](https://elloop.github.io/tools/2016-04-10/learning-cmake-2-commands)
+
 cmake的定义是什么 ？-----高级编译配置工具
 
 当多个人用不同的语言或者编译器开发一个项目，最终要输出一个可执行文件或者共享库（dll，so等等）这时候神器就出现了-----CMake！
