@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/sorts\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  2417 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  2776 ,
         "url": "https:\/\/swjtulwy.github.io\/sorts\/","datePublished": "2022-05-09T14:55:11+08:00","dateModified": "2022-05-09T14:55:11+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,8 +105,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">排序算法</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2417 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2776 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -150,8 +150,8 @@
 <tr>
 <td>希尔排序</td>
 <td>$O(n^{1-2})$</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(n^2)$</td>
+<td>&ndash;</td>
+<td>&ndash;</td>
 <td>$O(1)$</td>
 <td>不稳定</td>
 </tr>
@@ -263,6 +263,9 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">shell_sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
@@ -273,15 +276,18 @@
     <span class="p">}</span>
     <span class="c1">// 增量按照 Knuth 序列规则依次递减
 </span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">max_knuth_num</span><span class="p">;</span> <span class="n">gap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">gap</span> <span class="o">=</span> <span class="p">(</span><span class="n">gap</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">gap</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 从gap开始遍历到结尾，=
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">gap</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
             <span class="kt">int</span> <span class="n">cur_num</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
             <span class="kt">int</span> <span class="n">pre_index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">gap</span><span class="p">;</span>
-            <span class="k">while</span> <span class="p">(</span><span class="n">pre_index</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cur_num</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">pre_index</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// 对每个当前遍历的点cur_num，使用插入排序从后往前调整其前面的间隔序列
+</span><span class="c1"></span>            <span class="k">while</span> <span class="p">(</span><span class="n">pre_index</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cur_num</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">pre_index</span><span class="p">])</span> <span class="p">{</span>
                 <span class="c1">// 向后挪动位置
 </span><span class="c1"></span>                <span class="n">nums</span><span class="p">[</span><span class="n">pre_index</span> <span class="o">+</span> <span class="n">gap</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">pre_index</span><span class="p">];</span>
                 <span class="n">pre_index</span> <span class="o">-=</span> <span class="n">gap</span><span class="p">;</span>
             <span class="p">}</span>
-            <span class="n">nums</span><span class="p">[</span><span class="n">pre_index</span> <span class="o">+</span> <span class="n">gap</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_num</span><span class="p">;</span>
+            <span class="c1">// 坐下来
+</span><span class="c1"></span>            <span class="n">nums</span><span class="p">[</span><span class="n">pre_index</span> <span class="o">+</span> <span class="n">gap</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_num</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
@@ -327,6 +333,7 @@
 </div><h2 id="快速排序quick-sort">快速排序(Quick Sort)</h2>
 <p>快速排序使用了递归操作，所以其空间复杂度有所增加，但是时间复杂度更占据优势，也是其名字的由来。快速排序不适合已经大部分有序的情况，这样会增加遍历操作，甚至时间复杂度上升至$O(n^2)$ 。考虑这种情况，我们在每次划分的时候随机选择一个数进行交换，可以使得数组更混乱。</p>
 <p>其思想是，每一趟排序确定一个数的最终位置，在该位置上，左边的数都小于该数，右边的数都大于该数，由此，我们也称这一趟排序为一次划分(<code>partition</code>)， 每次划分时，都会不断地找到从左往右第一个比该数大的数<code>a</code>和从右往左第一个比该数小的数<code>b</code>，然后将两者交换一下，最终满足条件。在该次划分后，确定了一个数的最终位置<code>pos</code>，那么可以递归地对<code>pos</code>左边的数和<code>pos</code>右边的数进行划分。最后每个数都到了其实际的位置，排序就完成了。</p>
+<img src="https://i0.hdslb.com/bfs/album/7bf5e67bec10de8eefb288abac7502feec8c16ae.gif" title="" alt="" data-align="center">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -359,6 +366,7 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
+</span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 划分函数，返回已经有序的位置
@@ -381,7 +389,8 @@
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">my_qsort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="c1">// 保证区间内至少有两个元素，left 和 right
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">pivot_pos</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
     <span class="n">my_qsort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">pivot_pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
     <span class="n">my_qsort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">pivot_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
@@ -564,9 +573,94 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="基数排序radix-sort">基数排序(Radix Sort)</h2>
-<h2 id="计数排序counting-sort">计数排序(Counting Sort)</h2>
-<p>计数排序就是一种时间复杂度为 O(n)O(n) 的排序算法，该算法于 19541954 年由 Harold H. Seward 提出。在对一定范围内的整数排序时，它的复杂度为 Ο(n+k)O(n+k)（其中 k 是整数的范围大小）</p>
-<p>用到的空间主要是长度为 <code>k</code> 的计数数组和长度为 <code>n</code> 的结果数组，所以空间复杂度也是 O(n+k)。</p>
+<p>下面实现的版本可以包含有负数的情况，将基数进行加9处理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">radix_sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// 找出位数最多的数
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">max</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// 计算最长位数
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">max_digit_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">max</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">++</span><span class="n">max_digit_len</span><span class="p">;</span>
+        <span class="n">max</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 使用计数排序法对基数进行排序，下标[0, 18]对应[-9, 9]
+</span><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">counting</span><span class="p">(</span><span class="mi">19</span><span class="p">);</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="kt">int</span> <span class="n">dev</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_digit_len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 下标调整
+</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">radix</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">dev</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">9</span><span class="p">;</span>
+            <span class="o">++</span><span class="n">counting</span><span class="p">[</span><span class="n">radix</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">counting</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">counting</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counting</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="c1">// 使用倒序遍历的方式完成计数排序
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">radix</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">dev</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">9</span><span class="p">;</span>
+            <span class="n">result</span><span class="p">[</span><span class="o">--</span><span class="n">counting</span><span class="p">[</span><span class="n">radix</span><span class="p">]]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="c1">// 计数排序完成后，将结果拷贝回 nums 数组
+</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">result</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">counting</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">counting</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">dev</span> <span class="o">*=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="计数排序counting-sort">计数排序(Counting Sort)</h2>
+<p>计数排序就是一种时间复杂度为 $O(n)$ 的排序算法，该算法于 19541954 年由 Harold H. Seward 提出。在对一定范围内的整数排序时，它的复杂度为 $O(n+k)$（其中 k 是整数的范围大小）</p>
+<p>用到的空间主要是长度为 <code>k</code> 的计数数组和长度为 <code>n</code> 的结果数组，所以空间复杂度也是 $O(n+k)$。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

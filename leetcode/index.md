@@ -61,3 +61,20 @@
 | <font color=orange>Medium</font> | [542. 01 矩阵](https://leetcode-cn.com/problems/01-matrix/)                           | ✅   | ⭐⭐⭐⭐  |
 | <font color=orange>Medium</font> | [394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)                       | ✅   | ⭐⭐⭐⭐⭐ |
 
+## 排序
+
+[LeetBook: 排序](https://leetcode.cn/leetbook/detail/sort-algorithms/)
+
+| 难度                               | 题目                                                                                   | 刷次数 | 经典指数  |
+|:-------------------------------- |:------------------------------------------------------------------------------------ |:--- |:----- |
+| <font color=green>Easy</font>    | [283. 移动零](https://leetcode.cn/problems/move-zeroes/)                                | ✅   | ⭐⭐⭐⭐  |
+| <font color=green>Easy</font>    | [506. 相对名次](https://leetcode.cn/problems/relative-ranks/)                            | ✅   | ⭐⭐⭐   |
+| <font color=orange>Medium</font> | [215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)    | ✅   | ⭐⭐⭐⭐⭐ |
+| <font color=orange>Medium</font> | [912. 排序数组](https://leetcode.cn/problems/sort-an-array/)                             | ✅   | ⭐⭐⭐⭐⭐ |
+| <font color=orange>Medium</font> | [147. 对链表进行插入排序](https://leetcode.cn/problems/insertion-sort-list/)                  | ✅   | ⭐⭐⭐⭐  |
+| <font color=orange>Medium</font> | [剑指 Offer 40. 最小的k个数](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)        | ✅   | ⭐⭐⭐⭐⭐ |
+| <font color=orange>Medium</font> | [169. 多数元素](https://leetcode.cn/problems/majority-element/)                          | ✅   | ⭐⭐⭐⭐⭐ |
+| <font color=orange>Medium</font> | [75. 颜色分类](https://leetcode.cn/problems/sort-colors/)                                | ✅   | ⭐⭐⭐⭐⭐ |
+| <font color=red>Hard</font>      | [剑指 Offer 51. 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/) | ✅   | ⭐⭐⭐⭐⭐ |
+| <font color=red>Hard</font>      | [164. 最大间距](https://leetcode.cn/problems/maximum-gap/)                               | ✅   | ⭐⭐⭐   |
+

@@ -8,7 +8,7 @@
 | Method | Average      | Worst        | Best         | Space       | Stable |
 | ------ | ------------ | ------------ | ------------ | ----------- | ------ |
 | 直接插入排序 | $O(n^2)$     | $O(n^2)$     | $O(n)$       | $O(1)$      | 稳定     |
-| 希尔排序   | $O(n^{1-2})$ | $O(nlog_2n)$ | $O(n^2)$     | $O(1)$      | 不稳定    |
+| 希尔排序   | $O(n^{1-2})$ | --           | --           | $O(1)$      | 不稳定    |
 | 冒泡排序   | $O(n^2)$     | $O(n^2)$     | $O(n)$       | $O(1)$      | 稳定     |
 | 快速排序   | $O(nlog_2n)$ | $O(n^2)$     | $O(nlog_2n)$ | $O(log_2n)$ | 不稳定    |
 | 直接选择排序 | $O(n^2)$     | $O(n^2)$     | $O(n^2)$     | $O(1)$      | 不稳定    |
@@ -56,14 +56,17 @@ vector<int> shell_sort(vector<int>& nums) {
     }
     // 增量按照 Knuth 序列规则依次递减
     for (int gap = max_knuth_num; gap > 0; gap = (gap - 1) / 3) {
+        // 从gap开始遍历到结尾，=
         for (int i = gap; i < nums.size(); ++i) {
             int cur_num = nums[i];
             int pre_index = i - gap;
+            // 对每个当前遍历的点cur_num，使用插入排序从后往前调整其前面的间隔序列
             while (pre_index >= 0 && cur_num < nums[pre_index]) {
                 // 向后挪动位置
                 nums[pre_index + gap] = nums[pre_index];
                 pre_index -= gap;
             }
+            // 坐下来
             nums[pre_index + gap] = cur_num;
         }
     }
@@ -98,6 +101,8 @@ vector<int> bubble_sort(vector<int>& nums) {
 
 其思想是，每一趟排序确定一个数的最终位置，在该位置上，左边的数都小于该数，右边的数都大于该数，由此，我们也称这一趟排序为一次划分(`partition`)， 每次划分时，都会不断地找到从左往右第一个比该数大的数`a`和从右往左第一个比该数小的数`b`，然后将两者交换一下，最终满足条件。在该次划分后，确定了一个数的最终位置`pos`，那么可以递归地对`pos`左边的数和`pos`右边的数进行划分。最后每个数都到了其实际的位置，排序就完成了。
 
+<img src="https://i0.hdslb.com/bfs/album/7bf5e67bec10de8eefb288abac7502feec8c16ae.gif" title="" alt="" data-align="center">
+
 ```cpp
 // 划分函数，返回已经有序的位置
 int partition(vector<int>& nums, int left, int right) {
@@ -119,6 +124,7 @@ int partition(vector<int>& nums, int left, int right) {
 }
 
 void my_qsort(vector<int>& nums, int left, int right) {
+    // 保证区间内至少有两个元素，left 和 right
     if (left >= right) return;
     int pivot_pos = partition(nums, left, right);
     my_qsort(nums, left, pivot_pos - 1);
@@ -224,11 +230,55 @@ vector<int> merge_sort(vector<int>& nums) {
 
 ## 基数排序(Radix Sort)
 
+下面实现的版本可以包含有负数的情况，将基数进行加9处理
+
+```cpp
+vector<int> radix_sort(vector<int>& nums) {
+    int max = 0;
+    // 找出位数最多的数
+    for (int num : nums) {
+        if (abs(num) > max) {
+            max = abs(num);
+        }
+    }
+    // 计算最长位数
+    int max_digit_len = 0;
+    while (max != 0) {
+        ++max_digit_len;
+        max /= 10;
+    }
+    // 使用计数排序法对基数进行排序，下标[0, 18]对应[-9, 9]
+    vector<int> counting(19);
+    vector<int> result(nums.size());
+    int dev = 1;
+    for (int i = 0; i < max_digit_len; ++i) {
+        for (int num : nums) {
+            // 下标调整
+            int radix = num / dev % 10 + 9;
+            ++counting[radix];
+        }
+        for (int j = 1; j < counting.size(); ++j) {
+            counting[j] += counting[j - 1];
+        }
+        // 使用倒序遍历的方式完成计数排序
+        for (int j = nums.size() - 1; j >= 0; --j) {
+            int radix = nums[j] / dev % 10 + 9;
+            result[--counting[radix]] = nums[j];
+        }
+        // 计数排序完成后，将结果拷贝回 nums 数组
+        std::copy(result.begin(), result.end(), nums.begin());
+        std::fill(counting.begin(), counting.end(), 0);
+        dev *= 10;
+    }
+    return nums;
+}
+```
+
 ## 计数排序(Counting Sort)
 
-计数排序就是一种时间复杂度为 O(n)O(n) 的排序算法，该算法于 19541954 年由 Harold H. Seward 提出。在对一定范围内的整数排序时，它的复杂度为 Ο(n+k)O(n+k)（其中 k 是整数的范围大小）
+计数排序就是一种时间复杂度为 $O(n)$ 的排序算法，该算法于 19541954 年由 Harold H. Seward 提出。在对一定范围内的整数排序时，它的复杂度为 $O(n+k)$（其中 k 是整数的范围大小）
 
-用到的空间主要是长度为 `k` 的计数数组和长度为 `n` 的结果数组，所以空间复杂度也是 O(n+k)。
+用到的空间主要是长度为 `k` 的计数数组和长度为 `n` 的结果数组，所以空间复杂度也是 $O(n+k)$。
 
 ```cpp
 // 计数排序, Worst: O(n+k), k 表示数据范围大小。 本实现方式稳定
