@@ -63,7 +63,7 @@ C标准库中有三个预定义标准流：
 
 - `char *fgets(char *str, int count, FILE* stream);` 从给定的文件流中读取最多count - 1个字符并将其存储到str指向的字符数组中。当解析到换行符时就会停止，这时str会包含该换行符，或者当检测到EOF标记时也会停止。如果读取中没有发生错误，那么会在结尾写入一个空字符。 
 
-- `int fputs(const char *str, FILE *stream);` 将`str`中每个非空字符写入输出流`stream`,就像一致重复地在执行`fgetc`. 结尾的空字符不会别写入
+- `int fputs(const char *str, FILE *stream);` 将`str`中每个非空字符写入输出流`stream`,就像一致重复地在执行`fputc`. 结尾的空字符不会别写入
 
 - `char *gets_s( char *str, rsize_t n ); / char *gets( char *str );`从`stdin`中读取最多`count - 1`个字符并将其存储到str指向的字符数组中 . 当解析到换行符或者EOF标记时停止，如果读取中没有发生错误，那么会在结尾写入一个空字符。 如果碰到换行符，则会直接丢弃，且不会被计算到写入的字符数量中
 

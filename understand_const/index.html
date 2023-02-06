@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/understand_const\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  5120 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  5078 ,
         "url": "https:\/\/swjtulwy.github.io\/understand_const\/","datePublished": "2019-08-03T15:31:57+00:00","dateModified": "2019-08-03T15:31:57+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,7 +105,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">理解常量const</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-03">2019-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5120 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-03">2019-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5078 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -202,7 +202,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>默认情况下，<code>cosnt</code>对象被设定为仅在文件内有效。当多个文件中出现了同名的<code>const</code>变量时，其实等同于在不同的文件中分别定义了独立的变量。所以如果想要在<strong>多个文件中共享</strong><code>const</code>对象，则对于<code>const</code>变量不管是声明还是定义都<strong>添加extern关键字</strong>，这样只需定义一次就可以了。</p>
+</div><p>默认情况下，<code>const</code>对象被设定为仅在文件内有效。当多个文件中出现了同名的<code>const</code>变量时，其实等同于在不同的文件中分别定义了独立的变量。所以如果想要在<strong>多个文件中共享</strong><code>const</code>对象，则对于<code>const</code>变量不管是声明还是定义都<strong>添加extern关键字</strong>，这样只需定义一次就可以了。</p>
 <h2 id="const-与指针">const 与指针</h2>
 <p>利用最前面分析的方法，可以知道<code>const</code>修饰指针变量有三种情况：</p>
 <p>①<code>const</code>修饰 <code>*</code> 号</p>
@@ -367,7 +367,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">char</span><span class="o">*</span> <span class="n">VP</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">};</span>     <span class="c1">// (1)
-</span><span class="c1"></span><span class="k">const</span> <span class="n">VP</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">}</span><span class="err">；</span>      <span class="c1">// (2)
+</span><span class="c1"></span><span class="k">const</span> <span class="n">VP</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">};</span>      <span class="c1">// (2)
 </span><span class="c1"></span>
 <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;hate&#34;</span><span class="p">;</span>       <span class="c1">//能正常修改
 </span><span class="c1"></span><span class="n">data1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;hate&#34;</span><span class="p">;</span>      <span class="c1">//编译器报错，提示data1[1]是无法修改的左值
@@ -462,8 +462,6 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span> <span class="n">N</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">C</span><span class="p">{};</span>
@@ -489,8 +487,6 @@
 </span><span class="c1"></span>    <span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="c1">// 此处，大多数C++编译器输出6
 </span><span class="c1"></span><span class="p">}</span>
-
-
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到，f 和 g 都有一个 <code>const int x</code>，但它们的行为却不同。原因在于：f 的 <code>const int x</code> 只是「一个只读的变量」；而 g 的 <code>const int x </code>既是「一个只读的变量」，又是「一个值为5的常量」，变得飘忽不定。</p>
@@ -536,7 +532,7 @@
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

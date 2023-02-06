@@ -41,13 +41,13 @@
 												</svg>
 											</a>
 										</li>
-										<li>
+										<!-- <li>
 											<a href="https://facebook.com/">
 												<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 													<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
 												</svg>
 											</a>
-										</li>
+										</li> -->
 										<li>
 											<a href="https://instagram.com/lauweiyee666">
 												<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -79,8 +79,8 @@
 						<ul class="list-group list-unstyled">
 							<li class="list-item"><a class="" href="#education" style='color:white'>教育经历</a></li>
 							<li class="list-item"><a class="" href="#projects" style='color:white'>项目经历</a></li>
-							<li class="list-item"><a class="" href="#certifications" style='color:white'>获得证书</a></li>
-							<li class="list-item"><a class="" href="#skills" style='color:white'>掌握技能</a></li>
+							<li class="list-item"><a class="" href="#certifications" style='color:white'>专业技能</a></li>
+							<!-- <li class="list-item"><a class="" href="#skills" style='color:white'>掌握技能</a></li> -->
 						</ul>
 					</div>
 				</aside>
@@ -93,18 +93,18 @@
 					<!-- About  Start-->
 					<div id="about" class="section mt-3 mt-md-0 p-3 p-md-5 rounded">
 						<h3 class="mb-3 text-uppercase">关于本人</h3>
-						<p>代码届的小学生，喜欢C++，技术很菜却乐在其中，是个平平常常的人，做着平平常常的事，渴望环游世界！</p>
+						<p>软件工程专业本硕毕业，是一个爱学习，知上进，善沟通，重细节，懂感恩的人！</p>
 					</div>
 					<!-- About  End-->
 					<!-- Education  Start-->
 					<div id="education" class="section mt-3 mt-md-5 p-3 p-md-5 rounded">
 						<h3 class="mb-2 text-uppercase">教育经历</h3>
 						<div class="row mt-4 mb-2">
-							<div class="col-8"> <span class="tiny-super font-weight-bold">Master Of Software Engineering</span> <span class="tiny-super d-block">SCUT</span> </div>
-							<div class="col-4 text-right"> <span class="tiny-super">2018 - Present</span> </div>
+							<div class="col-8"> <span class="tiny-super font-weight-bold">软件工程专业&nbsp; &nbsp; &nbsp;全日制硕士</span> <span class="tiny-super d-block">华南理工大学(SCUT)</span> </div>
+							<div class="col-4 text-right"> <span class="tiny-super">2018 - 2022</span> </div>
 						</div>
 						<div class="row mt-4 mb-2">
-							<div class="col-8"> <span class="tiny-super font-weight-bold">Bachelor Of Software Engineering</span> <span class="tiny-super d-block">SWJTU</span> </div>
+							<div class="col-8"> <span class="tiny-super font-weight-bold">软件工程专业&nbsp; &nbsp; &nbsp;全日制学士</span> <span class="tiny-super d-block">西南交通大学(SWJTU)</span> </div>
 							<div class="col-4 text-right"> <span class="tiny-super">2014 - 2018</span> </div>
 						</div>
 					</div>
@@ -113,11 +113,34 @@
 					<!-- Projects  Start-->
 					<div id="projects" class="section mt-3 mt-md-5 p-3 p-md-5 rounded">
 						<h3 class="mb-3 text-uppercase">项目经历</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>Apps - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>CRMs - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>Websites - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>eCom Apps - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
+						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p> -->
+						<p><strong>静态Web服务器</strong>
+							<ul>
+								<li>该项目使用Epoll边沿触发的非阻塞多路IO复用技术实现，采用Reactor并发模型，加快了请求的响应速度</li>
+								<li>使用多线程技术充分利用多核CPU,采用线程池机制提升系统性能</li>
+								<li>使用状态机解析HTTP请求，使用智能指针等RAII机制，更加安全</li>
+								<li>主线程只负责accept请求，并采用Round Robin方式分发请求，实现任务提交和执行的解耦</li>
+							</ul></p>
+							<strong>项目收获</strong>
+							<br><li>学习并熟悉了Linux下基于Socket的网络编程、Linux下的IO模型和IO多路复用技术以及多线程编程方法</li>
+						<hr color="white"/>
+						<p><strong> 轻量级JSON解析库 light-json </strong>
+							<br>light-json是一个基于C++11实现的跨平台轻量级JSON解析库
+							<ul>
+								<li>实现了符合JSON标准的解析器和生成器，支持标准的JSON库解析</li>
+								<li>借助动态数组实现模拟栈完成JSON字符串的递归下降解析，内存空间更紧凑</li>
+								<li>使用现代C++、STL,不依赖第三方库，轻量简洁</li>
+
+							</ul>
+							<strong>项目收获</strong>
+							<ul>
+								<li>熟悉了常用的数据结构和对字符串处理的相关函数</li>
+								<li>采用测试驱动开发模式，熟悉了单元测试的基本流程</li>
+								<li>了解了UTF-8字符集的编码原理以及接口与实现分离的设计思想</li>
+
+							</ul>
+						</p>
+		
 					</div>
 					<!-- Projects  End-->
 
@@ -151,21 +174,21 @@
 
 					<!-- Certifications  Start-->
 					<div id="certifications" class="section mt-3 mt-md-5 p-3 p-md-5 rounded">
-						<h3 class="mb-3 text-uppercase">获得证书</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>SAP - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>CCP - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>PAAS - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
-						<p><strong>HDPCD - </strong>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p>
+						<h3 class="mb-3 text-uppercase">专业技能</h3>
+						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p> -->
+						<p><strong>外语</strong><br>CET-6 级，能流畅阅读英文专业技术文档</p>
+						<p><strong>编程语言</strong><br>熟悉C++及STL，掌握Java和Python.</p>
+						<p><strong>专业理论</strong><br>熟悉操作系统、数据结构，了解计算机网络以及TCP/IP协议的相关知识，掌握Linux的基础命令.</p>
+						<!-- <p><strong>HDPCD - </strong><br>Ut accumsan turpis nec elit feugiat, et sodales ex pulvinar. Donec dolor massa, consequat eu interdum a, semper at lectus.</p> -->
 					</div>
 					<!-- Certifications  End-->
 					<!-- Skills  Start-->
-					<div id="skills" class="section mt-3 mt-md-5 p-3 p-md-5 rounded">
+					<!-- <div id="skills" class="section mt-3 mt-md-5 p-3 p-md-5 rounded">
 						<h3 class=" mb-3 text-uppercase">掌握技能</h3>
-						<div class="row">
-							<div class="col-12">
+						<div class="row"> -->
+							<!-- <div class="col-12">
 								<p>懂一点C++,Java,Python 熟悉Linux</p>
-							</div>
+							</div> -->
 							<!-- <div class="col-12 col-md-6">
 								<div class="progress mt-4">
 									<div class="progress-bar progress-bar-striped progress-bar-animated bg-progress" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">C++</div>
@@ -188,8 +211,8 @@
 									<div class="progress-bar progress-bar-striped progress-bar-animated bg-progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 90%">Go</div>
 								</div>
 							</div> -->
-						</div>
-					</div>
+						<!-- </div>
+					</div> -->
 					<!-- Skills  End-->
 				</main>
 			</div>

@@ -240,7 +240,7 @@
 <p><code>char *fgets(char *str, int count, FILE* stream);</code> 从给定的文件流中读取最多count - 1个字符并将其存储到str指向的字符数组中。当解析到换行符时就会停止，这时str会包含该换行符，或者当检测到EOF标记时也会停止。如果读取中没有发生错误，那么会在结尾写入一个空字符。</p>
 </li>
 <li>
-<p><code>int fputs(const char *str, FILE *stream);</code> 将<code>str</code>中每个非空字符写入输出流<code>stream</code>,就像一致重复地在执行<code>fgetc</code>. 结尾的空字符不会别写入</p>
+<p><code>int fputs(const char *str, FILE *stream);</code> 将<code>str</code>中每个非空字符写入输出流<code>stream</code>,就像一致重复地在执行<code>fputc</code>. 结尾的空字符不会别写入</p>
 </li>
 <li>
 <p><code>char *gets_s( char *str, rsize_t n ); / char *gets( char *str );</code>从<code>stdin</code>中读取最多<code>count - 1</code>个字符并将其存储到str指向的字符数组中 . 当解析到换行符或者EOF标记时停止，如果读取中没有发生错误，那么会在结尾写入一个空字符。 如果碰到换行符，则会直接丢弃，且不会被计算到写入的字符数量中</p>
@@ -740,7 +740,7 @@
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
