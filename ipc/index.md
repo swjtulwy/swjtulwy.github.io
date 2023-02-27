@@ -1337,7 +1337,7 @@ int main() {
 
 ## 信号量（Semaphore Array）
 
-## 套接字（Socke）
+## 套接字（Socket）
 
 ### 本地套接字
 

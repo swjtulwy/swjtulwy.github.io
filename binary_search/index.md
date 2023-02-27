@@ -17,7 +17,7 @@ Donald Knuth（高德纳）曾经说过二分法思路很简单，细节是魔�
 int binarySearch(int[] nums, int target) {
     int left = 0, right = ...;
 
-    while(...) {
+    while (...) {
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
             ...
@@ -116,7 +116,7 @@ int binarySearch(int[] nums, int target) {
 ```cpp
 int binarySearch(int[] nums, int target) {
     int left = 0, right = nums.length - 1;
-    while(left <= right) {
+    while (left <= right) {
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
             // 缩小右边搜索区间
@@ -154,7 +154,7 @@ int binarySearch(int[] nums, int target) {
 ```cpp
 int binarySearch(int[] nums, int target) {
     int left = 0, right = nums.length - 1;
-    while(left <= right) {
+    while (left <= right) {
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
             // 缩小左边搜索区间
@@ -179,12 +179,12 @@ int binarySearch(int[] nums, int target) {
 
 ### 搜索单个值
 
-返回`left `或者 `righ`, 因为此时`left == right`,其含义是`nums`种小于`target`的值数量，所以函数返回值的取值区间为`[0, num.length]`， 所以最后要做检查
+返回`left `或者 `right`, 因为此时`left == right`,其含义是`nums`中小于`target`的值数量，所以函数返回值的取值区间为`[0, num.length]`， 所以最后要做检查
 
 ```cpp
 int binarySearch(int[] nums, int target) {
     int left = 0, right = nums.length;
-    while(left < right) { // 注意
+    while (left < right) { // 注意
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
             return mid; 
@@ -220,7 +220,7 @@ int binarySearch(int[] nums, int target) {
 ```cpp
 int binarySearch(int[] nums, int target) {
     int left = 0, right = nums.length;
-    while(left < right) { 
+    while (left < right) { 
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
             right = mid; 
@@ -240,7 +240,7 @@ int binarySearch(int[] nums, int target) {
     // return -1;
 
     // 或者以下统一形式
-    return (left != nums.length && nums[left] == target) left : -1;
+    return (left != nums.length && nums[left] == target) ? left : -1;
 }
 ```
 
@@ -265,7 +265,7 @@ int binarySearch(int[] nums, int target) {
 ```cpp
 int binarySearch(int[] nums, int target) {
     int left = 0, right = nums.length;
-    while(left < right) { 
+    while (left < right) { 
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
             left = mid + 1; 

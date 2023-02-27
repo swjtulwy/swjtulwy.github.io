@@ -2,18 +2,24 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://swjtulwy.github.io/virtual_func/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://swjtulwy.github.io/posts/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://swjtulwy.github.io/tags/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://swjtulwy.github.io/tags/virtual-function/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://swjtulwy.github.io/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/categories/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/tags/commands/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/categories/linux/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/commands_in_linux/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/posts/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/tags/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/</loc><lastmod>2023-02-27T10:12:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/smart_pointer/</loc><lastmod>2023-02-26T08:46:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/tags/smartpoint/</loc><lastmod>2023-02-26T08:46:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://swjtulwy.github.io/virtual_func/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://swjtulwy.github.io/tags/virtual-function/</loc><lastmod>2023-02-06T08:31:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://swjtulwy.github.io/categories/algorithm/</loc><lastmod>2022-05-09T14:55:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://swjtulwy.github.io/tags/sort/</loc><lastmod>2022-05-09T14:55:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/sorts/</loc><lastmod>2022-05-09T14:55:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/c_and_cpp_io/</loc><lastmod>2022-05-06T17:56:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/tags/io/</loc><lastmod>2022-05-06T17:56:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/tags/cpp/</loc><lastmod>2022-04-29T20:10:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/constructor/</loc><lastmod>2022-04-29T20:10:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://swjtulwy.github.io/categories/algorithm/</loc><lastmod>2022-04-28T17:47:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://swjtulwy.github.io/categories/</loc><lastmod>2022-04-28T17:47:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/leetcode/</loc><lastmod>2022-04-28T17:47:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/tags/binary-tree/</loc><lastmod>2022-04-23T11:46:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://swjtulwy.github.io/binary_tree/</loc><lastmod>2022-04-23T11:46:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
