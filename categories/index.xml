@@ -1,7 +1,71 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Categories - 分类 - 我的全新 Hugo 网站</title>
-        <link>http://example.org/categories/</link>
-        <description>Categories - 分类 - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="http://example.org/categories/" rel="self" type="application/rss+xml" /></channel>
+        <title>Categories - 分类 - Weiyee&#39;s Blog</title>
+        <link>https://swjtulwy.github.io/categories/</link>
+        <description>Categories - 分类 - Weiyee&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
+            <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 11 Mar 2023 09:01:15 &#43;0800</lastBuildDate><atom:link href="https://swjtulwy.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>DesignPattern</title>
+    <link>https://swjtulwy.github.io/categories/designpattern/</link>
+    <pubDate>Sat, 11 Mar 2023 09:01:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/designpattern/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Algorithm</title>
+    <link>https://swjtulwy.github.io/categories/algorithm/</link>
+    <pubDate>Sat, 04 Mar 2023 10:57:49 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/algorithm/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Linux</title>
+    <link>https://swjtulwy.github.io/categories/linux/</link>
+    <pubDate>Mon, 27 Feb 2023 10:12:23 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/linux/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>tools</title>
+    <link>https://swjtulwy.github.io/categories/tools/</link>
+    <pubDate>Fri, 15 Apr 2022 16:16:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/tools/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Computer Network</title>
+    <link>https://swjtulwy.github.io/categories/computer-network/</link>
+    <pubDate>Fri, 07 Jan 2022 20:14:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/computer-network/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Operating System</title>
+    <link>https://swjtulwy.github.io/categories/operating-system/</link>
+    <pubDate>Mon, 12 Apr 2021 16:18:55 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/operating-system/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Math</title>
+    <link>https://swjtulwy.github.io/categories/math/</link>
+    <pubDate>Tue, 14 May 2019 15:49:45 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/math/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>C/C&#43;&#43;</title>
+    <link>https://swjtulwy.github.io/categories/c/c&#43;&#43;/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/c/c&#43;&#43;/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>文档</title>
+    <link>https://swjtulwy.github.io/categories/documentation/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/categories/documentation/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
 </rss>

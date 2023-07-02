@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="referrer" content="no-referrer">
+        <title>C&#43;&#43;中的日期与时间 - Weiyee&#39;s Blog</title><meta name="Description" content="记录个人学习的博客"><meta property="og:title" content="C&#43;&#43;中的日期与时间" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://swjtulwy.github.io/date_and_time/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-02T01:34:14+08:00" />
+<meta property="article:modified_time" content="2023-07-02T01:34:14+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
+
+<meta name="twitter:title" content="C&#43;&#43;中的日期与时间"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/blogging.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://swjtulwy.github.io/date_and_time/" /><link rel="prev" href="https://swjtulwy.github.io/singleton/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "C++中的日期与时间",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/swjtulwy.github.io\/date_and_time\/"
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "datetime","wordcount":  4122 ,
+        "url": "https:\/\/swjtulwy.github.io\/date_and_time\/","datePublished": "2023-07-02T01:34:14+08:00","dateModified": "2023-07-02T01:34:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Weiyee"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 📔 所有文章 </a><a class="menu-item" href="/tags/"> 🏷️ 标签 </a><a class="menu-item" href="/categories/"> 🗂️ 分类 </a><a class="menu-item" href="/mypage/"> 👨‍💻 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Weiyee&#39;s Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Weiyee&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">📔 所有文章</a><a class="menu-item" href="/tags/" title="">🏷️ 标签</a><a class="menu-item" href="/categories/" title="">🗂️ 分类</a><a class="menu-item" href="/mypage/" title="">👨‍💻 关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">C&#43;&#43;中的日期与时间</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-07-02">2023-07-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4122 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#时间的几种表示方法">时间的几种表示方法</a>
+      <ul>
+        <li><a href="#utc时间">UTC时间</a></li>
+        <li><a href="#本地时间">本地时间</a></li>
+        <li><a href="#纪元时间">纪元时间</a></li>
+        <li><a href="#时钟时间">时钟时间</a></li>
+        <li><a href="#cpu时间">CPU时间</a></li>
+      </ul>
+    </li>
+    <li><a href="#c风格api">C风格API</a>
+      <ul>
+        <li><a href="#c风格计算进程时间">C风格计算进程时间</a></li>
+        <li><a href="#utc时间与本地时间">UTC时间与本地时间</a></li>
+      </ul>
+    </li>
+    <li><a href="#c风格api-1">C++风格API</a>
+      <ul>
+        <li><a href="#时钟">时钟</a></li>
+        <li><a href="#时长">时长</a>
+          <ul>
+            <li><a href="#ratio">ratio</a></li>
+            <li><a href="#时长类型">时长类型</a></li>
+            <li><a href="#时长运算">时长运算</a></li>
+          </ul>
+        </li>
+        <li><a href="#时间点">时间点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="时间的几种表示方法">时间的几种表示方法</h2>
+<h3 id="utc时间">UTC时间</h3>
+<p>UTC又称作协调世界时(Coordinated Universal Time)，是最主要的时间标准，其以原子时秒长为基础，在时刻上尽量接近于格林威治天文台的标准时间</p>
+<p>协调世界时是世界上调节时钟和时间的主要时间标准，它与0度经线的平太阳时差不超过1秒。因此UTC时间加8就是北京标准时间(UTC+8)</p>
+<h3 id="本地时间">本地时间</h3>
+<p>本地时间包含了与当地时区相关的信息</p>
+<h3 id="纪元时间">纪元时间</h3>
+<p>纪元时间(Epoch time)又被称为Unix时间，它表示1970年1月1日00:00UTC以来所经理的秒数(不考虑闰秒)。</p>
+<p>这个是一个遗留问题，如果使用32位有符号数来存储的话，在2038年该值就会溢出。</p>
+<h3 id="时钟时间">时钟时间</h3>
+<p>从进程开始到结束，时钟所走过的时间，包括进程阻塞和等待的时间。</p>
+<h3 id="cpu时间">CPU时间</h3>
+<p>进程获得CPU资源执行的时间包括用户态CPU时间和内核态CPU时间。</p>
+<h2 id="c风格api">C风格API</h2>
+<p>在C语言中，时间相关的结构体和API都在time.h头文件中，C++为了兼容C语言，这个头文件以及相关的接口都保留了，只不过头文件变成了ctime。</p>
+<p>首先介绍下与时间相关的类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clock_t</td>
+<td>CPU时间，一般用于统计进程执行时间，开启多线程的时候会比实际时间要多</td>
+</tr>
+<tr>
+<td>size_t</td>
+<td>sizeof运算符返回的无符号整数类型</td>
+</tr>
+<tr>
+<td>time_t</td>
+<td>从纪元起的时间类型</td>
+</tr>
+<tr>
+<td>tm</td>
+<td>日历时间类型，一个结构体，包含年月日等信息</td>
+</tr>
+<tr>
+<td>timespec (C++17)</td>
+<td>以秒和纳秒表示的时间（C++17）</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>std::clock_t clock()</td>
+<td>返回自程序启动时起的原始处理器时钟时间</td>
+</tr>
+<tr>
+<td>std::time_t time(std::time_t* arg)</td>
+<td>返回自纪元起计的系统当前时间</td>
+</tr>
+<tr>
+<td>double difftime(std::time_t time_end, std::time_t time_beg)</td>
+<td>计算时间之间的差</td>
+</tr>
+<tr>
+<td>int timespec_get(std::timespec* ts, int base) (C++17)</td>
+<td>返回基于给定时间基底的日历时间（C++17）</td>
+</tr>
+<tr>
+<td>char* ctime(const std::time_t* time)</td>
+<td>转换 time_t 对象为文本表示</td>
+</tr>
+<tr>
+<td>char* asctime(const std::tm* time_ptr)</td>
+<td>转换 tm 对象为文本表示</td>
+</tr>
+<tr>
+<td>std::size_t strftime(char* str, std::size_t count, const char* format, const std::tm* time)</td>
+<td>转换 tm 对象到自定义的文本表示</td>
+</tr>
+<tr>
+<td>std::size_t wcsftime( wchar_t* str, std::size_t count, const wchar_t* format, const std::tm* time)</td>
+<td>转换 tm 对象为定制的宽字符串文本表示</td>
+</tr>
+<tr>
+<td>std::tm* gmtime(const std::time_t* time)</td>
+<td>将time_t转换成UTC表示的时间</td>
+</tr>
+<tr>
+<td>std::tm* localtime(const std::time_t *time)</td>
+<td>将time_t转换成本地时间</td>
+</tr>
+<tr>
+<td>std::time_t mktime(std::tm* time)</td>
+<td>将tm格式的时间转换成time_t表示的时间</td>
+</tr>
+</tbody>
+</table>
+<p>上述的类型与函数之间的基本关系如下图所示</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://article.biliimg.com/bfs/article/831e73e96b2f022aec51a97cc313a6fcdfb6e117.png@1e_1c.webp"
+        data-srcset="https://article.biliimg.com/bfs/article/831e73e96b2f022aec51a97cc313a6fcdfb6e117.png@1e_1c.webp, https://article.biliimg.com/bfs/article/831e73e96b2f022aec51a97cc313a6fcdfb6e117.png@1e_1c.webp 1.5x, https://article.biliimg.com/bfs/article/831e73e96b2f022aec51a97cc313a6fcdfb6e117.png@1e_1c.webp 2x"
+        data-sizes="auto"
+        alt="https://article.biliimg.com/bfs/article/831e73e96b2f022aec51a97cc313a6fcdfb6e117.png@1e_1c.webp"
+        title="https://article.biliimg.com/bfs/article/831e73e96b2f022aec51a97cc313a6fcdfb6e117.png@1e_1c.webp" /></p>
+<h3 id="c风格计算进程时间">C风格计算进程时间</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;ctime&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;cstdlib&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;threads.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iomanip&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">thr_data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">volatile</span> <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">d</span> <span class="o">+=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clock_t</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">clock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">time_t</span> <span class="n">start</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span> <span class="c1">// very low precision
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="nc">timeval</span> <span class="n">tv_begin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tv_begin</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timespec</span> <span class="n">ts_begin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">timespec_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ts_begin</span><span class="p">,</span> <span class="n">TIME_UTC</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thrd_t</span> <span class="n">thr1</span><span class="p">,</span> <span class="n">thr2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thrd_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thr1</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thrd_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thr2</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thrd_join</span><span class="p">(</span><span class="n">thr1</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thrd_join</span><span class="p">(</span><span class="n">thr1</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timespec</span> <span class="n">ts_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">timespec_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ts_end</span><span class="p">,</span> <span class="n">TIME_UTC</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">timeval</span> <span class="n">tv_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tv_end</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">time_t</span> <span class="n">end</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clock_t</span> <span class="n">post</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">clock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">duration</span> <span class="o">=</span> <span class="mf">1000.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">post</span> <span class="o">-</span> <span class="n">pre</span><span class="p">)</span> <span class="o">/</span> <span class="n">CLOCKS_PER_SEC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;CPU time used &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">duration</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; ms&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Wall time passed &#34;</span> <span class="o">&lt;&lt;</span> <span class="mf">1000.0</span> <span class="o">*</span> <span class="n">std</span><span class="o">::</span><span class="n">difftime</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; ms&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Wall time passed(POSIX API) &#34;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">tv_end</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000000</span> <span class="o">+</span> <span class="n">tv_end</span><span class="p">.</span><span class="n">tv_usec</span><span class="p">)</span> <span class="o">-</span> 
+</span></span><span class="line"><span class="cl">                                        <span class="p">(</span><span class="n">tv_begin</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000000</span> <span class="o">+</span> <span class="n">tv_begin</span><span class="p">.</span><span class="n">tv_usec</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; us&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Wall time passed(high precision) &#34;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ts_end</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000000000</span> <span class="o">+</span> <span class="n">ts_end</span><span class="p">.</span><span class="n">tv_nsec</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                                        <span class="o">-</span> <span class="p">(</span><span class="n">ts_begin</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000000000</span> <span class="o">+</span> <span class="n">ts_begin</span><span class="p">.</span><span class="n">tv_nsec</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; ns&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CPU time used 861.249 ms
+</span></span><span class="line"><span class="cl">Wall time passed 1000 ms
+</span></span><span class="line"><span class="cl">Wall time passed(POSIX API) 431405 us
+</span></span><span class="line"><span class="cl">Wall time passed(high precision) 431404002 ns
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到用time函数获取墙上时间是很不精确的，用timespec结构体可以获得纳秒级的精度，而timeval 结构体结合gettimeofday可以获得微秒级别精度，但是后者只适用于POSIX 接口。</p>
+<h3 id="utc时间与本地时间">UTC时间与本地时间</h3>
+<p>C风格的日期时间库中，gmtime将std::time_t类型的纪元时间转换为UTC标准时间，使用localtime则将纪元时间转换为本地时区的日历时间。日历时间用tm结构表示，结构体如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">tm</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_sec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_min</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_hour</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_mday</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_mon</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_year</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_wday</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_yday</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tm_isdst</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;ctime&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iomanip&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;locale&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">time_t</span> <span class="n">cur_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">tm</span><span class="o">*</span> <span class="n">cur_gmtime</span> <span class="o">=</span> <span class="n">gmtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cur_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">tm</span><span class="o">*</span> <span class="n">cur_localtime</span> <span class="o">=</span> <span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cur_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;put_time打印UTC时间: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">put_time</span><span class="p">(</span><span class="n">cur_gmtime</span><span class="p">,</span> <span class="s">&#34;%Y-%m-%d %H:%M:%S&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;asctime打印UTC时间: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">asctime</span><span class="p">(</span><span class="n">cur_gmtime</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">timestr</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">strftime</span><span class="p">(</span><span class="n">timestr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">timestr</span><span class="p">),</span> <span class="s">&#34;%Y-%m-%d %H:%M:%S&#34;</span><span class="p">,</span> <span class="n">cur_gmtime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;strftime打印UTC时间: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">timestr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;put_time打印local时间: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">put_time</span><span class="p">(</span><span class="n">cur_localtime</span><span class="p">,</span> <span class="s">&#34;%Y-%m-%d %H:%M:%S&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;asctime打印local时间: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">asctime</span><span class="p">(</span><span class="n">cur_localtime</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打印结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">put_time打印UTC时间: 2023-07-02 16:05:24
+</span></span><span class="line"><span class="cl">asctime打印UTC时间: Sun Jul  2 16:05:24 2023
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">strftime打印UTC时间: 2023-07-02 16:05:24
+</span></span><span class="line"><span class="cl">put_time打印local时间: 2023-07-02 16:05:24
+</span></span><span class="line"><span class="cl">asctime打印local时间: Sun Jul  2 16:05:24 2023
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意的是，如果我们手动打印tm结构体各个字段的话，tm_year是从1900年开始经历的年份，所以tm_year要加上1900，tm_mon的范围是[0, 11]，所以要加上1。</p>
+<h2 id="c风格api-1">C++风格API</h2>
+<p>C++11 引入了choro库，该库能够以各种精度处理时间。其定义了三种主要的时间概念：</p>
+<ul>
+<li>时钟</li>
+<li>时长</li>
+<li>时间点</li>
+</ul>
+<h3 id="时钟">时钟</h3>
+<p>C++11的chrono库主要包含了三种类型的时钟：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>system_clock</td>
+<td>来自系统范畴实时时钟的挂钟时间</td>
+</tr>
+<tr>
+<td>steady_clock</td>
+<td>决不会调整的单调时钟</td>
+</tr>
+<tr>
+<td>high_resolution_clock</td>
+<td>拥有可用的最短嘀嗒周期的时钟</td>
+</tr>
+</tbody>
+</table>
+<p>system_clock来源是系统时钟。然而在大多数系统上，系统时间是可以在任何时候被调节的。所以如果用来计算两个时间点的时间差，这并不是一个好的选择。</p>
+<p>steady_clock是一个单调时钟。此时钟的时间点无法减少，因为物理时间向前移动。因而steady_clock是度量间隔的最适宜的选择。</p>
+<p>high_resolution_clock表示实现提供的拥有最小计次周期的时钟。它可以是system_clock或steady_clock的别名，或者第三个独立时钟（尽量避免使用）。</p>
+<p>对于这三个时钟类，有着以下共同的成员：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>now()</td>
+<td>静态成员函数，返回当前时间，类型为clock::time_point</td>
+</tr>
+<tr>
+<td>time_point</td>
+<td>成员类型，当前时钟的时间点类型。</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>成员类型，时钟的时长类型。</td>
+</tr>
+<tr>
+<td>rep</td>
+<td>成员类型，时钟的tick类型，等同于clock::duration::rep</td>
+</tr>
+<tr>
+<td>period</td>
+<td>成员类型，时钟的单位，等同于clock::duration::period</td>
+</tr>
+<tr>
+<td>is_steady</td>
+<td>静态成员类型：是否是稳定时钟，对于steady_clock来说该值一定是true</td>
+</tr>
+</tbody>
+</table>
+<p>每个时钟类都有着一个静态成员函数<code>now()</code>来获取当前时间。该函数的返回类型则是由该时钟类的time_point描述，例如<code>std::chrono::time_point&lt;std::chrono::system_clock&gt;</code>或者<code>std::chrono::time_point&lt;std::chrono::steady_clock&gt;</code>。我们可以使用auto关键字来简写。</p>
+<p>阅读文档，我们不难发现system_clock有着与另外两个clock所不具有的特性：它是唯一有能力映射其时间点到C-Style时间的C++时钟。system_clock提供了两个静态成员函数来与std::time_t进行互相转换：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>to_time_t</td>
+<td>转换系统时钟时间点为 std::time_t</td>
+</tr>
+<tr>
+<td>from_time_t</td>
+<td>转换 std::time_t 到系统时钟时间点</td>
+</tr>
+</tbody>
+</table>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://article.biliimg.com/bfs/article/4ad7d17274c96f8dac90a5d7b15e6baa89475356.png@1e_1c.webp"
+        data-srcset="https://article.biliimg.com/bfs/article/4ad7d17274c96f8dac90a5d7b15e6baa89475356.png@1e_1c.webp, https://article.biliimg.com/bfs/article/4ad7d17274c96f8dac90a5d7b15e6baa89475356.png@1e_1c.webp 1.5x, https://article.biliimg.com/bfs/article/4ad7d17274c96f8dac90a5d7b15e6baa89475356.png@1e_1c.webp 2x"
+        data-sizes="auto"
+        alt="https://article.biliimg.com/bfs/article/4ad7d17274c96f8dac90a5d7b15e6baa89475356.png@1e_1c.webp"
+        title="https://article.biliimg.com/bfs/article/4ad7d17274c96f8dac90a5d7b15e6baa89475356.png@1e_1c.webp" /></p>
+<h3 id="时长">时长</h3>
+<p>人类对精度的要求永无止境。C-Style日期时间库为了提供对纳秒的精度，增加了timespec类型及相关的函数。那如果以后对更高精度的需求越来越高，C++标准库还要不断增加更多的类型和配套函数吗？这明显是一个不合理的设计。因而C++标准提出了一个新的解决思路，而这个思路涉及到了C++11引入的一个新的头文件和类型：ratio。</p>
+<h4 id="ratio">ratio</h4>
+<p><code>std::ratio</code>定义在<code>&lt;ratio&gt;</code>文件中，提供了编译期的比例计算功能。</p>
+<p><code>std::ratio</code>的定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">intmax_t</span> <span class="n">Num</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">intmax_t</span> <span class="n">Denom</span> <span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">ratio</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>类成员Num即为分子，类成员Denom即为分母。我们可以直接通过调用类成员来获取相关值。</p>
+<p><code>&lt;ratio&gt;</code>头文件还包含了：ratio_add，ratio_subtract，ratio_multiply，ratio_divide来完成分数的加减乘除四则运算。</p>
+<p>例如，想要计算 5 / 7 + 59 / 1023  ，我们可以这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ratio_add</span><span class="o">&lt;</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">ratio</span><span class="o">&lt;</span><span class="mi">59</span><span class="p">,</span> <span class="mi">1023</span><span class="o">&gt;&gt;</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="p">((</span><span class="kt">double</span><span class="p">)</span> <span class="n">result</span><span class="p">.</span><span class="n">num</span><span class="p">)</span> <span class="o">/</span> <span class="n">result</span><span class="p">.</span><span class="n">den</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">.</span><span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;/&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">.</span><span class="n">den</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; = &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于编译期有理数算数的相关内容，可以在这篇文档中找到更多信息：</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//zh.cppreference.com/w/cpp/numeric/ratio" target="_blank" rel="noopener noreffer">编译时有理数算术 - cppreference.comzh.cppreference.com/w/cpp/numeric/ratio</a></p>
+<p>有了ratio之后，结合<code>std::chrono::duration</code>，我们便可以表示任意精度的值了。</p>
+<p>例如，相对于秒来说，毫秒是 1 / 1,000 ，微秒是 1 / 1,000,000 ，纳秒是 1 / 1,000,000,000 。通过ratio就可以这样表达：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="o">&gt;</span>       <span class="n">milliseconds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000000</span><span class="o">&gt;</span>    <span class="n">microseconds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000000000</span><span class="o">&gt;</span> <span class="n">nanoseconds</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="时长类型">时长类型</h4>
+<p>类模板 std::chrono::duration 表示时间间隔。有了ratio之后，表达时长就很方便了，下面是chrono库中提供的很常用的几个时长单位：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>std::chrono::nanoseconds</td>
+<td>duration&lt;至少 64 位的有符号整数类型, std::nano&gt;</td>
+</tr>
+<tr>
+<td>std::chrono::microseconds</td>
+<td>duration&lt;至少 55 位的有符号整数类型, std::micro&gt;</td>
+</tr>
+<tr>
+<td>std::chrono::milliseconds</td>
+<td>duration&lt;至少 45 位的有符号整数类型, std::milli&gt;</td>
+</tr>
+<tr>
+<td>std::chrono::seconds</td>
+<td>duration&lt;至少 35 位的有符号整数类型&gt;</td>
+</tr>
+<tr>
+<td>std::chrono::minutes</td>
+<td>duration&lt;至少 29 位的有符号整数类型, std::ratio&lt;60&raquo;</td>
+</tr>
+<tr>
+<td>std::chrono::hours</td>
+<td>duration&lt;至少 23 位的有符号整数类型, std::ratio&lt;3600&raquo;</td>
+</tr>
+</tbody>
+</table>
+<p>我们可以调用duration类的<code>count()</code>成员函数来获取具体数值。</p>
+<h4 id="时长运算">时长运算</h4>
+<p>时长运算可以直接使用“+”或“-”相加相减。chrono库也提供了几个常用的函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>duration_cast</td>
+<td>进行时长的转换</td>
+</tr>
+<tr>
+<td>floor (C++17)</td>
+<td>以向下取整的方式，将一个时长转换为另一个时长</td>
+</tr>
+<tr>
+<td>ceil (C++17)</td>
+<td>以向上取整的方式，将一个时长转换为另一个时长</td>
+</tr>
+<tr>
+<td>round (C++17)</td>
+<td>转换时长到另一个时长，就近取整，偶数优先</td>
+</tr>
+<tr>
+<td>abs (C++17)</td>
+<td>获取时长的绝对值</td>
+</tr>
+</tbody>
+</table>
+<p>例如：想要知道2个小时零5分钟一共是多少秒，可以这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">chrono</span><span class="o">::</span><span class="n">hours</span> <span class="n">two_hours</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">chrono</span><span class="o">::</span><span class="n">minutes</span> <span class="n">five_minutes</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">two_hours</span> <span class="o">+</span> <span class="n">five_minutes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">seconds</span> <span class="o">=</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">duration</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;02:05 is &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">seconds</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; seconds&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们可以得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">02:05 is 7500 seconds
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从C++14开始，你甚至可以用字面值来描述常见的时长。这包括：</p>
+<ul>
+<li><code>h</code>表示小时</li>
+<li><code>min</code>表示分钟</li>
+<li><code>s</code>表示秒</li>
+<li><code>ms</code>表示毫秒</li>
+<li><code>us</code>表示微妙</li>
+<li><code>ns</code>表示纳秒</li>
+</ul>
+<p>这些字面值位于<code>std::chrono_literals</code>命名空间下。于是，可以这样表达2个小时以及5分钟：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono_literals</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">two_hours</span> <span class="o">=</span> <span class="mi">2</span><span class="n">h</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">five_minutes</span> <span class="o">=</span> <span class="mi">5</span><span class="n">min</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="时间点">时间点</h3>
+<p>时钟的now函数返回的值就是一个时间点，时间点包含了时钟和时长两个信息。</p>
+<p>类模板<code>std::chrono::time_point</code>表示时间中的一个点，定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span><span class="k">class</span> <span class="nc">Duration</span> <span class="o">=</span> <span class="k">typename</span> <span class="n">Clock</span><span class="o">::</span><span class="n">duration</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">time_point</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>与我们的常识一致，时间点具有加法和减法操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">时间点 + 时长 = 时间点
+</span></span><span class="line"><span class="cl">时间点 - 时间点 = 时长
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>因而我们可以通过两个时间点相减来计算一个时间间隔，示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100000000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">+=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">end</span> <span class="o">=</span> <span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">time_diff</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">time_diff</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Operation cost : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">duration</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;ms&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>两个时间点也存在着比较操作，用于判断一个时间点在另外一个时间点之前还是之后，<code>std::chrono::time_point</code>重载了<code>==</code>，<code>!=</code>，<code>&lt;</code>，<code>&lt;=</code>，<code>&gt;</code>，<code>&gt;=</code>操作符来实现比较操作。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-07-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/date_and_time/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://swjtulwy.github.io/date_and_time/" data-title="C&#43;&#43;中的日期与时间" data-hashtags="datetime"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://swjtulwy.github.io/date_and_time/" data-title="C&#43;&#43;中的日期与时间" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/datetime/">datetime</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/singleton/" class="prev" rel="prev" title="C&#43;&#43;中的单例模式"><i class="fas fa-angle-left fa-fw"></i>C&#43;&#43;中的单例模式</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

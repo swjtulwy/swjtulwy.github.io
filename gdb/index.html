@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/gdb/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-04-07T08:41:04+08:00" />
 <meta property="article:modified_time" content="2021-04-07T08:41:04+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -28,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/gdb\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "GDB, Compile","wordcount":  3609 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "GDB, Compile","wordcount":  3610 ,
         "url": "https:\/\/swjtulwy.github.io\/gdb\/","datePublished": "2021-04-07T08:41:04+08:00","dateModified": "2021-04-07T08:41:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,7 +104,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">GDB调试基础</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-07">2021-04-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3609 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-07">2021-04-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3610 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -196,44 +195,44 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// main.c:
-</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">extern</span> <span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
-
-<span class="k">struct</span> <span class="n">inout</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-    <span class="k">struct</span> <span class="n">inout</span> <span class="o">*</span> <span class="n">io</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inout</span> <span class="o">*</span> <span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">inout</span><span class="p">));</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">io</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Malloc failed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Wrong para!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="o">*</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-    <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Your enter: %d, result:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">,</span> <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">result</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="c1">// sum.c:
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// main.c:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">inout</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">inout</span> <span class="o">*</span> <span class="n">io</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inout</span> <span class="o">*</span> <span class="p">)</span> <span class="nf">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">inout</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">io</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Malloc failed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Wrong para!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="o">*</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Your enter: %d, result:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">,</span> <span class="n">io</span> <span class="o">-&gt;</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// sum.c:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后<code>gcc main.c sum.c -o main -g</code>, 得到main可执行文件， 输入<code>gdb main</code>可进入调试.</p>
 <p>下面介绍了gdb大部分功能，1.1 设置断点以及 1.3显示栈帧是常用功能；调试过程中可以需要1.6 单步执行，并且1.4 显示变量、1.5显示寄存器、1.8 监视点、1.9 改变变量的值。</p>
@@ -263,15 +262,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">(</span>gdb<span class="o">)</span> b <span class="m">13</span>
-Breakpoint <span class="m">1</span> at 0x11aa: file main.c, line 13.
-<span class="o">(</span>gdb<span class="o">)</span> b sum.c:2
-Breakpoint <span class="m">2</span> at 0x123d: file sum.c, line 2.
-<span class="o">(</span>gdb<span class="o">)</span> info b
-Num     Type           Disp Enb Address            What
-<span class="m">1</span>       breakpoint     keep y   0x00000000000011aa in main at main.c:13
-<span class="m">2</span>       breakpoint     keep y   0x000000000000123d in sum at sum.c:2
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> b <span class="m">13</span>
+</span></span><span class="line"><span class="cl">Breakpoint <span class="m">1</span> at 0x11aa: file main.c, line 13.
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> b sum.c:2
+</span></span><span class="line"><span class="cl">Breakpoint <span class="m">2</span> at 0x123d: file sum.c, line 2.
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> info b
+</span></span><span class="line"><span class="cl">Num     Type           Disp Enb Address            What
+</span></span><span class="line"><span class="cl"><span class="m">1</span>       breakpoint     keep y   0x00000000000011aa in main at main.c:13
+</span></span><span class="line"><span class="cl"><span class="m">2</span>       breakpoint     keep y   0x000000000000123d in sum at sum.c:2
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>删除断点通过命令包括：</p>
 <blockquote>
@@ -331,30 +330,30 @@ Num     Type           Disp Enb Address            What
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">int</span> <span class="n">result</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">square</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span> <span class="o">+=</span> <span class="nf">square</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>比如需要对如上程序square参数i为5的时候断点，并在此时打印栈、局部变量以及total的值</p>
 <p>编写gdb.init如下：</p>
@@ -372,17 +371,17 @@ Num     Type           Disp Enb Address            What
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">set</span> <span class="n">logging</span> <span class="n">on</span> <span class="n">gdb</span><span class="p">.</span><span class="n">log</span>
-
-
-<span class="n">b</span> <span class="n">square</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span>
-<span class="n">commands</span>
-  <span class="n">bt</span> <span class="n">full</span>
-  <span class="n">i</span> <span class="n">locals</span>
-  <span class="n">p</span> <span class="n">total</span>
-  <span class="n">print</span> <span class="s">&#34;Hit break when i == 5&#34;</span>
-<span class="n">end</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">set</span> <span class="n">logging</span> <span class="n">on</span> <span class="n">gdb</span><span class="p">.</span><span class="n">log</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="n">square</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">commands</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bt</span> <span class="n">full</span>
+</span></span><span class="line"><span class="cl">  <span class="n">i</span> <span class="n">locals</span>
+</span></span><span class="line"><span class="cl">  <span class="n">p</span> <span class="n">total</span>
+</span></span><span class="line"><span class="cl">  <span class="n">print</span> <span class="s">&#34;Hit break when i == 5&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">end</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在gdb shell中<code>source gdb.init</code>，然后r执行命令，结果如下：</p>
 <div class="highlight"><div class="chroma">
@@ -403,21 +402,21 @@ Num     Type           Disp Enb Address            What
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) source gdb.init 
-Breakpoint 1 at 0x1129: file commands.c, line 6.
-(gdb) r
-Starting program: /home/lwy/workspace/gdbtest/commands 
-
-Breakpoint 1, square (i=5) at commands.c:6
-6       {
-#0  square (i=5) at commands.c:6
-        result = 25
-#1  0x000055555555516f in main (argc=1, argv=0x7fffffffe048) at commands.c:20
-        i = 6
-result = 25
-$1 = 55
-$2 = &#34;Hit break when i == 5&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) source gdb.init 
+</span></span><span class="line"><span class="cl">Breakpoint 1 at 0x1129: file commands.c, line 6.
+</span></span><span class="line"><span class="cl">(gdb) r
+</span></span><span class="line"><span class="cl">Starting program: /home/lwy/workspace/gdbtest/commands 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Breakpoint 1, square (i=5) at commands.c:6
+</span></span><span class="line"><span class="cl">6       {
+</span></span><span class="line"><span class="cl">#0  square (i=5) at commands.c:6
+</span></span><span class="line"><span class="cl">        result = 25
+</span></span><span class="line"><span class="cl">#1  0x000055555555516f in main (argc=1, argv=0x7fffffffe048) at commands.c:20
+</span></span><span class="line"><span class="cl">        i = 6
+</span></span><span class="line"><span class="cl">result = 25
+</span></span><span class="line"><span class="cl">$1 = 55
+</span></span><span class="line"><span class="cl">$2 = &#34;Hit break when i == 5&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看出断点在i==5的时候断住了，并且此时打印了正确的值。</p>
 <h3 id="运行">运行</h3>
@@ -430,11 +429,11 @@ $2 = &#34;Hit break when i == 5&#34;
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) run 9
-Starting program: /home/lwy/workspace/gdbtest/main 9
-Your enter: 9, result:45
-[Inferior 1 (process 12362) exited normally]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) run 9
+</span></span><span class="line"><span class="cl">Starting program: /home/lwy/workspace/gdbtest/main 9
+</span></span><span class="line"><span class="cl">Your enter: 9, result:45
+</span></span><span class="line"><span class="cl">[Inferior 1 (process 12362) exited normally]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果需要断点在main()处，直接执行<code>start</code>就可以。</p>
 <div class="highlight"><div class="chroma">
@@ -446,12 +445,12 @@ Your enter: 9, result:45
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) start
-Temporary breakpoint 1 at 0x555555555189: file main.c, line 11.
-Starting program: /home/lwy/workspace/gdbtest/main 9
-
-Temporary breakpoint 1, main (argc=21845, argv=0x0) at main.c:11
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) start
+</span></span><span class="line"><span class="cl">Temporary breakpoint 1 at 0x555555555189: file main.c, line 11.
+</span></span><span class="line"><span class="cl">Starting program: /home/lwy/workspace/gdbtest/main 9
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Temporary breakpoint 1, main (argc=21845, argv=0x0) at main.c:11
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="显示栈帧">显示栈帧*</h3>
 <p>如果遇到断点而暂停执行，或者<code>coredump</code>可以显示栈帧。</p>
@@ -474,21 +473,21 @@ Temporary breakpoint 1, main (argc=21845, argv=0x0) at main.c:11
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) r 9
-Starting program: /home/lwy/workspace/gdbtest/main 9
-
-Breakpoint 2, sum (value=9) at sum.c:3
-3           int i = 0;
-(gdb) bt
-#0  sum (value=9) at sum.c:3
-#1  0x0000555555555204 in main (argc=2, argv=0x7fffffffe048) at main.c:24
-(gdb) bt full
-#0  sum (value=9) at sum.c:3
-        result = 0
-        i = 32767
-#1  0x0000555555555204 in main (argc=2, argv=0x7fffffffe048) at main.c:24
-        io = 0x5555555592a0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) r 9
+</span></span><span class="line"><span class="cl">Starting program: /home/lwy/workspace/gdbtest/main 9
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Breakpoint 2, sum (value=9) at sum.c:3
+</span></span><span class="line"><span class="cl">3           int i = 0;
+</span></span><span class="line"><span class="cl">(gdb) bt
+</span></span><span class="line"><span class="cl">#0  sum (value=9) at sum.c:3
+</span></span><span class="line"><span class="cl">#1  0x0000555555555204 in main (argc=2, argv=0x7fffffffe048) at main.c:24
+</span></span><span class="line"><span class="cl">(gdb) bt full
+</span></span><span class="line"><span class="cl">#0  sum (value=9) at sum.c:3
+</span></span><span class="line"><span class="cl">        result = 0
+</span></span><span class="line"><span class="cl">        i = 32767
+</span></span><span class="line"><span class="cl">#1  0x0000555555555204 in main (argc=2, argv=0x7fffffffe048) at main.c:24
+</span></span><span class="line"><span class="cl">        io = 0x5555555592a0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>命令格式如下：</p>
 <blockquote>
@@ -536,32 +535,32 @@ Breakpoint 2, sum (value=9) at sum.c:3
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) i r
-rax            0x9                 9
-rbx            0x555555555270      93824992236144
-rcx            0x5555555592b0      93824992252592
-rdx            0x9                 9
-rsi            0x0                 0
-rdi            0x9                 9
-rbp            0x7fffffffdf20      0x7fffffffdf20
-rsp            0x7fffffffdf20      0x7fffffffdf20
-r8             0x5555555592a0      93824992252576
-r9             0x7ffff7dd1070      140737351848048
-r10            0x7ffff7fb9be0      140737353849824
-r11            0x7ffff7fb9be0      140737353849824
-r12            0x5555555550a0      93824992235680
-r13            0x7fffffffe040      140737488347200
-r14            0x0                 0
-r15            0x0                 0
-rip            0x55555555524b      0x55555555524b &lt;sum+25&gt;
-eflags         0x216               [ PF AF IF ]
-cs             0x33                51
-ss             0x2b                43
-ds             0x0                 0
-es             0x0                 0
-fs             0x0                 0
-gs             0x0                 0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) i r
+</span></span><span class="line"><span class="cl">rax            0x9                 9
+</span></span><span class="line"><span class="cl">rbx            0x555555555270      93824992236144
+</span></span><span class="line"><span class="cl">rcx            0x5555555592b0      93824992252592
+</span></span><span class="line"><span class="cl">rdx            0x9                 9
+</span></span><span class="line"><span class="cl">rsi            0x0                 0
+</span></span><span class="line"><span class="cl">rdi            0x9                 9
+</span></span><span class="line"><span class="cl">rbp            0x7fffffffdf20      0x7fffffffdf20
+</span></span><span class="line"><span class="cl">rsp            0x7fffffffdf20      0x7fffffffdf20
+</span></span><span class="line"><span class="cl">r8             0x5555555592a0      93824992252576
+</span></span><span class="line"><span class="cl">r9             0x7ffff7dd1070      140737351848048
+</span></span><span class="line"><span class="cl">r10            0x7ffff7fb9be0      140737353849824
+</span></span><span class="line"><span class="cl">r11            0x7ffff7fb9be0      140737353849824
+</span></span><span class="line"><span class="cl">r12            0x5555555550a0      93824992235680
+</span></span><span class="line"><span class="cl">r13            0x7fffffffe040      140737488347200
+</span></span><span class="line"><span class="cl">r14            0x0                 0
+</span></span><span class="line"><span class="cl">r15            0x0                 0
+</span></span><span class="line"><span class="cl">rip            0x55555555524b      0x55555555524b &lt;sum+25&gt;
+</span></span><span class="line"><span class="cl">eflags         0x216               [ PF AF IF ]
+</span></span><span class="line"><span class="cl">cs             0x33                51
+</span></span><span class="line"><span class="cl">ss             0x2b                43
+</span></span><span class="line"><span class="cl">ds             0x0                 0
+</span></span><span class="line"><span class="cl">es             0x0                 0
+</span></span><span class="line"><span class="cl">fs             0x0                 0
+</span></span><span class="line"><span class="cl">gs             0x0                 0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在寄存器名之前加$可以显示寄存器内容，</p>
 <blockquote>
@@ -576,11 +575,11 @@ gs             0x0                 0
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) p $ss
-$2 = 43
-(gdb) p/x $pc
-$3 = 0x55555555524b
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) p $ss
+</span></span><span class="line"><span class="cl">$2 = 43
+</span></span><span class="line"><span class="cl">(gdb) p/x $pc
+</span></span><span class="line"><span class="cl">$3 = 0x55555555524b
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>用x命令可以显示内容内容，<code>x/格式 地址</code>。</p>
 <blockquote>
@@ -608,22 +607,22 @@ $3 = 0x55555555524b
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) x $pc
-0x55555555524b &lt;sum+25&gt;:        0x00fc45c7
-(gdb) x/i $pc
-=&gt; 0x55555555524b &lt;sum+25&gt;:     movl   $0x0,-0x4(%rbp)
-(gdb) x/10i $pc
-=&gt; 0x55555555524b &lt;sum+25&gt;:     movl   $0x0,-0x4(%rbp)
-   0x555555555252 &lt;sum+32&gt;:     jmp    0x555555555261 &lt;sum+47&gt;
-   0x555555555254 &lt;sum+34&gt;:     mov    -0x4(%rbp),%eax
-   0x555555555257 &lt;sum+37&gt;:     add    $0x1,%eax
-   0x55555555525a &lt;sum+40&gt;:     add    %eax,-0x8(%rbp)
-   0x55555555525d &lt;sum+43&gt;:     addl   $0x1,-0x4(%rbp)
-   0x555555555261 &lt;sum+47&gt;:     mov    -0x4(%rbp),%eax
-   0x555555555264 &lt;sum+50&gt;:     cmp    -0x14(%rbp),%eax
-   0x555555555267 &lt;sum+53&gt;:     jl     0x555555555254 &lt;sum+34&gt;
-   0x555555555269 &lt;sum+55&gt;:     mov    -0x8(%rbp),%eax
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) x $pc
+</span></span><span class="line"><span class="cl">0x55555555524b &lt;sum+25&gt;:        0x00fc45c7
+</span></span><span class="line"><span class="cl">(gdb) x/i $pc
+</span></span><span class="line"><span class="cl">=&gt; 0x55555555524b &lt;sum+25&gt;:     movl   $0x0,-0x4(%rbp)
+</span></span><span class="line"><span class="cl">(gdb) x/10i $pc
+</span></span><span class="line"><span class="cl">=&gt; 0x55555555524b &lt;sum+25&gt;:     movl   $0x0,-0x4(%rbp)
+</span></span><span class="line"><span class="cl">   0x555555555252 &lt;sum+32&gt;:     jmp    0x555555555261 &lt;sum+47&gt;
+</span></span><span class="line"><span class="cl">   0x555555555254 &lt;sum+34&gt;:     mov    -0x4(%rbp),%eax
+</span></span><span class="line"><span class="cl">   0x555555555257 &lt;sum+37&gt;:     add    $0x1,%eax
+</span></span><span class="line"><span class="cl">   0x55555555525a &lt;sum+40&gt;:     add    %eax,-0x8(%rbp)
+</span></span><span class="line"><span class="cl">   0x55555555525d &lt;sum+43&gt;:     addl   $0x1,-0x4(%rbp)
+</span></span><span class="line"><span class="cl">   0x555555555261 &lt;sum+47&gt;:     mov    -0x4(%rbp),%eax
+</span></span><span class="line"><span class="cl">   0x555555555264 &lt;sum+50&gt;:     cmp    -0x14(%rbp),%eax
+</span></span><span class="line"><span class="cl">   0x555555555267 &lt;sum+53&gt;:     jl     0x555555555254 &lt;sum+34&gt;
+</span></span><span class="line"><span class="cl">   0x555555555269 &lt;sum+55&gt;:     mov    -0x8(%rbp),%eax
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>还可以通过<code>disassemble</code>指令来反汇编。</p>
 <blockquote>
@@ -660,15 +659,15 @@ $3 = 0x55555555524b
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) watch i
-Hardware watchpoint 3: i
-(gdb) i b
-Num     Type           Disp Enb Address            What
-2       breakpoint     keep y   0x0000555555555244 in sum at sum.c:3
-        stop only if value==9
-        breakpoint already hit 1 time
-3       hw watchpoint  keep y  
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) watch i
+</span></span><span class="line"><span class="cl">Hardware watchpoint 3: i
+</span></span><span class="line"><span class="cl">(gdb) i b
+</span></span><span class="line"><span class="cl">Num     Type           Disp Enb Address            What
+</span></span><span class="line"><span class="cl">2       breakpoint     keep y   0x0000555555555244 in sum at sum.c:3
+</span></span><span class="line"><span class="cl">        stop only if value==9
+</span></span><span class="line"><span class="cl">        breakpoint already hit 1 time
+</span></span><span class="line"><span class="cl">3       hw watchpoint  keep y  
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="改变变量的值">改变变量的值*</h3>
 <p>通过<code>set variable &lt;变量&gt;=&lt;表达式&gt;</code>来修改变量的值。</p>
@@ -703,32 +702,32 @@ Num     Type           Disp Enb Address            What
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) b main
-Breakpoint 4 at 0x555555555189: file main.c, line 11.
-(gdb) r 9
-Starting program: /home/lwy/workspace/gdbtest/main 9
-
-Breakpoint 4, main (argc=21845, argv=0x0) at main.c:11
-11      {
-(gdb) n
-12          struct inout * io = (struct inout * ) malloc(sizeof(struct inout));
-(gdb) n
-13          if (NULL == io) {
-(gdb) n
-18          if (argc != 2) {
-(gdb) n
-23          io -&gt; value = *argv[1] - &#39;0&#39;;
-(gdb) n
-24          io -&gt; result = sum(io -&gt; value);
-(gdb) print io-&gt;value
-$4 = 9
-(gdb) set variable io-&gt;value=10
-(gdb) n
-25          printf(&#34;Your enter: %d, result:%d\n&#34;, io -&gt; value, io -&gt; result);
-(gdb) n
-Your enter: 10, result:55
-26          return 0;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) b main
+</span></span><span class="line"><span class="cl">Breakpoint 4 at 0x555555555189: file main.c, line 11.
+</span></span><span class="line"><span class="cl">(gdb) r 9
+</span></span><span class="line"><span class="cl">Starting program: /home/lwy/workspace/gdbtest/main 9
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Breakpoint 4, main (argc=21845, argv=0x0) at main.c:11
+</span></span><span class="line"><span class="cl">11      {
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">12          struct inout * io = (struct inout * ) malloc(sizeof(struct inout));
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">13          if (NULL == io) {
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">18          if (argc != 2) {
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">23          io -&gt; value = *argv[1] - &#39;0&#39;;
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">24          io -&gt; result = sum(io -&gt; value);
+</span></span><span class="line"><span class="cl">(gdb) print io-&gt;value
+</span></span><span class="line"><span class="cl">$4 = 9
+</span></span><span class="line"><span class="cl">(gdb) set variable io-&gt;value=10
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">25          printf(&#34;Your enter: %d, result:%d\n&#34;, io -&gt; value, io -&gt; result);
+</span></span><span class="line"><span class="cl">(gdb) n
+</span></span><span class="line"><span class="cl">Your enter: 10, result:55
+</span></span><span class="line"><span class="cl">26          return 0;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>set $r0=xxx</code>：设置r0寄存器的值为xxx。</p>
 <h3 id="生成内核转储文件">生成内核转储文件*</h3>
@@ -751,20 +750,20 @@ Your enter: 10, result:55
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gdb) generate-core-file
-warning: target file /proc/14188/cmdline contained unexpected null characters
-Saved corefile core.14188 
-
-
-lwy@lwysLaptop:~/workspace/gdbtest$ gdb ./main ./core.14188 
-Type &#34;apropos word&#34; to search for commands related to &#34;word&#34;...
-Reading symbols from ./main...
-[New LWP 14188]
-Core was generated by `/home/lwy/workspace/gdbtest/main 9&#39;.
-Program terminated with signal SIGTRAP, Trace/breakpoint trap.
-#0  main (argc=2, argv=0x7fffffffe048) at main.c:26
-26          return 0;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(gdb) generate-core-file
+</span></span><span class="line"><span class="cl">warning: target file /proc/14188/cmdline contained unexpected null characters
+</span></span><span class="line"><span class="cl">Saved corefile core.14188 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">lwy@lwysLaptop:~/workspace/gdbtest$ gdb ./main ./core.14188 
+</span></span><span class="line"><span class="cl">Type &#34;apropos word&#34; to search for commands related to &#34;word&#34;...
+</span></span><span class="line"><span class="cl">Reading symbols from ./main...
+</span></span><span class="line"><span class="cl">[New LWP 14188]
+</span></span><span class="line"><span class="cl">Core was generated by `/home/lwy/workspace/gdbtest/main 9&#39;.
+</span></span><span class="line"><span class="cl">Program terminated with signal SIGTRAP, Trace/breakpoint trap.
+</span></span><span class="line"><span class="cl">#0  main (argc=2, argv=0x7fffffffe048) at main.c:26
+</span></span><span class="line"><span class="cl">26          return 0;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>另一命令<code>gcore</code>可以从命令行直接生成内核转储文件。</p>
 <blockquote>
@@ -841,7 +840,7 @@ Program terminated with signal SIGTRAP, Trace/breakpoint trap.
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

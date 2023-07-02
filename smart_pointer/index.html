@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/smart_pointer/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-10T08:46:11+08:00" />
 <meta property="article:modified_time" content="2023-02-26T08:46:11+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -28,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/smart_pointer\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "SmartPoint","wordcount":  6739 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "SmartPoint","wordcount":  6741 ,
         "url": "https:\/\/swjtulwy.github.io\/smart_pointer\/","datePublished": "2023-02-10T08:46:11+08:00","dateModified": "2023-02-26T08:46:11+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,7 +104,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">C&#43;&#43;智能指针</h1><h2 class="single-subtitle">原理、应用场景与最佳实践</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/c++/"><i class="far fa-folder fa-fw"></i>C/C++</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-10">2023-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6739 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-10">2023-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6741 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -191,18 +190,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">test_memory_leak</span><span class="p">(</span><span class="kt">bool</span> <span class="n">open</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">A</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">open</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 代码变复杂过程中，很可能漏了 delete(a);
-</span><span class="c1"></span>        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">delete</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_memory_leak</span><span class="p">(</span><span class="kt">bool</span> <span class="n">open</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">open</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 代码变复杂过程中，很可能漏了 delete(a);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="多线程下对象的析构问题">多线程下对象的析构问题</h3>
 <p>多线程遇上对象析构，是一个很难的问题，稍有不慎就会导致程序崩溃。因此在对于 C++开发者而言，经常会使用<strong>静态单例</strong>来使得对象常驻内存，避免析构带来的问题。这势必会造成内存泄露，当单例对象比较大，或者程序对内存非常敏感的时候，就必须面对这个问题了。</p>
@@ -285,80 +284,80 @@
 </span><span class="lnt">73
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 日志上报Class
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">ReportClass</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">ReportClass</span><span class="p">()</span> <span class="p">{}</span>
-    <span class="n">ReportClass</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-    <span class="n">ReportClass</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-    <span class="n">ReportClass</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-    <span class="n">ReportClass</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">mutex_</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">void</span> <span class="nf">addWorkThread</span><span class="p">();</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">pushEvent</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">event</span><span class="p">);</span>
-
-<span class="k">private</span><span class="o">:</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">workThread</span><span class="p">(</span><span class="n">ReportClass</span> <span class="o">*</span><span class="n">report</span><span class="p">);</span>
-
-<span class="k">private</span><span class="o">:</span>
-    <span class="k">static</span> <span class="n">ReportClass</span><span class="o">*</span> <span class="n">instance_</span><span class="p">;</span>
-    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">static_mutex_</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">static</span> <span class="n">ReportClass</span><span class="o">*</span> <span class="n">GetInstance</span><span class="p">();</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="nf">ReleaseInstance</span><span class="p">();</span>
-<span class="p">};</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">static_mutex_</span><span class="p">;</span>
-<span class="n">ReportClass</span><span class="o">*</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">instance_</span><span class="p">;</span>
-
-<span class="n">ReportClass</span><span class="o">*</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 单例简单实现，非本文重点
-</span><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">instance_</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">instance_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReportClass</span><span class="p">();</span>
-        <span class="n">instance_</span><span class="o">-&gt;</span><span class="n">addWorkThread</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">instance_</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">ReleaseInstance</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">instance_</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">delete</span> <span class="n">instance_</span><span class="p">;</span>
-        <span class="n">instance_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 轮询上报线程
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">workThread</span><span class="p">(</span><span class="n">ReportClass</span> <span class="o">*</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 线程运行过程中，report可能已经被销毁了
-</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">mutex_</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">--</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 创建任务线程
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">addWorkThread</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">new_thread</span><span class="p">(</span><span class="n">workThread</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-    <span class="n">new_thread</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// 外部调用
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">pushEvent</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex_</span><span class="p">);</span>
-    <span class="k">this</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 日志上报Class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">ReportClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReportClass</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReportClass</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReportClass</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReportClass</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReportClass</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ReportClass</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">addWorkThread</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">pushEvent</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="n">workThread</span><span class="p">(</span><span class="n">ReportClass</span> <span class="o">*</span><span class="n">report</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">ReportClass</span><span class="o">*</span> <span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">static_mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">ReportClass</span><span class="o">*</span> <span class="n">GetInstance</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="nf">ReleaseInstance</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">static_mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ReportClass</span><span class="o">*</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ReportClass</span><span class="o">*</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 单例简单实现，非本文重点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">instance_</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReportClass</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_</span><span class="o">-&gt;</span><span class="n">addWorkThread</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">ReleaseInstance</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">instance_</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">delete</span> <span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 轮询上报线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">workThread</span><span class="p">(</span><span class="n">ReportClass</span> <span class="o">*</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 线程运行过程中，report可能已经被销毁了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建任务线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">addWorkThread</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">new_thread</span><span class="p">(</span><span class="n">workThread</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">new_thread</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 外部调用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">pushEvent</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用 ReportClass 的代码如下：</p>
 <div class="highlight"><div class="chroma">
@@ -366,8 +365,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ReportClass</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pushEvent</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ReportClass</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pushEvent</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>但当这个外部对象（即<code>ReportClass</code>）析构时，对象创建的线程还在执行。此时线程引用的对象指针为野指针，程序必然会发生异常。</p>
 <p>解决这个问题的思路是在对象析构的时候，对线程进行<code>join</code>。</p>
@@ -421,53 +420,53 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 日志上报Class
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">ReportClass</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="c1">//...
-</span><span class="c1"></span>    <span class="o">~</span><span class="n">ReportClass</span><span class="p">();</span>
-
-<span class="k">private</span><span class="o">:</span>
-    <span class="c1">//...
-</span><span class="c1"></span>    <span class="kt">bool</span> <span class="n">stop_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="o">*</span><span class="n">work_thread_</span><span class="p">;</span>
-    <span class="c1">//...
-</span><span class="c1"></span><span class="p">};</span>
-
-<span class="c1">// 轮询上报线程
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">workThread</span><span class="p">(</span><span class="n">ReportClass</span> <span class="o">*</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">mutex_</span><span class="p">);</span>
-
-        <span class="c1">// 如果上报停止，不再轮询上报
-</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">stop_</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">--</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 创建任务线程
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">addWorkThread</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 保存线程指针，不再使用分离线程
-</span><span class="c1"></span>    <span class="n">work_thread_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span><span class="n">workThread</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">ReportClass</span><span class="o">::~</span><span class="n">ReportClass</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 通过join来停止内部线程
-</span><span class="c1"></span>    <span class="n">stop_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="n">work_thread_</span><span class="o">-&gt;</span><span class="n">join</span><span class="p">();</span>
-    <span class="k">delete</span> <span class="n">work_thread_</span><span class="p">;</span>
-    <span class="n">work_thread_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 日志上报Class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">ReportClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">~</span><span class="n">ReportClass</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">stop_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="o">*</span><span class="n">work_thread_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 轮询上报线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">workThread</span><span class="p">(</span><span class="n">ReportClass</span> <span class="o">*</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果上报停止，不再轮询上报
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">stop_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">report</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建任务线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">addWorkThread</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 保存线程指针，不再使用分离线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">work_thread_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span><span class="n">workThread</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ReportClass</span><span class="o">::~</span><span class="n">ReportClass</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 通过join来停止内部线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">stop_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">work_thread_</span><span class="o">-&gt;</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">work_thread_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">work_thread_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这种方式看起来没问题了，但是由于这个对象一般是被多个线程使用。假如某个线程想要释放这个对象，但另外一个线程还在使用这个对象，可能会出现野指针问题。就算释放对象的线程将对象释放后将指针置为<code>nullptr</code>，但仍然可能在多线程下在指针置空前被另外一个线程取得地址并使用。</p>
 <table>
@@ -507,10 +506,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a1</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
-<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">a1</span><span class="p">;</span><span class="n">v</span> <span class="c1">// 编译报错，不允许复制
-</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a3</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a1</span><span class="p">);</span> <span class="c1">// 可以转移所有权，所有权转义后a1不再拥有任何指针
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a1</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">a1</span><span class="p">;</span><span class="n">v</span> <span class="c1">// 编译报错，不允许复制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a3</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a1</span><span class="p">);</span> <span class="c1">// 可以转移所有权，所有权转义后a1不再拥有任何指针
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用场景如下：</p>
 <div class="highlight"><div class="chroma">
@@ -534,24 +533,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">do_something</span><span class="p">()</span> <span class="p">{}</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="nf">test_unique_ptr</span><span class="p">(</span><span class="kt">bool</span> <span class="n">open</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
-    <span class="n">a</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">open</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 不再需要手动释放内存
-</span><span class="c1"></span>        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 不再需要手动释放内存
-</span><span class="c1"></span>    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">do_something</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_unique_ptr</span><span class="p">(</span><span class="kt">bool</span> <span class="n">open</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">open</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 不再需要手动释放内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 不再需要手动释放内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>unique_ptr</code>本身拥有的方法主要包括：</p>
 <p>1、get() 获取其保存的原生指针，尽量不要使用<br>
@@ -572,17 +571,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a1</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
-<span class="n">A</span> <span class="o">*</span><span class="n">origin_a</span> <span class="o">=</span> <span class="n">a1</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="c1">// 尽量不要暴露原生指针
-</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// a1 拥有指针
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a2</span><span class="p">(</span><span class="n">a1</span><span class="p">.</span><span class="n">release</span><span class="p">());</span> <span class="c1">// 常见用法，转义拥有权
-</span><span class="c1"></span><span class="n">a2</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span> <span class="c1">// 释放并销毁原有对象，持有一个新对象
-</span><span class="c1"></span><span class="n">a2</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span> <span class="c1">// 释放并销毁原有对象，等同于下面的写法
-</span><span class="c1"></span><span class="n">a2</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// 释放并销毁原有对象
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a1</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="o">*</span><span class="n">origin_a</span> <span class="o">=</span> <span class="n">a1</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="c1">// 尽量不要暴露原生指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// a1 拥有指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a2</span><span class="p">(</span><span class="n">a1</span><span class="p">.</span><span class="n">release</span><span class="p">());</span> <span class="c1">// 常见用法，转义拥有权
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a2</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span> <span class="c1">// 释放并销毁原有对象，持有一个新对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a2</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span> <span class="c1">// 释放并销毁原有对象，等同于下面的写法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a2</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// 释放并销毁原有对象
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="shared_ptr">shared_ptr</h3>
 <p><code>shared_ptr</code>多个指针指向相同的对象。<code>shared_ptr</code>使用引用计数，每一个<code>shared_ptr</code>的拷贝都指向相同的内存。每使用一次，内部的引用计数加1，每析构一次，内部的引用计数减1，减为0时，自动删除所指向的堆内存。<code>shared_ptr</code>内部的<strong>引用计数是线程安全的</strong>，<strong>但是对象的读取需要加锁</strong>。</p>
@@ -616,20 +615,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">uptr</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>  <span class="c1">// 绑定动态对象
-</span><span class="c1"></span>        <span class="c1">//std::unique_ptr&lt;int&gt; uptr2 = uptr;  // 不能赋值
-</span><span class="c1"></span>        <span class="c1">//std::unique_ptr&lt;int&gt; uptr2(uptr);  // 不能拷贝
-</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">uptr2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">uptr</span><span class="p">);</span> <span class="c1">// 转换所有权
-</span><span class="c1"></span>        <span class="n">uptr2</span><span class="p">.</span><span class="n">release</span><span class="p">();</span> <span class="c1">// 释放所有权
-</span><span class="c1"></span>    <span class="p">}</span>
-    <span class="c1">// 超出uptr的作用域，内存释放
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">uptr</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>  <span class="c1">// 绑定动态对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//std::unique_ptr&lt;int&gt; uptr2 = uptr;  // 不能赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//std::unique_ptr&lt;int&gt; uptr2(uptr);  // 不能拷贝
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">uptr2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">uptr</span><span class="p">);</span> <span class="c1">// 转换所有权
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">uptr2</span><span class="p">.</span><span class="n">release</span><span class="p">();</span> <span class="c1">// 释放所有权
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 超出uptr的作用域，内存释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="weak_ptr">weak_ptr</h3>
 <p><code>weak_ptr</code>是为了配合<code>shared_ptr</code>而引入的一种智能指针，因为它不具有普通指针的行为，<strong>没有重载</strong><code>operator*</code>和<code>-&gt;</code>,它的最大作用在于协助<code>shared_ptr</code>工作，像旁观者那样观测资源的使用情况。<code>weak_ptr</code>可以从一个<code>shared_ptr</code>或者另一个<code>weak_ptr</code>对象构造，获得资源的观测权。但<code>weak_ptr</code>没有共享资源，它的构造<strong>不会引起指针引用计数的增加</strong>。使用<code>weak_ptr</code>的成员函数<code>use_count()</code>可以观测资源的引用计数，另一个成员函数<code>expired()</code>的功能等价于<code>use_count()==0</code>,但更快，表示被观测的资源(也就是<code>shared_ptr</code>的管理的资源)已经不复存在。<strong><code>weak_ptr</code>可以使用一个非常重要的成员函数<code>lock()</code></strong> 从被观测的<code>shared_ptr</code>获得一个可用的shared_ptr对象， 从而操作资源。但当<code>expired()==true</code>的时候，<code>lock()</code>函数将返回一个存储空指针的<code>shared_ptr</code>。</p>
@@ -641,9 +640,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">std::shared_ptr&lt;A&gt; a1(new A());
-std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">std::shared_ptr&lt;A&gt; a1(new A());
+</span></span><span class="line"><span class="cl">std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>weak_ptr</code>本身拥有的方法主要包括：</p>
 <p>1、<code>expired()</code> 判断所指向的原生指针是否被释放，如果被释放了返回 <code>true</code>，否则返回 <code>false</code><br>
@@ -668,21 +667,21 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a1</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
-<span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">weak_a1</span> <span class="o">=</span> <span class="n">a1</span><span class="p">;</span><span class="c1">//不增加引用计数
-</span><span class="c1"></span>
-<span class="k">if</span><span class="p">(</span><span class="n">weak_a1</span><span class="p">.</span><span class="n">expired</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// 如果为true，weak_a1对应的原生指针已经被释放了
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="kt">long</span> <span class="n">a1_use_count</span> <span class="o">=</span> <span class="n">weak_a1</span><span class="p">.</span><span class="n">use_count</span><span class="p">();</span> <span class="c1">// 引用计数数量
-</span><span class="c1"></span>
-<span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">shared_a</span> <span class="o">=</span> <span class="n">weak_a1</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// 此时可以通过shared_a进行原生指针的方法调用
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="n">weak_a1</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span><span class="c1">// 将weak_a1置空
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a1</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">weak_a1</span> <span class="o">=</span> <span class="n">a1</span><span class="p">;</span><span class="c1">//不增加引用计数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">weak_a1</span><span class="p">.</span><span class="n">expired</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果为true，weak_a1对应的原生指针已经被释放了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">a1_use_count</span> <span class="o">=</span> <span class="n">weak_a1</span><span class="p">.</span><span class="n">use_count</span><span class="p">();</span> <span class="c1">// 引用计数数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">shared_a</span> <span class="o">=</span> <span class="n">weak_a1</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 此时可以通过shared_a进行原生指针的方法调用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">weak_a1</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span><span class="c1">// 将weak_a1置空
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="智能指针最佳实践">智能指针最佳实践</h2>
 <h3 id="智能指针如何选择">智能指针如何选择</h3>
@@ -714,23 +713,23 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TestUnique</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">process1</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">a_</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="kt">void</span> <span class="nf">process2</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">a_</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="o">~</span><span class="n">TestUnique</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// 此处不再需要手动删除a_
-</span><span class="c1"></span>    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TestUnique</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">process1</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a_</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">process2</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a_</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">TestUnique</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 此处不再需要手动删除a_
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="2方法内部使用">2、方法内部使用</h5>
 <div class="highlight"><div class="chroma">
@@ -741,11 +740,11 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">test_unique_ptr</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
-    <span class="n">a</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_unique_ptr</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="k">new</span> <span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="shared_ptr-的使用场景及最佳实践">shared_ptr 的使用场景及最佳实践</h4>
 <p><code>shared_ptr</code>一般在需要多个执行同一个对象的指针使用。在我看来可以简单的理解：这个对象需要被多个 Class 同时使用的时候。</p>
@@ -777,31 +776,31 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">B</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">B</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a_</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">C</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">C</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a_</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">};</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span> <span class="n">b_</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span> <span class="n">c_</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">test_A_B_C</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="n">b_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="n">c_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">B</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">B</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a_</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a_</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span> <span class="n">b_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span> <span class="n">c_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_A_B_C</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在上面的代码中需要注意，我们使用<code>std::make_shared</code>代替<code>new</code>的方式创建<code>shared_ptr</code>。</p>
 <p>因为使用<code>new</code>的方式创建<code>shared_ptr</code>会导致出现两次内存申请，而<code>std::make_shared</code>在内部实现时只会申请一个内存。因此建议后续均使用<code>std::make_shared</code>。</p>
@@ -823,27 +822,27 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span> <span class="n">b_</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span> <span class="n">c_</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">do_something</span><span class="p">()</span> <span class="p">{}</span>
-
-    <span class="kt">void</span> <span class="nf">set_B_C</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;&amp;</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">b_</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-        <span class="n">c_</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span> <span class="n">b_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span> <span class="n">c_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">do_something</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">set_B_C</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;&amp;</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b_</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c_</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">a</span><span class="o">-&gt;</span><span class="n">set_B_C</span><span class="p">(</span><span class="n">b_</span><span class="p">,</span> <span class="n">c_</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">a</span><span class="o">-&gt;</span><span class="n">set_B_C</span><span class="p">(</span><span class="n">b_</span><span class="p">,</span> <span class="n">c_</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果想要在<code>A</code>内部将当前对象的指针共享给其他对象，需要怎么处理呢？</p>
 <div class="highlight"><div class="chroma">
@@ -868,25 +867,25 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">D</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a_</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-<span class="c1">// 上述代码省略
-</span><span class="c1"></span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">new_D</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// 错误方式，用this指针重新构造shared_ptr，将导致二次释放当前对象
-</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">this_shared_ptr1</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">d1</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">(</span><span class="n">this_shared_ptr1</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">D</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">a_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a_</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 上述代码省略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">new_D</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 错误方式，用this指针重新构造shared_ptr，将导致二次释放当前对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">this_shared_ptr1</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">d1</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">(</span><span class="n">this_shared_ptr1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果采用<code>this</code>指针重新构造<code>shared_ptr</code>是肯定不行的，因为重新创建的<code>shared_ptr</code>与当前对象的<code>shared_ptr</code>没有关系，没有增加当前对象的引用计数。这将导致任何一个<code>shared_ptr</code>计数为 0 时提前释放了对象，后续操作这个释放的对象都会导致程序异常。</p>
 <p>此时就需要引入<code>shared_from_this</code>。对象继承了<code>enable_shared_from_this</code>后，可以通过<code>shared_from_this()</code>获取当前对象的<code>shared_ptr</code>指针。</p>
@@ -907,20 +906,20 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">A</span><span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="c1">// 上述代码省略
-</span><span class="c1"></span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">new_D</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// 错误方式，用this指针重新构造shared_ptr，将导致二次释放当前对象
-</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">this_shared_ptr1</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">d1</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">(</span><span class="n">this_shared_ptr1</span><span class="p">));</span>
-        <span class="c1">// 正确方式
-</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">this_shared_ptr2</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">();</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">d2</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">(</span><span class="n">this_shared_ptr2</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span><span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 上述代码省略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">new_D</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 错误方式，用this指针重新构造shared_ptr，将导致二次释放当前对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">this_shared_ptr1</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">d1</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">(</span><span class="n">this_shared_ptr1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 正确方式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">this_shared_ptr2</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">d2</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">(</span><span class="n">this_shared_ptr2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="智能指针的错误使用方法">智能指针的错误使用方法</h3>
 <h4 id="1使用智能指针托管的对象尽量不要再使用原生指针">1、使用智能指针托管的对象，尽量不要再使用原生指针</h4>
@@ -936,14 +935,14 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer1</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">A</span><span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">unique_ptr_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-
-    <span class="c1">// 此处将导致对象的二次释放
-</span><span class="c1"></span>    <span class="k">delete</span> <span class="n">a</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer1</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span><span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">unique_ptr_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 此处将导致对象的二次释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">delete</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="2不要把一个原生指针交给多个智能指针管理">2、不要把一个原生指针交给多个智能指针管理</h4>
 <p>如果将一个原生指针交个多个智能指针，这些智能指针释放对象时会产生对象的多次销毁</p>
@@ -956,12 +955,12 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer2</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">A</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">unique_ptr_a1</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">unique_ptr_a2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="c1">// 此处将导致对象的二次释放
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer2</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">unique_ptr_a1</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">unique_ptr_a2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="c1">// 此处将导致对象的二次释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="3尽量不要使用-get获取原生指针">3、尽量不要使用 get()获取原生指针</h4>
 <div class="highlight"><div class="chroma">
@@ -977,16 +976,16 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer3</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">shared_ptr_a1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">();</span>
-
-    <span class="n">A</span> <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="n">shared_ptr_a1</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
-
-    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">shared_ptr_a2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="c1">// 此处将导致对象的二次释放
-</span><span class="c1"></span>
-    <span class="k">delete</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// 此处也将导致对象的二次释放
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer3</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">shared_ptr_a1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="n">shared_ptr_a1</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">shared_ptr_a2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="c1">// 此处将导致对象的二次释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// 此处也将导致对象的二次释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="4不要将-this-指针直接托管智能指针">4、不要将 this 指针直接托管智能指针</h4>
 <div class="highlight"><div class="chroma">
@@ -999,21 +998,21 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">E</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="nf">use_this</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">//错误方式，用this指针重新构造shared_ptr，将导致二次释放当前对象
-</span><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">this_shared_ptr1</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">use_this</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//错误方式，用this指针重新构造shared_ptr，将导致二次释放当前对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">this_shared_ptr1</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">();</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="5智能指针只能管理堆对象不能管理栈上对象">5、智能指针只能管理堆对象，不能管理栈上对象</h4>
 <p>栈上对象本身在出栈时就会被自动销毁，如果将其指针交给智能指针，会造成对象的二次销毁</p>
@@ -1025,11 +1024,11 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer5</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">int_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">int_unique_ptr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">int_num</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">incorrect_smart_pointer5</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">int_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">int_unique_ptr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">int_num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="解决多线程下对象析构的问题">解决多线程下对象析构的问题</h3>
 <p>有了智能指针之后，我们就可以使用智能指针解决多线程下的对象析构问题。</p>
@@ -1104,73 +1103,73 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">66
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 日志上报Class
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">ReportClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="c1">//...
-</span><span class="c1"></span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">workThread</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">weak_report_ptr</span><span class="p">);</span>
-
-<span class="k">private</span><span class="o">:</span>
-    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">instance_</span><span class="p">;</span>
-    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">static_mutex_</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">GetInstance</span><span class="p">();</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="nf">ReleaseInstance</span><span class="p">();</span>
-<span class="p">};</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">static_mutex_</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">instance_</span><span class="p">;</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 单例简单实现，非本文重点
-</span><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">instance_</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">instance_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">ReportClass</span><span class="p">());</span>
-        <span class="n">instance_</span><span class="o">-&gt;</span><span class="n">addWorkThread</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">instance_</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">ReleaseInstance</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">instance_</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">instance_</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 轮询上报线程
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">workThread</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">weak_report_ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">shared_report_ptr</span> <span class="o">=</span> <span class="n">weak_report_ptr</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">shared_report_ptr</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_report_ptr</span><span class="o">-&gt;</span><span class="n">mutex_</span><span class="p">);</span>
-
-        <span class="k">if</span><span class="p">(</span><span class="n">shared_report_ptr</span><span class="o">-&gt;</span><span class="n">count_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">shared_report_ptr</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">--</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 创建任务线程
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">addWorkThread</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">weak_report_ptr</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">work_thread</span><span class="p">(</span><span class="n">workThread</span><span class="p">,</span> <span class="n">weak_report_ptr</span><span class="p">);</span>
-    <span class="n">work_thread</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// 外部调用
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">pushEvent</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex_</span><span class="p">);</span>
-    <span class="k">this</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 日志上报Class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">ReportClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="n">workThread</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">weak_report_ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">static_mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">GetInstance</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="nf">ReleaseInstance</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">static_mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 单例简单实现，非本文重点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">instance_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">ReportClass</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_</span><span class="o">-&gt;</span><span class="n">addWorkThread</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">instance_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">ReleaseInstance</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">static_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">instance_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">instance_</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 轮询上报线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">workThread</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">weak_report_ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">shared_report_ptr</span> <span class="o">=</span> <span class="n">weak_report_ptr</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">shared_report_ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_report_ptr</span><span class="o">-&gt;</span><span class="n">mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">shared_report_ptr</span><span class="o">-&gt;</span><span class="n">count_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">shared_report_ptr</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建任务线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">addWorkThread</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">ReportClass</span><span class="o">&gt;</span> <span class="n">weak_report_ptr</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">work_thread</span><span class="p">(</span><span class="n">workThread</span><span class="p">,</span> <span class="n">weak_report_ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">work_thread</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 外部调用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ReportClass</span><span class="o">::</span><span class="n">pushEvent</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">count_</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>并且在多个线程使用的时候，由于采用<code>shared_ptr</code>管理，因此只要有<code>shared_ptr</code>持有对象，就不会销毁对象，因此不会出现多个线程使用时对象被析构的情况。只有该对象的所有<code>shared_ptr</code>都被销毁的时候，对象的内存才会被释放，保证的对象析构的安全。</p>
 <h2 id="智能指针设计与实现">智能指针设计与实现</h2>
@@ -1259,87 +1258,87 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </span><span class="lnt">80
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">SmartPointer</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">T</span><span class="o">*</span> <span class="n">_ptr</span><span class="p">;</span>
-    <span class="n">size_t</span><span class="o">*</span> <span class="n">_count</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">SmartPointer</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="o">:</span>
-            <span class="n">_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">_count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">size_t</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">_count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">SmartPointer</span><span class="p">(</span><span class="k">const</span> <span class="n">SmartPointer</span><span class="o">&amp;</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_ptr</span><span class="p">;</span>
-            <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_count</span><span class="p">;</span>
-            <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">SmartPointer</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">SmartPointer</span><span class="o">&amp;</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">==</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span>
-            <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">--</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">;</span>
-                <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_ptr</span><span class="p">;</span>
-        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_count</span><span class="p">;</span>
-        <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">assert</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">);</span>
-        <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">);</span>
-
-    <span class="p">}</span>
-
-    <span class="n">T</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">assert</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">);</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="o">~</span><span class="n">SmartPointer</span><span class="p">()</span> <span class="p">{</span>
-        <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">--</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">;</span>
-            <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">size_t</span> <span class="nf">use_count</span><span class="p">(){</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">{</span>
-        <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
-        <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp2</span><span class="p">(</span><span class="n">sp</span><span class="p">);</span>
-        <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp3</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span>
-        <span class="n">sp2</span> <span class="o">=</span> <span class="n">sp3</span><span class="p">;</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sp</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sp3</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="c1">//delete operator
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SmartPointer</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">T</span><span class="o">*</span> <span class="n">_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span><span class="o">*</span> <span class="n">_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SmartPointer</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">size_t</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">SmartPointer</span><span class="p">(</span><span class="k">const</span> <span class="n">SmartPointer</span><span class="o">&amp;</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">SmartPointer</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">SmartPointer</span><span class="o">&amp;</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">==</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">assert</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">T</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">assert</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">SmartPointer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">)</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">delete</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="nf">use_count</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp2</span><span class="p">(</span><span class="n">sp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp3</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sp2</span> <span class="o">=</span> <span class="n">sp3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sp</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sp3</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//delete operator
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="reference">Reference</h2>
 <p><a href="https://aijishu.com/a/1060000000286819" target="_blank" rel="noopener noreffer">C++ 智能指针最佳实践&amp;源码分析 - 极术社区 - 连接开发者与智能计算生态 (aijishu.com)</a></p>
@@ -1374,7 +1373,7 @@ std::weak_ptr&lt;A&gt; weak_a1 = a1; //不增加引用计数
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

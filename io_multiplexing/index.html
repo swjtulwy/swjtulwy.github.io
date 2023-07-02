@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/io_multiplexing/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-05-12T16:38:03+08:00" />
 <meta property="article:modified_time" content="2021-05-12T16:38:03+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -28,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/io_multiplexing\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "multiplexingIO","wordcount":  2250 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "multiplexingIO","wordcount":  2256 ,
         "url": "https:\/\/swjtulwy.github.io\/io_multiplexing\/","datePublished": "2021-05-12T16:38:03+08:00","dateModified": "2021-05-12T16:38:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,7 +104,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">IO多路复用</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/computer-network/"><i class="far fa-folder fa-fw"></i>Computer Network</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-05-12">2021-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2250 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-05-12">2021-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2256 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -202,44 +201,44 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// sizeof(fd_set) = 128     1024
-</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;sys/select.h&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="kt">int</span> <span class="nf">select</span><span class="p">(</span><span class="kt">int</span> <span class="n">nfds</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">readfds</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">writefds</span><span class="p">,</span>
-           <span class="n">fd_set</span> <span class="o">*</span><span class="n">exceptfds</span><span class="p">,</span> <span class="k">struct</span> <span class="n">timeval</span> <span class="o">*</span><span class="n">timeout</span><span class="p">);</span>
-    <span class="o">-</span> <span class="err">参数：</span>
-            <span class="o">-</span> <span class="nl">nfds</span> <span class="p">:</span> <span class="err">委托内核检测的最大文件描述符的值</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="o">-</span> <span class="nl">readfds</span> <span class="p">:</span> <span class="err">要检测的文件描述符的读的集合，委托内核检测哪些文件描述符的读的属性</span>
-                      <span class="o">-</span> <span class="err">一般检测读操作</span>
-                      <span class="o">-</span> <span class="err">对应的是对方发送过来的数据，因为读是被动的接收数据，检测的就是读缓冲</span>
-<span class="err">区</span>
-                      <span class="o">-</span> <span class="err">是一个传入传出参数</span>
-            <span class="o">-</span> <span class="nl">writefds</span> <span class="p">:</span> <span class="err">要检测的文件描述符的写的集合，委托内核检测哪些文件描述符的写的属性</span>
-                      <span class="o">-</span> <span class="err">委托内核检测写缓冲区是不是还可以写数据（不满的就可以写）</span>
-            <span class="o">-</span> <span class="nl">exceptfds</span> <span class="p">:</span> <span class="err">检测发生异常的文件描述符的集合</span>
-            <span class="o">-</span> <span class="nl">timeout</span> <span class="p">:</span> <span class="err">设置的超时时间</span>
-                <span class="k">struct</span> <span class="n">timeval</span> <span class="p">{</span>
-                    <span class="kt">long</span>    <span class="n">tv_sec</span><span class="p">;</span>         <span class="cm">/* seconds */</span>
-                    <span class="kt">long</span>    <span class="n">tv_usec</span><span class="p">;</span>        <span class="cm">/* microseconds */</span>
-                <span class="p">};</span>
-                <span class="o">-</span> <span class="nb">NULL</span> <span class="o">:</span> <span class="err">永久阻塞，直到检测到了文件描述符有变化</span>
-                <span class="o">-</span> <span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="err">，</span> <span class="err">不阻塞</span>
-                <span class="o">-</span> <span class="n">tv_sec</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">tv_usec</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="err">，</span> <span class="err">阻塞对应的时间</span>
-
-       <span class="o">-</span> <span class="err">返回值</span> <span class="o">:</span> 
-            <span class="o">-</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">失败</span>
-            <span class="o">-</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="err">检测的集合中有</span><span class="n">n个文件描述符发生了变化</span>
-<span class="c1">// 将参数文件描述符fd对应的标志位设置为0
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">FD_CLR</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
-<span class="c1">// 判断fd对应的标志位是0还是1， 返回值 ： fd对应的标志位的值，0，返回0， 1，返回1
-</span><span class="c1"></span><span class="kt">int</span>  <span class="nf">FD_ISSET</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
-<span class="c1">// 将参数文件描述符fd 对应的标志位，设置为1
-</span><span class="c1"></span><span class="kt">void</span> <span class="nf">FD_SET</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
-<span class="c1">// fd_set一共有1024 bit, 全部初始化为0
-</span><span class="c1"></span><span class="kt">void</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// sizeof(fd_set) = 128     1024
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/select.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">select</span><span class="p">(</span><span class="kt">int</span> <span class="n">nfds</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">readfds</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">writefds</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">           <span class="n">fd_set</span> <span class="o">*</span><span class="n">exceptfds</span><span class="p">,</span> <span class="k">struct</span> <span class="n">timeval</span> <span class="o">*</span><span class="n">timeout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">nfds</span> <span class="p">:</span> <span class="err">委托内核检测的最大文件描述符的值</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">readfds</span> <span class="p">:</span> <span class="err">要检测的文件描述符的读的集合，委托内核检测哪些文件描述符的读的属性</span>
+</span></span><span class="line"><span class="cl">                      <span class="o">-</span> <span class="err">一般检测读操作</span>
+</span></span><span class="line"><span class="cl">                      <span class="o">-</span> <span class="err">对应的是对方发送过来的数据，因为读是被动的接收数据，检测的就是读缓冲</span>
+</span></span><span class="line"><span class="cl"><span class="err">区</span>
+</span></span><span class="line"><span class="cl">                      <span class="o">-</span> <span class="err">是一个传入传出参数</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">writefds</span> <span class="p">:</span> <span class="err">要检测的文件描述符的写的集合，委托内核检测哪些文件描述符的写的属性</span>
+</span></span><span class="line"><span class="cl">                      <span class="o">-</span> <span class="err">委托内核检测写缓冲区是不是还可以写数据（不满的就可以写）</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">exceptfds</span> <span class="p">:</span> <span class="err">检测发生异常的文件描述符的集合</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">timeout</span> <span class="p">:</span> <span class="err">设置的超时时间</span>
+</span></span><span class="line"><span class="cl">                <span class="k">struct</span> <span class="n">timeval</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">long</span>    <span class="n">tv_sec</span><span class="p">;</span>         <span class="cm">/* seconds */</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">long</span>    <span class="n">tv_usec</span><span class="p">;</span>        <span class="cm">/* microseconds */</span>
+</span></span><span class="line"><span class="cl">                <span class="p">};</span>
+</span></span><span class="line"><span class="cl">                <span class="o">-</span> <span class="nb">NULL</span> <span class="o">:</span> <span class="err">永久阻塞，直到检测到了文件描述符有变化</span>
+</span></span><span class="line"><span class="cl">                <span class="o">-</span> <span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="err">，</span> <span class="err">不阻塞</span>
+</span></span><span class="line"><span class="cl">                <span class="o">-</span> <span class="n">tv_sec</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">tv_usec</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="err">，</span> <span class="err">阻塞对应的时间</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="o">-</span> <span class="err">返回值</span> <span class="o">:</span> 
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">失败</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="err">检测的集合中有</span><span class="n">n</span><span class="err">个文件描述符发生了变化</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将参数文件描述符fd对应的标志位设置为0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">FD_CLR</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断fd对应的标志位是0还是1， 返回值 ： fd对应的标志位的值，0，返回0， 1，返回1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span>  <span class="nf">FD_ISSET</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将参数文件描述符fd 对应的标志位，设置为1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">FD_SET</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// fd_set一共有1024 bit, 全部初始化为0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">FD_ZERO</span><span class="p">(</span><span class="n">fd_set</span> <span class="o">*</span><span class="n">set</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="poll">poll</h2>
 <img src="https://i0.hdslb.com/bfs/album/9604129e4271dcf6fbbb284e67122140f0bae2bf.png@1e_1c.webp" title="" alt="" data-align="center">
@@ -266,26 +265,26 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;poll.h&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="k">struct</span> <span class="n">pollfd</span> <span class="p">{</span>
-    <span class="kt">int</span>   <span class="n">fd</span><span class="p">;</span>         <span class="cm">/* 委托内核检测的文件描述符 */</span>
-    <span class="kt">short</span> <span class="n">events</span><span class="p">;</span>     <span class="cm">/* 委托内核检测文件描述符的什么事件 */</span>
-    <span class="kt">short</span> <span class="n">revents</span><span class="p">;</span>    <span class="cm">/* 文件描述符实际发生的事件 */</span>
-<span class="p">};</span>
-<span class="k">struct</span> <span class="n">pollfd</span> <span class="n">myfd</span><span class="p">;</span>
-<span class="n">myfd</span><span class="p">.</span><span class="n">fd</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-<span class="n">myfd</span><span class="p">.</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span> <span class="o">|</span> <span class="n">POLLOUT</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">poll</span><span class="p">(</span><span class="k">struct</span> <span class="n">pollfd</span> <span class="o">*</span><span class="n">fds</span><span class="p">,</span> <span class="n">nfds_t</span> <span class="n">nfds</span><span class="p">,</span> <span class="kt">int</span> <span class="n">timeout</span><span class="p">);</span>
-    <span class="o">-</span> <span class="err">参数：</span>
-        <span class="o">-</span> <span class="nl">fds</span> <span class="p">:</span> <span class="err">是一个</span><span class="k">struct</span> <span class="n">pollfd</span> <span class="err">结构体数组，这是一个需要检测的文件描述符的集合</span>
-        <span class="o">-</span> <span class="nl">nfds</span> <span class="p">:</span> <span class="err">这个是第一个参数数组中最后一个有效元素的下标</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="o">-</span> <span class="nl">timeout</span> <span class="p">:</span> <span class="err">阻塞时长</span>
-            <span class="mi">0</span> <span class="o">:</span> <span class="err">不阻塞</span>
-            <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">阻塞，当检测到需要检测的文件描述符有变化，解除阻塞</span>
-            <span class="o">&gt;</span><span class="mi">0</span> <span class="o">:</span> <span class="err">阻塞的时长</span>
-    <span class="o">-</span> <span class="err">返回值：</span>
-        <span class="o">&gt;</span><span class="mi">0</span><span class="err">（</span><span class="n">n</span><span class="err">）</span> <span class="o">:</span> <span class="err">成功</span><span class="p">,</span><span class="n">n表示检测到集合中有n个文件描述符发生变化</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;poll.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">struct</span> <span class="n">pollfd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span>   <span class="n">fd</span><span class="p">;</span>         <span class="cm">/* 委托内核检测的文件描述符 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">short</span> <span class="n">events</span><span class="p">;</span>     <span class="cm">/* 委托内核检测文件描述符的什么事件 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">short</span> <span class="n">revents</span><span class="p">;</span>    <span class="cm">/* 文件描述符实际发生的事件 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">pollfd</span> <span class="n">myfd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">myfd</span><span class="p">.</span><span class="n">fd</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">myfd</span><span class="p">.</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span> <span class="o">|</span> <span class="n">POLLOUT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">poll</span><span class="p">(</span><span class="k">struct</span> <span class="n">pollfd</span> <span class="o">*</span><span class="n">fds</span><span class="p">,</span> <span class="kt">nfds_t</span> <span class="n">nfds</span><span class="p">,</span> <span class="kt">int</span> <span class="n">timeout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">fds</span> <span class="p">:</span> <span class="err">是一个</span><span class="k">struct</span> <span class="n">pollfd</span> <span class="err">结构体数组，这是一个需要检测的文件描述符的集合</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">nfds</span> <span class="p">:</span> <span class="err">这个是第一个参数数组中最后一个有效元素的下标</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">timeout</span> <span class="p">:</span> <span class="err">阻塞时长</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">0</span> <span class="o">:</span> <span class="err">不阻塞</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">阻塞，当检测到需要检测的文件描述符有变化，解除阻塞</span>
+</span></span><span class="line"><span class="cl">            <span class="o">&gt;</span><span class="mi">0</span> <span class="o">:</span> <span class="err">阻塞的时长</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;</span><span class="mi">0</span><span class="err">（</span><span class="n">n</span><span class="err">）</span> <span class="o">:</span> <span class="err">成功</span><span class="p">,</span><span class="n">n</span><span class="err">表示检测到集合中有</span><span class="n">n</span><span class="err">个文件描述符发生变化</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="epoll">epoll</h2>
 <img src="https://i0.hdslb.com/bfs/album/65c3cf7499158a6bb894934fc4751bb362f95bec.png@1e_1c.webp" title="" alt="" data-align="center">
@@ -355,69 +354,69 @@
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/epoll.h&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="c1">// 创建一个新的epoll实例。在内核中创建了一个数据，这个数据中有两个比较重要的数据，一个是需要检
-</span><span class="c1"></span><span class="err">测的文件描述符的信息（红黑树），还有一个是就绪列表，存放检测到数据发送改变的文件描述符信息（双向</span>
-<span class="err">链表）。</span>
-<span class="kt">int</span> <span class="n">epoll_create</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">);</span>
-    <span class="o">-</span> <span class="err">参数：</span>
-        <span class="nl">size</span> <span class="p">:</span> <span class="err">目前没有意义了。随便写一个数，必须大于</span><span class="mi">0</span>
-    <span class="o">-</span> <span class="err">返回值：</span>
-        <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">失败</span>
-        <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">:</span> <span class="err">文件描述符，操作</span><span class="n">epoll实例的</span>
-
-<span class="k">typedef</span> <span class="k">union</span> <span class="n">epoll_data</span> <span class="p">{</span>
-    <span class="kt">void</span>        <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
-    <span class="kt">int</span>          <span class="n">fd</span><span class="p">;</span>
-    <span class="kt">uint32_t</span>     <span class="n">u32</span><span class="p">;</span>
-    <span class="kt">uint64_t</span>     <span class="n">u64</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">epoll_data_t</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="n">epoll_event</span> <span class="p">{</span>
-    <span class="kt">uint32_t</span>     <span class="n">events</span><span class="p">;</span>      <span class="cm">/* Epoll events */</span>
-    <span class="n">epoll_data_t</span> <span class="n">data</span><span class="p">;</span>        <span class="cm">/* User data variable */</span>
-<span class="p">};</span>
-
-<span class="err">常见的</span><span class="n">Epoll检测事件</span><span class="err">：</span>
-    <span class="o">-</span> <span class="n">EPOLLIN</span>
-    <span class="o">-</span> <span class="n">EPOLLOUT</span>
-    <span class="o">-</span> <span class="n">EPOLLERR</span>
-<span class="c1">// 对epoll实例进行管理：添加文件描述符信息，删除信息，修改信息
-</span><span class="c1"></span><span class="kt">int</span> <span class="n">epoll_ctl</span><span class="p">(</span><span class="kt">int</span> <span class="n">epfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">op</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">event</span><span class="p">);</span>
-    <span class="o">-</span> <span class="err">参数：</span>
-            <span class="o">-</span> <span class="nl">epfd</span> <span class="p">:</span> <span class="n">epoll实例对应的文件描述符</span>
-            <span class="o">-</span> <span class="nl">op</span> <span class="p">:</span> <span class="err">要进行什么操作</span>
-                <span class="nl">EPOLL_CTL_ADD</span><span class="p">:</span>  <span class="err">添加</span>
-                <span class="nl">EPOLL_CTL_MOD</span><span class="p">:</span>  <span class="err">修改</span>
-                <span class="nl">EPOLL_CTL_DEL</span><span class="p">:</span>  <span class="err">删除</span>
-            <span class="o">-</span> <span class="nl">fd</span> <span class="p">:</span> <span class="err">要检测的文件描述符</span>
-            <span class="o">-</span> <span class="nl">event</span> <span class="p">:</span> <span class="err">检测文件描述符什么事情</span>
-<span class="c1">// 检测函数                
-</span><span class="c1"></span><span class="kt">int</span> <span class="n">epoll_wait</span><span class="p">(</span><span class="kt">int</span> <span class="n">epfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">events</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxevents</span><span class="p">,</span> <span class="kt">int</span> 
-<span class="n">timeout</span><span class="p">);</span>
-    <span class="o">-</span> <span class="err">参数：</span>
-        <span class="o">-</span> <span class="nl">epfd</span> <span class="p">:</span> <span class="n">epoll实例对应的文件描述符</span>
-        <span class="o">-</span> <span class="nl">events</span> <span class="p">:</span> <span class="err">传出参数，保存了发送了变化的文件描述符的信息</span>
-        <span class="o">-</span> <span class="nl">maxevents</span> <span class="p">:</span> <span class="err">第二个参数结构体数组的大小</span>
-        <span class="o">-</span> <span class="nl">timeout</span> <span class="p">:</span> <span class="err">阻塞时间</span>
-            <span class="o">-</span> <span class="mi">0</span> <span class="o">:</span> <span class="err">不阻塞</span>
-            <span class="o">-</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">阻塞，直到检测到</span><span class="n">fd数据发生变化</span><span class="err">，解除阻塞</span>
-            <span class="o">-</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">:</span> <span class="err">阻塞的时长（毫秒）</span>
-
-    <span class="o">-</span> <span class="err">返回值：</span>
-         <span class="o">-</span> <span class="err">成功，返回发送变化的文件描述符的个数</span> <span class="o">&gt;</span> <span class="mi">0</span>
-         <span class="o">-</span> <span class="err">失败</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="k">struct</span> <span class="n">epoll_event</span> <span class="p">{</span>
-    <span class="kt">uint32_t</span>     <span class="n">events</span><span class="p">;</span>      <span class="cm">/* Epoll events */</span>
-    <span class="n">epoll_data_t</span> <span class="n">data</span><span class="p">;</span>        <span class="cm">/* User data variable */</span>
-<span class="p">};</span>
-<span class="err">常见的</span><span class="n">Epoll检测事件</span><span class="err">：</span>
-    <span class="o">-</span> <span class="n">EPOLLIN</span>
-    <span class="o">-</span> <span class="n">EPOLLOUT</span>
-    <span class="o">-</span> <span class="n">EPOLLERR</span>
-    <span class="o">-</span> <span class="n">EPOLLET</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/epoll.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// 创建一个新的epoll实例。在内核中创建了一个数据，这个数据中有两个比较重要的数据，一个是需要检
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">测的文件描述符的信息（红黑树），还有一个是就绪列表，存放检测到数据发送改变的文件描述符信息（双向</span>
+</span></span><span class="line"><span class="cl"><span class="err">链表）。</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">epoll_create</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">size</span> <span class="p">:</span> <span class="err">目前没有意义了。随便写一个数，必须大于</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">失败</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">:</span> <span class="err">文件描述符，操作</span><span class="n">epoll</span><span class="err">实例的</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">union</span> <span class="n">epoll_data</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span>        <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span>          <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span>     <span class="n">u32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span>     <span class="n">u64</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kt">epoll_data_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">epoll_event</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span>     <span class="n">events</span><span class="p">;</span>      <span class="cm">/* Epoll events */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">epoll_data_t</span> <span class="n">data</span><span class="p">;</span>        <span class="cm">/* User data variable */</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">常见的</span><span class="n">Epoll</span><span class="err">检测事件：</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLIN</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLOUT</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLERR</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 对epoll实例进行管理：添加文件描述符信息，删除信息，修改信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">epoll_ctl</span><span class="p">(</span><span class="kt">int</span> <span class="n">epfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">op</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">epfd</span> <span class="p">:</span> <span class="n">epoll</span><span class="err">实例对应的文件描述符</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">op</span> <span class="p">:</span> <span class="err">要进行什么操作</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">EPOLL_CTL_ADD</span><span class="p">:</span>  <span class="err">添加</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">EPOLL_CTL_MOD</span><span class="p">:</span>  <span class="err">修改</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">EPOLL_CTL_DEL</span><span class="p">:</span>  <span class="err">删除</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">fd</span> <span class="p">:</span> <span class="err">要检测的文件描述符</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="nl">event</span> <span class="p">:</span> <span class="err">检测文件描述符什么事情</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 检测函数                
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">epoll_wait</span><span class="p">(</span><span class="kt">int</span> <span class="n">epfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">events</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxevents</span><span class="p">,</span> <span class="kt">int</span> 
+</span></span><span class="line"><span class="cl"><span class="n">timeout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">epfd</span> <span class="p">:</span> <span class="n">epoll</span><span class="err">实例对应的文件描述符</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">events</span> <span class="p">:</span> <span class="err">传出参数，保存了发送了变化的文件描述符的信息</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">maxevents</span> <span class="p">:</span> <span class="err">第二个参数结构体数组的大小</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="nl">timeout</span> <span class="p">:</span> <span class="err">阻塞时间</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="mi">0</span> <span class="o">:</span> <span class="err">不阻塞</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="err">阻塞，直到检测到</span><span class="n">fd</span><span class="err">数据发生变化，解除阻塞</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">:</span> <span class="err">阻塞的时长（毫秒）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">         <span class="o">-</span> <span class="err">成功，返回发送变化的文件描述符的个数</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">         <span class="o">-</span> <span class="err">失败</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">epoll_event</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span>     <span class="n">events</span><span class="p">;</span>      <span class="cm">/* Epoll events */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">epoll_data_t</span> <span class="n">data</span><span class="p">;</span>        <span class="cm">/* User data variable */</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="err">常见的</span><span class="n">Epoll</span><span class="err">检测事件：</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLIN</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLOUT</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLERR</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">EPOLLET</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="lt模式level-triggerd">LT模式（Level Triggerd）</h3>
 <p>假设委托内核检测读事件 -&gt; 检测fd的读缓冲区</p>
@@ -467,7 +466,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

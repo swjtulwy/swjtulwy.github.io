@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/reliable_data_transfer/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-07T20:14:59+08:00" />
 <meta property="article:modified_time" content="2022-01-07T20:14:59+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -337,8 +336,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">netstat -n -p TCP <span class="p">|</span> grep SYN_RECV
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">netstat -n -p TCP <span class="p">|</span> grep SYN_RECV
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>常见的防御 SYN 攻击的方法有如下几种：</p>
 <ul>
@@ -404,12 +403,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat /proc/sys/net/ipv4/tcp_wmem
-
-<span class="m">4096</span>    <span class="m">87380</span>   <span class="m">4194304</span>
-
-// 4096表示缓冲区的最小大小，4194304表示缓冲区的最大大小，87380 表示默认值
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /proc/sys/net/ipv4/tcp_wmem
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">4096</span>    <span class="m">87380</span>   <span class="m">4194304</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 4096表示缓冲区的最小大小，4194304表示缓冲区的最大大小，87380 表示默认值
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>发送窗口的大小受TCP数据报中窗口大小的影响，TCP数据报中的窗口大小是接收端通知发送端其还可以接收多少数据，因此发送窗口根据接收的的窗口大小的值动态变化。需要明确的是，发送窗口只是发送缓存的一部分。</p>
 <p>接受缓存区也可以自动调整，在高并发的场景中可以降低默认的缓冲区大小，提高并发性。</p>
@@ -420,10 +419,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat /proc/sys/net/ipv4/tcp_rmem
-
-<span class="m">4096</span>    <span class="m">87380</span>   <span class="m">4194304</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /proc/sys/net/ipv4/tcp_rmem
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">4096</span>    <span class="m">87380</span>   <span class="m">4194304</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看是否开启接受缓冲区自动调整的功能</p>
 <div class="highlight"><div class="chroma">
@@ -433,10 +432,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat /proc/sys/net/ipv4/tcp_moderate_rcvbuf
-
-<span class="m">4096</span> <span class="m">87380</span> <span class="m">4194304</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /proc/sys/net/ipv4/tcp_moderate_rcvbuf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">4096</span> <span class="m">87380</span> <span class="m">4194304</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>发送缓冲区自动调节的依据是待发送的数据，接收缓冲区由于只能被动地等待接收数据，它该如何自动调整呢？可以依据空闲系统内存的数量来调节接收窗口。如果系统的空闲内存很多，就可以把缓冲区增大一些，这样传给对方的接收窗口也会变大，因而对方的发送速度就会通过增加飞行报文（发送还未确认的报文）来提升。反之，当内存紧张时就会缩小缓冲区，这虽然会减慢速度，但可以保证更多的并发连接正常工作。需要注意，TCP 规定是不允许同时减少缓存又收缩窗口的，而是采用先收缩窗口，过段时间再减少缓存，这样做就可以避免了丢包情况。</p>
 <p>当接受缓存满并且系统不再有内存分配调整大小，此时接受方会发送零窗口大小的报文，具体做法是将返回的确认（<code>ACK</code>）报文的窗口值大小设置为0（窗口关闭），让发送方停止发送数据。之后接收方有足够的缓存，再发送非零窗口大小的报文。</p>
@@ -495,7 +494,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

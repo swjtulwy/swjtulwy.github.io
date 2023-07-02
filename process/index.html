@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/process/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-04-06T08:28:33+08:00" />
 <meta property="article:modified_time" content="2021-04-06T08:28:33+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -28,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/swjtulwy.github.io\/process\/"
-        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Unix","wordcount":  9660 ,
+        },"image": ["https:\/\/swjtulwy.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Unix","wordcount":  9678 ,
         "url": "https:\/\/swjtulwy.github.io\/process\/","datePublished": "2021-04-06T08:28:33+08:00","dateModified": "2021-04-06T08:28:33+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/swjtulwy.github.io\/images\/avatar.png"},"author": {
@@ -105,7 +104,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Unix进程模型</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>weiyee</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/operating-system/"><i class="far fa-folder fa-fw"></i>Operating System</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-06">2021-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9660 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-06">2021-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9678 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 20 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -229,8 +228,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">volatile</span> <span class="kt">long</span> <span class="n">state</span><span class="p">;</span>    <span class="cm">/* -1 unrunnable, 0 runnable, &gt;0 stopped */</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">volatile</span> <span class="kt">long</span> <span class="n">state</span><span class="p">;</span>    <span class="cm">/* -1 unrunnable, 0 runnable, &gt;0 stopped */</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其状态取值如下：</p>
 <div class="highlight"><div class="chroma">
@@ -250,20 +249,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#define TASK_RUNNING        0
-</span><span class="cp">#define TASK_INTERRUPTIBLE  1
-</span><span class="cp">#define TASK_UNINTERRUPTIBLE    2
-</span><span class="cp">#define __TASK_STOPPED      4
-</span><span class="cp">#define __TASK_TRACED       8
-</span><span class="cp"></span><span class="cm">/* in tsk-&gt;exit_state */</span>
-<span class="cp">#define EXIT_ZOMBIE     16
-</span><span class="cp">#define EXIT_DEAD       32
-</span><span class="cp"></span><span class="cm">/* in tsk-&gt;state again */</span>
-<span class="cp">#define TASK_DEAD       64
-</span><span class="cp">#define TASK_WAKEKILL       128
-</span><span class="cp">#define TASK_WAKING     256
-</span><span class="cp">#define TASK_STATE_MAX      512
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define TASK_RUNNING        0
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define TASK_INTERRUPTIBLE  1
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define TASK_UNINTERRUPTIBLE    2
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __TASK_STOPPED      4
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __TASK_TRACED       8
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* in tsk-&gt;exit_state */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define EXIT_ZOMBIE     16
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define EXIT_DEAD       32
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* in tsk-&gt;state again */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define TASK_DEAD       64
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define TASK_WAKEKILL       128
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define TASK_WAKING     256
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define TASK_STATE_MAX      512
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>对进程每个状态简析如下：</p>
 <ul>
@@ -310,9 +309,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// For example, &amp;etext gives the address of the end of the program text / start of initialized data
-</span><span class="c1"></span><span class="k">extern</span> <span class="kt">char</span> <span class="n">etext</span><span class="p">,</span> <span class="n">edata</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// For example, &amp;etext gives the address of the end of the program text / start of initialized data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="kt">char</span> <span class="n">etext</span><span class="p">,</span> <span class="n">edata</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>图中标灰的区域表示这些范围在进程虚拟地址空间中不可用，也就是说，没有为这些区域创建页表（<code>page table</code>）。</p>
 <h3 id="孤儿进程orphan">孤儿进程（orphan）</h3>
@@ -343,28 +342,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
-<span class="p">{</span>
-    <span class="cm">/*fpid表示fork函数返回的值,fork会返回两次，
-</span><span class="cm">    一次是父进程，返回值是子进程的Pid，在子进程会返回0*/</span>
-    <span class="n">pid_t</span> <span class="n">fpid</span><span class="p">;</span>
-    <span class="n">fpid</span><span class="o">=</span><span class="n">fork</span><span class="p">();</span><span class="c1">//fork后会出现两个分支执行下面的代码，一个父进程，一个新的子进程
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fork error!&#34;</span><span class="p">);</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span> <span class="c1">//父进程
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parent id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="c1">//睡眠30s，在子进程之前退出
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parend finally...&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*fpid表示fork函数返回的值,fork会返回两次，
+</span></span></span><span class="line"><span class="cl"><span class="cm">    一次是父进程，返回值是子进程的Pid，在子进程会返回0*/</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pid_t</span> <span class="n">fpid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fpid</span><span class="o">=</span><span class="nf">fork</span><span class="p">();</span><span class="c1">//fork后会出现两个分支执行下面的代码，一个父进程，一个新的子进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;fork error!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;child id is %dn&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span> <span class="c1">//父进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;parent id is %dn&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="c1">//睡眠30s，在子进程之前退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;parend finally...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="僵尸进程zombie">僵尸进程（zombie）</h3>
 <p><strong>僵尸进程：一个进程使用<code>fork</code>创建子进程，如果子进程退出，而父进程并没有调用<code>wait</code>或<code>waitpid</code>获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中。这种进程称之为僵尸进程。</strong></p>
@@ -400,29 +399,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
-<span class="p">{</span>
-    <span class="cm">/*fpid表示fork函数返回的值,fork会返回两次，
-</span><span class="cm">    一次是父进程，返回值是子进程的Pid，在子进程会返回0*/</span>
-    <span class="n">pid_t</span> <span class="n">fpid</span><span class="p">;</span>
-    <span class="n">fpid</span><span class="o">=</span><span class="n">fork</span><span class="p">();</span><span class="c1">//fork后会出现两个分支执行下面的代码，一个父进程，一个新的子进程
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fork error!&#34;</span><span class="p">);</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="c1">//睡眠30s，在父进程之前退出
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child finally...&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span> <span class="c1">//父进程
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parent id is %dn&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;parend finally...&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*fpid表示fork函数返回的值,fork会返回两次，
+</span></span></span><span class="line"><span class="cl"><span class="cm">    一次是父进程，返回值是子进程的Pid，在子进程会返回0*/</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pid_t</span> <span class="n">fpid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fpid</span><span class="o">=</span><span class="nf">fork</span><span class="p">();</span><span class="c1">//fork后会出现两个分支执行下面的代码，一个父进程，一个新的子进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;fork error!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fpid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;child id is %dn&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="c1">//睡眠30s，在父进程之前退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;child finally...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span> <span class="c1">//父进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;parent id is %dn&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;parend finally...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="僵尸进程解决办法">僵尸进程解决办法</h4>
 <h5 id="通过信号机制">通过信号机制</h5>
@@ -472,48 +471,48 @@
 </span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">sig_child</span><span class="p">(</span><span class="kt">int</span> <span class="n">signo</span><span class="p">);</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
-    <span class="c1">//创建捕捉子进程退出信号
-</span><span class="c1"></span>    <span class="n">signal</span><span class="p">(</span><span class="n">SIGCHLD</span><span class="p">,</span><span class="n">sig_child</span><span class="p">);</span>
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am child process,pid id %d.I am exiting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am father process.I will sleep two seconds</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-    <span class="c1">//等待子进程先退出
-</span><span class="c1"></span>    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-    <span class="c1">//输出进程信息
-</span><span class="c1"></span>    <span class="n">system</span><span class="p">(</span><span class="s">&#34;ps -o pid,ppid,state,tty,command&#34;</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;father process is exiting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">sig_child</span><span class="p">(</span><span class="kt">int</span> <span class="n">signo</span><span class="p">)</span>
-<span class="p">{</span>
-     <span class="n">pid_t</span>        <span class="n">pid</span><span class="p">;</span>
-     <span class="kt">int</span>        <span class="n">stat</span><span class="p">;</span>
-     <span class="c1">//处理僵尸进程
-</span><span class="c1"></span>     <span class="k">while</span> <span class="p">((</span><span class="n">pid</span> <span class="o">=</span> <span class="n">waitpid</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stat</span><span class="p">,</span> <span class="n">WNOHANG</span><span class="p">))</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;child %d terminated.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">sig_child</span><span class="p">(</span><span class="kt">int</span> <span class="n">signo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//创建捕捉子进程退出信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">signal</span><span class="p">(</span><span class="n">SIGCHLD</span><span class="p">,</span><span class="n">sig_child</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pid</span> <span class="o">=</span> <span class="nf">fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I am child process,pid id %d.I am exiting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I am father process.I will sleep two seconds</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//等待子进程先退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//输出进程信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">system</span><span class="p">(</span><span class="s">&#34;ps -o pid,ppid,state,tty,command&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;father process is exiting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">sig_child</span><span class="p">(</span><span class="kt">int</span> <span class="n">signo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="kt">pid_t</span>        <span class="n">pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="kt">int</span>        <span class="n">stat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">//处理僵尸进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="k">while</span> <span class="p">((</span><span class="n">pid</span> <span class="o">=</span> <span class="nf">waitpid</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stat</span><span class="p">,</span> <span class="n">WNOHANG</span><span class="p">))</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;child %d terminated.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="fork两次">fork两次</h5>
 <p>《Unix 环境高级编程》8.6节说的非常详细。原理是将<mark>子进程成为孤儿进程，从而其的父进程变为init进程</mark>，通过init进程可以处理僵尸进程。测试程序如下所示</p>
@@ -568,54 +567,54 @@
 </span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">pid_t</span>  <span class="n">pid</span><span class="p">;</span>
-    <span class="c1">//创建第一个子进程
-</span><span class="c1"></span>    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">//第一个子进程
-</span><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//子进程再创建子进程
-</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am the first child process.pid:%d</span><span class="se">\t</span><span class="s">ppid:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">(),</span><span class="n">getppid</span><span class="p">());</span>
-        <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
-            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="c1">//第一个子进程退出
-</span><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;first procee is exited.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-            <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="c1">//第二个子进程
-</span><span class="c1"></span>        <span class="c1">//睡眠3s保证第一个子进程退出，这样第二个子进程的父亲就是init进程里
-</span><span class="c1"></span>        <span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;I am the second child process.pid: %d</span><span class="se">\t</span><span class="s">ppid:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">getpid</span><span class="p">(),</span><span class="n">getppid</span><span class="p">());</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">//父进程处理第一个子进程退出
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pid</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;waitepid error:&#34;</span><span class="p">);</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pid_t</span>  <span class="n">pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//创建第一个子进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pid</span> <span class="o">=</span> <span class="nf">fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//第一个子进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//子进程再创建子进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I am the first child process.pid:%d</span><span class="se">\t</span><span class="s">ppid:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">(),</span><span class="nf">getppid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pid</span> <span class="o">=</span> <span class="nf">fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;fork error:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//第一个子进程退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;first procee is exited.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//第二个子进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//睡眠3s保证第一个子进程退出，这样第二个子进程的父亲就是init进程里
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I am the second child process.pid: %d</span><span class="se">\t</span><span class="s">ppid:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="nf">getpid</span><span class="p">(),</span><span class="nf">getppid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//父进程处理第一个子进程退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;waitepid error:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="守护进程">守护进程</h3>
 <h4 id="控制终端">控制终端</h4>
@@ -755,88 +754,88 @@
 </span><span class="lnt">81
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"> <span class="cm">/*
-</span><span class="cm">    写一个守护进程，每隔2s获取一下系统时间，将这个时间写入到磁盘文件中。
-</span><span class="cm">*/</span>
-
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">void</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 捕捉到信号之后，获取系统时间，写入磁盘文件
-</span><span class="c1"></span>    <span class="n">time_t</span> <span class="n">tm</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-    <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tm</span><span class="p">);</span>
-    <span class="c1">// char buf[1024];
-</span><span class="c1"></span>
-    <span class="c1">// sprintf(buf, &#34;%d-%d-%d %d:%d:%d\n&#34;,loc-&gt;tm_year,loc-&gt;tm_mon
-</span><span class="c1"></span>    <span class="c1">// ,loc-&gt;tm_mday, loc-&gt;tm_hour, loc-&gt;tm_min, loc-&gt;tm_sec);
-</span><span class="c1"></span>
-    <span class="c1">// printf(&#34;%s\n&#34;, buf);
-</span><span class="c1"></span>
-    <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="n">asctime</span><span class="p">(</span><span class="n">loc</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;time.txt&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">O_APPEND</span><span class="p">,</span> <span class="mo">0664</span><span class="p">);</span>
-    <span class="n">write</span><span class="p">(</span><span class="n">fd</span> <span class="p">,</span><span class="n">str</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
-    <span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="c1">// 1.创建子进程，退出父进程
-</span><span class="c1"></span>    <span class="n">pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 2.将子进程重新创建一个会话
-</span><span class="c1"></span>    <span class="n">setsid</span><span class="p">();</span>
-
-    <span class="c1">// 3.设置掩码
-</span><span class="c1"></span>    <span class="n">umask</span><span class="p">(</span><span class="mo">022</span><span class="p">);</span>
-
-    <span class="c1">// 4.更改工作目录
-</span><span class="c1"></span>    <span class="n">chdir</span><span class="p">(</span><span class="s">&#34;/home/nowcoder/&#34;</span><span class="p">);</span>
-
-    <span class="c1">// 5. 关闭、重定向文件描述符
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;/dev/null&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
-    <span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDIN_FILENO</span><span class="p">);</span>
-    <span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span>
-    <span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDERR_FILENO</span><span class="p">);</span>
-
-    <span class="c1">// 6.业务逻辑
-</span><span class="c1"></span>
-    <span class="c1">// 捕捉定时信号
-</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">sigaction</span> <span class="n">act</span><span class="p">;</span>
-    <span class="n">act</span><span class="p">.</span><span class="n">sa_flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">act</span><span class="p">.</span><span class="n">sa_handler</span> <span class="o">=</span> <span class="n">work</span><span class="p">;</span>
-    <span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">act</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
-    <span class="n">sigaction</span><span class="p">(</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">act</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-
-    <span class="k">struct</span> <span class="n">itimerval</span> <span class="n">val</span><span class="p">;</span>
-    <span class="n">val</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">val</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">val</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">val</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="c1">// 创建定时器
-</span><span class="c1"></span>    <span class="n">setitimer</span><span class="p">(</span><span class="n">ITIMER_REAL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-
-    <span class="c1">// 不让进程结束
-</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err"> </span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    写一个守护进程，每隔2s获取一下系统时间，将这个时间写入到磁盘文件中。
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 捕捉到信号之后，获取系统时间，写入磁盘文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">time_t</span> <span class="n">tm</span> <span class="o">=</span> <span class="nf">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span> <span class="n">loc</span> <span class="o">=</span> <span class="nf">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tm</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// char buf[1024];
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// sprintf(buf, &#34;%d-%d-%d %d:%d:%d\n&#34;,loc-&gt;tm_year,loc-&gt;tm_mon
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ,loc-&gt;tm_mday, loc-&gt;tm_hour, loc-&gt;tm_min, loc-&gt;tm_sec);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// printf(&#34;%s\n&#34;, buf);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="nf">asctime</span><span class="p">(</span><span class="n">loc</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;time.txt&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">O_APPEND</span><span class="p">,</span> <span class="mo">0664</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write</span><span class="p">(</span><span class="n">fd</span> <span class="p">,</span><span class="n">str</span><span class="p">,</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1.创建子进程，退出父进程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="nf">fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2.将子进程重新创建一个会话
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">setsid</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3.设置掩码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">umask</span><span class="p">(</span><span class="mo">022</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4.更改工作目录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">chdir</span><span class="p">(</span><span class="s">&#34;/home/nowcoder/&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 5. 关闭、重定向文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/dev/null&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDIN_FILENO</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDERR_FILENO</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 6.业务逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 捕捉定时信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">sigaction</span> <span class="n">act</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">act</span><span class="p">.</span><span class="n">sa_flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">act</span><span class="p">.</span><span class="n">sa_handler</span> <span class="o">=</span> <span class="n">work</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">act</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sigaction</span><span class="p">(</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">act</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">itimerval</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建定时器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">setitimer</span><span class="p">(</span><span class="n">ITIMER_REAL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 不让进程结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="进程管理命令">进程管理命令</h3>
 <h5 id="ps">ps</h5>
@@ -887,10 +886,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># pgrep -l “log”</span>
-<span class="m">2538</span>  rsyslog
-<span class="m">2113</span>  mcelog
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># pgrep -l “log”</span>
+</span></span><span class="line"><span class="cl"><span class="m">2538</span>  rsyslog
+</span></span><span class="line"><span class="cl"><span class="m">2113</span>  mcelog
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>还可以结合“-U”选项查询特定用户的进程、“-t”选项查询在特定终端运行的进程。例如，若要查询用户zhangsan在tty3终端上运行的进程及PID号，可以执行以下操作。</p>
 <div class="highlight"><div class="chroma">
@@ -900,10 +899,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># pgrep -l -U zhangsan-t tty3</span>
-<span class="m">2105</span> bash
-<span class="m">2122</span> vim
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># pgrep -l -U zhangsan-t tty3</span>
+</span></span><span class="line"><span class="cl"><span class="m">2105</span> bash
+</span></span><span class="line"><span class="cl"><span class="m">2122</span> vim
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="pstree">pstree</h4>
 <p><code>pstree</code>命令可以输出Linux系统中各进程的树形结构，以更加直观地判断出各进程之间的相互关系（父、子进程）。</p>
@@ -917,9 +916,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># cp /dev/cdrom/mnt/Redhat6.0.iso</span>
-<span class="o">[</span>1<span class="o">]</span>+ Stopped     cp -i/dev/cdrom /mnt/Redhat6.0.iso
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># cp /dev/cdrom/mnt/Redhat6.0.iso</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>1<span class="o">]</span>+ Stopped     cp -i/dev/cdrom /mnt/Redhat6.0.iso
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="查看后台的进程">查看后台的进程</h5>
 <p>查看当前终端中在后台运行的进程任务时，可以使用<code>jobs</code>命令，结合“<code>-l</code>”选项可以同时显示出该进程对应的PID号。</p>
@@ -929,9 +928,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># jobs -l</span>
-<span class="o">[</span>1<span class="o">]</span>+  <span class="m">2193</span> Stopped cp -i /dev/cdrom /mnt/Redhat6.0.iso
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@lwy~<span class="o">]</span><span class="c1"># jobs -l</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>1<span class="o">]</span>+  <span class="m">2193</span> Stopped cp -i /dev/cdrom /mnt/Redhat6.0.iso
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="将后台的进程恢复运行">将后台的进程恢复运行</h5>
 <p>■ 使用<code>bg</code>（BackGround，后台）命令，可以将后台中暂定执行（如按<code>Ctrl+Z</code>组合键挂起）的任务恢复运行，继续在后台执行操作、</p>
@@ -946,11 +945,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># jobs</span>
-<span class="o">[</span>1<span class="o">]</span>+ Stopped         cp -i/dev/cdrom /mnt/Redhat6.0.iso
-<span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># fg 1</span>
-cp -i /dev/cdrom /mnt/Redhat6.0.iso
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># jobs</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>1<span class="o">]</span>+ Stopped         cp -i/dev/cdrom /mnt/Redhat6.0.iso
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># fg 1</span>
+</span></span><span class="line"><span class="cl">cp -i /dev/cdrom /mnt/Redhat6.0.iso
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="用pkill命令终止进程">用pkill命令终止进程</h5>
 <p>使用pkill命令可以根据进程的名称、运行该进程的用户、进程所在的终端等多种属性终止特定的进程，大部分选项与<code>pgrep</code>命令基本类似，如“<code>-U</code>”（指定用户）、“<code>-t</code>”（指定终端）等选项。</p>
@@ -963,11 +962,11 @@ cp -i /dev/cdrom /mnt/Redhat6.0.iso
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pgrep -l -U&#34;zhangsan&#34;</span>
-<span class="m">2105</span> bash
-<span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pkill -9 -U&#34;zhangsan&#34;</span>
-<span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pgrep -l -U&#34;zhangsan&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pgrep -l -U&#34;zhangsan&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="m">2105</span> bash
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pkill -9 -U&#34;zhangsan&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@lwy/<span class="o">]</span><span class="c1"># pgrep -l -U&#34;zhangsan&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -999,7 +998,7 @@ cp -i /dev/cdrom /mnt/Redhat6.0.iso
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

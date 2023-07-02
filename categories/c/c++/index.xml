@@ -5,6 +5,13 @@
         <description>C/C&#43;&#43; - 分类 - Weiyee&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>swjtulauweiyee@gmail.com (Weiyee)</managingEditor>
             <webMaster>swjtulauweiyee@gmail.com (Weiyee)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://swjtulwy.github.io/categories/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+    <title>C&#43;&#43;中的日期与时间</title>
+    <link>https://swjtulwy.github.io/date_and_time/</link>
+    <pubDate>Sun, 02 Jul 2023 01:34:14 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://swjtulwy.github.io/date_and_time/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>C&#43;&#43;智能指针</title>
     <link>https://swjtulwy.github.io/smart_pointer/</link>
     <pubDate>Fri, 10 Feb 2023 08:46:11 &#43;0800</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>https://swjtulwy.github.io/understand_const/</guid>
     <description><![CDATA[常量const通俗理解 首先先讲一讲常量，为什么要使用常量，因为不变的值更易于理解、跟踪和分析，所以应该尽可能地使用常量代替变量。 C++ 语言可以用]]></description>
-</item><item>
-    <title>C&#43;&#43;变量声明与定义</title>
-    <link>https://swjtulwy.github.io/variable/</link>
-    <pubDate>Thu, 01 Aug 2019 15:30:21 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://swjtulwy.github.io/variable/</guid>
-    <description><![CDATA[声明与定义关系 为了允许把程序拆分为多个逻辑部分来写，C++文件允许分离式编译机制，该机制允许将程序分割为若干个文件，每个文件可被独立编译。 如]]></description>
 </item></channel>
 </rss>

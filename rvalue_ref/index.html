@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/rvalue_ref/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-21T18:23:44+08:00" />
 <meta property="article:modified_time" content="2022-04-21T18:23:44+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -167,14 +166,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="c1">// 左值为表达式
-</span><span class="c1"></span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+=</span> <span class="mi">28</span><span class="p">;</span> <span class="c1">// 左值是一个表达式 a=4，这句话结果为 a=32
-</span><span class="c1">// 左值为变量
-</span><span class="c1"></span><span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// a 和 b 都是左值
-</span><span class="c1"></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>    <span class="c1">// Error, a + b整体只是右值，出现右边，这句话出错
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 左值为表达式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+=</span> <span class="mi">28</span><span class="p">;</span> <span class="c1">// 左值是一个表达式 a=4，这句话结果为 a=32
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 左值为变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// a 和 b 都是左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>    <span class="c1">// Error, a + b整体只是右值，出现右边，这句话出错
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>看一个关于 string 类型的</p>
 <p><strong>特别注意，C++规定字符串是左值</strong></p>
@@ -186,11 +185,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="nf">s1</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>
-<span class="n">string</span> <span class="nf">s2</span><span class="p">(</span><span class="s">&#34;World&#34;</span><span class="p">);</span>
-<span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s2</span><span class="p">;</span>    <span class="c1">// s1 + s2 是右值，但是这里编译成功了，后面看一下
-</span><span class="c1"></span><span class="n">string</span><span class="p">()</span> <span class="o">=</span> <span class="s">&#34;World&#34;</span><span class="p">;</span> <span class="c1">// 编译通过，左边是临时对象， 竟然也可以赋值
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">s1</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">s2</span><span class="p">(</span><span class="s">&#34;World&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s2</span><span class="p">;</span>    <span class="c1">// s1 + s2 是右值，但是这里编译成功了，后面看一下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">string</span><span class="p">()</span> <span class="o">=</span> <span class="s">&#34;World&#34;</span><span class="p">;</span> <span class="c1">// 编译通过，左边是临时对象， 竟然也可以赋值
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在函数中也会用到</p>
 <div class="highlight"><div class="chroma">
@@ -201,11 +200,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">5</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// 函数返回的是一个右值
-</span><span class="c1"></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">foo</span><span class="p">();</span>
-<span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">foo</span><span class="p">();</span>  <span class="c1">//Error，对函数的返回值取地址，但是函数返回值为右值，取地址不行
-</span><span class="c1"></span><span class="n">foo</span><span class="p">()</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>        <span class="c1">// Error，函数返回值为右值，只能出现在右边
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">5</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// 函数返回的是一个右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">foo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">foo</span><span class="p">();</span>  <span class="c1">//Error，对函数的返回值取地址，但是函数返回值为右值，取地址不行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">foo</span><span class="p">()</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>        <span class="c1">// Error，函数返回值为右值，只能出现在右边
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>简单的来说，能取地址的变量一定是左值，有名字的变量也一定是左值，最经典的void fun(p&amp;&amp; shit)，其中shit也是左值，因为右值引用是左值（所以才会有move，forward这些函数的产生，其中move出来一定是右值，forward保持变量形式和之前的不变，就是为了解决右值引用是左值的问题）。</p>
@@ -247,17 +246,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
-<span class="kt">int</span> <span class="o">&amp;</span><span class="n">aRef1</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>                    <span class="c1">// 非常量左值引用 &lt;----&gt; 非常量左值
-</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">aRef2</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>              <span class="c1">// 常量左值引用   &lt;----&gt; 非常量左值
-</span><span class="c1"></span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>   
-<span class="kt">int</span> <span class="o">&amp;</span><span class="n">bRef1</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>                    <span class="c1">// Error，非常量左值不能绑定常量右值
-</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">bRef2</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>              <span class="c1">// 常量左值引用 &lt;----&gt; 常量左值
-</span><span class="c1"></span>
-<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref1</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>               <span class="c1">// 常量左值引用 &lt;----&gt; 右值（具体某个值）
-</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref2</span> <span class="o">=</span> <span class="n">a</span><span class="o">==</span><span class="mi">2</span><span class="p">;</span>                <span class="c1">// 常量左值引用 &lt;----&gt; 右值（表达式）
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">&amp;</span><span class="n">aRef1</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>                    <span class="c1">// 非常量左值引用 &lt;----&gt; 非常量左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">aRef2</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>              <span class="c1">// 常量左值引用   &lt;----&gt; 非常量左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">&amp;</span><span class="n">bRef1</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>                    <span class="c1">// Error，非常量左值不能绑定常量右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">bRef2</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>              <span class="c1">// 常量左值引用 &lt;----&gt; 常量左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref1</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>               <span class="c1">// 常量左值引用 &lt;----&gt; 右值（具体某个值）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref2</span> <span class="o">=</span> <span class="n">a</span><span class="o">==</span><span class="mi">2</span><span class="p">;</span>            <span class="err">    </span><span class="c1">// 常量左值引用 &lt;----&gt; 右值（表达式）
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="右值引用">右值引用</h3>
 <p>为什么要用到右值引用？</p>
@@ -284,15 +283,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">GetValue</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="o">&amp;</span><span class="n">alRef</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>                  <span class="c1">// 左值引用
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rRef1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                 <span class="c1">// 临时对象是右值
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rRef2</span> <span class="o">=</span> <span class="n">GetValue</span><span class="p">();</span>        <span class="c1">// 调用的函数返回值为右值
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">GetValue</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="o">&amp;</span><span class="n">alRef</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>                  <span class="c1">// 左值引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rRef1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                 <span class="c1">// 临时对象是右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rRef2</span> <span class="o">=</span> <span class="n">GetValue</span><span class="p">();</span>        <span class="c1">// 调用的函数返回值为右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -315,24 +314,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">ProcessValue</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>                         <span class="c1">// 左值引用
-</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;lValue processed: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">ProcessValue</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>                        <span class="c1">// 右值引用
-</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;rValue processed: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">GetValue</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>                <span class="c1">// 左值
-</span><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>                <span class="c1">// 临时对象是右值
-</span><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">GetValue</span><span class="p">());</span>        <span class="c1">// 调用的函数为右值
-</span><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">);</span>                <span class="c1">// 左值
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">ProcessValue</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>                         <span class="c1">// 左值引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;lValue processed: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">ProcessValue</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>                        <span class="c1">// 右值引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;rValue processed: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">GetValue</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>                <span class="c1">// 左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>                <span class="c1">// 临时对象是右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">GetValue</span><span class="p">());</span>        <span class="c1">// 调用的函数为右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ProcessValue</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">);</span>                <span class="c1">// 左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从内存角度来看，我们给变量 a 分配好了内存，所以它是正统的内存使用者；而像函数的返回值、临时对象这样的右值，我们找不到它的内存，所以是盗版的内存使用者，这就是左值和右值的区别。</p>
 <p>关于右值引用：</p>
@@ -352,14 +351,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
-  <span class="kt">int</span> <span class="n">m</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="n">A</span><span class="o">&amp;&amp;</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span>
-<span class="n">A</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">();</span>
-<span class="n">A</span> <span class="n">a</span><span class="p">;</span>
-<span class="n">A</span><span class="o">&amp;&amp;</span> <span class="n">ar</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span><span class="o">&amp;&amp;</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span><span class="o">&amp;&amp;</span> <span class="n">ar</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里表达式 <code>f(), f().m, static_cast&lt;A&amp;&amp;&gt;(a)</code>, 以及 <code>a + a </code>都是 x值。</p>
 <p>而表达式 <code>ar</code> 为 A 类型的左值。</p>
@@ -399,7 +398,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://swjtulwy.github.io/understand_const/" /><meta property="og:image" content="https://swjtulwy.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-08-03T15:31:57+00:00" />
 <meta property="article:modified_time" content="2019-08-03T15:31:57+00:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://swjtulwy.github.io/logo.png"/>
 
@@ -141,9 +140,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="n">p</span><span class="p">;</span><span class="c1">//忽略int，即 const后面是p，修饰的即为p
-</span><span class="c1"></span><span class="kt">int</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span><span class="c1">//同样的分析方法，这句跟上面的分析一致
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">p</span><span class="p">;</span><span class="c1">//忽略int，即 const后面是p，修饰的即为p
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span><span class="c1">//同样的分析方法，这句跟上面的分析一致
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>指针类型：</p>
 <div class="highlight"><div class="chroma">
@@ -154,11 +153,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span> <span class="c1">//去掉int，const修饰的是 *
-</span><span class="c1"></span><span class="kt">int</span> <span class="k">const</span> <span class="o">*</span><span class="n">p2</span><span class="p">;</span> <span class="c1">//去掉int，const修饰的是 *，等同于上面一句
-</span><span class="c1"></span><span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p3</span><span class="p">;</span> <span class="c1">//去掉int，const修饰的是p3，区别于上面那种情况
-</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p4</span><span class="p">;</span> <span class="c1">//去掉int，const即修饰*，又修饰p4，区别上面两种情况
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span> <span class="c1">//去掉int，const修饰的是 *
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="k">const</span> <span class="o">*</span><span class="n">p2</span><span class="p">;</span> <span class="c1">//去掉int，const修饰的是 *，等同于上面一句
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p3</span><span class="p">;</span> <span class="c1">//去掉int，const修饰的是p3，区别于上面那种情况
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p4</span><span class="p">;</span> <span class="c1">//去掉int，const即修饰*，又修饰p4，区别上面两种情况
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>当然还有其他的类型等，放到后面再说。</p>
 <h2 id="const修饰的普通变量">const修饰的普通变量</h2>
@@ -187,20 +186,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">//const修饰全局变量必须初始化
-</span><span class="c1"></span>
-<span class="kt">void</span> <span class="nf">fun</span><span class="p">(){</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">;</span> <span class="c1">//const修饰局部变量可以不初始化
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//可以利用指针指向b对应的内存块，对该内存块修改
-</span><span class="c1"></span>    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>     
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d , %d&#34;</span><span class="p">,</span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="n">b</span><span class="p">);</span> <span class="c1">//结果为 20 ，20 
-</span><span class="c1"></span>
-    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>    <span class="c1">//可以利用指针指向a对应的内存块
-</span><span class="c1"></span>    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>   <span class="c1">//（此句运行出错）但不可以通过指针修改全局变量的内容
-</span><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>    <span class="c1">//（此句运行出错）因为a为全局常量，不能修改
-</span><span class="c1"></span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">//const修饰全局变量必须初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">;</span> <span class="c1">//const修饰局部变量可以不初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//可以利用指针指向b对应的内存块，对该内存块修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>     
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d , %d&#34;</span><span class="p">,</span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="n">b</span><span class="p">);</span> <span class="c1">//结果为 20 ，20 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>    <span class="c1">//可以利用指针指向a对应的内存块
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>   <span class="c1">//（此句运行出错）但不可以通过指针修改全局变量的内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>    <span class="c1">//（此句运行出错）因为a为全局常量，不能修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>默认情况下，<code>const</code>对象被设定为仅在文件内有效。当多个文件中出现了同名的<code>const</code>变量时，其实等同于在不同的文件中分别定义了独立的变量。所以如果想要在<strong>多个文件中共享</strong><code>const</code>对象，则对于<code>const</code>变量不管是声明还是定义都<strong>添加extern关键字</strong>，这样只需定义一次就可以了。</p>
 <h2 id="const-与指针">const 与指针</h2>
@@ -222,15 +221,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p_a</span><span class="p">;</span><span class="c1">//与int const *p_a;等价
-</span><span class="c1"></span>
-<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-<span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>   
-<span class="o">*</span><span class="n">p_a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>  <span class="c1">//错误
-</span><span class="c1"></span><span class="n">a</span> <span class="o">=</span><span class="mi">20</span><span class="p">;</span>      <span class="c1">//正确
-</span><span class="c1"></span><span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>   <span class="c1">//正确
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p_a</span><span class="p">;</span><span class="c1">//与int const *p_a;等价
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">p_a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>  <span class="c1">//错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a</span> <span class="o">=</span><span class="mi">20</span><span class="p">;</span>      <span class="c1">//正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>   <span class="c1">//正确
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>当<code>const</code>修饰*号时，表示不能通过指针p_a修改p_a<strong>指向</strong>的内容。这句话有3层意思（对应上述代码三种情况）：</p>
 <p>①当p_a指向a时,不能<strong>通过指针</strong>p_a取*号修改a中的内容</p>
@@ -251,16 +250,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-    <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> 
-
-    <span class="o">*</span><span class="n">p_a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">//正确
-</span><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>    <span class="c1">//正确
-</span><span class="c1"></span>    <span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>  <span class="c1">//错误
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="n">p_a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">//正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>    <span class="c1">//正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">p_a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>  <span class="c1">//错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当<code>const</code>修饰变量p_a时，表示<strong>不能改变</strong>p_a的内容，即改不了<strong>指针的指向</strong>。这句话有3层意思（对应上述代码三种情况）：</p>
 <p>①当p_a指向a时,能<strong>通过指针</strong>p_a取*号<strong>修改</strong>a中的<strong>内容</strong></p>
@@ -283,17 +282,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(){</span>
-
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-
-    <span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c1">//必须初始化
-</span><span class="c1"></span>    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>                 <span class="c1">//错误    
-</span><span class="c1"></span>    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>                  <span class="c1">//错误
-</span><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>                  <span class="c1">//正确
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c1">//必须初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>                 <span class="c1">//错误    
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>                  <span class="c1">//错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>                  <span class="c1">//正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果明白了前两种情况，那么最后这种情况就好理解了（对应上述代码三种情况）</p>
 <p>①<code>const</code>修饰*号限定了指针对内存的操作只能为只读</p>
@@ -310,11 +309,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r1</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">//正确, 引用及其对应的对象都是常量
-</span><span class="c1"></span><span class="n">r1</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>         <span class="c1">// 错误，r1 是对常量的引用
-</span><span class="c1"></span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span>     <span class="c1">// 错误，试图让一个非常量引用指向一个常量对象
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r1</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">//正确, 引用及其对应的对象都是常量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">r1</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>         <span class="c1">// 错误，r1 是对常量的引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span>     <span class="c1">// 错误，试图让一个非常量引用指向一个常量对象
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>因为不允许直接为ci 赋值，当然也不可以通过引用去改变ci，因此对r2的初始化是错误的，假设该初始化合法， 就可以通过r2来改变其引用的值，这显然不正确。</p>
 <p>“常量引用”是“对<code>const</code>的引用“，严格来说，并不存在常量引用，因为引用不是一个对象，我们没法让引用本身恒定不变。事实上，由于C++语言并不允许随意改变引用所绑定的对象，所以从这层意义上来看所有的引用又都算常量。引用的对象是常量还是非常量可以决定其所能参与的操作，却无论如何都不会影响到引用和对象的绑定关系本身。</p>
@@ -326,9 +325,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">double</span> <span class="n">dval</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ri</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">dval</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ri</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此处<code>ri</code>引用了一个<code>Int</code>型的数，对<code>ri</code>的操作应该是整数运算，但<code>dval</code>是一个双精度浮点数而非整数。因此为了确保让<code>ri</code>绑定一个整数，编译器将代码变成了以下形式：</p>
 <div class="highlight"><div class="chroma">
@@ -337,9 +336,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span> <span class="c1">// 由双精度浮点数生成一个临时的整型常量
-</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ri</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>  <span class="c1">// 让ri绑定这个临时量
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span> <span class="c1">// 由双精度浮点数生成一个临时的整型常量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ri</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>  <span class="c1">// 让ri绑定这个临时量
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这种情况下，ri绑定了一个<strong>临时量</strong>对象，所谓的临时量对象就是编译器需要一个空间来暂存表达式的求值结果临时创建的一个未命名的对象。</p>
 <p>对<code>const</code>的引用可能引用一个并非<code>const </code>的对象</p>
@@ -365,13 +364,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">char</span><span class="o">*</span> <span class="n">VP</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">};</span>     <span class="c1">// (1)
-</span><span class="c1"></span><span class="k">const</span> <span class="n">VP</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">};</span>      <span class="c1">// (2)
-</span><span class="c1"></span>
-<span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;hate&#34;</span><span class="p">;</span>       <span class="c1">//能正常修改
-</span><span class="c1"></span><span class="n">data1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;hate&#34;</span><span class="p">;</span>      <span class="c1">//编译器报错，提示data1[1]是无法修改的左值
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">char</span><span class="o">*</span> <span class="n">VP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">};</span>     <span class="c1">// (1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="n">VP</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">};</span>      <span class="c1">// (2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;hate&#34;</span><span class="p">;</span>       <span class="c1">//能正常修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">data1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;hate&#34;</span><span class="p">;</span>      <span class="c1">//编译器报错，提示data1[1]是无法修改的左值
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据编译器报错的提示信息，你可能猜到了在(2)式中的指针变为了常量指针，而(1)没有改变。那为什么会造成这种情况呢，这得从编译器的角度来说明变量的申明顺序问题。</p>
 <p>首先，先针对声明语句进行剖析一下。</p>
@@ -382,8 +381,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">int</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">int</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -391,9 +390,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">int</span> <span class="c1">// 声明说明符 
-</span><span class="c1"></span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="c1">// 声明符 
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">int</span> <span class="c1">// 声明说明符 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="c1">// 声明符 
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>一个声明符就是被声明的名称，可能还伴有操作符，如*,(),[],&amp;等，以本例为例，*表示x是一个指针，[]表示序列， *x[N]表明x是含有N个指针的序列。 可能基础比较弱的人一直分不清楚指针数组和数组指针，以及返回指针的函数和函数指针怎么写。其实与运算符一样，操作符也是有优先级的，在本例中[]的优先级要比*的优先级高，所以首先其是一个序列，然后才声明序列中的元素是指针。而(*x)[N]中()的优先级比[]的优先级高，所以首先确定了其是一个指针。</p>
 <p><strong>(b)</strong> 声明说明符包含类型说明符和与类型无关的说明符，分清楚这个对于理解例子中的两个例子为什么会出现不同的情况至关重要。注意在(1)式中char是类型说明符，而const是与类型无关的说明符，所以1)式中const并不会修饰变量data，应该理解为指向const char的指针序列，而不是指向char的const指针序列。。</p>
@@ -404,9 +403,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-<span class="kt">void</span> <span class="k">const</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="k">const</span> <span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这两者实际上是等价的，但是要注意对于指针的声明是从右到左来看的，所以对于在<strong>对指针的声明说明符</strong>中，正确的写法应该将<strong>const放在类型说明符的右边</strong>。如：</p>
 <div class="highlight"><div class="chroma">
@@ -415,9 +414,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">T</span> <span class="k">const</span> <span class="o">*</span><span class="n">p</span> <span class="c1">// const 在T后面， 指向常量的指针
-</span><span class="c1"></span><span class="n">T</span><span class="o">*</span> <span class="k">const</span> <span class="n">p</span> <span class="c1">// const 在T后面，常量指针
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">T</span> <span class="k">const</span> <span class="o">*</span><span class="n">p</span> <span class="c1">// const 在T后面， 指向常量的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">T</span><span class="o">*</span> <span class="k">const</span> <span class="n">p</span> <span class="c1">// const 在T后面，常量指针
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面的式子中表示指向const T的指针，而下面的式子修饰了操作符*则表示指向T类型的const指针，说以对于最开始的问题中的(2)按照正确的写法应该是：</p>
 <div class="highlight"><div class="chroma">
@@ -427,10 +426,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">VP</span> <span class="k">const</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">}</span><span class="err">；</span>
-<span class="err">展开</span><span class="o">:</span>
-<span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">}</span><span class="err">；</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">VP</span> <span class="k">const</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">}</span><span class="err">；</span>
+</span></span><span class="line"><span class="cl"><span class="err">展开</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;I&#34;</span><span class="p">,</span><span class="s">&#34;Love&#34;</span><span class="p">,</span><span class="s">&#34;u&#34;</span><span class="p">}</span><span class="err">；</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样对照刚刚的讲解，现在是不是就能理解为什么data1序列中的指针为const类型了。</p>
 <h2 id="constexpr">constexpr</h2>
@@ -464,30 +463,30 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span> <span class="n">N</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">C</span><span class="p">{};</span>
-
-<span class="k">constexpr</span> <span class="kt">int</span> <span class="nf">FivePlus</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">C</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">c1</span><span class="p">;</span> <span class="c1">// Error: x is not compile-time evaluable.
-</span><span class="c1"></span>    <span class="n">C</span><span class="o">&lt;</span><span class="n">FivePlus</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">c2</span><span class="p">;</span> <span class="c1">// OK
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">g</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="n">C</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">c1</span><span class="p">;</span> <span class="c1">// OK!!! 此处用x的「常量」语义
-</span><span class="c1"></span>    <span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="c1">// Still OK! 只处用x的「只读」语义，去除const后便可写了; (int*)是强制类型转换，有些编译器可能会报错
-</span><span class="c1"></span>    <span class="c1">// 如果上一句报错，就可以写成下面这一句：
-</span><span class="c1"></span>    <span class="c1">// *const_cast&lt;int*&gt;(&amp;x) = 6;
-</span><span class="c1"></span>    <span class="n">C</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">c2</span><span class="p">;</span> <span class="c1">// Still OK! c2是C&lt;5&gt;类型（不是C&lt;6&gt;！）
-</span><span class="c1"></span>    <span class="n">C</span><span class="o">&lt;</span><span class="n">FivePlus</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">c3</span><span class="p">;</span> <span class="c1">// Still OK! c3是C&lt;10&gt;类型（不是C&lt;11&gt;！）
-</span><span class="c1"></span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> <span class="c1">// 此处绝大多数（所有？）C++编译器会输出5！！
-</span><span class="c1"></span>                       <span class="c1">// （然而，如果用一个C编译器来编译类似代码，一定输出6）
-</span><span class="c1"></span>    <span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="c1">// 此处，大多数C++编译器输出6
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span> <span class="n">N</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">C</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">constexpr</span> <span class="kt">int</span> <span class="nf">FivePlus</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">c1</span><span class="p">;</span> <span class="c1">// Error: x is not compile-time evaluable.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">C</span><span class="o">&lt;</span><span class="n">FivePlus</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">c2</span><span class="p">;</span> <span class="c1">// OK
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">g</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">c1</span><span class="p">;</span> <span class="c1">// OK!!! 此处用x的「常量」语义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="c1">// Still OK! 只处用x的「只读」语义，去除const后便可写了; (int*)是强制类型转换，有些编译器可能会报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果上一句报错，就可以写成下面这一句：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// *const_cast&lt;int*&gt;(&amp;x) = 6;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">C</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">c2</span><span class="p">;</span> <span class="c1">// Still OK! c2是C&lt;5&gt;类型（不是C&lt;6&gt;！）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">C</span><span class="o">&lt;</span><span class="n">FivePlus</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">c3</span><span class="p">;</span> <span class="c1">// Still OK! c3是C&lt;10&gt;类型（不是C&lt;11&gt;！）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> <span class="c1">// 此处绝大多数（所有？）C++编译器会输出5！！
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                       <span class="c1">// （然而，如果用一个C编译器来编译类似代码，一定输出6）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="c1">// 此处，大多数C++编译器输出6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，f 和 g 都有一个 <code>const int x</code>，但它们的行为却不同。原因在于：f 的 <code>const int x</code> 只是「一个只读的变量」；而 g 的 <code>const int x </code>既是「一个只读的变量」，又是「一个值为5的常量」，变得飘忽不定。</p>
 <p>在 C++11 以后，建议凡是 <strong>「常量」</strong> 语义的场景都使用 <code>constexpr</code>，只对 <strong>「只读」</strong> 语义使用 <code>const</code>。</p>
@@ -531,7 +530,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Weiyee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
